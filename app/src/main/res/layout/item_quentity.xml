@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_35sdp"
+    android:orientation="horizontal"
+    android:weightSum="3">
+
+    <TextView
+        android:id="@+id/txtSize"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="1 Kg - "
+        android:layout_gravity="center"
+        android:gravity="center|right"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/black"
+        android:paddingLeft="@dimen/_5sdp"></TextView>
+
+    <TextView
+        android:id="@+id/txtPriceDescount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".6"
+        android:text="£110.50"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:paddingLeft="@dimen/_5sdp"></TextView>
+
+
+    <TextView
+        android:id="@+id/txtNetPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="£10.50"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center|left"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/black"
+        android:paddingLeft="@dimen/_5sdp"></TextView>
+
+</LinearLayout>

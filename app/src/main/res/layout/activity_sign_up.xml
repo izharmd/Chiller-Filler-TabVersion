@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_110sdp"
+        android:layout_gravity="center"
+        android:background="@drawable/new_registration"
+        android:gravity="center"
+        android:text="NEW REGISTRATION"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp"
+        android:textStyle="bold">
+
+    </LinearLayout>
+
+
+    <EditText
+        style="@style/editText"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/round_textview"
+        android:drawableLeft="@drawable/title_24"
+        android:hint="Title"
+        android:textColorHint="@color/black"></EditText>
+
+
+    <EditText
+        style="@style/editText"
+        android:background="@drawable/round_textview"
+        android:drawableLeft="@drawable/first_name_24"
+        android:hint="First name"
+        android:textColorHint="@color/black"></EditText>
+
+
+    <EditText
+        style="@style/editText"
+        android:background="@drawable/round_textview"
+        android:drawableLeft="@drawable/first_name_24"
+        android:hint="Last name"
+        android:textColorHint="@color/black"></EditText>
+
+
+    <EditText
+        style="@style/editText"
+        android:background="@drawable/round_textview"
+        android:drawableLeft="@drawable/email_24"
+        android:hint="Email"
+        android:textColorHint="@color/black"></EditText>
+
+    <EditText
+        style="@style/editText"
+        android:background="@drawable/round_textview"
+        android:drawableLeft="@drawable/phone_24"
+        android:hint="Mobile"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:textColorHint="@color/black"></EditText>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@drawable/rippal_cardview"
+        android:text="REGISTER"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_weight=".65"
+            android:gravity="center|right"
+            android:text="Already have an account ?"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"></TextView>
+
+        <TextView
+            android:id="@+id/txtAllreadyAccount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_weight=".3"
+            android:gravity="center|left"
+            android:text=" LOGIN"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/_12sdp"></TextView>
+
+
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="184dp"
+            android:layout_height="61dp"
+            android:layout_marginBottom="168dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.542"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/logo3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

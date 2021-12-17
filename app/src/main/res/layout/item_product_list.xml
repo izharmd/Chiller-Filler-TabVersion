@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_weight=".8"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_4sdp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imvProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                tools:srcCompat="@drawable/potato" />
+
+            <TextView
+                android:id="@+id/txtOffer"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:background="@drawable/round_offer"
+                android:gravity="center"
+                android:text="40% OFF"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="@+id/imvProduct"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imvProduct"
+                app:layout_constraintTop_toTopOf="@+id/imvProduct" />
+
+            <TextView
+                android:id="@+id/txtOutOfStock"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:background="@drawable/round_out_of_stock"
+                android:gravity="center"
+                android:paddingRight="@dimen/_5sdp"
+                android:text="OUT OF STOCK"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_8sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/imvProduct"
+                app:layout_constraintEnd_toEndOf="@+id/imvProduct"
+                app:layout_constraintStart_toStartOf="@+id/imvProduct"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/txtBrandName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".69"
+                android:gravity="left|center"
+                android:text="FRESH"></TextView>
+
+            <TextView
+                android:id="@+id/txtDeliveryTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:paddingLeft="@dimen/_5sdp"
+                android:background="@drawable/round_delivery"
+                android:drawableLeft="@drawable/delivery_24"
+                android:gravity="center|left"
+                android:text="5 hrs"
+                android:textSize="@dimen/_8sdp"></TextView>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Potato"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/txtRatingPoint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".15"
+                android:text="4.1"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:drawableRight="@drawable/star_24"
+                android:textSize="@dimen/_8sdp"
+                android:paddingRight="@dimen/_3sdp"
+                android:background="@drawable/round_rating"
+                android:paddingLeft="@dimen/_3sdp"></TextView>
+
+            <TextView
+                android:id="@+id/txtRating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".8"
+                android:text="10034 Ratings"
+                android:textColor="@color/black"
+                android:gravity="center|left"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_7sdp"
+                android:paddingRight="@dimen/_3sdp"
+                android:paddingLeft="@dimen/_3sdp"></TextView>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:background="@drawable/round_delivery"
+            android:drawableRight="@drawable/arrow_down_18"
+            android:gravity="center|left"
+            android:paddingRight="@dimen/_5sdp"
+            android:paddingLeft="@dimen/_5sdp"
+            android:text="5 Kg">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left|center"
+                android:text="£150.20"
+                android:textColor="@color/black"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/txtDiscountPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity=""
+                android:text="£ 200.30"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:textSize="@dimen/_8sdp"></TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+
+            <TextView
+                android:id="@+id/txtAdd"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:text="Add"
+                android:gravity="center"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/round_add_to_cart"></TextView>
+
+
+            <TextView
+                android:id="@+id/txtNotiFyme"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:text="Notify Me"
+                android:gravity="center"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/round_notify_me"></TextView>
+
+            <LinearLayout
+                android:id="@+id/llIncrementDecrement"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:orientation="horizontal"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@drawable/round_increare_decrease"
+                android:weightSum="3"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/txtDecrement"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="-"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:id="@+id/txtTotalQuentity"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="1"
+                    android:background="@color/yellow"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:id="@+id/txtInrement"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="+"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/black"></TextView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
