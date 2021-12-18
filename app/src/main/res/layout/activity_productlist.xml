@@ -49,14 +49,24 @@
         android:text="FRUITS &amp; VEGETABLES"
         android:textColor="@color/yellow"
         android:textSize="@dimen/_16sdp"
-        android:textStyle="bold"></TextView>
+        android:textStyle="bold"
+        android:visibility="gone"></TextView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyMainCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_payment_view"
         android:layout_marginTop="@dimen/_5sdp"
-        >
+        android:background="@drawable/round_payment_view">
 
 
         <androidx.recyclerview.widget.RecyclerView

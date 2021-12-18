@@ -21,20 +21,14 @@ class ItemCategotyActivity:AppCompatActivity() {
         arrayListFish.add("Beef")
         arrayListFish.add("Pork")
         arrayListFish.add("Turkey")
-        //arrayListFish.add("Fish")
-       // arrayListFish.add("Goat")
-       // arrayListFish.add("Red Meat")
-       // arrayListFish.add("Seafood")
+
 
         val arrayListFriudts = ArrayList<String>()
         arrayListFriudts.add("Fresh Vegetables")
         arrayListFriudts.add("Herbs & Seasonings")
         arrayListFriudts.add("Fresh Fruits")
-       // arrayListFriudts.add("Organic Fruits & Vegetables")
         arrayListFriudts.add("Cuts & Sprouts")
-       // arrayListFriudts.add("Exotic Fruits & Veggies")
-       // arrayListFriudts.add("Flower Bouquets, Bunches")
-       // arrayListFriudts.add("Mashroom")
+
 
         val arrayListDairy = ArrayList<String>()
         arrayListDairy.add("Amul Butter")

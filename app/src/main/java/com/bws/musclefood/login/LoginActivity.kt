@@ -7,6 +7,7 @@ import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import com.bws.musclefood.R
 import com.bws.musclefood.itemcategory.ItemCategotyActivity
+import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.signup.SignUpActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -39,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener(){
-            startActivity(Intent(this@LoginActivity,ItemCategotyActivity::class.java))
+            startActivity(Intent(this@LoginActivity,ProductListActivity::class.java))
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.bws.musclefood.itemcategory
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
+import com.bws.musclefood.common.Constant.Companion.pos
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
-import com.bws.musclefood.itemcategory.subcategory.SubCategoryActivity
-import com.bws.musclefood.login.LoginActivity
 
 class ItemCategoryAdapter(val list: List<ItemCategoryModel>) :
     RecyclerView.Adapter<ItemCategoryAdapter.ViewHolder>() {
@@ -39,14 +37,20 @@ class ItemCategoryAdapter(val list: List<ItemCategoryModel>) :
 
         holder.itemView.setOnClickListener(){
             val designation = list[position].arrSubCategory
-            val stri = arr.get(0)
+           // subCategoryData = designation
+            pos = position
+            if (context is ProductListActivity) {
+                (context as ProductListActivity).yourDesiredMethod()
+            }
+
+           /* val stri = arr.get(0)
             val i = Intent(context, ProductListActivity::class.java).apply {
                 putStringArrayListExtra("Data",designation)
                  putExtra("POSITION",position)
                  putExtra("CATEGORY",list[position].category)
+                subCategoryData = designation
             }
-
-            context?.startActivity(i)
+            context?.startActivity(i)*/
         }
     }
 

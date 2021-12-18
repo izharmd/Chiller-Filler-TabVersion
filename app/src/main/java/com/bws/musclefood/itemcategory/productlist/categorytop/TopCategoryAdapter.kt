@@ -1,6 +1,8 @@
 package com.bws.musclefood.itemcategory.productlist.categorytop
 
 import android.content.Context
+import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
+import com.bws.musclefood.common.Constant
+import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 
 class TopCategoryAdapter (val mList: List<TopCategoryModel>):
     RecyclerView.Adapter<TopCategoryAdapter.ViewHolder>() {
@@ -28,6 +32,19 @@ class TopCategoryAdapter (val mList: List<TopCategoryModel>):
         val itemCategory = mList[position]
         holder.txtCategoryTop.text = itemCategory.categoryName
         holder.imvProduct.setImageResource(itemCategory.topImage)
+
+        if(position == 0) {
+            holder.itemView.setBackgroundResource(R.drawable.round_login_button)
+        }
+
+
+
+        holder.itemView.setOnClickListener() {
+            Constant.pos = position
+            if (context is ProductListActivity) {
+                (context as ProductListActivity).subMenuCategory()
+            }
+        }
     }
 
     override fun getItemCount(): Int {
