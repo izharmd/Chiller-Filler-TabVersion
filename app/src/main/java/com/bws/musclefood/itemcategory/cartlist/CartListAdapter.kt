@@ -28,8 +28,14 @@ class CartListAdapter (val mList: List<CartListModel>): RecyclerView.Adapter<Car
         holder.txtPrice.text = itemProduct.netPrice
         holder.txtQuantity.text = itemProduct.quantity
         holder.txtDiscountPrice.text = itemProduct.price
-        holder.txtYouSaved.text = itemProduct.youSaved
+        holder.txtYouSaved.text = itemProduct.youSaved + "\n" +"SAVED"
         holder.imvProduct.setImageResource(itemProduct.image)
+
+        var youSaved = itemProduct.youSaved
+        if(youSaved.equals("",true)){
+            holder.txtYouSaved.visibility = View.GONE
+            holder.txtDiscountPrice.visibility = View.GONE
+        }
 
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 

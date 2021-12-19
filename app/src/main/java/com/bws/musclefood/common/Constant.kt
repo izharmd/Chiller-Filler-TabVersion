@@ -8,7 +8,8 @@ class Constant {
         val APPLE_SIZE_KEY: String = "APPLE_SIZE_KEY"
         val addDataToCart = ArrayList<CartListModel>()
         var subCategoryData = ArrayList<String>()
-        var pos:Int = 1
+        var pos:Int = 0
+        var clickOnTop:String = "YES"
     }
 
 

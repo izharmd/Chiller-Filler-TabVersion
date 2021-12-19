@@ -13,12 +13,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
+import com.bws.musclefood.common.Constant.Companion.clickOnTop
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 
 class TopCategoryAdapter (val mList: List<TopCategoryModel>):
     RecyclerView.Adapter<TopCategoryAdapter.ViewHolder>() {
 
     private var context: Context? = null
+
+    var row_index:Int = 0;
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -33,17 +36,36 @@ class TopCategoryAdapter (val mList: List<TopCategoryModel>):
         holder.txtCategoryTop.text = itemCategory.categoryName
         holder.imvProduct.setImageResource(itemCategory.topImage)
 
+
+
         if(position == 0) {
             holder.itemView.setBackgroundResource(R.drawable.round_login_button)
+        }
+
+        val catgoryName = itemCategory.categoryName
+        if(catgoryName.equals("",true)){
+            holder.itemView.visibility = View.GONE
         }
 
 
 
         holder.itemView.setOnClickListener() {
             Constant.pos = position
+            row_index=position;
+             notifyDataSetChanged();
             if (context is ProductListActivity) {
+                //clickOnTop = "NO"
                 (context as ProductListActivity).subMenuCategory()
             }
+        }
+
+
+        if(row_index==position){
+            holder.itemView.setBackgroundResource(R.drawable.round_login_button);
+        }
+        else
+        {
+            holder.itemView.setBackgroundResource(R.drawable.round_top_sub_menu);
         }
     }
 

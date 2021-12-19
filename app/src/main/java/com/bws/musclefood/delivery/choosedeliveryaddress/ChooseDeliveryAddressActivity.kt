@@ -21,7 +21,7 @@ class ChooseDeliveryAddressActivity:AppCompatActivity() {
 
         recyAddress.layoutManager = LinearLayoutManager(this)
         val data = ArrayList<ChooseDelModel>()
-        data.add(ChooseDelModel("Home","Mr James","RG6 6AH UK","2489003450"))
+       // data.add(ChooseDelModel("Home","Mr James","RG6 6AH UK","2489003450"))
         data.add(ChooseDelModel("Office","Mr Joseph","32, My Street, Kingston, UK 12401.","342603450"))
         data.add(ChooseDelModel("Home","Mr John Smith","132, My Street,Bigtown BG23 4YZ UK","2489003450"))
 

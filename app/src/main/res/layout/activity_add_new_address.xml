@@ -43,7 +43,7 @@
                     android:padding="@dimen/_1sdp"
                     app:animatedTextSize="@dimen/_10sdp"
                     app:borderColor="@color/black"
-                    app:borderWidth=".3dp"
+                    app:borderWidth=".1dp"
                     app:cornerRadius="@dimen/_2sdp">
 
                     <EditText
@@ -67,7 +67,7 @@
                     android:layout_weight="1"
                     app:animatedTextSize="@dimen/_10sdp"
                     app:borderColor="@color/black"
-                    app:borderWidth=".3dp"
+                    app:borderWidth=".1dp"
                     app:cornerRadius="@dimen/_2sdp">
 
                     <EditText
@@ -94,7 +94,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 app:animatedTextSize="@dimen/_10sdp"
                 app:borderColor="@color/black"
-                app:borderWidth=".3dp"
+                app:borderWidth=".1dp"
                 app:cornerRadius="@dimen/_2sdp">
 
                 <EditText
@@ -137,7 +137,7 @@
                     android:padding="@dimen/_1sdp"
                     app:animatedTextSize="@dimen/_10sdp"
                     app:borderColor="@color/black"
-                    app:borderWidth=".3dp"
+                    app:borderWidth=".1dp"
                     app:cornerRadius="@dimen/_2sdp">
 
                     <EditText
@@ -162,7 +162,7 @@
                     android:layout_weight="1"
                     app:animatedTextSize="@dimen/_10sdp"
                     app:borderColor="@color/black"
-                    app:borderWidth=".3dp"
+                    app:borderWidth=".1dp"
                     app:cornerRadius="@dimen/_2sdp">
 
                     <EditText
@@ -188,7 +188,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 app:animatedTextSize="@dimen/_10sdp"
                 app:borderColor="@color/black"
-                app:borderWidth=".3dp"
+                app:borderWidth=".1dp"
                 app:cornerRadius="@dimen/_2sdp">
 
                 <EditText
@@ -212,7 +212,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 app:animatedTextSize="@dimen/_10sdp"
                 app:borderColor="@color/black"
-                app:borderWidth=".3dp"
+                app:borderWidth=".1dp"
                 app:cornerRadius="@dimen/_2sdp">
 
                 <EditText
@@ -247,7 +247,7 @@
                     android:padding="@dimen/_1sdp"
                     app:animatedTextSize="@dimen/_10sdp"
                     app:borderColor="@color/black"
-                    app:borderWidth=".3dp"
+                    app:borderWidth=".1dp"
                     app:cornerRadius="@dimen/_2sdp">
 
                     <EditText
@@ -271,7 +271,7 @@
                     android:layout_weight="1"
                     app:animatedTextSize="@dimen/_10sdp"
                     app:borderColor="@color/black"
-                    app:borderWidth=".3dp"
+                    app:borderWidth=".1dp"
                     app:cornerRadius="@dimen/_2sdp">
 
                     <EditText

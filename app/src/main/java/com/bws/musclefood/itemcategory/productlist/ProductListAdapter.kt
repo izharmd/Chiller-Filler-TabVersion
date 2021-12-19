@@ -56,6 +56,13 @@ class ProductListAdapter(val mList: List<ProductListModel>):RecyclerView.Adapter
        // holder.txtDiscountPrice.text = itemProduct.productDiscountPrice
         holder.imvProduct.setImageResource(itemProduct.productImage)
 
+        var offer = itemProduct.offer
+
+        if(offer.equals("",true)){
+           holder.txtOffer.visibility = View.GONE
+           holder.txtDiscountPrice.visibility = View.GONE
+        }
+
 
 
         var strOutOfStock = itemProduct.outOfStock
@@ -80,7 +87,7 @@ class ProductListAdapter(val mList: List<ProductListModel>):RecyclerView.Adapter
             var ss = itm.brandName
             holder.llIncrementDecrement.visibility = View.VISIBLE
             holder.txtAdd.visibility = View.GONE
-           addDataToCart.add(CartListModel(itm.productImage,itm.productName,itm.quentity,itm.productPrice,itm.productDiscountPrice,itm.offer +"\nSAVED"))
+           addDataToCart.add(CartListModel(itm.productImage,itm.productName,itm.quentity,itm.productPrice,itm.productDiscountPrice,itm.offer))
         }
 
         holder.txtQuantity.setOnClickListener(){
@@ -98,7 +105,7 @@ class ProductListAdapter(val mList: List<ProductListModel>):RecyclerView.Adapter
             myInt++
             holder.txtTotalQuentity.text = myInt.toString()
             val itm = mList[position]
-            addDataToCart.add(CartListModel(itm.productImage,itm.productName,itm.quentity,itm.productPrice,itm.productDiscountPrice,itm.offer +"\nSAVED"))
+            addDataToCart.add(CartListModel(itm.productImage,itm.productName,itm.quentity,itm.productPrice,itm.productDiscountPrice,itm.offer))
         }
 
     }

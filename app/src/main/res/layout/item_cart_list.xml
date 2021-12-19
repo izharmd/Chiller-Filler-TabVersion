@@ -103,8 +103,8 @@
             android:gravity="center|left"
             android:paddingRight="@dimen/_5sdp"
             android:paddingLeft="@dimen/_5sdp"
-
-            android:text="5 Kg">
+            android:text="5 Kg"
+            android:visibility="gone">
 
         </TextView>
 
@@ -114,6 +114,16 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_3sdp"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left|center"
+                android:text="JUST : "
+                android:textColor="@color/black"
+                android:textStyle="bold"></TextView>
+
 
             <TextView
                 android:id="@+id/txtPrice"

@@ -7,7 +7,16 @@
     android:layout_marginRight="@dimen/_5sdp"
     android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/imvCatogoryImage"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/fruits1"
+
+        app:civ_border_width="2dp"
+       />
+
+<!--    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imvCatogoryImage"
         android:layout_width="@dimen/_70sdp"
         android:layout_height="@dimen/_70sdp"
@@ -16,7 +25,22 @@
         app:civ_border_width="1dp"
         android:src="@drawable/fruits1">
 
-    </de.hdodenhof.circleimageview.CircleImageView>
+    </de.hdodenhof.circleimageview.CircleImageView>-->
+
+
+  <!--  <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imvCatogoryImage"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/fruits1"
+        app:riv_border_width="2dip"
+        app:riv_border_color="#333333"
+        app:riv_mutate_background="true"
+        app:riv_oval="true">
+
+    </com.makeramen.roundedimageview.RoundedImageView>
+-->
+
 
     <TextView
         android:id="@+id/txtCategory"

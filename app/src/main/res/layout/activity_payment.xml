@@ -79,7 +79,7 @@
                         android:background="@null"
                         android:drawablePadding="@dimen/_5sdp"
                         android:gravity="center|left"
-                        android:text="Coupon Code"
+                        android:hint="Coupon Code"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"></EditText>
 
@@ -365,7 +365,7 @@
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/round_ll_light_gray"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
 
                 <ss.anoop.awesometextinputlayout.AwesomeTextInputLayout
@@ -434,7 +434,7 @@
                         android:layout_weight="1"
                         app:animatedTextSize="@dimen/_10sdp"
                         app:borderColor="@color/black"
-                        app:borderWidth=".3dp"
+                        app:borderWidth=".1dp"
                         app:cornerRadius="@dimen/_2sdp">
 
                         <EditText
