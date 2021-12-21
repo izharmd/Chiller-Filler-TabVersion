@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MuscleFood</string>
+    <string name="f_Name">Job Title<font color='#FF0000'>*</font></string>
+    <string name="l_Name">Last Name<font color='#FF0000'>*</font></string>
+    <string name="mob_land">Daytime Phone(landline)<font color='#FF0000'>*</font></string>
+    <string name="mob_No">Daytime Phone(mobile)<font color='#FF0000'>*</font></string>
+    <string name="eMail">E-mail Address<font color='#FF0000'>*</font></string>
+    <string name="DOB">Date Of Birth(dd/mm/yyyy)</string>
+
+    <string name="subject">Subject<font color='#FF0000'>*</font></string>
+    <string name="message">Message<font color='#FF0000'>*</font></string>
+
+    <string name="home_fragment">Home Fragment</string>
+    <string name="sport_fragment">Sport Fragment</string>
+    <string name="movie_fragment">Movie Fragment</string>
 </resources>

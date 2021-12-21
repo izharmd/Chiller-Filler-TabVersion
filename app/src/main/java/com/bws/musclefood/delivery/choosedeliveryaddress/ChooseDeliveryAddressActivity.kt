@@ -33,5 +33,9 @@ class ChooseDeliveryAddressActivity:AppCompatActivity() {
             startActivity(Intent(this@ChooseDeliveryAddressActivity,AddNewAddressActivity::class.java))
         }
 
+        imvBack.setOnClickListener(){
+            finish()
+        }
+
     }
 }

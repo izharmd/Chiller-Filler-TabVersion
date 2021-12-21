@@ -53,6 +53,18 @@
         android:visibility="gone"></TextView>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight=".92">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyMainCategory"
         android:layout_width="match_parent"
@@ -87,5 +99,26 @@
         android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+        
+        <com.volcaniccoder.bottomify.BottomifyNavigationView
+            android:id="@+id/bottomify"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".08"
+            android:background="@color/yellow"
+            android:orientation="horizontal"
+            app:menu="@menu/nevigation_items"
+            app:active_color="@color/bottomifyActiveColor"
+            app:passive_color="@color/black"
+            app:pressed_color="@color/bottomifyPressedColor"
+            app:item_text_size="@dimen/_10sdp"
+            app:animation_duration="300"
+           >
+
+
+        </com.volcaniccoder.bottomify.BottomifyNavigationView>
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:checked="true"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/action_order"
+        android:icon="@drawable/order_24"
+        android:title="Order" />
+    <item
+        android:id="@+id/action_browse"
+        android:icon="@drawable/basket_24"
+        android:title="Baskets" />
+
+    <item
+        android:id="@+id/action_radio"
+        android:icon="@drawable/note_add_24"
+        android:title="eNote" />
+    <item
+        android:id="@+id/action_library"
+        android:icon="@drawable/manage_accounts_24"
+        android:title="Profile" />
+</menu>

@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_cart_list.*
 import kotlinx.android.synthetic.main.activity_productlist.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import kotlinx.android.synthetic.main.tool_bar.txtLogInSignUp
+import kotlinx.android.synthetic.main.tool_bar_address.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.*
 
 class CartListActivity:AppCompatActivity() {
@@ -57,6 +58,10 @@ class CartListActivity:AppCompatActivity() {
 
         txtCheckOut.setOnClickListener(){
             startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
+        }
+
+        imvBack.setOnClickListener(){
+            finish()
         }
     }
 }

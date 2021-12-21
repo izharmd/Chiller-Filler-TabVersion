@@ -288,35 +288,68 @@
                 android:weightSum="3">
 
 
-                <RadioButton
-                    android:id="@+id/rdDebitCredit"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:backgroundTint="@color/red_light"
-                    android:buttonTint="@color/black"
-                    android:text="Debit/Credit card"
-                    android:textColor="@color/black"></RadioButton>
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <RadioButton
+                        android:id="@+id/rdDebitCredit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".7"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:backgroundTint="@color/red_light"
+                        android:buttonTint="@color/black"
+                        android:text="Debit/Credit card"
+                        android:textColor="@color/black"></RadioButton>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_weight=".3"
+                        android:layout_gravity="center"
+                        android:src="@drawable/credit_card_24"></ImageView>
+
+                </LinearLayout>
 
 
-                <RadioButton
-                    android:id="@+id/rdPayPal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:backgroundTint="@color/red_light"
-                    android:buttonTint="@color/black"
-                    android:text="PayPal"
-                    android:textColor="@color/black"></RadioButton>
 
 
                 <LinearLayout
-                    android:id="@+id/ll_Gpay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <RadioButton
+                        android:id="@+id/rdPayPal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".7"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:backgroundTint="@color/red_light"
+                        android:buttonTint="@color/black"
+                        android:text="PayPal"
+                        android:textColor="@color/black"></RadioButton>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_weight=".3"
+                        android:layout_gravity="center"
+                        android:src="@drawable/paypal2"></ImageView>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="1">
 
@@ -324,36 +357,53 @@
                         android:id="@+id/rdGpay"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight=".7"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/_3sdp"
-                        android:layout_weight=".1"
+                        android:layout_marginLeft="@dimen/_5sdp"
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
+                        android:text="Google Pay"
                         android:textColor="@color/black"></RadioButton>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_weight=".3"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/_3sdp"
-                        android:drawableLeft="@drawable/googlelogo1"
-                        android:text="Pay"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"></TextView>
-
+                        android:src="@drawable/g_pay"></ImageView>
 
                 </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/rdCashOnDelivery"
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:backgroundTint="@color/red_light"
-                    android:buttonTint="@color/black"
-                    android:text="Cash on Delivery"
-                    android:textColor="@color/black"></RadioButton>
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <RadioButton
+                        android:id="@+id/rdCashOnDelivery"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".7"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:backgroundTint="@color/red_light"
+                        android:buttonTint="@color/black"
+                        android:text="Cash on Delivery"
+                        android:textColor="@color/black"></RadioButton>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_weight=".3"
+                        android:layout_gravity="center"
+                        android:src="@drawable/cod_2"></ImageView>
+
+                </LinearLayout>
+
+
 
 
             </LinearLayout>
@@ -511,17 +561,24 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight=".9"
                     android:gravity="center|right"
                     android:text="Pay with"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"></TextView>
 
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight=".2"
+                    android:layout_gravity="center"
+                    android:src="@drawable/g_pay"></ImageView>
+
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/googlelogo1"
+                    android:layout_weight=".9"
                     android:gravity="center|left"
                     android:paddingLeft="@dimen/_5sdp"
                     android:text="Pay"
@@ -564,6 +621,22 @@
 
 
             </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txtPlaceOrder"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@color/light_yellow"
+                android:gravity="center"
+                android:text="Place Order"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible"></TextView>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

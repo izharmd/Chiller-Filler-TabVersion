@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bws.musclefood.R
 import kotlinx.android.synthetic.main.activity_add_new_address.*
+import kotlinx.android.synthetic.main.tool_bar_address.*
 
 class AddNewAddressActivity:AppCompatActivity() {
 
@@ -48,6 +49,10 @@ class AddNewAddressActivity:AppCompatActivity() {
 
             txtOthers.setBackgroundResource(R.drawable.round_address_selected)
             txtOthers.setTextColor(Color.parseColor("#FFB300"))
+        }
+
+        imvBack.setOnClickListener(){
+            finish()
         }
     }
 }

@@ -39,6 +39,15 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".payment.PaymentActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".MyProfileActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".orders.OrderActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".itemcategory.basket.BasketsActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".orders.SearchOrderActivity"></activity>
+        <activity android:name=".enotes.EnotesActivity"
+            android:screenOrientation="portrait"></activity>
 
     </application>
 

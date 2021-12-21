@@ -46,6 +46,10 @@ class DeliveryOptionActivity:AppCompatActivity() {
         txtProceedToPay.setOnClickListener(){
             startActivity(Intent(this@DeliveryOptionActivity, PaymentActivity::class.java))
         }
+
+        imvBack.setOnClickListener(){
+            finish()
+        }
     }
 
     fun dialogViewProduct(pName:String) {

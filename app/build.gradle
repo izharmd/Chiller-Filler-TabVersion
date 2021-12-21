@@ -68,4 +68,5 @@ dependencies {
 
     implementation 'com.mikhaellopez:circularimageview:4.3.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.github.volsahin:bottomify-navigation-view:1.0.2'
 }

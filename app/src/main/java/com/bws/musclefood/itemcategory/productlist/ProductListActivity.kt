@@ -4,18 +4,26 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bws.musclefood.MyProfileActivity
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant.Companion.clickOnTop
 import com.bws.musclefood.common.Constant.Companion.pos
+import com.bws.musclefood.enotes.EnotesActivity
 import com.bws.musclefood.itemcategory.ItemCategoryAdapter
 import com.bws.musclefood.itemcategory.ItemCategoryModel
+import com.bws.musclefood.itemcategory.basket.BasketsActivity
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryAdapter
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryModel
+import com.bws.musclefood.orders.OrderActivity
+import com.bws.musclefood.orders.SearchOrderActivity
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
+import com.volcaniccoder.bottomify.BottomifyNavigationView
+import com.volcaniccoder.bottomify.OnNavigationItemChangeListener
 import kotlinx.android.synthetic.main.activity_item_categoty.*
 import kotlinx.android.synthetic.main.activity_productlist.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.*
@@ -44,6 +52,23 @@ class ProductListActivity:AppCompatActivity() {
         imvCart.setOnClickListener(){
            startActivity(Intent(this@ProductListActivity,CartListActivity::class.java))
         }
+
+        bottomify.setOnNavigationItemChangedListener(object : OnNavigationItemChangeListener {
+            override fun onNavigationItemChanged(navigationItem: BottomifyNavigationView.NavigationItem) {
+                val pos = navigationItem.position
+                if(pos == 0){
+
+                }else if(pos == 1){
+                    startActivity(Intent(this@ProductListActivity,SearchOrderActivity::class.java))
+                }else if(pos == 2){
+                    startActivity(Intent(this@ProductListActivity,BasketsActivity::class.java))
+                }else if(pos == 3){
+                    startActivity(Intent(this@ProductListActivity,EnotesActivity::class.java))
+                }else {
+                    startActivity(Intent(this@ProductListActivity,MyProfileActivity::class.java))
+                }
+            }
+        })
     }
 
     fun yourDesiredMethod(){

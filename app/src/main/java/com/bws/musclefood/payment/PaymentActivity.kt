@@ -22,32 +22,56 @@ class PaymentActivity:AppCompatActivity() {
             rdDebitCredit.isChecked = true
             rdPayPal.isChecked = false
             rdGpay.isChecked = false
+            rdCashOnDelivery.isChecked = false
 
             ll_CardDetails.visibility = View.VISIBLE
             txtPayToCard.visibility = View.VISIBLE
             ll_PayWithGpay.visibility = View.GONE
             ll_PayWithPayPal.visibility = View.GONE
+            txtPlaceOrder.visibility = View.GONE
         }
         rdPayPal.setOnClickListener(){
             rdDebitCredit.isChecked = false
             rdPayPal.isChecked = true
             rdGpay.isChecked = false
+            rdCashOnDelivery.isChecked = false
 
             ll_CardDetails.visibility = View.GONE
             txtPayToCard.visibility = View.GONE
 
             ll_PayWithGpay.visibility = View.GONE
             ll_PayWithPayPal.visibility = View.VISIBLE
+            txtPlaceOrder.visibility = View.GONE
         }
 
-        ll_Gpay.setOnClickListener(){
+        rdGpay.setOnClickListener(){
             rdDebitCredit.isChecked = false
             rdPayPal.isChecked = false
             rdGpay.isChecked = true
+            rdCashOnDelivery.isChecked = false
+
             ll_CardDetails.visibility = View.GONE
             txtPayToCard.visibility = View.GONE
             ll_PayWithGpay.visibility = View.VISIBLE
             ll_PayWithPayPal.visibility = View.GONE
+            txtPlaceOrder.visibility = View.GONE
+        }
+
+        rdCashOnDelivery.setOnClickListener(){
+            rdDebitCredit.isChecked = false
+            rdPayPal.isChecked = false
+            rdGpay.isChecked = false
+            rdCashOnDelivery.isChecked = true
+
+            ll_CardDetails.visibility = View.GONE
+            txtPayToCard.visibility = View.GONE
+            ll_PayWithGpay.visibility = View.GONE
+            ll_PayWithPayPal.visibility = View.GONE
+            txtPlaceOrder.visibility = View.VISIBLE
+        }
+
+        imvBack.setOnClickListener(){
+            finish()
         }
     }
 }

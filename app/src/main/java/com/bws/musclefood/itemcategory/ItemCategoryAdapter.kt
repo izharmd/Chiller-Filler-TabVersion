@@ -40,9 +40,6 @@ class ItemCategoryAdapter(val list: List<ItemCategoryModel>) :
         holder.txtCategory.text = itemCategory.category
         holder.imvCatogoryImage.setImageResource(itemCategory.image)
 
-
-
-
         holder.itemView.setOnClickListener(){
             pos = position
             row_index=position;
