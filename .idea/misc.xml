@@ -1,9 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable-v24/rippal_cardview.xml" value="0.169" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/basket_24.xml" value="0.157" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/company_name.xml" value="0.169" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/delete_18.xml" value="0.182" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/email_24.xml" value="0.155" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/favorite_24.xml" value="0.15" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/favorite_black_24.xml" value="0.182" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/favorite_hover.xml" value="0.1405" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/first_name_24.xml" value="0.155" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/lock_24.xml" value="0.107" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/phone_24.xml" value="0.155" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_address.xml" value="0.1505" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_button.xml" value="0.1505" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_delivery_time.xml" value="0.1195" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_dialog.xml" value="0.1505" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_e_notes.xml" value="0.1505" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_edt_ext_forgotass.xml" value="0.1505" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_increare_decrease.xml" value="0.15" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_login_button.xml" value="0.169" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_text_view.xml" value="0.1505" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/round_textview.xml" value="0.169" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/rund_cart_item.xml" value="0.15" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/spinner_bg.xml" value="0.1195" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/title_24.xml" value="0.155" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/drawable/vat_no.xml" value="0.169" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout-land/dialog_forgot_password.xml" value="0.1953125" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout-large/dialog_forgot_password.xml" value="0.2" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout-sw600dp/activity_login.xml" value="0.1765625" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout-sw600dp/activity_splash.xml" value="0.1" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout-sw600dp/dailog_alert_with_button.xml" value="0.2" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout-sw600dp/dialog_forgot_password.xml" value="0.11953125" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/a_profile_new.xml" value="0.11151315789473684" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/accitivity_delivery_option.xml" value="0.2" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_add_new_address.xml" value="0.12138157894736842" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_cart_list.xml" value="0.15" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_choose_delivery_address.xml" value="0.1576923076923077" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_favourites.xml" value="0.1765625" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_item_categoty.xml" value="0.1765625" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_login.xml" value="0.16" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_order.xml" value="0.1765625" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_payment.xml" value="0.12" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_productlist.xml" value="0.17239583333333333" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_profile.xml" value="0.16" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_rating.xml" value="0.13076923076923078" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_search_order.xml" value="0.14517543859649124" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_splash.xml" value="0.1453125" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/dailog_alert.xml" value="0.2" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/dailog_alert_with_button.xml" value="0.15" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/dialog_forgot_password.xml" value="0.16" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/dialog_login_to_otp.xml" value="0.15" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/dialog_quentity.xml" value="0.17083333333333334" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/dialog_rating.xml" value="0.16" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/dialog_view_cart_item.xml" value="0.17083333333333334" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/fragment_football.xml" value="0.1765625" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/item_cart_list.xml" value="0.1765625" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/item_category_top_round_image.xml" value="0.12138157894736842" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/item_choose_adress_list.xml" value="0.2" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/item_current_order.xml" value="0.12138157894736842" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/item_product_list.xml" value="0.12" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/item_profile.xml" value="0.11151315789473684" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/item_rating.xml" value="0.25" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar_address.xml" value="0.14517543859649124" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar_cart_details.xml" value="0.14517543859649124" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar_search_view.xml" value="0.1" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/menu/nevigation_items.xml" value="0.33" />
+      </map>
+    </option>
   </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

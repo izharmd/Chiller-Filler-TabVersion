@@ -6,6 +6,7 @@
     <color name="teal_200">#FF000000</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="black_bold">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#d1d1d6</color>
     <color name="deep_gray">#AAAAAA</color>
@@ -13,10 +14,14 @@
     <color name="light_gray">#eeeeee</color>
     <color name="baseColor">#FFB300</color>
     <color name="light_yellow">#9EFFB300</color>
-    <color name="yellow">#FFB300</color>
+    <color name="yellow">#2E36F5</color>
+    <color name="yellow_light">#78F2F5</color>
+   <!-- <color name="yellow">#FFB300</color>-->
+
     <color name="green">#029509</color>
     <color name="red">#ff2600</color>
     <color name="red_light">#e66067</color>
     <color name="blue">#00acac</color>
+    <color name="app_logo_theme">#1982a7</color>
 
 </resources>

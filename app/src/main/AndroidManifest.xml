@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/logo3"
         android:supportsRtl="true"
         android:theme="@style/Theme.MuscleFood">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,15 +39,23 @@
         <activity android:name=".delivery.AddNewAddressActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".payment.PaymentActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".MyProfileActivity"
+        <activity android:name=".profofile.MyProfileActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".orders.OrderActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".itemcategory.basket.BasketsActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".orders.SearchOrderActivity"></activity>
+        <activity android:name=".orders.SearchOrderActivity"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".enotes.EnotesActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".itemcategory.rating.RatingActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".favourites.FavouritesActivity"
             android:screenOrientation="portrait"></activity>
 
     </application>

@@ -1,30 +1,26 @@
 package com.bws.musclefood.itemcategory.productlist
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bws.musclefood.MyProfileActivity
+import com.bws.musclefood.profofile.MyProfileActivity
 import com.bws.musclefood.R
-import com.bws.musclefood.common.Constant.Companion.clickOnTop
 import com.bws.musclefood.common.Constant.Companion.pos
-import com.bws.musclefood.enotes.EnotesActivity
+import com.bws.musclefood.common.Constant.Companion.totalCartItem
+import com.bws.musclefood.favourites.FavouritesActivity
 import com.bws.musclefood.itemcategory.ItemCategoryAdapter
 import com.bws.musclefood.itemcategory.ItemCategoryModel
 import com.bws.musclefood.itemcategory.basket.BasketsActivity
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryAdapter
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryModel
-import com.bws.musclefood.orders.OrderActivity
 import com.bws.musclefood.orders.SearchOrderActivity
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import com.volcaniccoder.bottomify.BottomifyNavigationView
 import com.volcaniccoder.bottomify.OnNavigationItemChangeListener
-import kotlinx.android.synthetic.main.activity_item_categoty.*
 import kotlinx.android.synthetic.main.activity_productlist.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.*
 
@@ -63,9 +59,10 @@ class ProductListActivity:AppCompatActivity() {
                 }else if(pos == 2){
                     startActivity(Intent(this@ProductListActivity,BasketsActivity::class.java))
                 }else if(pos == 3){
-                    startActivity(Intent(this@ProductListActivity,EnotesActivity::class.java))
+                   // startActivity(Intent(this@ProductListActivity,EnotesActivity::class.java))
+                    startActivity(Intent(this@ProductListActivity,FavouritesActivity::class.java))
                 }else {
-                    startActivity(Intent(this@ProductListActivity,MyProfileActivity::class.java))
+                    startActivity(Intent(this@ProductListActivity, MyProfileActivity::class.java))
                 }
             }
         })
@@ -444,33 +441,33 @@ class ProductListActivity:AppCompatActivity() {
 
         if(pos == 0){
 
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(0),dataTopCategory!!.get(pos).arrChicken.get(0),"£3.55","£4.50","4 hrs","FRESHO","5 kg","","4.4","1003 Ratings","YES"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(0),dataTopCategory!!.get(pos).arrChicken.get(0),"£3.55","£4.50","4 hrs","FRESHO","5 kg","£ 2","4.4","1003 Ratings","YES"))
             data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(1),dataTopCategory!!.get(pos).arrChicken.get(1),"£3.55","£12.00","2 hrs","Blue Flame","5 kg","£ 5","4.1","12203 Ratings","YES"))
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(2),dataTopCategory!!.get(pos).arrChicken.get(2),"£1.99","£20.00","10 hrs","Bon Appetit","5 kg","","4.4","3403 Ratings","NO"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(2),dataTopCategory!!.get(pos).arrChicken.get(2),"£1.99","£20.00","10 hrs","Bon Appetit","5 kg","£ 5","4.4","3403 Ratings","NO"))
             data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(3),dataTopCategory!!.get(pos).arrChicken.get(3),"£2.90","£5.00","4 hrs","Fresho","5 kg","£ 15","2.4","1433 Ratings","YES"))
         }
 
 
         if(pos == 1){
             data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(0),dataTopCategory!!.get(pos).arrChicken.get(0),"£1.55","£10.50","4 hrs","FRESHO","5 kg","£ 20","4.1","1003 Ratings","YES"))
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(1),dataTopCategory!!.get(pos).arrChicken.get(1),"£6.55","£8.00","8 hrs","Blue Flame","5 kg","","3.1","103 Ratings","YES"))
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(2),dataTopCategory!!.get(pos).arrChicken.get(2),"£5.50","£10.20","10 hrs","Bon Appetit","5 kg","","5.0","3403 Ratings","NO"))
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(3),dataTopCategory!!.get(pos).arrChicken.get(3),"£3.00","£7.70","11 hrs","Fresho","5 kg","","2.4","1433 Ratings","YES"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(1),dataTopCategory!!.get(pos).arrChicken.get(1),"£6.55","£8.00","8 hrs","Blue Flame","5 kg","£ 5","3.1","103 Ratings","YES"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(2),dataTopCategory!!.get(pos).arrChicken.get(2),"£5.50","£10.20","10 hrs","Bon Appetit","5 kg","£ 5","5.0","3403 Ratings","NO"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(3),dataTopCategory!!.get(pos).arrChicken.get(3),"£3.00","£7.70","11 hrs","Fresho","5 kg","£ 5","2.4","1433 Ratings","YES"))
         }
 
         if(pos == 2){
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(0),dataTopCategory!!.get(pos).arrChicken.get(0),"£8.55","£10.50","4 hrs","FRESHO","5 kg","","4.0","13 Ratings","YES"))
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(1),dataTopCategory!!.get(pos).arrChicken.get(1),"£2.55","£5.50","6 hrs","Blue Flame","5 kg","","3.1","1203 Ratings","YES"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(0),dataTopCategory!!.get(pos).arrChicken.get(0),"£8.55","£10.50","4 hrs","FRESHO","5 kg","£ 5","4.0","13 Ratings","YES"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(1),dataTopCategory!!.get(pos).arrChicken.get(1),"£2.55","£5.50","6 hrs","Blue Flame","5 kg","£ 5","3.1","1203 Ratings","YES"))
             data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(2),dataTopCategory!!.get(pos).arrChicken.get(2),"£20.30","£30.00","5 hrs","Bon Appetit","5 kg","£ 20 ","4.4","34053 Ratings","NO"))
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(3),dataTopCategory!!.get(pos).arrChicken.get(3),"£10.80","£14.20","4 hrs","Fresho","5 kg","","2.4","143 Ratings","YES"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(3),dataTopCategory!!.get(pos).arrChicken.get(3),"£10.80","£14.20","4 hrs","Fresho","5 kg","£ 5","2.4","143 Ratings","YES"))
         }
 
         if(pos == 3){
             val ss = dataTopCategory!!.get(pos).arrChicken.get(0)
             val img = dataTopCategory!!.get(pos).arrChickenImg.get(0)
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(0),dataTopCategory!!.get(pos).arrChicken.get(0),"£2.55","£4.50","4 hrs","FRESHO","5 kg","","2.4","10443 Ratings","YES"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(0),dataTopCategory!!.get(pos).arrChicken.get(0),"£2.55","£4.50","4 hrs","FRESHO","5 kg","£ 5","2.4","10443 Ratings","YES"))
             data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(1),dataTopCategory!!.get(pos).arrChicken.get(1),"£4.55","£8.20","7 hrs","Blue Flame","5 kg","£ 5","5.0","103 Ratings","YES"))
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(2),dataTopCategory!!.get(pos).arrChicken.get(2),"£20.00","£23.00","10 hrs","Bon Appetit","5 kg","","4.4","3353 Ratings","NO"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(2),dataTopCategory!!.get(pos).arrChicken.get(2),"£20.00","£23.00","10 hrs","Bon Appetit","5 kg","£ 5","4.4","3353 Ratings","NO"))
             data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(3),dataTopCategory!!.get(pos).arrChicken.get(3),"£14.00","£20.00","4 hrs","Fresho","5 kg","£ 15","2.4","1454 Ratings","YES"))
         }
 
@@ -478,8 +475,8 @@ class ProductListActivity:AppCompatActivity() {
             val ss = dataTopCategory!!.get(pos).arrChicken.get(0)
             val img = dataTopCategory!!.get(pos).arrChickenImg.get(0)
             data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(0),dataTopCategory!!.get(pos).arrChicken.get(0),"£0.99.00","£10.50","4 hrs","FRESHO","5 kg","£ 13","5.0","1003 Ratings","YES"))
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(1),dataTopCategory!!.get(pos).arrChicken.get(1),"£2.55","£3.00","8 hrs","Blue Flame","5 kg","","4.1","12203 Ratings","YES"))
-            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(2),dataTopCategory!!.get(pos).arrChicken.get(2),"£7.20","£12.20","9 hrs","Bon Appetit","5 kg"," ","4.4","3403 Ratings","NO"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(1),dataTopCategory!!.get(pos).arrChicken.get(1),"£2.55","£3.00","8 hrs","Blue Flame","5 kg","£ 5","4.1","12203 Ratings","YES"))
+            data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(2),dataTopCategory!!.get(pos).arrChicken.get(2),"£7.20","£12.20","9 hrs","Bon Appetit","5 kg","£ 5","4.4","3403 Ratings","NO"))
             data.add(ProductListModel(dataTopCategory!!.get(pos).arrChickenImg.get(3),dataTopCategory!!.get(pos).arrChicken.get(3),"£2.60","£4.40","5 hrs","Fresho","5 kg","£ 15","5.0","1433 Ratings","YES"))
         }
 
@@ -538,7 +535,7 @@ class ProductListActivity:AppCompatActivity() {
 
          dataMainCtegory.add(ItemCategoryModel(R.drawable.meat,"Meat",arrayListFish))
          dataMainCtegory.add(ItemCategoryModel(R.drawable.fruts,"Veg & Vegan",arrayListFriudts))
-         dataMainCtegory.add(ItemCategoryModel(R.drawable.egg,"Eggs & Diary",arrayListDairy))
+         dataMainCtegory.add(ItemCategoryModel(R.drawable.egg,"Eggs & Dairy",arrayListDairy))
          dataMainCtegory.add(ItemCategoryModel(R.drawable.gro,"Snacks",arrayListGrosries))
          dataMainCtegory.add(ItemCategoryModel(R.drawable.drink,"DRINKS",arrayDringkList))
 
@@ -548,6 +545,14 @@ class ProductListActivity:AppCompatActivity() {
 
          yourDesiredMethod()
 
+    }
+    fun updateCartItem(cartItem:Int){
+        txtTotalCartItem.text = cartItem.toString()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        txtTotalCartItem.text = totalCartItem.toString()
     }
 
 }

@@ -1,5 +1,6 @@
 package com.bws.musclefood.common
 
+import com.bws.musclefood.favourites.FavouritesModel
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
 
 class Constant {
@@ -7,8 +8,11 @@ class Constant {
     companion object {
         val APPLE_SIZE_KEY: String = "APPLE_SIZE_KEY"
         val addDataToCart = ArrayList<CartListModel>()
+        val arrFavourites = ArrayList<FavouritesModel>()
         var subCategoryData = ArrayList<String>()
         var pos:Int = 0
+        var totalCartItem:Int = 0
+        var totalFavoritesCartItem:Int = 0
         var clickOnTop:String = "YES"
     }
 

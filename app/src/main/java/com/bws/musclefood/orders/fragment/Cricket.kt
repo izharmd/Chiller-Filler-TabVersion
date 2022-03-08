@@ -27,8 +27,8 @@ class Cricket : Fragment() {
       view.txtNoOrder.visibility = View.GONE
 
 
-      data.add(CurrentOrderModel("18/01/2021","27706830","£358.96","Shipped","Track"))
-      data.add(CurrentOrderModel("05/09/2019","26262638","£379.96","Shipped","Track"))
+      data.add(CurrentOrderModel("05 - 03 -2022","27706830","£358.96","Shipped","Track"))
+      data.add(CurrentOrderModel("18 - 02 -2022","26262638","£379.96","Delivered","Track"))
      // data.add(CurrentOrderModel("17/12/2021","1761754","£50.20","Shipped","Track"))
      // data.add(CurrentOrderModel("18/11/2021","17654984","£70.00","Shipped","Track"))
      // data.add(CurrentOrderModel("20/11/2021","11054044","£20.80","Shipped","Track"))

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,82 +9,78 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/light_gray2">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/_10sdp"
         android:background="@color/light_gray2"
-        android:weightSum="1">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".8"
-            android:text="Delivery to: Home(Default)"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:drawablePadding="@dimen/_5sdp"
-           android:textStyle="bold"
-            android:drawableLeft="@drawable/location_on_24"
-            android:layout_marginLeft="@dimen/_5sdp">
-        </TextView>
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/light_gray2"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_weight=".8"
+                android:drawableLeft="@drawable/location_on_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:text="Delivery to: Home(Default)"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtChangeAddress"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_weight=".2"
+                android:background="@drawable/round_address"
+                android:gravity="center"
+                android:text="Change"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/txtChangeAddress"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_weight=".2"
-            android:text="Change"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="Reading Berkshire RG6 6AH United Kingdom"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp"
-            android:background="@drawable/round_address"></TextView>
-
-
+            android:textSize="@dimen/_10sdp" />
 
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reading Berkshire RG6 6AH United Kingdom"
-        android:textSize="@dimen/_10sdp"
-        android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:layout_marginLeft="@dimen/_5sdp">
-    </TextView>
-
-    </LinearLayout>
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
-        android:orientation="horizontal"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="#25E3E4E3"
+        android:orientation="horizontal"
         android:weightSum="1">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".6"
-            android:text="Default Delivery Option"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/black"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_weight=".6"
             android:drawablePadding="@dimen/_5sdp"
-            android:textStyle="bold"
-            android:layout_marginLeft="@dimen/_5sdp">
-        </TextView>
+            android:text="Default Delivery Option"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -96,28 +91,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1 Shipment"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:drawableLeft="@drawable/delivery_24"
                 android:gravity="center|left"
-                android:layout_marginRight="@dimen/_10sdp"
+                android:text="1 Shipment"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
-               android:layout_gravity="center"></TextView>
+                android:textSize="@dimen/_8sdp" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delivery Charges: FREE"
-                android:gravity="center|left"
+                android:layout_gravity="center"
                 android:layout_marginRight="@dimen/_10sdp"
+                android:gravity="center|left"
+                android:text="Delivery Charges: FREE"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
-               android:layout_gravity="center"></TextView>
+                android:textSize="@dimen/_8sdp" />
 
 
         </LinearLayout>
-
 
 
     </LinearLayout>
@@ -126,77 +120,100 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="#25E3E4E3">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:orientation="horizontal"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="#25E3E4E3"
-        android:weightSum="1">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#25E3E4E3"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_weight=".7"
+                android:drawablePadding="@dimen/_5sdp"
+                android:text="Shipment 1: Express Delivery"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"></TextView>
+
+            <TextView
+                android:id="@+id/txtViewAllItems"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_weight=".3"
+                android:background="@drawable/round_address"
+                android:gravity="center"
+                android:text="View Items"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"></TextView>
+
+
+        </LinearLayout>
+
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:text="Shipment 1: Express Delivery"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:drawablePadding="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_5sdp">
-        </TextView>
-
-        <TextView
-            android:id="@+id/txtViewAllItems"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_gravity="center"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:layout_weight=".3"
-            android:background="@drawable/round_address"
-            android:gravity="center"
-            android:text="View Items"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp"></TextView>
-
-
-
-
-    </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/txtQuantity"
+            android:id="@+id/txtDeliveryDate"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_margin="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_3sdp"
             android:background="@drawable/round_delivery_time"
-            android:drawableLeft="@drawable/access_time_24"
-            android:drawableRight="@drawable/arrow_down_24"
+            android:drawableLeft="@drawable/order_date_24"
             android:drawablePadding="@dimen/_5sdp"
             android:gravity="center|left"
             android:paddingLeft="@dimen/_5sdp"
             android:paddingRight="@dimen/_5sdp"
-            android:text="Today 4:30 PM - 6:30 PM"
+            android:text="10 - 03 - 2022"
             android:textColor="@color/black">
 
         </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:background="@drawable/round_delivery_time"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_weight=".05"
+                android:drawableLeft="@drawable/access_time_24" />
+
+
+            <Spinner
+                android:id="@+id/spDeliveryTime"
+                style="@style/SpinnerTheme"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".95" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txtProceedToPay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
-            android:background="@color/light_yellow"
-            android:textColor="@color/white"
-            android:text="PROCEED TO PAY"
             android:layout_margin="@dimen/_15sdp"
-            android:textSize="@dimen/_12sdp"
-            android:gravity="center"></TextView>
+            android:background="@color/yellow"
+            android:gravity="center"
+            android:text="PROCEED TO PAY"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp" />
 
     </LinearLayout>
 

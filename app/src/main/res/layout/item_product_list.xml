@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent"
 
                 app:shapeAppearanceOverlay="@style/roundedImageView"
-                tools:srcCompat="@drawable/potato" />
+                tools:srcCompat="@drawable/logo3" />
 
             <TextView
                 android:id="@+id/txtOffer"
@@ -111,9 +111,10 @@
             android:text="Potato"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/llRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2sdp"
@@ -132,20 +133,34 @@
                 android:paddingRight="@dimen/_3sdp"
                 android:text="4.1"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"></TextView>
+                android:textSize="@dimen/_8sdp" />
 
             <TextView
                 android:id="@+id/txtRating"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight=".8"
+                android:layout_weight=".4"
                 android:gravity="center|left"
                 android:paddingLeft="@dimen/_3sdp"
                 android:paddingRight="@dimen/_3sdp"
-                android:text="10034 Ratings"
+                android:text="10034 Review"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_7sdp"></TextView>
+                android:textSize="@dimen/_7sdp" />
+
+            <TextView
+                android:id="@+id/txtWriteReview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".4"
+                android:gravity="center|right"
+                android:paddingLeft="@dimen/_3sdp"
+                android:paddingRight="@dimen/_3sdp"
+                android:text="Write Review"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="invisible" />
 
 
         </LinearLayout>
@@ -191,7 +206,7 @@
                 android:gravity="left|center"
                 android:text="£150.20"
                 android:textColor="@color/black"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDiscountPrice"
@@ -201,96 +216,127 @@
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity=""
                 android:text="£ 200.30"
-                android:textSize="@dimen/_8sdp"></TextView>
+                android:textSize="@dimen/_8sdp" />
 
 
         </LinearLayout>
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:weightSum="1">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtAdd"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="center|right"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:background="@drawable/round_add_to_cart"
-                android:gravity="center"
-                android:text="Add"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_10sdp"></TextView>
+                <ImageView
+                    android:id="@+id/imvAddToFavourites"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/favorite_24"
+                    android:visibility="gone" />
 
 
-            <TextView
-                android:id="@+id/txtNotiFyme"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="center|right"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:background="@drawable/round_notify_me"
-                android:gravity="center"
-                android:text="Notify Me"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"></TextView>
+                <ImageView
+                    android:id="@+id/imvAddToFavouritesHover"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/favorite_hover" />
+
+
+            </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llIncrementDecrement"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="center|right"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:background="@drawable/round_increare_decrease"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:weightSum="3">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_weight=".9"
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/txtDecrement"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:id="@+id/txtAdd"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@drawable/round_add_to_cart"
                     android:gravity="center"
-                    android:text="-"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"></TextView>
+                    android:text="Add"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+
 
                 <TextView
-                    android:id="@+id/txtTotalQuentity"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/yellow"
+                    android:id="@+id/txtNotiFyme"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@drawable/round_notify_me"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="Notify Me"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"></TextView>
+                    android:textSize="@dimen/_10sdp" />
 
-                <TextView
-                    android:id="@+id/txtInrement"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="+"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"></TextView>
+                <LinearLayout
+                    android:id="@+id/llIncrementDecrement"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@drawable/round_increare_decrease"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:id="@+id/txtDecrement"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtTotalQuentity"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/yellow"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtInrement"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
     </LinearLayout>
-
 
 </LinearLayout>

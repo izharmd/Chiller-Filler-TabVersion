@@ -18,8 +18,8 @@
         android:gravity="center|left"
         android:paddingLeft="@dimen/_5sdp"
         android:text="Order Number:"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_12sdp"></TextView>
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"/>
 
 
     <EditText
@@ -80,9 +80,9 @@
         android:background="@drawable/rippal_cardview"
         android:text="Search"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
-        android:textStyle="normal"></androidx.appcompat.widget.AppCompatButton>
+        android:textStyle="normal"/>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"

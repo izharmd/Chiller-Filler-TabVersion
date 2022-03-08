@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
-import com.bws.musclefood.delivery.AddNewAddressActivity
+import com.bws.musclefood.common.Constant.Companion.totalCartItem
 import com.bws.musclefood.delivery.deliveryoption.DeliveryOptionActivity
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_cart_list.*
@@ -16,9 +16,16 @@ import kotlinx.android.synthetic.main.activity_productlist.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import kotlinx.android.synthetic.main.tool_bar.txtLogInSignUp
 import kotlinx.android.synthetic.main.tool_bar_address.*
+import kotlinx.android.synthetic.main.tool_bar_address.imvBack
+import kotlinx.android.synthetic.main.tool_bar_cart_details.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.*
+import kotlinx.android.synthetic.main.tool_bar_search_view.imvSearch
+import java.text.NumberFormat
+import java.util.*
 
 class CartListActivity:AppCompatActivity() {
+
+    //lateinit var adapter: CartListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart_list)
@@ -29,20 +36,10 @@ class CartListActivity:AppCompatActivity() {
       //  txtLogInSignUp.setBackgroundColor(resources.getColor(R.color.gray));
       //  txtLogInSignUp.setTextColor(resources.getColor(R.color.black))
 
-        constraintLayCart.visibility = View.INVISIBLE
+      //  constraintLayCart.visibility = View.INVISIBLE
 
 
         recyCartList.layoutManager = LinearLayoutManager(this)
-       /* val data = ArrayList<CartListModel>()
-
-        data.add(CartListModel(R.drawable.potato,"Potato","1 Kg","£ 150.00","£ 55.00","£ 95.00\n SAVED"))
-        data.add(CartListModel(R.drawable.sweet_corn,"Sweet Corn","500 g","£ 120.00","£ 25.00","£ 95.00\nSAVED"))
-       data.add(CartListModel(R.drawable.baby_potato,"Baby potato","5 Kg","£ 250.00","£ 45.00","£ 205.00\n SAVED"))
-       data.add(CartListModel(R.drawable.banana_nendran,"Banana - Nendran","200 g","£ 60.00","£ 55.00","£ 10.00\n SAVED"))
-     */
-
-      // data.add(CartListModel(R.drawable.mosambi_economy,"Mosambi - Economy","750 g","£ 50.00","£ 30.60"))
-        // data.add(ProductListModel(R.drawable.potato,"Potato","£150.00","£50.00","5 hrs","FRESHO","5 kg","50% OFF"))
 
         val dividerDrawable =
             ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
@@ -64,4 +61,15 @@ class CartListActivity:AppCompatActivity() {
             finish()
         }
     }
+
+    fun updateCartItem(totalPrice: Double, netDiscount: Double){
+        val currentLocale = Locale.UK
+        val currencyFormatter = NumberFormat.getCurrencyInstance()
+        txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString()
+        txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString().drop(1)
+        txtTotalSave.text = "£ "+currencyFormatter.format(netDiscount).toString().drop(1)
+
+        txtCartValue.text = totalCartItem.toString()
+    }
+
 }

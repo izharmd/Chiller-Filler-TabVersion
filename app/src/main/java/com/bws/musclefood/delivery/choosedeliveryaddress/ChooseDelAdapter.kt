@@ -1,12 +1,16 @@
 package com.bws.musclefood.delivery.choosedeliveryaddress
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
+import com.bws.musclefood.delivery.AddNewAddressActivity
+import com.bws.musclefood.interfaceCallback.CallbackInterface
 
 
 class ChooseDelAdapter(val mList: List<ChooseDelModel>) :
@@ -29,6 +33,14 @@ class ChooseDelAdapter(val mList: List<ChooseDelModel>) :
         holder.txtName.text = itemProduct.fullName
         holder.txtFullAddress.text = itemProduct.fullAddress
         holder.txtPhone.text = itemProduct.phoneNo
+
+        if(position == 0){
+           holder.rdDefaultAddress.isChecked = true
+        }
+
+        holder.txtEditAddress.setOnClickListener {
+          context?.startActivity(Intent(context,AddNewAddressActivity::class.java))
+        }
     }
 
     override fun getItemCount(): Int {
@@ -36,9 +48,11 @@ class ChooseDelAdapter(val mList: List<ChooseDelModel>) :
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+        val rdDefaultAddress: RadioButton = itemView.findViewById(R.id.rdDefaultAddress)
         val txtDefaultAdd: TextView = itemView.findViewById(R.id.txtDefaultAdd)
         val txtName: TextView = itemView.findViewById(R.id.txtName)
         val txtFullAddress: TextView = itemView.findViewById(R.id.txtFullAddress)
         val txtPhone: TextView = itemView.findViewById(R.id.txtPhone)
+        val txtEditAddress: TextView = itemView.findViewById(R.id.txtEditAddress)
     }
 }

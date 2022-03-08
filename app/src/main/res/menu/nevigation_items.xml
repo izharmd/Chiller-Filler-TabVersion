@@ -18,8 +18,8 @@
 
     <item
         android:id="@+id/action_radio"
-        android:icon="@drawable/note_add_24"
-        android:title="eNote" />
+        android:icon="@drawable/favorite_black_24"
+        android:title="Likes" />
     <item
         android:id="@+id/action_library"
         android:icon="@drawable/manage_accounts_24"

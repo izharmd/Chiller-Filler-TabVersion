@@ -20,9 +20,9 @@
             android:layout_weight="1"
             android:text="SAVED ADDRESS "
             android:layout_gravity="center"
-            android:textColor="@color/yellow"
+            android:textColor="@color/black_bold"
             android:textStyle="bold"
-            android:paddingLeft="@dimen/_10sdp"></TextView>
+            android:paddingLeft="@dimen/_10sdp"/>
 
         <TextView
             android:id="@+id/txtAddNewAddress"
@@ -33,10 +33,10 @@
             android:layout_gravity="center"
            android:gravity="center"
             android:paddingRight="@dimen/_10sdp"
-            android:textColor="@color/yellow"
+            android:textColor="@color/black_bold"
             android:drawableLeft="@drawable/add_new_address_12"
             android:textStyle="bold"
-            android:paddingLeft="@dimen/_30sdp"></TextView>
+            android:paddingLeft="@dimen/_30sdp"/>
 
 
     </LinearLayout>
