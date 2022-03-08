@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bws.musclefood.profofile.MyProfileActivity
+import com.bws.musclefood.profile.MyProfileActivity
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant.Companion.pos
 import com.bws.musclefood.common.Constant.Companion.totalCartItem

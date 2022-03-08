@@ -41,7 +41,7 @@
         <activity android:name=".payment.PaymentActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".profofile.MyProfileActivity"
+        <activity android:name=".profile.MyProfileActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".orders.OrderActivity"
             android:screenOrientation="portrait"></activity>
@@ -56,6 +56,11 @@
             android:screenOrientation="portrait"></activity>
 
         <activity android:name=".favourites.FavouritesActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".profile.ContactPreferenceActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".productdetails.ProductDetailsActivity"
             android:screenOrientation="portrait"></activity>
 
     </application>

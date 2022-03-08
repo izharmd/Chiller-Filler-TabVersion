@@ -27,6 +27,7 @@ import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryModel
 import com.bws.musclefood.itemcategory.rating.RatingActivity
 import com.bws.musclefood.itemcategory.rating.RatingAdapter
 import com.bws.musclefood.itemcategory.rating.RatingModel
+import com.bws.musclefood.productdetails.ProductDetailsActivity
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_productlist.*
 
@@ -181,6 +182,11 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
                 )
             )
             // notifyDataSetChanged()
+        }
+
+
+        holder.itemView.setOnClickListener(){
+            context?.startActivity(Intent(context,ProductDetailsActivity::class.java))
         }
 
     }

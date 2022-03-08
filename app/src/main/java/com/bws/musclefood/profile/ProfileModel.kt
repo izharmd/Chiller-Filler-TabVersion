@@ -1,4 +1,4 @@
-package com.bws.musclefood.profofile
+package com.bws.musclefood.profile
 
 data class ProfileModel(
     val name: String

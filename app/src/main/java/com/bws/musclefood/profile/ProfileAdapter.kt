@@ -1,4 +1,4 @@
-package com.bws.musclefood.profofile
+package com.bws.musclefood.profile
 
 import android.content.Context
 import android.content.Intent
@@ -41,7 +41,7 @@ class ProfileAdapter(val mList: List<ProfileModel>) :
             }else if(position == 3){
                 context?.startActivity(Intent(context,PaymentActivity::class.java))
             }else if(position == 4){
-
+                context?.startActivity(Intent(context,ContactPreferenceActivity::class.java))
             }else if(position == 5){
 
             }

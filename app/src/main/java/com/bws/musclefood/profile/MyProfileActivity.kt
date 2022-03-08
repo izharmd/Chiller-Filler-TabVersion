@@ -1,4 +1,4 @@
-package com.bws.musclefood.profofile
+package com.bws.musclefood.profile
 
 import android.os.Bundle
 import android.view.View
@@ -6,11 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.R
-import com.bws.musclefood.common.Constant
-import com.bws.musclefood.itemcategory.cartlist.CartListAdapter
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import kotlinx.android.synthetic.main.a_profile_new.*
-import kotlinx.android.synthetic.main.activity_cart_list.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
 
 class MyProfileActivity:AppCompatActivity() {
@@ -21,7 +18,7 @@ class MyProfileActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.a_profile_new)
         supportActionBar?.hide()
-        txtTxtHeader.text = "Edit Profile"
+        txtTxtHeader.text = "Profile"
         imvSaveaddress.visibility = View.GONE
 
         recyProfile.layoutManager = LinearLayoutManager(this)
