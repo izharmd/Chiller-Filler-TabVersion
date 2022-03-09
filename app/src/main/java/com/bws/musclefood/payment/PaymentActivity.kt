@@ -27,11 +27,13 @@ class PaymentActivity:AppCompatActivity() {
             rdCashOnDelivery.isChecked = false
 
             ll_CardDetails.visibility = View.VISIBLE
-            txtPayToCard.visibility = View.VISIBLE
+            txtPayToCard.visibility = View.GONE
+            txtPayToCard.visibility = View.GONE
             ll_PayWithGpay.visibility = View.GONE
             ll_PayWithPayPal.visibility = View.GONE
             llAccountPaymet.visibility = View.GONE
-            txtPlaceOrder.visibility = View.GONE
+            txtPlaceOrder.visibility = View.VISIBLE
+            txtPlaceOrder2.visibility = View.GONE
         }
         rdPayPal.setOnClickListener(){
             rdDebitCredit.isChecked = false
@@ -46,6 +48,7 @@ class PaymentActivity:AppCompatActivity() {
             ll_PayWithGpay.visibility = View.GONE
             ll_PayWithPayPal.visibility = View.VISIBLE
             txtPlaceOrder.visibility = View.GONE
+            txtPlaceOrder2.visibility = View.GONE
         }
 
         rdGpay.setOnClickListener(){
@@ -61,6 +64,7 @@ class PaymentActivity:AppCompatActivity() {
             llAccountPaymet.visibility = View.GONE
             ll_PayWithPayPal.visibility = View.GONE
             txtPlaceOrder.visibility = View.GONE
+            txtPlaceOrder2.visibility = View.GONE
         }
 
         rdCashOnDelivery.setOnClickListener(){
@@ -76,6 +80,7 @@ class PaymentActivity:AppCompatActivity() {
             llAccountPaymet.visibility = View.GONE
             ll_PayWithPayPal.visibility = View.GONE
             txtPlaceOrder.visibility = View.VISIBLE
+            txtPlaceOrder2.visibility = View.GONE
         }
 
         rdAccountPayment.setOnClickListener(){
@@ -92,15 +97,16 @@ class PaymentActivity:AppCompatActivity() {
             ll_PayWithPayPal.visibility = View.GONE
             txtPlaceOrder.visibility = View.GONE
             llAccountPaymet.visibility = View.VISIBLE
+            txtPlaceOrder2.visibility = View.VISIBLE
 
         }
 
         txtPlaceOrder.setOnClickListener(){
-            AlertDialog().dialogPaymentSuccessFull(this,"Your order has been placed successfully.")
+            AlertDialog().dialogPaymentSuccessFull(this,"Your order has been placed successfully.","Total Order Price : £200.00")
         }
 
         txtPlaceOrder2.setOnClickListener(){
-            AlertDialog().dialogPaymentSuccessFull(this,"Your order has been placed successfully.")
+            AlertDialog().dialogPaymentSuccessFull(this,"Your order has been placed successfully.","Total Order Price : £200.00")
         }
 
         imvBack.setOnClickListener(){

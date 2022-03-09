@@ -63,10 +63,12 @@ class FavouritesActivity:AppCompatActivity() {
     fun updateCartItem(totalPrice: Double, netDiscount: Double){
         val currentLocale = Locale.UK
         val currencyFormatter = NumberFormat.getCurrencyInstance()
-        txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString()
-        txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString().drop(1)
-        txtTotalSave.text = "£ "+currencyFormatter.format(netDiscount).toString().drop(1)
+        //txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString()
+        //txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString().drop(1)
+        txtTotalPrice.text = "£ 7.10"
+        txtTotalSave.text = "£ 9.40"
+        txtCartValue.text = "2"
 
-        txtCartValue.text = Constant.totalCartItem.toString()
+        //txtCartValue.text = Constant.totalCartItem.toString()
     }
 }

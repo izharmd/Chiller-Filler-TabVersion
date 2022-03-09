@@ -20,6 +20,7 @@ class RatingActivity:AppCompatActivity() {
         setContentView(R.layout.activity_rating)
         supportActionBar?.hide()
         imvSaveaddress.visibility = View.GONE
+        txtTxtHeader.text = "Product Review"
 
         val txtProductName: TextView = findViewById(R.id.txtProductName)
         val txtSubmitReview: TextView = findViewById(R.id.txtSubmitReview)
@@ -51,7 +52,7 @@ class RatingActivity:AppCompatActivity() {
 
 
         txtSubmitReview.setOnClickListener(){
-            AlertDialog().dialogPaymentSuccessFull(this,"Thank you for your review.")
+            AlertDialog().dialogPaymentSuccessFull(this,"Thank you for your review.","")
         }
     }
 }

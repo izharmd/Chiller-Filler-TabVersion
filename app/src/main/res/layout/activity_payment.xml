@@ -144,7 +144,7 @@
                         android:drawablePadding="@dimen/_5sdp"
                         android:text="Total Discount"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"/>
+                        android:textSize="@dimen/_10sdp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -155,7 +155,7 @@
                         android:gravity="center|right"
                         android:text="£ 50.00"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"></TextView>
+                        android:textSize="@dimen/_10sdp"/>
 
 
                 </LinearLayout>
@@ -176,7 +176,7 @@
                         android:drawablePadding="@dimen/_5sdp"
                         android:text="Delivery Charges"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"/>
+                        android:textSize="@dimen/_10sdp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -187,7 +187,7 @@
                         android:gravity="center|right"
                         android:text="£ 0.00"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"/>
+                        android:textSize="@dimen/_10sdp" />
 
 
                 </LinearLayout>
@@ -248,7 +248,7 @@
                         android:gravity="center|left"
                         android:text="Total Savings"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"/>
+                        android:textSize="@dimen/_10sdp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -298,25 +298,23 @@
                         android:id="@+id/rdDebitCredit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".7"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_weight=".7"
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
-                        android:text="Debit/Credit card"
                         android:checked="true"
-                        android:textColor="@color/black"/>
+                        android:text="Debit/Credit card"
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
-                        android:layout_weight=".3"
                         android:layout_gravity="center"
+                        android:layout_weight=".3"
                         android:src="@drawable/credit_card_24"></ImageView>
 
                 </LinearLayout>
-
-
 
 
                 <LinearLayout
@@ -329,9 +327,9 @@
                         android:id="@+id/rdPayPal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".7"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_weight=".7"
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
                         android:text="PayPal"
@@ -340,12 +338,11 @@
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
-                        android:layout_weight=".3"
                         android:layout_gravity="center"
+                        android:layout_weight=".3"
                         android:src="@drawable/paypal2"></ImageView>
 
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -358,9 +355,9 @@
                         android:id="@+id/rdGpay"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".7"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_weight=".7"
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
                         android:text="Google Pay"
@@ -369,42 +366,40 @@
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
-                        android:layout_weight=".3"
                         android:layout_gravity="center"
+                        android:layout_weight=".3"
                         android:src="@drawable/g_pay"></ImageView>
 
                 </LinearLayout>
-
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="1"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    android:weightSum="1">
 
                     <RadioButton
                         android:id="@+id/rdCashOnDelivery"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".7"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_weight=".7"
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
                         android:text="Cash on Delivery"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
-                        android:layout_weight=".3"
                         android:layout_gravity="center"
-                        android:src="@drawable/cod_2"/>
+                        android:layout_weight=".3"
+                        android:src="@drawable/cod_2" />
 
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -417,20 +412,20 @@
                         android:id="@+id/rdAccountPayment"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".7"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_weight=".7"
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
                         android:text="Account Payment"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
-                        android:layout_weight=".3"
                         android:layout_gravity="center"
-                        android:src="@drawable/account_payment"/>
+                        android:layout_weight=".3"
+                        android:src="@drawable/account_payment" />
 
                 </LinearLayout>
 
@@ -467,7 +462,7 @@
                         android:hint="Card Number"
                         android:inputType="phone"
                         android:textColorHint="@color/black"
-                        android:textSize="@dimen/_12sdp"/>
+                        android:textSize="@dimen/_12sdp" />
 
 
                 </ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
@@ -501,7 +496,7 @@
                             android:hint="MM/YYYY"
                             android:inputType="number"
                             android:textColorHint="@color/black"
-                            android:textSize="@dimen/_12sdp"/>
+                            android:textSize="@dimen/_12sdp" />
 
 
                     </ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
@@ -573,16 +568,16 @@
                 android:background="@color/yellow"
                 android:gravity="center"
                 android:text="Continue"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/ll_PayWithGpay"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@color/yellow"
                 android:orientation="horizontal"
@@ -595,15 +590,15 @@
                     android:layout_weight=".9"
                     android:gravity="center|right"
                     android:text="Pay with"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"></TextView>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_weight=".2"
                     android:layout_gravity="center"
-                    android:src="@drawable/g_pay"></ImageView>
+                    android:layout_weight=".2"
+                    android:src="@drawable/g_pay" />
 
 
                 <TextView
@@ -613,8 +608,8 @@
                     android:gravity="center|left"
                     android:paddingLeft="@dimen/_5sdp"
                     android:text="Pay"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"></TextView>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
 
             </LinearLayout>
@@ -637,8 +632,8 @@
                     android:layout_weight="1"
                     android:gravity="center|right"
                     android:text="Pay with"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"></TextView>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -647,8 +642,8 @@
                     android:gravity="center|left"
                     android:paddingLeft="@dimen/_5sdp"
                     android:text="PayPal"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"></TextView>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
 
             </LinearLayout>
@@ -659,11 +654,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal"
-                android:weightSum="2"
-                android:visibility="gone">
+                android:visibility="visible"
+                android:weightSum="2">
 
                 <ss.anoop.awesometextinputlayout.AwesomeTextInputLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_20sdp"
@@ -683,13 +678,13 @@
                         android:hint="MM/YYYY"
                         android:inputType="number"
                         android:textColorHint="@color/black"
-                        android:textSize="@dimen/_12sdp"/>
+                        android:textSize="@dimen/_12sdp" />
 
 
                 </ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
 
                 <ss.anoop.awesometextinputlayout.AwesomeTextInputLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginRight="@dimen/_10sdp"
@@ -708,27 +703,26 @@
                         android:hint="CVV"
                         android:inputType="number"
                         android:textColorHint="@color/black"
-                        android:textSize="@dimen/_12sdp"/>
+                        android:textSize="@dimen/_12sdp" />
 
 
                 </ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
 
-
-                <TextView
-                    android:id="@+id/txtPlaceOrder2"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginLeft="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_15sdp"
-                    android:background="@color/yellow"
-                    android:gravity="center"
-                    android:text="Place Order"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    android:visibility="visible"/>
-
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtPlaceOrder2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@color/yellow"
+                android:gravity="center"
+                android:text="Place Order"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="gone" />
 
 
             <TextView
@@ -736,14 +730,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@color/yellow"
                 android:gravity="center"
                 android:text="Place Order"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
-                android:visibility="visible"/>
+                android:visibility="visible" />
 
         </LinearLayout>
     </ScrollView>

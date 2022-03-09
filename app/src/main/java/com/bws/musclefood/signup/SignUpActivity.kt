@@ -38,9 +38,9 @@ class SignUpActivity:AppCompatActivity() {
         txtAllreadyAccount.text = content
 
         if(Validator.isValidEmail("name@gmail.com",false)){
-            Toast.makeText(this,"TTTTT",Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this,"TTTTT",Toast.LENGTH_SHORT).show()
         }else {
-            Toast.makeText(this,"FFFFF",Toast.LENGTH_SHORT).show()
+           // Toast.makeText(this,"FFFFF",Toast.LENGTH_SHORT).show()
         }
 
         btnRegister.setOnClickListener(){
