@@ -273,8 +273,9 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/_10sdp"
                 android:text="Payment Options"
+                android:textSize="@dimen/_14sdp"
                 android:textColor="@color/yellow"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
 
             <LinearLayout
@@ -301,6 +302,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_weight=".7"
+                        android:textSize="@dimen/_10sdp"
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
                         android:checked="true"
@@ -333,7 +335,8 @@
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
                         android:text="PayPal"
-                        android:textColor="@color/black"></RadioButton>
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/black"/>
 
                     <ImageView
                         android:layout_width="0dp"
@@ -361,6 +364,7 @@
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
                         android:text="Google Pay"
+                        android:textSize="@dimen/_10sdp"
                         android:textColor="@color/black"></RadioButton>
 
                     <ImageView
@@ -418,6 +422,7 @@
                         android:backgroundTint="@color/red_light"
                         android:buttonTint="@color/black"
                         android:text="Account Payment"
+                        android:textSize="@dimen/_10sdp"
                         android:textColor="@color/black" />
 
                     <ImageView

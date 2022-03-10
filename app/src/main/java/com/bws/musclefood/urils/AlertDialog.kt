@@ -36,10 +36,10 @@ class AlertDialog {
         dialog.getWindow()?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         val imv_cross: ImageView = dialog.findViewById(R.id.imv_cross)
         val txtMessage: TextView = dialog.findViewById(R.id.txtMessage)
-        val txtMessageTitle: TextView = dialog.findViewById(R.id.txtMessageTitle)
+       // val txtMessageTitle: TextView = dialog.findViewById(R.id.txtMessageTitle)
         val txtOk: TextView = dialog.findViewById(R.id.txtOk)
         txtMessage.text = message
-        txtMessageTitle.text = messageTitle
+       // txtMessageTitle.text = messageTitle
 
         txtOk.setOnClickListener(){
             activity.startActivity(Intent(activity,ProductListActivity::class.java))

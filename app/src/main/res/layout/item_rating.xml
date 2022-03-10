@@ -37,11 +37,12 @@
         android:layout_marginTop="3dp"
         android:text="3 Review"
         android:textSize="@dimen/_10sdp"
-        android:textColor="@color/gray"
+        android:textColor="@color/yellow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/txtDisplayName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDisplayName"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"

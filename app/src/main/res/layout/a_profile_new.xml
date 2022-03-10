@@ -19,13 +19,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/circularImageView"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_height="@dimen/_60sdp"
                 android:layout_margin="@dimen/_15sdp"
                 android:layout_marginBottom="1dp"
                 android:layout_weight=".3"
@@ -38,8 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
-                android:text="PROFILE"
                 android:paddingLeft="@dimen/_10sdp"
+                android:text="PROFILE"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:background="@color/yellow"
             android:gravity="center"
