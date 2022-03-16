@@ -25,20 +25,14 @@ import java.util.*
 
 class CartListActivity:AppCompatActivity() {
 
-    //lateinit var adapter: CartListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart_list)
         supportActionBar?.hide()
 
-       // txtLogInSignUp.visibility = View.GONE
+        txtOrderNo.visibility = View.GONE
+
         txtLogInSignUp.text = "Cart Details"
-      //  txtLogInSignUp.setBackgroundColor(resources.getColor(R.color.gray));
-      //  txtLogInSignUp.setTextColor(resources.getColor(R.color.black))
-
-      //  constraintLayCart.visibility = View.INVISIBLE
-
-
         recyCartList.layoutManager = LinearLayoutManager(this)
 
         val dividerDrawable =
@@ -63,7 +57,7 @@ class CartListActivity:AppCompatActivity() {
     }
 
     fun updateCartItem(totalPrice: Double, netDiscount: Double){
-        val currentLocale = Locale.UK
+
         val currencyFormatter = NumberFormat.getCurrencyInstance()
         txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString()
         txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString().drop(1)

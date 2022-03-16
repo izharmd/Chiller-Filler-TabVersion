@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.R
+import com.bws.musclefood.common.Constant
 import com.bws.musclefood.delivery.AddNewAddressActivity
 import kotlinx.android.synthetic.main.activity_choose_delivery_address.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
@@ -17,7 +18,7 @@ class ChooseDeliveryAddressActivity:AppCompatActivity() {
         supportActionBar?.hide()
 
         imvSaveaddress.visibility = View.GONE
-        txtTxtHeader.text = "Choose Delivery Address"
+        txtTxtHeader.text = Constant.deliveryAddress
 
         recyAddress.layoutManager = LinearLayoutManager(this)
         val data = ArrayList<ChooseDelModel>()
@@ -32,6 +33,26 @@ class ChooseDeliveryAddressActivity:AppCompatActivity() {
         txtAddNewAddress.setOnClickListener(){
             startActivity(Intent(this@ChooseDeliveryAddressActivity,AddNewAddressActivity::class.java))
         }
+
+
+        rdDefaultAddress.setOnClickListener(){
+            rdDefaultAddress.isChecked = true
+            rdHomeAddress.isChecked = false
+        }
+
+        rdHomeAddress.setOnClickListener(){
+            rdDefaultAddress.isChecked = false
+            rdHomeAddress.isChecked = true
+        }
+
+        txtEditAddress.setOnClickListener(){
+           startActivity(Intent(this@ChooseDeliveryAddressActivity,AddNewAddressActivity::class.java))
+        }
+
+        txtEditAddress1.setOnClickListener(){
+           startActivity(Intent(this@ChooseDeliveryAddressActivity,AddNewAddressActivity::class.java))
+        }
+
 
         imvBack.setOnClickListener(){
             finish()

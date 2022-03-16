@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_45sdp"
+    android:layout_height="wrap_content"
     android:background="@drawable/border_in_bottom"
     android:orientation="horizontal"
     android:weightSum="1">
@@ -20,46 +20,46 @@
 
     </ImageView>
 
-    <TextView
+
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="@dimen/_32sdp"
-        android:background="@drawable/logo3"
-        android:layout_weight=".2"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_weight=".8"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:background="@drawable/logo3">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/txtTxtHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/round_login_signup"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_10sdp"
+            android:text="Add New Address"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imvSaveaddress"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/_5sdp">
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/txtTxtHeader"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_gravity="center"
-        android:layout_weight=".55"
-        android:gravity="center"
-        android:text="Add New Address"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_14sdp"
-        android:textStyle="bold"/>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight=".16">
-
-        <ImageView
-            android:id="@+id/imvSaveaddress"
-            android:layout_width="58dp"
-            android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.79"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.47000003"
-            app:srcCompat="@drawable/check_24" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_weight=".1"
+        app:srcCompat="@drawable/check_24" />
 
 </LinearLayout>

@@ -21,8 +21,8 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_weight="1"
+
+
         android:background="@drawable/round_yello"
         android:paddingLeft="@dimen/_15sdp"
         android:paddingRight="@dimen/_15sdp"

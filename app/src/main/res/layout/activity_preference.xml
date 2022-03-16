@@ -34,7 +34,7 @@
                     android:paddingLeft="@dimen/_5sdp"
                     android:text="@string/f_Name"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"/>
+                    android:textSize="@dimen/_12sdp" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -51,32 +51,91 @@
                 </EditText>
 
 
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:drawableLeft="@drawable/first_name_24"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center|left"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="Name"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"/>
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2">
 
-                <EditText
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/first_name_24"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="First Name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp">
+
+                    </TextView>
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/first_name_24"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="Last Name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@drawable/round_profile_view"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="Shailendra Prasad"
-                    android:textSize="@dimen/_12sdp">
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2">
 
-                </EditText>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_profile_view"
+                        android:gravity="center|left"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="Shailendra"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp">
+
+                    </EditText>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_profile_view"
+                        android:gravity="center|left"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="Prasad"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp">
+
+                    </EditText>
+
+
+                </LinearLayout>
+
 
 
                 <TextView
@@ -88,7 +147,7 @@
                     android:paddingLeft="@dimen/_5sdp"
                     android:text="@string/eMail"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"/>
+                    android:textSize="@dimen/_12sdp" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -115,7 +174,7 @@
                     android:text="@string/mob_land"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -189,38 +248,13 @@
 
                 </EditText>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/lock_24"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center|left"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="Password"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@drawable/round_profile_view"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="*********"
-                    android:textSize="@dimen/_12sdp">
-
-                </EditText>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="1"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    android:weightSum="1">
 
                     <TextView
                         android:layout_width="0dp"
@@ -233,7 +267,7 @@
                         android:paddingLeft="@dimen/_5sdp"
                         android:text="@string/DOB"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"/>
+                        android:textSize="@dimen/_12sdp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -326,7 +360,7 @@
                     android:gravity="center"
                     android:text="Update"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_14sdp"/>
+                    android:textSize="@dimen/_14sdp" />
 
 
             </LinearLayout>
@@ -350,7 +384,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.848"/>
+            app:layout_constraintVertical_bias="0.848" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

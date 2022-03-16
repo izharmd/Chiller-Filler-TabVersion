@@ -66,22 +66,24 @@ class DeliveryOptionActivity:AppCompatActivity(), AdapterView.OnItemSelectedList
 
         })
 
+        txtChangeAddress.setOnClickListener{
+            Constant.deliveryAddress = "Choose Delivery Address"
 
-
-        txtChangeAddress.setOnClickListener(){
             startActivity(Intent(this@DeliveryOptionActivity, ChooseDeliveryAddressActivity::class.java))
         }
 
-        txtViewAllItems.setOnClickListener(){
+        txtViewAllItems.setOnClickListener{
             //dialogViewProduct("qwertyu")
             startActivity(Intent(this@DeliveryOptionActivity, CartListActivity::class.java))
         }
 
-        txtProceedToPay.setOnClickListener(){
+        txtProceedToPay.setOnClickListener{
+            Constant.hidePaymentSection = "NO"
+            Constant.paymentDetails = "Payment"
             startActivity(Intent(this@DeliveryOptionActivity, PaymentActivity::class.java))
         }
 
-        imvBack.setOnClickListener(){
+        imvBack.setOnClickListener{
             finish()
         }
 
@@ -98,7 +100,7 @@ class DeliveryOptionActivity:AppCompatActivity(), AdapterView.OnItemSelectedList
 
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //To change body of created functions use File | Settings | File Templates.
     }
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val text: String = parent?.getItemAtPosition(position).toString()

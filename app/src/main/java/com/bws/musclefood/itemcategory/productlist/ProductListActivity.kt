@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.profile.MyProfileActivity
 import com.bws.musclefood.R
+import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.pos
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
 import com.bws.musclefood.favourites.FavouritesActivity
@@ -35,6 +36,8 @@ class ProductListActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_productlist)
         supportActionBar?.hide()
+
+        txtLogInSignUp.text = Constant.serviceType
 
 
         mainCategory()

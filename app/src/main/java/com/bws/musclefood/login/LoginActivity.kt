@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
 import com.bws.musclefood.R
+import com.bws.musclefood.home.HomeActivity
 import com.bws.musclefood.itemcategory.ItemCategotyActivity
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.signup.SignUpActivity
@@ -63,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                 dialogOTPtoLogin()
             }*/
 
-            startActivity(Intent(this@LoginActivity, ProductListActivity::class.java))
+            startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
         }
 
         llForgotPassword.setOnClickListener() {

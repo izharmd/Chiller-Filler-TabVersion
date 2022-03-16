@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
@@ -23,7 +24,7 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesModel>): RecyclerView.Ad
     var netDiscount: Double = 0.0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_cart_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_favourites, parent, false)
         context = parent.context
         return ViewHolder(view)
     }
@@ -106,6 +107,12 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesModel>): RecyclerView.Ad
         }
 
 
+       /* holder.txtAdd.setOnClickListener{
+            holder.llIncrementDecrement.visibility = View.VISIBLE
+            holder.txtAdd.visibility = View.GONE
+        }*/
+
+
         val productQuantity = holder.txtTotalQuentity.text.toString().toInt()
         val productPrice = holder.txtPrice.text.toString().drop(1).toFloat()
         totalProductPrice = (productQuantity * productPrice).toDouble()
@@ -147,10 +154,12 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesModel>): RecyclerView.Ad
         val txtDiscountPrice: TextView = itemView.findViewById(R.id.txtDiscountPrice)
         val txtDeleteProduct: TextView = itemView.findViewById(R.id.txtDeleteProduct)
         val txtDecrement: TextView = itemView.findViewById(R.id.txtDecrement)
+        val txtAdd: TextView = itemView.findViewById(R.id.txtAdd)
         val txtInrement: TextView = itemView.findViewById(R.id.txtInrement)
         val txtTotalQuentity: TextView = itemView.findViewById(R.id.txtTotalQuentity)
         val txtYouSaved: TextView = itemView.findViewById(R.id.txtYouSaved)
         val imvProduct: ImageView = itemView.findViewById(R.id.imvProduct)
+        val llIncrementDecrement: LinearLayout = itemView.findViewById(R.id.llIncrementDecrement)
 
         val imvAddToFavourites: ImageView = itemView.findViewById(R.id.imvAddToFavourites)
         val imvAddToFavouritesHover: ImageView = itemView.findViewById(R.id.imvAddToFavouritesHover)

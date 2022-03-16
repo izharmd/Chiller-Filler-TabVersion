@@ -1,6 +1,7 @@
 package com.bws.musclefood.orders.fragment.fragmentCurrent
 
 import android.content.Context
+import android.content.Intent
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
@@ -10,7 +11,10 @@ import android.widget.TextView
 import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
+import com.bws.musclefood.common.Constant
 import com.bws.musclefood.itemcategory.ItemCategoryAdapter
+import com.bws.musclefood.orders.reorder.ReorderActivity
+import com.bws.musclefood.orders.vieworderdetails.ViewOrderDetailsActivity
 
 class CurrentOrderAdapter(val mList:ArrayList<CurrentOrderModel>) :RecyclerView.Adapter<CurrentOrderAdapter.ViewHolder>(){
      private var context: Context? = null
@@ -23,12 +27,11 @@ class CurrentOrderAdapter(val mList:ArrayList<CurrentOrderModel>) :RecyclerView.
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        TODO("Not yet implemented")
 
         val currentOrder = mList[position]
 
         holder.txtOrderDate.text = currentOrder.orderDate
-       // holder.txtOrderNumber.text = currentOrder.orderNumber
+        holder.txtOrderNumber.text = currentOrder.orderNumber
         holder.txtOrderValue.text = currentOrder.orderValue
         holder.txtOrderStatus.text = currentOrder.status
 
@@ -36,9 +39,19 @@ class CurrentOrderAdapter(val mList:ArrayList<CurrentOrderModel>) :RecyclerView.
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         holder.txtTrack.text = content
 
-        val content2 = SpannableString(currentOrder.orderNumber)
-        content2.setSpan(UnderlineSpan(), 0, content.length, 0)
-        holder.txtOrderNumber.text = content2
+       // val content2 = SpannableString(currentOrder.orderNumber)
+        //content2.setSpan(UnderlineSpan(), 0, content.length, 0)
+        //holder.txtOrderNumber.text = content2
+
+
+        holder.txtViewOrder.setOnClickListener{
+            context?.startActivity(Intent(context,ViewOrderDetailsActivity::class.java))
+        }
+
+        holder.txtReOrder.setOnClickListener{
+            Constant.orderNo = currentOrder.orderNumber
+            context?.startActivity(Intent(context,ReorderActivity::class.java))
+        }
 
     }
 
@@ -54,6 +67,8 @@ class CurrentOrderAdapter(val mList:ArrayList<CurrentOrderModel>) :RecyclerView.
         val txtOrderValue: TextView = itemView.findViewById(R.id.txtOrderValue)
         val txtOrderStatus: TextView = itemView.findViewById(R.id.txtOrderStatus)
         val txtTrack: TextView = itemView.findViewById(R.id.txtTrack)
+        val txtReOrder: TextView = itemView.findViewById(R.id.txtReOrder)
+        val txtViewOrder: TextView = itemView.findViewById(R.id.txtViewOrder)
 
     }
 }

@@ -8,8 +8,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
+import com.bws.musclefood.common.Constant
+import com.bws.musclefood.delivery.AddNewAddressActivity
 import com.bws.musclefood.delivery.choosedeliveryaddress.ChooseDeliveryAddressActivity
+import com.bws.musclefood.delivery.deliveryoption.DeliveryOptionActivity
 import com.bws.musclefood.orders.OrderActivity
+import com.bws.musclefood.orders.SearchOrderActivity
 import com.bws.musclefood.payment.PaymentActivity
 
 class ProfileAdapter(val mList: List<ProfileModel>) :
@@ -33,12 +37,15 @@ class ProfileAdapter(val mList: List<ProfileModel>) :
 
         holder.itemView.setOnClickListener() {
             if(position == 0){
-
+                context?.startActivity(Intent(context,ChangeProfileActivity::class.java))
             }else if(position == 1){
+                Constant.deliveryAddress = "Delivery Address"
                 context?.startActivity(Intent(context,ChooseDeliveryAddressActivity::class.java))
             }else if(position == 2){
-                context?.startActivity(Intent(context,OrderActivity::class.java))
+                context?.startActivity(Intent(context,SearchOrderActivity::class.java))
             }else if(position == 3){
+                Constant.hidePaymentSection = "YES"
+                Constant.paymentDetails = "Payment Details"
                 context?.startActivity(Intent(context,PaymentActivity::class.java))
             }else if(position == 4){
                 context?.startActivity(Intent(context,ContactPreferenceActivity::class.java))

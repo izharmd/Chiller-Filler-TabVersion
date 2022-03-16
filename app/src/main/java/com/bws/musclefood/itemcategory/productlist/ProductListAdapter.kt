@@ -38,6 +38,8 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
     var context: Context? = null
     var myInt: Int = 0
 
+    val arrItem = ArrayList<String>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_product_list, parent, false)
@@ -94,6 +96,7 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
 
             holder.llIncrementDecrement.visibility = View.VISIBLE
             holder.txtAdd.visibility = View.GONE
+
             addDataToCart.add(
                 CartListModel(
                     itm.productImage,
@@ -104,6 +107,8 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
                     itm.offer
                 )
             )
+
+            arrItem.add(itemProduct.productName)
         }
 
         holder.txtQuantity.setOnClickListener() {
@@ -140,16 +145,24 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
             myInt++
             holder.txtTotalQuentity.text = myInt.toString()
             val itm = mList[position]
-            addDataToCart.add(
-                CartListModel(
-                    itm.productImage,
-                    itm.productName,
-                    itm.quentity,
-                    itm.productPrice,
-                    itm.productDiscountPrice,
-                    itm.offer
+
+
+            val bl = arrItem.contains(itm.productName)
+
+            if(bl){
+               // Toast.makeText(context,"YYYYY",Toast.LENGTH_SHORT).show()
+            }else{
+                addDataToCart.add(
+                    CartListModel(
+                        itm.productImage,
+                        itm.productName,
+                        itm.quentity,
+                        itm.productPrice,
+                        itm.productDiscountPrice,
+                        itm.offer
+                    )
                 )
-            )
+            }
         }
 
         holder.llRating.setOnClickListener() {
@@ -185,7 +198,7 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
         }
 
 
-        holder.itemView.setOnClickListener(){
+        holder.imvProduct.setOnClickListener(){
             context?.startActivity(Intent(context,ProductDetailsActivity::class.java))
         }
 

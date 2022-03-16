@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -31,7 +31,7 @@
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="Order Date"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/txtOrderDate"
@@ -42,14 +42,16 @@
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="10 Dec 2021"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_12sdp" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -63,7 +65,7 @@
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="Order Number"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/txtOrderNumber"
@@ -74,14 +76,16 @@
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="10 Dec 2021"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_12sdp" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -95,7 +99,7 @@
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="Order Value"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/txtOrderValue"
@@ -106,14 +110,16 @@
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="10 Dec 2021"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_12sdp" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -127,7 +133,7 @@
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="Status"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/txtOrderStatus"
@@ -138,14 +144,16 @@
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="10 Dec 2021"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_12sdp" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -159,7 +167,7 @@
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="Delivery Tracking"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/txtTrack"
@@ -169,11 +177,89 @@
                 android:layout_weight=".5"
                 android:paddingLeft="@dimen/_5sdp"
                 android:text="10 Dec 2021"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/_12sdp"></TextView>
-
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_12sdp" />
 
         </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".5"
+                android:drawableLeft="@drawable/basket_black_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:gravity="center|left"
+                android:text="View Order Details"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/txtViewOrder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".5"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="View Order"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_12sdp" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".75"
+                android:drawableLeft="@drawable/basket_black_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="View Order Details"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/txtReOrder"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center|right"
+                android:gravity="center"
+                android:paddingRight="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_weight=".25"
+                android:paddingLeft="@dimen/_15sdp"
+                android:text="Reorder"
+                android:drawableRight="@drawable/arrow_forward_24"
+                android:background="@drawable/round_reorder"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

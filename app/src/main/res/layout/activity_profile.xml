@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,305 +13,308 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".7">
+        android:layout_weight="1">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imvProfile"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:src="@drawable/user_account_circle_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.589" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/imvProfile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.36"
+                    app:layout_constraintStart_toStartOf="@+id/imvProfile"
+                    app:layout_constraintTop_toTopOf="@+id/imvProfile"
+                    app:layout_constraintVertical_bias="0.777"
+                    app:srcCompat="@drawable/camera_24" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/first_name_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center|left"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="@string/f_Name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@drawable/round_profile_view"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+
+                <Spinner
+                    android:id="@+id/spTitle"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="2">
+
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
                     android:drawableLeft="@drawable/first_name_24"
                     android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center|left"
                     android:paddingLeft="@dimen/_5sdp"
-                    android:text="@string/f_Name"
+                    android:text="First Name"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"></TextView>
+                    android:textSize="@dimen/_12sdp">
+
+                </TextView>
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/first_name_24"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Last Name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp">
+
+                </TextView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="2">
+
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight="1"
                     android:background="@drawable/round_profile_view"
+                    android:gravity="center|left"
                     android:paddingLeft="@dimen/_5sdp"
-                    android:text="Director"
+                    android:text="Shailendra"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp">
 
                 </EditText>
 
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/email_24"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center|left"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="@string/eMail"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"></TextView>
-
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight="1"
                     android:background="@drawable/round_profile_view"
+                    android:gravity="center|left"
                     android:paddingLeft="@dimen/_5sdp"
-                    android:text="sp@bitwavesolutions.com"
+                    android:text="Prasad"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp">
 
                 </EditText>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/landline_24"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center|left"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="@string/mob_land"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"></TextView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation="horizontal"
-                    android:visibility="visible"
-                    android:weightSum="2">
-
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_profile_view"
-                        android:gravity="center|left"
-                        android:inputType="number"
-                        android:paddingLeft="@dimen/_5sdp"
-                        android:text="70830"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp">
-
-                    </EditText>
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_profile_view"
-                        android:gravity="center|left"
-                        android:paddingLeft="@dimen/_5sdp"
-                        android:text="052891"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp">
-
-                    </EditText>
-
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/phone_24"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center|left"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="@string/mob_No"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@drawable/round_profile_view"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="07830052891"
-                    android:textSize="@dimen/_12sdp">
-
-                </EditText>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/lock_24"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center|left"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="Password"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@drawable/round_profile_view"
-                    android:paddingLeft="@dimen/_5sdp"
-                    android:text="Test@123"
-                    android:textSize="@dimen/_12sdp">
-
-                </EditText>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center"
-                        android:layout_weight=".6"
-                        android:drawableLeft="@drawable/date_of_birth_24"
-                        android:drawablePadding="@dimen/_5sdp"
-                        android:gravity="center|left"
-                        android:paddingLeft="@dimen/_5sdp"
-                        android:text="@string/DOB"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"></TextView>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_weight=".4"
-                        android:background="@drawable/round_profile_view"
-                        android:gravity="center"
-                        android:text="On Record"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp">
-
-                    </TextView>
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
-                    android:weightSum="3">
-
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_profile_view"
-                        android:gravity="center"
-                        android:hint="dd"
-                        android:inputType="number"
-                        android:textColor="@color/black">
-
-                    </EditText>
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_profile_view"
-                        android:gravity="center"
-                        android:hint="mm"
-                        android:inputType="number"
-                        android:textColor="@color/black">
-
-                    </EditText>
-
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_profile_view"
-                        android:gravity="center"
-                        android:hint="yyyy"
-                        android:inputType="number"
-                        android:textColor="@color/black">
-
-                    </EditText>
-
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@color/yellow"
-                    android:gravity="center"
-                    android:text="Update"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14sdp"/>
 
 
             </LinearLayout>
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:drawableLeft="@drawable/email_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center|left"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="@string/eMail"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/round_profile_view"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="sp@bitwavesolutions.com"
+                android:textSize="@dimen/_12sdp">
+
+            </EditText>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:drawableLeft="@drawable/phone_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center|left"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="@string/mob_No"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="visible" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/round_profile_view"
+                android:maxLength="10"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="0783005289"
+                android:inputType="phone"
+                android:textSize="@dimen/_12sdp">
+
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="3">
+
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_profile_view"
+                    android:gravity="center"
+                    android:hint="dd"
+                    android:inputType="number"
+                    android:textColor="@color/black">
+
+                </EditText>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_profile_view"
+                    android:gravity="center"
+                    android:hint="mm"
+                    android:inputType="number"
+                    android:textColor="@color/black">
+
+                </EditText>
+
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_profile_view"
+                    android:gravity="center"
+                    android:hint="yyyy"
+                    android:inputType="number"
+                    android:textColor="@color/black">
+
+                </EditText>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@color/yellow"
+                android:gravity="center"
+                android:text="Update"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp" />
+
+
         </LinearLayout>
+
 
     </ScrollView>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".3">
+        android:layout_weight=".3"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="193dp"
@@ -320,8 +324,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.848"></ImageView>
+            app:layout_constraintVertical_bias="0.848"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 </LinearLayout>

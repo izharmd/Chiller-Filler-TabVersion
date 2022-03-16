@@ -11,15 +11,47 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_110sdp"
+            android:layout_height="@dimen/_80sdp"
             android:layout_gravity="center"
-            android:src="@drawable/new_registration"
-            android:scaleType="fitXY"
-            android:textColor="@color/black">
+            android:text="New Registration"
+            android:textAllCaps="true"
+            android:textSize="@dimen/_22sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:textColor="@color/yellow">
 
-        </ImageView>
+        </TextView>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:background="@drawable/round_textview"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_weight=".05"
+                android:drawableLeft="@drawable/title_24" />
+
+
+            <Spinner
+                android:id="@+id/spTitle"
+                style="@style/SpinnerTheme"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".95" />
+        </LinearLayout>
 
 
         <EditText
@@ -29,7 +61,8 @@
             android:background="@drawable/round_textview"
             android:drawableLeft="@drawable/title_24"
             android:hint="Title"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"
+            android:visibility="gone"/>
 
 
         <EditText

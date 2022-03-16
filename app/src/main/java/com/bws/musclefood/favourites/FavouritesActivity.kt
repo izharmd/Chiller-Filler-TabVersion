@@ -26,11 +26,11 @@ class FavouritesActivity:AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cart_list)
+        setContentView(R.layout.activity_favourites)
         supportActionBar?.hide()
 
         // txtLogInSignUp.visibility = View.GONE
-        txtLogInSignUp.text = "Favourites Items"
+        txtLogInSignUp.text = "Favourite Items"
         //  txtLogInSignUp.setBackgroundColor(resources.getColor(R.color.gray));
         //  txtLogInSignUp.setTextColor(resources.getColor(R.color.black))
 

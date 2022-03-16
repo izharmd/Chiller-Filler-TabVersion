@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.tool_bar_cart_details.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.txtLogInSignUp
 
 class ProductDetailsActivity:AppCompatActivity() {
-
+    var myInt: Int = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_producct_details)
@@ -20,6 +20,32 @@ class ProductDetailsActivity:AppCompatActivity() {
 
         imvProduct.setImageResource(R.drawable.cheken1)
 
+        txtPlus1.setOnClickListener{
+            txtGradient.visibility = View.VISIBLE
+            txtMinus1.visibility = View.VISIBLE
+        }
+
+        txtMinus1.setOnClickListener{
+            txtGradient.visibility = View.GONE
+            txtPlus1.visibility = View.VISIBLE
+            txtMinus1.visibility = View.GONE
+        }
+
+        txtDecrement.setOnClickListener{
+            myInt = txtTotalQuentity.text.toString().toInt()
+            if (myInt <= 1) {
+                myInt = 1
+            } else {
+                myInt--
+                txtTotalQuentity.text = myInt.toString()
+            }
+        }
+
+        txtInrement.setOnClickListener{
+            myInt = txtTotalQuentity.text.toString().toInt()
+            myInt++
+            txtTotalQuentity.text = myInt.toString()
+        }
 
         imvBack.setOnClickListener(){
             finish()

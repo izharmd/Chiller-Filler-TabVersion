@@ -187,18 +187,6 @@
                             android:layout_weight=".9"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/txtAdd"
-                                android:layout_width="@dimen/_80sdp"
-                                android:layout_height="@dimen/_20sdp"
-                                android:layout_gravity="center|right"
-                                android:layout_marginRight="@dimen/_10sdp"
-                                android:background="@drawable/round_add_to_cart"
-                                android:gravity="center"
-                                android:text="Add"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_10sdp"
-                                android:visibility="visible" />
 
                             <LinearLayout
                                 android:id="@+id/llIncrementDecrement"
@@ -208,7 +196,7 @@
                                 android:layout_marginRight="@dimen/_10sdp"
                                 android:orientation="horizontal"
 
-                                android:visibility="gone"
+                                android:visibility="visible"
                                 android:weightSum="3">
 
                                 <TextView
@@ -249,6 +237,21 @@
 
                             </LinearLayout>
 
+                            <TextView
+                                android:id="@+id/txtAdd"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_gravity="center|right"
+                                android:layout_marginRight="@dimen/_10sdp"
+                                android:background="@drawable/round_add_to_cart"
+                                android:gravity="center"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:text="Add to basket"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10sdp"
+                                android:visibility="visible" />
+
+
                         </LinearLayout>
 
                     </LinearLayout>
@@ -280,6 +283,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <TextView
+                    android:id="@+id/txtMinus1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
@@ -289,6 +293,20 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_20sdp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtPlus1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|left"
+                    android:layout_weight=".1"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="+"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
 
 
             </LinearLayout>
@@ -300,6 +318,7 @@
                 android:background="@color/black" />
 
             <TextView
+                android:id="@+id/txtGradient"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -332,6 +351,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <TextView
+                    android:id="@+id/txtPlus2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
@@ -341,6 +361,19 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_20sdp"
                     android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtMinus2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|left"
+                    android:layout_weight=".1"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="-"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
 
 
             </LinearLayout>
@@ -368,6 +401,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <TextView
+                    android:id="@+id/txtPlus3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
@@ -377,6 +411,18 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_20sdp"
                     android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtMinus3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|left"
+                    android:layout_weight=".1"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="-"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
 
             </LinearLayout>
@@ -404,6 +450,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <TextView
+                    android:id="@+id/txtPlus4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|left"
@@ -413,6 +460,18 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_20sdp"
                     android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtMinus4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|left"
+                    android:layout_weight=".1"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="-"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
 
             </LinearLayout>

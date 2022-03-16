@@ -22,7 +22,7 @@
             android:orientation="horizontal">
 
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/circularImageView"
+                android:id="@+id/imvProfile"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_60sdp"
                 android:layout_margin="@dimen/_15sdp"
@@ -42,18 +42,18 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/circularImageView"
+                app:layout_constraintStart_toEndOf="@+id/imvProfile"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/circularImageView"
-                app:layout_constraintEnd_toEndOf="@+id/circularImageView"
+                app:layout_constraintBottom_toBottomOf="@+id/imvProfile"
+                app:layout_constraintEnd_toEndOf="@+id/imvProfile"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/circularImageView"
-                app:layout_constraintTop_toTopOf="@+id/circularImageView"
+                app:layout_constraintStart_toStartOf="@+id/imvProfile"
+                app:layout_constraintTop_toTopOf="@+id/imvProfile"
                 app:layout_constraintVertical_bias="0.776"
                 app:srcCompat="@drawable/camera_24" />
 

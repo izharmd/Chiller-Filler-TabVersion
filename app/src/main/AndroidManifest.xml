@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bws.musclefood">
 
+
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo3"
@@ -61,6 +66,18 @@
         <activity android:name=".profile.ContactPreferenceActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".productdetails.ProductDetailsActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".home.HomeActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".orders.vieworderdetails.ViewOrderDetailsActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".profile.ChangeProfileActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".orders.reorder.ReorderActivity"
             android:screenOrientation="portrait"></activity>
 
     </application>

@@ -38,6 +38,13 @@ class ChooseDelAdapter(val mList: List<ChooseDelModel>) :
            holder.rdDefaultAddress.isChecked = true
         }
 
+
+        holder.rdDefaultAddress.setOnClickListener(){
+            if (position == 0){
+
+            }
+        }
+
         holder.txtEditAddress.setOnClickListener {
           context?.startActivity(Intent(context,AddNewAddressActivity::class.java))
         }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/tool_bar_address"></include>
@@ -10,33 +10,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
-        android:orientation="horizontal"
         android:background="@color/light_gray"
+        android:orientation="horizontal"
         android:weightSum="2">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="SAVED ADDRESS "
             android:layout_gravity="center"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/_10sdp"
+            android:text="SAVED ADDRESS "
             android:textColor="@color/black_bold"
             android:textStyle="bold"
-            android:paddingLeft="@dimen/_10sdp"/>
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/txtAddNewAddress"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="ADD NEW ADDRESS "
             android:layout_gravity="center"
-           android:gravity="center"
-            android:paddingRight="@dimen/_10sdp"
-            android:textColor="@color/black_bold"
+            android:layout_weight="1"
             android:drawableLeft="@drawable/add_new_address_12"
-            android:textStyle="bold"
-            android:paddingLeft="@dimen/_30sdp"/>
+            android:gravity="center"
+            android:paddingLeft="@dimen/_30sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:text="ADD NEW ADDRESS "
+            android:textColor="@color/black_bold"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -44,8 +45,188 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyAddress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <RadioButton
+                    android:id="@+id/rdDefaultAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:checked="true"
+                    android:text="Office"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/green"
+                    android:buttonTint="@color/black">
+
+                </RadioButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text=""
+                    android:textColor="@color/black_bold"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:text="Mr Joseph"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:text="32 My Street Kingston,UK 12401"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:text="Ph: 322603540"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+            <TextView
+                android:id="@+id/txtEditAddress1"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="right"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:gravity="center"
+                android:text="Edit"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <RadioButton
+                    android:id="@+id/rdHomeAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:text="Godown"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/green"
+                    android:buttonTint="@color/black">
+
+                </RadioButton>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:text="Mr James"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"></TextView>
+
+
+            <TextView
+                android:id="@+id/txtFullAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:text="RG6 6AH United Kingdom"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"></TextView>
+
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:text="Ph: 2904700999"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+            <TextView
+                android:id="@+id/txtEditAddress"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="right"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:gravity="center"
+                android:text="Edit"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

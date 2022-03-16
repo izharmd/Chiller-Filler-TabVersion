@@ -7,5 +7,4 @@ class CartListModel(
     val price: String,
     val netPrice: String,
     val youSaved: String
-) {
-}
+)

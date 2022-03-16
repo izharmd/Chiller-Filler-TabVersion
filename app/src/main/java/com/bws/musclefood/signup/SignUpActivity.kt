@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Html
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
@@ -20,10 +21,11 @@ import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.urils.AlertDialog
 import com.bws.musclefood.urils.Validator
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
+import kotlinx.android.synthetic.main.accitivity_delivery_option.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 
-class SignUpActivity:AppCompatActivity() {
+class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
     private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
@@ -37,27 +39,49 @@ class SignUpActivity:AppCompatActivity() {
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         txtAllreadyAccount.text = content
 
-        if(Validator.isValidEmail("name@gmail.com",false)){
+        if (Validator.isValidEmail("name@gmail.com", false)) {
             //Toast.makeText(this,"TTTTT",Toast.LENGTH_SHORT).show()
-        }else {
-           // Toast.makeText(this,"FFFFF",Toast.LENGTH_SHORT).show()
+        } else {
+            // Toast.makeText(this,"FFFFF",Toast.LENGTH_SHORT).show()
         }
 
-        btnRegister.setOnClickListener(){
-          //  dialogViewProduct("")
+        btnRegister.setOnClickListener() {
+            //  dialogViewProduct("")
             dialogOTPtoLogin()
         }
+
+
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.arrTitle,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spTitle.adapter = adapter
+        spTitle.onItemSelectedListener = this
+
     }
 
 
-    fun dialogViewProduct(pName:String) {
-        val dialog = Dialog(this,R.style.NewDialog)
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val text: String = parent?.getItemAtPosition(position).toString()
+
+    }
+
+
+    fun dialogViewProduct(pName: String) {
+        val dialog = Dialog(this, R.style.NewDialog)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.dailog_alert)
-        dialog.getWindow()?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.getWindow()
+            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         val imv_cross: ImageView = dialog.findViewById(R.id.imv_cross)
-        imv_cross.setOnClickListener(){
+        imv_cross.setOnClickListener() {
             dialog.dismiss()
         }
 
@@ -79,8 +103,11 @@ class SignUpActivity:AppCompatActivity() {
         val btnSubmitToLogin: Button = dialog.findViewById(R.id.btnSubmitToLogin)
 
 
-        btnSubmitToLogin.setOnClickListener(){
-            AlertDialog().dialog(this,"Request sent successfully, will get a activation email once activated.")
+        btnSubmitToLogin.setOnClickListener() {
+            AlertDialog().dialog(
+                this,
+                "Request sent successfully, will get a activation email once activated."
+            )
             dialog.dismiss()
         }
 
