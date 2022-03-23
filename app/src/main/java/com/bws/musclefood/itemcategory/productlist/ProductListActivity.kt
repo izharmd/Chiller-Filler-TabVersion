@@ -2,11 +2,16 @@ package com.bws.musclefood.itemcategory.productlist
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bws.musclefood.profile.MyProfileActivity
+import com.bws.musclefood.Item
+import com.bws.musclefood.NavigationAdapter
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.pos
@@ -19,22 +24,27 @@ import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryAdapter
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryModel
 import com.bws.musclefood.orders.SearchOrderActivity
+import com.bws.musclefood.profile.MyProfileActivity
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import com.volcaniccoder.bottomify.BottomifyNavigationView
 import com.volcaniccoder.bottomify.OnNavigationItemChangeListener
+import kotlinx.android.synthetic.main.a_profile_new.*
 import kotlinx.android.synthetic.main.activity_productlist.*
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.drawer_layout.*
+import kotlinx.android.synthetic.main.side_menu_drawer.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.*
 
 class ProductListActivity:AppCompatActivity() {
 
     val dataMainCtegory = ArrayList<ItemCategoryModel>()
-
-
     var dataTopCategory: ArrayList<TopCategoryModel>? = null
+
+    var items: ArrayList<Item> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_productlist)
+        setContentView(R.layout.activity_navigation_drawer)
         supportActionBar?.hide()
 
         txtLogInSignUp.text = Constant.serviceType
@@ -69,6 +79,58 @@ class ProductListActivity:AppCompatActivity() {
                 }
             }
         })
+
+
+
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawer_layout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navLV.layoutManager = LinearLayoutManager(this)
+
+        drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+            override fun onDrawerOpened(drawerView: View) {
+                items.clear()
+                items.add(Item("Vieww All"))
+                items.add(Item("Chicken"))
+                items.add(Item("Beef"))
+                items.add(Item("Pork"))
+                items.add(Item("Turkey"))
+
+
+                val dividerDrawable =
+                    ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
+                navLV.addItemDecoration(DividerItemDecoration(dividerDrawable))
+
+                val adapter = NavigationAdapter(items)
+                navLV.adapter = adapter
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onDrawerClosed(drawerView: View) {}
+            override fun onDrawerStateChanged(newState: Int) {
+
+            }
+        })
+
+
+        burgerMenu.setOnClickListener {
+            drawer_layout.openDrawer(GravityCompat.START)
+        }
+    }
+
+
+    fun closeDrawer(){
+
+        drawer_layout.closeDrawer(Gravity.LEFT)
     }
 
     fun yourDesiredMethod(){

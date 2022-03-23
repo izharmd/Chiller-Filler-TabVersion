@@ -13,9 +13,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="@dimen/_160sdp"
             android:scaleType="fitXY"
-            android:src="@drawable/banner33">
+            android:src="@drawable/login_image">
 
         </ImageView>
 
@@ -35,7 +35,7 @@
 
 
         <EditText
-            android:id="@+id/edtEmail"
+            android:id="@+id/edtEmailId"
             style="@style/editText"
             android:background="@drawable/round_textview"
             android:drawableLeft="@drawable/email_24"
@@ -120,7 +120,8 @@
             android:gravity="center"
             android:text="OR"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16sdp"/>
+            android:textSize="@dimen/_16sdp"
+            android:visibility="gone"/>
 
 
         <LinearLayout
@@ -128,7 +129,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -231,7 +233,8 @@
             android:gravity="center"
             android:text="Guest User"
             android:textColor="@color/yellow"
-            android:textSize="@dimen/_14sdp"></TextView>
+            android:textSize="@dimen/_14sdp"
+            android:visibility="invisible"/>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

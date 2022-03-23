@@ -80,6 +80,8 @@
         <activity android:name=".orders.reorder.ReorderActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity android:name=".NavigationActivity"></activity>
+
     </application>
 
 </manifest>

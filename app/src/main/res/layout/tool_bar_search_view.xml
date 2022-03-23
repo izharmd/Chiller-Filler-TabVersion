@@ -3,23 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/_70sdp"
     android:background="@drawable/border_in_bottom"
     android:orientation="horizontal"
     android:weightSum="1">
+
+
+    <ImageView
+        android:id="@+id/burgerMenu"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_weight=".2"
+        android:layout_gravity="center"
+        android:src="@drawable/burgur_menu"/>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_2sdp"
-        android:layout_weight=".7"
+        android:layout_weight=".5"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_32sdp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:background="@drawable/logo3">
 
         </TextView>
@@ -29,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:background="@drawable/round_login_signup"
             android:gravity="center"
             android:text="Login/SignUp"

@@ -114,13 +114,24 @@
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/txtSizeOfProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 x 114g 85VL"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_2sdp"/>
+
         <LinearLayout
             android:id="@+id/llRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2sdp"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/txtRatingPoint"

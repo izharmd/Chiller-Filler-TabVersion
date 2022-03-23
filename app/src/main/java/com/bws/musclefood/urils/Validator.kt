@@ -48,7 +48,7 @@ class Validator {
             // Set error if required
             if (updateUI) {
                 val error: String? = if (valid) null else NAME_VALIDATION_MSG
-                setError(data, error)
+               // setError(data, error)
             }
 
             return valid
@@ -86,7 +86,7 @@ class Validator {
             // Set error if required
             if (updateUI) {
                 val error: String? = if (valid) null else PHONE_VALIDATION_MSG
-                setError(data, error)
+               // setError(data, error)
             }
 
             return valid
@@ -150,7 +150,7 @@ class Validator {
             // Set error if required
             if (updateUI) {
                 val error: String? = if (valid) null else PASSWORD_POLICY
-                setError(data, error)
+               // setError(data, error)
             }
 
             return valid
@@ -167,6 +167,7 @@ class Validator {
                     (data.parent.parent as TextInputLayout).setError(error)
                 } else {
                     data.setError(error)
+
                 }
             }
         }

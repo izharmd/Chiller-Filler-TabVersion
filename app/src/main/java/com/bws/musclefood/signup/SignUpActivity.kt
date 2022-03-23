@@ -12,10 +12,13 @@ import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
+import com.bws.musclefood.databinding.ActivityHomeBinding
+import com.bws.musclefood.databinding.ActivitySignUpBinding
 import com.bws.musclefood.delivery.deliveryoption.viewcartItems.ViewCartItemAdapter
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.urils.AlertDialog
@@ -27,27 +30,39 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
-
-    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+    lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+       // setContentView(R.layout.activity_sign_up)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up)
         supportActionBar?.hide()
 
         val content = SpannableString("LOGIN")
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         txtAllreadyAccount.text = content
 
-        if (Validator.isValidEmail("name@gmail.com", false)) {
-            //Toast.makeText(this,"TTTTT",Toast.LENGTH_SHORT).show()
-        } else {
-            // Toast.makeText(this,"FFFFF",Toast.LENGTH_SHORT).show()
-        }
 
-        btnRegister.setOnClickListener() {
-            //  dialogViewProduct("")
-            dialogOTPtoLogin()
+
+        binding.btnRegister.setOnClickListener() {
+
+            /*if (binding.edtFirstName.text.isEmpty()) {
+                AlertDialog().dialog(this,"Please enter first name")
+            } else if(binding.edtLastName.text.isEmpty()) {
+                AlertDialog().dialog(this,"Please enter last name")
+            }else if(binding.edtCompName.text.isEmpty()) {
+                AlertDialog().dialog(this,"Please enter company name")
+            }else if(binding.edtWatNo.text.isEmpty()) {
+                AlertDialog().dialog(this,"Please enter VAT number")
+            }else if(Validator.isValidEmail(binding.edtEmail.text.toString(),false)) {
+                AlertDialog().dialog(this,"Email id not valid")
+            }else if(binding.edtMobNo.text.isEmpty() || binding.edtMobNo.text.length < 10) {
+                AlertDialog().dialog(this,"Mobile id not valid")
+            }else{
+                dialogOTPtoLogin()
+            }*/
+
+          dialogOTPtoLogin()
         }
 
 
@@ -57,8 +72,8 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             android.R.layout.simple_spinner_item
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spTitle.adapter = adapter
-        spTitle.onItemSelectedListener = this
+        binding.spTitle.adapter = adapter
+        binding.spTitle.onItemSelectedListener = this
 
     }
 

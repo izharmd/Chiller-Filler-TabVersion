@@ -72,7 +72,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:background="@drawable/round_payment_view">
+                        android:background="@drawable/round_payment_view"
+                        android:visibility="gone">
 
 
                         <androidx.recyclerview.widget.RecyclerView

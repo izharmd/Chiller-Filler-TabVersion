@@ -1,177 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp"
-            android:layout_gravity="center"
-            android:text="New Registration"
-            android:textAllCaps="true"
-            android:textSize="@dimen/_22sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:gravity="center"
-            android:textColor="@color/yellow">
-
-        </TextView>
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:background="@drawable/round_textview"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_weight=".05"
-                android:drawableLeft="@drawable/title_24" />
+                android:text="New Registration"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_22sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:textColor="@color/yellow">
+
+            </TextView>
 
 
-            <Spinner
-                android:id="@+id/spTitle"
-                style="@style/SpinnerTheme"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".95" />
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@drawable/round_textview"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_weight=".05"
+                    android:drawableLeft="@drawable/title_24" />
 
 
-        <EditText
-            android:id="@+id/edtTitle"
-            style="@style/editText"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/round_textview"
-            android:drawableLeft="@drawable/title_24"
-            android:hint="Title"
-            android:textColorHint="@color/black"
-            android:visibility="gone"/>
+                <Spinner
+                    android:id="@+id/spTitle"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".95" />
+            </LinearLayout>
 
 
-        <EditText
-            style="@style/editText"
-            android:background="@drawable/round_textview"
-            android:drawableLeft="@drawable/first_name_24"
-            android:hint="First name"
-            android:textColorHint="@color/black"/>
+            <EditText
+                android:id="@+id/edtTitle"
+                style="@style/editText"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/round_textview"
+                android:drawableLeft="@drawable/title_24"
+                android:hint="Title"
+                android:textColorHint="@color/black"
+                android:visibility="gone" />
 
 
-        <EditText
-            style="@style/editText"
-            android:background="@drawable/round_textview"
-            android:drawableLeft="@drawable/first_name_24"
-            android:hint="Last name"
-            android:textColorHint="@color/black"/>
+            <EditText
+                android:id="@+id/edtFirstName"
+                style="@style/editText"
+                android:background="@drawable/round_textview"
+                android:drawableLeft="@drawable/first_name_24"
+                android:hint="First name"
+                android:textColorHint="@color/black" />
 
 
-        <EditText
-            style="@style/editText"
-            android:background="@drawable/round_textview"
-            android:drawableLeft="@drawable/company_name"
-            android:hint="Company name"
-            android:textColorHint="@color/black"/>
+            <EditText
+                android:id="@+id/edtLastName"
+                style="@style/editText"
+                android:background="@drawable/round_textview"
+                android:drawableLeft="@drawable/first_name_24"
+                android:hint="Last name"
+                android:textColorHint="@color/black" />
 
 
-        <EditText
-            style="@style/editText"
-            android:background="@drawable/round_textview"
-            android:drawableLeft="@drawable/vat_no"
-            android:hint="VAT No"
-            android:textColorHint="@color/black"/>
+            <EditText
+                android:id="@+id/edtCompName"
+                style="@style/editText"
+                android:background="@drawable/round_textview"
+                android:drawableLeft="@drawable/company_name"
+                android:hint="Company name"
+                android:textColorHint="@color/black" />
 
 
-        <EditText
-            style="@style/editText"
-            android:background="@drawable/round_textview"
-            android:drawableLeft="@drawable/email_24"
-            android:hint="Email"
-            android:textColorHint="@color/black"/>
-
-        <EditText
-            style="@style/editText"
-            android:background="@drawable/round_textview"
-            android:drawableLeft="@drawable/phone_24"
-            android:hint="Mobile"
-            android:inputType="phone"
-            android:maxLength="10"
-            android:textColorHint="@color/black"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnRegister"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:background="@drawable/rippal_cardview"
-            android:text="REGISTER"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_14sdp"
-            android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/edtWatNo"
+                style="@style/editText"
+                android:background="@drawable/round_textview"
+                android:drawableLeft="@drawable/vat_no"
+                android:hint="VAT No"
+                android:textColorHint="@color/black" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            <EditText
+                android:id="@+id/edtEmail"
+                style="@style/editText"
+                android:background="@drawable/round_textview"
+                android:drawableLeft="@drawable/email_24"
+                android:hint="Email"
+                android:textColorHint="@color/black" />
 
-            <TextView
+            <EditText
+                android:id="@+id/edtMobNo"
+                style="@style/editText"
+                android:background="@drawable/round_textview"
+                android:drawableLeft="@drawable/phone_24"
+                android:hint="Mobile"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:textColorHint="@color/black" />
 
-                android:layout_width="0dp"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@drawable/rippal_cardview"
+                android:text="REGISTER"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_weight=".65"
-                android:gravity="center|right"
-                android:text="Already have an account ?"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-            <TextView
-                android:id="@+id/txtAllreadyAccount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_weight=".3"
-                android:gravity="center|left"
-                android:text=" LOGIN"
-                android:textColor="@color/yellow"
-                android:textSize="@dimen/_12sdp"></TextView>
+                <TextView
 
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_weight=".65"
+                    android:gravity="center|right"
+                    android:text="Already have an account ?"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"></TextView>
+
+                <TextView
+                    android:id="@+id/txtAllreadyAccount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_weight=".3"
+                    android:gravity="center|left"
+                    android:text=" LOGIN"
+                    android:textColor="@color/yellow"
+                    android:textSize="@dimen/_12sdp"></TextView>
+
+
+            </LinearLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:srcCompat="@drawable/logo3" />
 
         </LinearLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:srcCompat="@drawable/logo3" />
-
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</layout>

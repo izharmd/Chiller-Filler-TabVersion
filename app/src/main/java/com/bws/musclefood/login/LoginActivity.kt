@@ -53,8 +53,8 @@ class LoginActivity : AppCompatActivity() {
 
            // val email = Validator.isValidEmail("nameg@mail.com",false)
            // val email = Validator.isValidEmail("nameg@mail.com",false)
-            val pass = Validator.isValidPassword(edtPassword.text.toString(),false)
-            val email = Validator.isValidEmail(edtEmail.text.toString(),false)
+            val pass = Validator.isValidPassword(edtPassword.text.toString(),true)
+            val email = Validator.isValidEmail(edtEmailId.text.toString(),true)
 
            /* if(!email){
                 AlertDialog().dialog(this,"Invalid Email Id")
@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                 dialogOTPtoLogin()
             }*/
 
-            startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+           startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
         }
 
         llForgotPassword.setOnClickListener() {

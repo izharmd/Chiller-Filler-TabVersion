@@ -23,6 +23,7 @@ import android.widget.TextView
 
 import androidx.core.app.ActivityCompat
 import com.bws.musclefood.R
+import com.bws.musclefood.urils.AlertDialog
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -48,6 +49,31 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
 
         imvSaveaddress.visibility = View.GONE
         txtTxtHeader.text = "Profile"
+
+
+        txtUpdate.setOnClickListener {
+
+            when {
+                edtFname.text.isEmpty() -> {
+                    AlertDialog().dialog(this,"Please enter first name")
+                }
+                edtLastNameProfile.text.isEmpty() -> {
+                    AlertDialog().dialog(this,"Please enter last name")
+                }
+                edtEmailProfile.text.isEmpty() -> {
+                    AlertDialog().dialog(this,"Please enter email id")
+                }
+                edtPhoneNoProfile.text.isEmpty() -> {
+                    AlertDialog().dialog(this,"Please enter phone no")
+                }
+                edtPhoneNoProfile.text.length < 10 -> {
+                    AlertDialog().dialog(this,"Please enter valid phone no")
+                }
+                else -> {
+                    AlertDialog().dialog(this,"Profile update successfully")
+                }
+            }
+        }
 
 
         imvProfile.setOnClickListener {

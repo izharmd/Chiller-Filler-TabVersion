@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bws.musclefood.R
+import com.bws.musclefood.urils.AlertDialog
 import kotlinx.android.synthetic.main.activity_add_new_address.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
 
@@ -50,6 +51,32 @@ class AddNewAddressActivity:AppCompatActivity() {
             txtOthers.setBackgroundResource(R.drawable.round_address_selected)
             txtOthers.setTextColor(Color.parseColor("#FFB300"))
         }
+
+
+
+        imvSaveaddress.setOnClickListener {
+            when {
+                edtHouseNo.text.isEmpty() -> {
+                    AlertDialog().dialog(this,"Please enter Address")
+                }
+                /*edtAddressLine1.text.isEmpty() -> {
+                    AlertDialog().dialog(this,"Please enter last name")
+                }
+                edtAddressLine2.text.isEmpty() -> {
+                    AlertDialog().dialog(this,"Please enter company name")
+                }*/
+                edtCity.text.isEmpty() -> {
+                    AlertDialog().dialog(this,"Please enter city")
+                }
+                edtZipCode.text.isEmpty() -> {
+                    AlertDialog().dialog(this,"Please enter zipcode")
+                }
+                else -> {
+                    finish()
+                }
+            }
+        }
+
 
         imvBack.setOnClickListener(){
             finish()
