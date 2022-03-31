@@ -1,5 +1,6 @@
 package com.bws.musclefood.itemcategory.cartlist
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
+import com.bws.musclefood.urils.AlertDialog
 
 class CartListAdapter(val mList: ArrayList<CartListModel>) :
     RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
@@ -91,18 +93,23 @@ class CartListAdapter(val mList: ArrayList<CartListModel>) :
         holder.txtInrement.setOnClickListener() {
             myInt = holder.txtTotalQuentity.text.toString().toInt()
             myInt++
-            holder.txtTotalQuentity.text = myInt.toString()
 
-            val productQuantity = holder.txtTotalQuentity.text.toString().toInt()
-            val productPrice = holder.txtPrice.text.toString().drop(1).toFloat()
-            totalPrice = totalPrice + productPrice
-            System.out.println("Total Price===" + productQuantity)
+            if (myInt <= 10) {
+                holder.txtTotalQuentity.text = myInt.toString()
 
-            val discountPrice = holder.txtDiscountPrice.text.toString().drop(1).toFloat()
-            totalDiscount = (discountPrice - productPrice).toDouble()
-            netDiscount = netDiscount + totalDiscount
+                val productQuantity = holder.txtTotalQuentity.text.toString().toInt()
+                val productPrice = holder.txtPrice.text.toString().drop(1).toFloat()
+                totalPrice = totalPrice + productPrice
+                System.out.println("Total Price===" + productQuantity)
 
-            (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+                val discountPrice = holder.txtDiscountPrice.text.toString().drop(1).toFloat()
+                totalDiscount = (discountPrice - productPrice).toDouble()
+                netDiscount = netDiscount + totalDiscount
+
+                (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+            }else{
+                AlertDialog().dialog(context as Activity,"Can not add quantity more than 10 ")
+            }
         }
 
 

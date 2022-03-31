@@ -117,11 +117,12 @@ class PaymentActivity:AppCompatActivity() {
         }
 
         txtPlaceOrder.setOnClickListener(){
-            AlertDialog().dialogPaymentSuccessFull(this,"Your order has been placed successfully.","Total Order Price : £200.00")
+           // AlertDialog().dialogPaymentSuccessFull(this,"Your order has been placed successfully.","Total Order Price : £200.00")
+            AlertDialog().dialog(this,"Your order has been placed successfully.\n Total Order Price : £200.00")
         }
 
         txtPlaceOrder2.setOnClickListener(){
-            AlertDialog().dialogPaymentSuccessFull(this,"Your order has been placed successfully.","Total Order Price : £200.00")
+            AlertDialog().dialog(this,"Your order has been placed successfully.\n Total Order Price : £200.00")
         }
 
 

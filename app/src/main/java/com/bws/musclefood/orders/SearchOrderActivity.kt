@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import com.bws.musclefood.R
+import com.bws.musclefood.urils.AlertDialog
 import kotlinx.android.synthetic.main.accitivity_delivery_option.*
 import kotlinx.android.synthetic.main.activity_search_order.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
@@ -26,7 +27,12 @@ class SearchOrderActivity:AppCompatActivity() {
         imvSaveaddress.visibility = View.GONE
 
         btnSearchOrder.setOnClickListener(){
-            startActivity(Intent(this@SearchOrderActivity,OrderActivity::class.java))
+
+            if(edtOrderNo.text.isEmpty()){
+                AlertDialog().dialog(this,"Please enter order number")
+            }else{
+                startActivity(Intent(this@SearchOrderActivity,OrderActivity::class.java))
+            }
         }
 
 

@@ -3,17 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="#BF000000">
 
 
     <LinearLayout
         android:id="@+id/constraintLayout"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_130sdp"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_20sdp"
         android:background="@drawable/round_dialog"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,16 +23,11 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:background="@drawable/round_dialog"
+            android:layout_margin="@dimen/_2sdp"
+
             android:orientation="vertical"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/_5sdp"
-            app:cardElevation="@dimen/_6sdp"
-            app:cardMaxElevation="@dimen/_8sdp"
-            app:cardPreventCornerOverlap="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,21 +36,35 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtMessage"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_15sdp"
                     android:gravity="center"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
                     android:text="Request sent successfully\nPlease wait for activation "
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp" />
+
+                <TextView
+                    android:id="@+id/txt_ok"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/rippal_cardview"
+                    android:gravity="center"
+                    android:text="Ok"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
 
@@ -65,14 +75,16 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imv_cross"
+
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
-        android:layout_marginTop="36dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002"
         app:srcCompat="@drawable/cancel_red_24" />
 
 

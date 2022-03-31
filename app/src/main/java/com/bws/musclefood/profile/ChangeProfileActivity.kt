@@ -53,7 +53,19 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
 
         txtUpdate.setOnClickListener {
 
-            when {
+            if(edtFname.text.isEmpty()){
+                AlertDialog().dialog(this,"Please enter first name")
+            }else if (edtLastNameProfile.text.isEmpty()){
+                AlertDialog().dialog(this,"Please enter last name")
+            }else if (edtEmailProfile.text.isEmpty()){
+                AlertDialog().dialog(this,"Please enter email id")
+            }else if (edtPhoneNoProfile.text.isEmpty()){
+                AlertDialog().dialog(this,"Please enter phone no")
+            }else{
+                AlertDialog().dialog(this,"Profile update successfully")
+            }
+
+           /* when {
                 edtFname.text.isEmpty() -> {
                     AlertDialog().dialog(this,"Please enter first name")
                 }
@@ -72,7 +84,7 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
                 else -> {
                     AlertDialog().dialog(this,"Profile update successfully")
                 }
-            }
+            }*/
         }
 
 

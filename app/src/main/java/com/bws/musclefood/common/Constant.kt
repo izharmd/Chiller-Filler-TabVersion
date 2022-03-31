@@ -14,7 +14,7 @@ class Constant {
         var totalCartItem:Int = 0
         var totalFavoritesCartItem:Int = 0
         var clickOnTop:String = "YES"
-        var serviceType = ""
+        var serviceType = "Retail Ready"
         var hidePaymentSection = ""
         var orderNo = ""
         var deliveryAddress = ""

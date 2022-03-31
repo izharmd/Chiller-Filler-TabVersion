@@ -1,5 +1,6 @@
 package com.bws.musclefood.signup
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -46,7 +47,7 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         binding.btnRegister.setOnClickListener() {
 
-            /*if (binding.edtFirstName.text.isEmpty()) {
+            if (binding.edtFirstName.text.isEmpty()) {
                 AlertDialog().dialog(this,"Please enter first name")
             } else if(binding.edtLastName.text.isEmpty()) {
                 AlertDialog().dialog(this,"Please enter last name")
@@ -54,15 +55,15 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 AlertDialog().dialog(this,"Please enter company name")
             }else if(binding.edtWatNo.text.isEmpty()) {
                 AlertDialog().dialog(this,"Please enter VAT number")
-            }else if(Validator.isValidEmail(binding.edtEmail.text.toString(),false)) {
+            }/*else if(Validator.isValidEmail(binding.edtEmail.text.toString(),false)) {
                 AlertDialog().dialog(this,"Email id not valid")
-            }else if(binding.edtMobNo.text.isEmpty() || binding.edtMobNo.text.length < 10) {
+            }*/else if(binding.edtMobNo.text.isEmpty() || binding.edtMobNo.text.length < 10) {
                 AlertDialog().dialog(this,"Mobile id not valid")
             }else{
                 dialogOTPtoLogin()
-            }*/
+            }
 
-          dialogOTPtoLogin()
+         // dialogOTPtoLogin()
         }
 
 
@@ -119,15 +120,41 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
         btnSubmitToLogin.setOnClickListener() {
-            AlertDialog().dialog(
-                this,
-                "Request sent successfully, will get a activation email once activated."
-            )
+
+            if(edtOTP.text.isEmpty()) {
+                AlertDialog().dialog(
+                    this,
+                    "Please enter OTP"
+                )
+            }else{
+                dialog(
+                    this,
+                    "Request sent successfully, will get a activation email once activated."
+                )
+            }
             dialog.dismiss()
         }
 
         imv_cross.setOnClickListener() {
             dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+
+    fun dialog(activity: Activity, message:String){
+        val dialog = Dialog(activity, R.style.NewDialog)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dailog_alert)
+        dialog.getWindow()?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        val txt_ok: TextView = dialog.findViewById(R.id.txt_ok)
+        val txtMessage: TextView = dialog.findViewById(R.id.txtMessage)
+        txtMessage.text = message
+
+        txt_ok.setOnClickListener(){
+            dialog.dismiss()
+            activity.finish()
         }
         dialog.show()
     }

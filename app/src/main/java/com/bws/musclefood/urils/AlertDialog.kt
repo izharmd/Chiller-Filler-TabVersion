@@ -17,12 +17,12 @@ class AlertDialog {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.dailog_alert)
-        dialog.getWindow()?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        val imv_cross: ImageView = dialog.findViewById(R.id.imv_cross)
+        dialog.getWindow()?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        val txt_ok: TextView = dialog.findViewById(R.id.txt_ok)
         val txtMessage: TextView = dialog.findViewById(R.id.txtMessage)
         txtMessage.text = message
 
-        imv_cross.setOnClickListener(){
+        txt_ok.setOnClickListener(){
             dialog.dismiss()
         }
         dialog.show()

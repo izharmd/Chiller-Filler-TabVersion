@@ -56,15 +56,17 @@ class LoginActivity : AppCompatActivity() {
             val pass = Validator.isValidPassword(edtPassword.text.toString(),true)
             val email = Validator.isValidEmail(edtEmailId.text.toString(),true)
 
-           /* if(!email){
-                AlertDialog().dialog(this,"Invalid Email Id")
+           if(edtEmailId.text.isEmpty()){
+                AlertDialog().dialog(this,"Please enter email id")
+            }else if(!email){
+               AlertDialog().dialog(this,"Invalid email id")
             }else if(!pass){
                 AlertDialog().dialog(this,"Password should be minimum 8 characters, a-Z,0-9 and one special character")
             }else{
                 dialogOTPtoLogin()
-            }*/
+            }
 
-           startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+          // startActivity(Intent(this@LoginActivity, ProductListActivity::class.java))
         }
 
         llForgotPassword.setOnClickListener() {

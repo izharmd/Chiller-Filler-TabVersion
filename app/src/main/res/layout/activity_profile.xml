@@ -148,7 +148,7 @@
                     android:background="@drawable/round_profile_view"
                     android:gravity="center|left"
                     android:paddingLeft="@dimen/_5sdp"
-                    android:text="Shailendra"
+                    android:hint="Shailendra"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp">
 
@@ -166,7 +166,7 @@
                     android:background="@drawable/round_profile_view"
                     android:gravity="center|left"
                     android:paddingLeft="@dimen/_5sdp"
-                    android:text="Prasad"
+                    android:hint="Prasad"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp">
 
@@ -198,7 +198,7 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/round_profile_view"
                 android:paddingLeft="@dimen/_5sdp"
-                android:text="sp@bitwavesolutions.com"
+                android:hint="sp@bitwavesolutions.com"
                 android:textSize="@dimen/_12sdp">
 
             </EditText>
@@ -229,7 +229,7 @@
                 android:inputType="phone"
                 android:maxLength="10"
                 android:paddingLeft="@dimen/_5sdp"
-                android:text="0783005289"
+                android:hint="0783005289"
                 android:textSize="@dimen/_12sdp">
 
             </EditText>

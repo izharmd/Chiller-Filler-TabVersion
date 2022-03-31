@@ -29,7 +29,7 @@
                 android:background="@drawable/round_payment_view"
                 android:hint="House no"
                 android:paddingLeft="@dimen/_5sdp"
-                android:textColorHint="@color/black"
+
                 android:textSize="@dimen/_12sdp" />
 
 
@@ -44,7 +44,7 @@
                 android:background="@drawable/round_payment_view"
                 android:hint="Address Line 1"
                 android:paddingLeft="@dimen/_5sdp"
-                android:textColorHint="@color/black"
+
                 android:textSize="@dimen/_12sdp" />
 
 
@@ -59,7 +59,7 @@
                 android:background="@drawable/round_payment_view"
                 android:hint="Address Line 2"
                 android:paddingLeft="@dimen/_5sdp"
-                android:textColorHint="@color/black"
+
                 android:textSize="@dimen/_12sdp" />
 
 
@@ -82,7 +82,7 @@
                     android:background="@drawable/round_payment_view"
                     android:hint="City"
                     android:paddingLeft="@dimen/_5sdp"
-                    android:textColorHint="@color/black"
+
                     android:textSize="@dimen/_12sdp" />
 
 
@@ -98,7 +98,7 @@
                     android:drawablePadding="@dimen/_5sdp"
                     android:hint="Zipcode"
                     android:paddingLeft="@dimen/_5sdp"
-                    android:textColorHint="@color/black"
+
                     android:textSize="@dimen/_12sdp" />
 
 

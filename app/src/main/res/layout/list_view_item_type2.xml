@@ -10,11 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center"
-        android:background="@color/yellow_light"
+        android:background="@color/white"
         android:gravity="center|left"
-        android:minHeight="@dimen/_40sdp"
-        android:paddingLeft="@dimen/_10sdp"
-        android:text="Show licence status"
+        android:text="category"
+        android:drawablePadding="@dimen/_5sdp"
+        android:padding="@dimen/_10sdp"
+        android:drawableRight="@drawable/arrow_black_forward_24"
         android:textColor="@color/black"
         android:textSize="@dimen/_14sdp" />
 

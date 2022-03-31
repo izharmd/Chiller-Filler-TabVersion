@@ -1,5 +1,6 @@
 package com.bws.musclefood.itemcategory.productlist
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -28,6 +29,7 @@ import com.bws.musclefood.itemcategory.rating.RatingActivity
 import com.bws.musclefood.itemcategory.rating.RatingAdapter
 import com.bws.musclefood.itemcategory.rating.RatingModel
 import com.bws.musclefood.productdetails.ProductDetailsActivity
+import com.bws.musclefood.urils.AlertDialog
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_productlist.*
 
@@ -71,7 +73,7 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
         }
 
 
-        var strOutOfStock = itemProduct.outOfStock
+       /* var strOutOfStock = itemProduct.outOfStock
 
         if (strOutOfStock.equals("YES", true)) {
             holder.txtOutOfStock.visibility = View.GONE
@@ -81,7 +83,7 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
             holder.txtOutOfStock.visibility = View.VISIBLE
             holder.txtNotiFyme.visibility = View.VISIBLE
             holder.txtAdd.visibility = View.GONE
-        }
+        }*/
 
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
@@ -143,25 +145,29 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
 
         holder.txtInrement.setOnClickListener() {
             myInt++
-            holder.txtTotalQuentity.text = myInt.toString()
-            val itm = mList[position]
 
+            if(myInt <= 10) {
 
-            val bl = arrItem.contains(itm.productName)
+                holder.txtTotalQuentity.text = myInt.toString()
+                val itm = mList[position]
+                val bl = arrItem.contains(itm.productName)
 
-            if(bl){
-               // Toast.makeText(context,"YYYYY",Toast.LENGTH_SHORT).show()
-            }else{
-                addDataToCart.add(
-                    CartListModel(
-                        itm.productImage,
-                        itm.productName,
-                        itm.quentity,
-                        itm.productPrice,
-                        itm.productDiscountPrice,
-                        itm.offer
+                if (bl) {
+                    // Toast.makeText(context,"YYYYY",Toast.LENGTH_SHORT).show()
+                } else {
+                    addDataToCart.add(
+                        CartListModel(
+                            itm.productImage,
+                            itm.productName,
+                            itm.quentity,
+                            itm.productPrice,
+                            itm.productDiscountPrice,
+                            itm.offer
+                        )
                     )
-                )
+                }
+            }else{
+                AlertDialog().dialog(context as Activity,"Can not add quantity more than 10 ")
             }
         }
 
