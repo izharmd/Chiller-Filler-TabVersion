@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.common.Constant
+import com.bws.musclefood.common.Constant.Companion.categoryId
+import com.bws.musclefood.common.Constant.Companion.categoryName
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
+import com.bws.musclefood.itemcategory.productlist.SubCategory
 import com.bws.musclefood.orders.reorder.ReorderModel
 
-class NavigationAdapter(val mList: ArrayList<Item>) :
+class NavigationAdapter(val mList: List<SubCategory>) :
     RecyclerView.Adapter<NavigationAdapter.ViewHolder>() {
 
     var context: Context? = null
@@ -25,10 +28,14 @@ class NavigationAdapter(val mList: ArrayList<Item>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemProduct = mList[position]
-        holder.texItem.text = itemProduct.productItems
+        holder.texItem.text = itemProduct.CategoryName
+
 
 
         holder.itemView.setOnClickListener {
+
+             categoryId = mList[position].CategoryID
+             categoryName = mList[position].CategoryName
 
             (context as ProductListActivity).closeDrawer()
         }

@@ -10,28 +10,47 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bws.musclefood.R
-import com.bws.musclefood.home.HomeActivity
-import com.bws.musclefood.itemcategory.ItemCategotyActivity
+import com.bws.musclefood.common.NewsService
+import com.bws.musclefood.common.RetrofitHelper
+import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
+import com.bws.musclefood.network.RequestBodies
+import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.signup.SignUpActivity
-import com.bws.musclefood.urils.AlertDialog
-import com.bws.musclefood.urils.Validator
+import com.bws.musclefood.urils.*
+import com.bws.musclefood.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
 
 
 class LoginActivity : AppCompatActivity() {
 
+    lateinit var loginViewModel: LoginViewModel
+    lateinit var preferenceConnector: PreferenceConnector
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
 
+       // val retro = RetrofitHelper.getInstance()
+
+        println("SINGLO TON==="+NewsService.retrofitService)
+        println("SINGLO TON==="+NewsService.retrofitService)
+        println("SINGLO TON==="+NewsService.retrofitService)
+        println("SINGLO TON==="+NewsService.retrofitService)
+        println("SINGLO TON==="+NewsService.retrofitService)
+
+
 
         val content = SpannableString("Guest User")
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         txtGuestUser.text = content
+
+
+        preferenceConnector = PreferenceConnector(this)
+
 
 
         // val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login)
@@ -56,15 +75,25 @@ class LoginActivity : AppCompatActivity() {
             val pass = Validator.isValidPassword(edtPassword.text.toString(),true)
             val email = Validator.isValidEmail(edtEmailId.text.toString(),true)
 
-           if(edtEmailId.text.isEmpty()){
+           /*if(edtEmailId.text.isEmpty()){
                 AlertDialog().dialog(this,"Please enter email id")
             }else if(!email){
                AlertDialog().dialog(this,"Invalid email id")
             }else if(!pass){
                 AlertDialog().dialog(this,"Password should be minimum 8 characters, a-Z,0-9 and one special character")
             }else{
-                dialogOTPtoLogin()
-            }
+
+               callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
+                //dialogOTPtoLogin()
+            }*/
+
+            val loginRepository = Repository()
+            val loginFactory = FactoryProvider(loginRepository, this)
+            loginViewModel =
+                ViewModelProvider(this, loginFactory).get(LoginViewModel::class.java)
+
+
+            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
 
           // startActivity(Intent(this@LoginActivity, ProductListActivity::class.java))
         }
@@ -72,6 +101,52 @@ class LoginActivity : AppCompatActivity() {
         llForgotPassword.setOnClickListener() {
             dialogForgotPassword()
         }
+    }
+
+    private fun callLoginAPI(email:String, password:String){
+        val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","122345")
+       // val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
+        val loadingDialog = LoadingDialog.progressDialog(this)
+        loginViewModel.loginUser(loginPram)
+        loginViewModel.loginResult.observe(this, Observer {
+            when (it) {
+                is Resources.NoInternet -> {
+                    loadingDialog.hide()
+                    this.viewModelStore.clear()
+                }
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.Success -> {
+                    loadingDialog.hide()
+                    val statusCode = it.data?.StatusCode
+                    if (statusCode.equals("200")){
+                        preferenceConnector.saveString("USER_ID",it.data?.UserId.toString())
+                        preferenceConnector.saveString("TITLE",it.data?.Title.toString())
+                        preferenceConnector.saveString("FIRST_NAME",it.data?.FirstName.toString())
+                        preferenceConnector.saveString("LAST_NAME",it.data?.LastName.toString())
+                        preferenceConnector.saveString("FULL_NAME",it.data?.FullName.toString())
+                        preferenceConnector.saveString("COMPANY_NAME",it.data?.CompanyName.toString())
+                        preferenceConnector.saveString("VAT_NO",it.data?.VATNo.toString())
+                        preferenceConnector.saveString("EMAIL_ID",it.data?.EmailID.toString())
+                        preferenceConnector.saveString("PROFILE_URL",it.data?.ProfileImage.toString())
+                        preferenceConnector.saveString("MOBILE_NO",it.data?.MobileNo.toString())
+                        dialogOTPtoLogin()
+                        this.viewModelStore.clear()
+                    }else{
+                        Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_LONG).show()
+                        this.viewModelStore.clear()
+                    }
+                    //Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_LONG).show()
+                }
+                is Resources.Error -> {
+                    loadingDialog.hide()
+                //    Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_LONG).show()
+                    this.viewModelStore.clear()
+                }
+            }
+        })
+
     }
 
     fun dialogForgotPassword() {

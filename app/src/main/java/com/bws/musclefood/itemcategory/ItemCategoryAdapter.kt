@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.clickOnTop
@@ -40,14 +41,24 @@ class ItemCategoryAdapter(val list: List<ItemCategoryModel>) :
         holder.txtCategory.text = itemCategory.category
         holder.imvCatogoryImage.setImageResource(itemCategory.image)
 
+
+        var productImage = itemCategory.image
+        if (productImage !== null) {
+            Glide.with(context!!)
+                .load(itemCategory.image)
+                .into(holder.imvCatogoryImage)
+        } else {
+            holder.imvCatogoryImage.setImageResource(R.drawable.ic_launcher_background)
+        }
+
+
         holder.itemView.setOnClickListener(){
             pos = position
             row_index=position;
             notifyDataSetChanged();
             if (context is ProductListActivity) {
-                (context as ProductListActivity).yourDesiredMethod()
+                //(context as ProductListActivity).yourDesiredMethod()
             }
-
         }
 
        // holder.imvCatogoryImage.borderColor =

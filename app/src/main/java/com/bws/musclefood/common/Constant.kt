@@ -19,5 +19,7 @@ class Constant {
         var orderNo = ""
         var deliveryAddress = ""
         var paymentDetails = "Payment"
+        var categoryId = ""
+        var categoryName = ""
     }
 }

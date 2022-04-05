@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
 import com.bws.musclefood.urils.AlertDialog
@@ -35,16 +36,17 @@ class CartListAdapter(val mList: ArrayList<CartListModel>) :
         val itemProduct = mList[position]
         holder.txtPName.text = itemProduct.pName
         holder.txtPrice.text = itemProduct.price
-        holder.txtQuantity.text = itemProduct.quantity
-        holder.txtDiscountPrice.text = itemProduct.netPrice
-        holder.txtYouSaved.text = itemProduct.youSaved + "\n" + "SAVED"
-        holder.imvProduct.setImageResource(itemProduct.image)
 
-        var youSaved = itemProduct.youSaved
-        if (youSaved.equals("", true)) {
-            holder.txtYouSaved.visibility = View.GONE
-            holder.txtDiscountPrice.visibility = View.GONE
+        var productImage = itemProduct.image
+
+        if (productImage !== null) {
+            Glide.with(context!!)
+                .load(itemProduct.image)
+                .into(holder.imvProduct)
+        } else {
+            holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)
         }
+
 
         holder.txtDeleteProduct.setOnClickListener() {
             mList.removeAt(position)

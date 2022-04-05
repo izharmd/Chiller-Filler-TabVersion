@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
+import com.bws.musclefood.itemcategory.productlist.SubCategory
 
-class NavigationAdapter2 (val mList: ArrayList<Item>) :
+class NavigationAdapter2 (val mList: List<SubCategory>) :
     RecyclerView.Adapter<NavigationAdapter2.ViewHolder>() {
 
     var context: Context? = null
@@ -23,7 +24,7 @@ class NavigationAdapter2 (val mList: ArrayList<Item>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemProduct = mList[position]
-        holder.texItem.text = itemProduct.productItems
+        holder.texItem.text = itemProduct.CategoryName
 
 
         holder.itemView.setOnClickListener {

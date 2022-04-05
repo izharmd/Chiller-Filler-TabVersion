@@ -21,14 +21,14 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_2sdp"
-        android:layout_weight=".5"
+        android:layout_weight=".55"
         android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_70sdp"
-            android:layout_gravity="center"
+            android:layout_gravity="center|right"
 
             android:background="@drawable/logo3">
 
@@ -36,11 +36,12 @@
 
         <TextView
             android:id="@+id/txtLogInSignUp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/round_login_signup"
             android:gravity="center"
+            android:paddingLeft="@dimen/_25sdp"
             android:text="Login/SignUp"
             android:textColor="@color/black"
             android:textSize="@dimen/_14sdp"
@@ -54,7 +55,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_30sdp"
         android:layout_gravity="center|right"
-        android:layout_weight=".15"
+        android:layout_weight=".10"
         android:src="@drawable/search_24">
 
     </ImageView>

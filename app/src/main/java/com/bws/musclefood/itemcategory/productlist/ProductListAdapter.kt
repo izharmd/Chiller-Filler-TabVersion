@@ -14,6 +14,7 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.addDataToCart
@@ -32,9 +33,10 @@ import com.bws.musclefood.productdetails.ProductDetailsActivity
 import com.bws.musclefood.urils.AlertDialog
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_productlist.*
+import kotlinx.android.synthetic.main.activity_profile.*
 
 
-class ProductListAdapter(val mList: List<ProductListModel>) :
+class ProductListAdapter(val mList: ProductListResponse) :
     RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     var context: Context? = null
@@ -52,38 +54,30 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemProduct = mList[position]
-        holder.txtBrandName.text = itemProduct.brandName
-        holder.txtDeliveryTime.text = itemProduct.deliveryTime
-        holder.txtProductName.text = itemProduct.productName
-        holder.txtPrice.text = itemProduct.productPrice
-        holder.txtQuantity.text = itemProduct.quentity
-        holder.txtDiscountPrice.text = itemProduct.productDiscountPrice
-        holder.txtOffer.text = itemProduct.offer + " OFF"
-        holder.txtRatingPoint.text = itemProduct.ratingPoint
-        holder.txtRating.text = itemProduct.ratingStr
-        //  holder.txtDiscountPrice.text = itemProduct.productDiscountPrice
-        // holder.txtDiscountPrice.text = itemProduct.productDiscountPrice
-        holder.imvProduct.setImageResource(itemProduct.productImage)
+        holder.txtProductName.text = itemProduct.ProductName
+        holder.txtSizeOfProduct.text = itemProduct.ProductSize
 
-        var offer = itemProduct.offer
+        holder.txtPrice.text = itemProduct.ProductPriceFormatted
 
-        if (offer.equals("", true)) {
-            holder.txtOffer.visibility = View.GONE
-            holder.txtDiscountPrice.visibility = View.GONE
+        // holder.imvProduct.setImageResource(itemProduct.productImage)
+
+        var productImage = itemProduct.ProductImage
+
+        if (productImage !== null) {
+            Glide.with(context!!)
+                .load(itemProduct.ProductImage)
+                .into(holder.imvProduct)
+        } else {
+            holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)
         }
 
+        // var offer = itemProduct.offer
 
-       /* var strOutOfStock = itemProduct.outOfStock
-
-        if (strOutOfStock.equals("YES", true)) {
-            holder.txtOutOfStock.visibility = View.GONE
-            holder.txtNotiFyme.visibility = View.GONE
-            holder.txtAdd.visibility = View.VISIBLE
-        } else {
-            holder.txtOutOfStock.visibility = View.VISIBLE
-            holder.txtNotiFyme.visibility = View.VISIBLE
-            holder.txtAdd.visibility = View.GONE
+       /* if (offer.equals("", true)) {
+            holder.txtOffer.visibility = View.GONE
+            holder.txtDiscountPrice.visibility = View.GONE
         }*/
+
 
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
@@ -101,20 +95,17 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
 
             addDataToCart.add(
                 CartListModel(
-                    itm.productImage,
-                    itm.productName,
-                    itm.quentity,
-                    itm.productPrice,
-                    itm.productDiscountPrice,
-                    itm.offer
+                    itm.ProductImage,
+                    itm.ProductName,
+                    itm.ProductPrice
                 )
             )
 
-            arrItem.add(itemProduct.productName)
+            arrItem.add(itemProduct.ProductName)
         }
 
         holder.txtQuantity.setOnClickListener() {
-            val pName = itemProduct.productName
+            val pName = itemProduct.ProductName
             dialogViewProduct(pName)
         }
 
@@ -122,10 +113,10 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
             myInt = holder.txtTotalQuentity.text.toString().toInt()
             if (myInt <= 1) {
                 myInt = 1
-            }else{
+            } else {
                 myInt--
                 holder.txtTotalQuentity.text = myInt.toString()
-                if(myInt == 1) {
+                if (myInt == 1) {
                     addDataToCart.removeAt(position)
                     (context as ProductListActivity).updateCartItem(totalCartItem)
                 }
@@ -139,35 +130,32 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
 
             if (totalCartItem > 0) {
                 totalCartItem = totalCartItem - 1
-               // (context as ProductListActivity).updateCartItem(totalCartItem)
+                // (context as ProductListActivity).updateCartItem(totalCartItem)
             }
         }
 
         holder.txtInrement.setOnClickListener() {
             myInt++
 
-            if(myInt <= 10) {
+            if (myInt <= 10) {
 
                 holder.txtTotalQuentity.text = myInt.toString()
                 val itm = mList[position]
-                val bl = arrItem.contains(itm.productName)
+                val bl = arrItem.contains(itm.ProductName)
 
                 if (bl) {
                     // Toast.makeText(context,"YYYYY",Toast.LENGTH_SHORT).show()
                 } else {
                     addDataToCart.add(
                         CartListModel(
-                            itm.productImage,
-                            itm.productName,
-                            itm.quentity,
-                            itm.productPrice,
-                            itm.productDiscountPrice,
-                            itm.offer
+                            itm.ProductImage,
+                            itm.ProductName,
+                            itm.ProductPrice
                         )
                     )
                 }
-            }else{
-                AlertDialog().dialog(context as Activity,"Can not add quantity more than 10 ")
+            } else {
+                AlertDialog().dialog(context as Activity, "Can not add quantity more than 10 ")
             }
         }
 
@@ -185,27 +173,27 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
         }
 
 
-        holder.imvAddToFavouritesHover.setOnClickListener() {
-            holder.imvAddToFavourites.visibility = View.VISIBLE
-            holder.imvAddToFavouritesHover.visibility = View.GONE
+        /* holder.imvAddToFavouritesHover.setOnClickListener() {
+             holder.imvAddToFavourites.visibility = View.VISIBLE
+             holder.imvAddToFavouritesHover.visibility = View.GONE
 
-            val itm = mList[position]
-            arrFavourites.add(
-                FavouritesModel(
-                    itm.productImage,
-                    itm.productName,
-                    itm.quentity,
-                    itm.productPrice,
-                    itm.productDiscountPrice,
-                    itm.offer
-                )
-            )
-            // notifyDataSetChanged()
-        }
+             val itm = mList[position]
+             arrFavourites.add(
+                 FavouritesModel(
+                     itm.productImage,
+                     itm.productName,
+                     itm.quentity,
+                     itm.productPrice,
+                     itm.productDiscountPrice,
+                     itm.offer
+                 )
+             )
+             // notifyDataSetChanged()
+         }*/
 
 
-        holder.imvProduct.setOnClickListener(){
-            context?.startActivity(Intent(context,ProductDetailsActivity::class.java))
+        holder.imvProduct.setOnClickListener() {
+            context?.startActivity(Intent(context, ProductDetailsActivity::class.java))
         }
 
     }
@@ -216,9 +204,9 @@ class ProductListAdapter(val mList: List<ProductListModel>) :
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
 
-        val txtBrandName: TextView = itemView.findViewById(R.id.txtBrandName)
-        val txtDeliveryTime: TextView = itemView.findViewById(R.id.txtDeliveryTime)
+
         val txtProductName: TextView = itemView.findViewById(R.id.txtProductName)
+        val txtSizeOfProduct: TextView = itemView.findViewById(R.id.txtSizeOfProduct)
         val txtQuantity: TextView = itemView.findViewById(R.id.txtQuantity)
         val txtPrice: TextView = itemView.findViewById(R.id.txtPrice)
         val txtDiscountPrice: TextView = itemView.findViewById(R.id.txtDiscountPrice)

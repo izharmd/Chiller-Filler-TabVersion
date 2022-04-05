@@ -66,7 +66,7 @@
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_main.xml" value="0.12466216216216217" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_navigation_drawer.xml" value="0.10371621621621621" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_order.xml" value="0.1765625" />
-        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_payment.xml" value="0.1" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_payment.xml" value="0.18" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_preference.xml" value="0.16" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_producct_details.xml" value="0.1" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/activity_productlist.xml" value="0.12" />
@@ -100,12 +100,13 @@
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/item_view_order.xml" value="0.12138157894736842" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/list_view_item_type2.xml" value="0.15" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/nav_header_main.xml" value="0.12466216216216217" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/progress_dialog.xml" value="0.12138157894736842" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/side_menu_drawer.xml" value="0.12" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar.xml" value="0.15" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar_address.xml" value="0.15" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar_cart_details.xml" value="0.14517543859649124" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar_home.xml" value="0.1" />
-        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar_search_view.xml" value="0.12" />
+        <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar_search_view.xml" value="0.22" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/layout/tool_bar_view_order.xml" value="0.15" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/menu/activity_main_drawer.xml" value="0.12466216216216217" />
         <entry key="..\:/IZHAR_WORKSPACE/MUSCLEFOOD_TAB_VER/MuscleFoodTabVer/app/src/main/res/menu/nevigation_items.xml" value="0.33" />

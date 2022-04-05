@@ -46,15 +46,15 @@ class NavigationActivity : AppCompatActivity() {
             override fun onDrawerOpened(drawerView: View) {
                 //items.clear()
                 items.add(Item("wertyuiokpl;"))
+               /* items.add(Item("wertyuiokpl;"))
                 items.add(Item("wertyuiokpl;"))
                 items.add(Item("wertyuiokpl;"))
                 items.add(Item("wertyuiokpl;"))
                 items.add(Item("wertyuiokpl;"))
-                items.add(Item("wertyuiokpl;"))
-
-                val adapter = NavigationAdapter(items)
+*/
+             /*   val adapter = NavigationAdapter(items)
                 navLV.adapter = adapter
-                adapter.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()*/
             }
 
             override fun onDrawerClosed(drawerView: View) {}

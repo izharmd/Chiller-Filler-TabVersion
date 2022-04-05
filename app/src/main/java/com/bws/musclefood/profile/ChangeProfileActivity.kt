@@ -16,14 +16,13 @@ import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 
 import androidx.core.app.ActivityCompat
+import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.urils.AlertDialog
+import com.bws.musclefood.urils.PreferenceConnector
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -41,6 +40,10 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
 
+    var jobTitle = 0
+
+    lateinit var preferenceConnector: PreferenceConnector
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -50,22 +53,42 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
         imvSaveaddress.visibility = View.GONE
         txtTxtHeader.text = "Profile"
 
+        preferenceConnector = PreferenceConnector(this)
+
+        edtFname.setText(preferenceConnector.getValueString("FIRST_NAME"))
+        edtLastNameProfile.setText(preferenceConnector.getValueString("LAST_NAME"))
+        edtEmailProfile.setText(preferenceConnector.getValueString("EMAIL_ID"))
+        edtPhoneNoProfile.setText(preferenceConnector.getValueString("MOBILE_NO"))
+        var title = preferenceConnector.getValueString("TITLE")
+
+        val imageUrl = preferenceConnector.getValueString("PROFILE_URL")
+
+        if (imageUrl !== null) {
+            Glide.with(this)
+                .load(imageUrl)
+                .into(imvProfile)
+        } else {
+            imvProfile.setImageResource(R.drawable.ic_launcher_background)
+        }
+
+        when (title) {
+            "Mr." -> {
+                jobTitle = 0
+            }
+            "Mrs." -> {
+                jobTitle =1
+            }
+            "Miss." -> {
+                jobTitle = 2
+            }
+            "Doctor." -> {
+                jobTitle = 3
+            }
+        }
 
         txtUpdate.setOnClickListener {
 
-            if(edtFname.text.isEmpty()){
-                AlertDialog().dialog(this,"Please enter first name")
-            }else if (edtLastNameProfile.text.isEmpty()){
-                AlertDialog().dialog(this,"Please enter last name")
-            }else if (edtEmailProfile.text.isEmpty()){
-                AlertDialog().dialog(this,"Please enter email id")
-            }else if (edtPhoneNoProfile.text.isEmpty()){
-                AlertDialog().dialog(this,"Please enter phone no")
-            }else{
-                AlertDialog().dialog(this,"Profile update successfully")
-            }
-
-           /* when {
+          when {
                 edtFname.text.isEmpty() -> {
                     AlertDialog().dialog(this,"Please enter first name")
                 }
@@ -84,9 +107,8 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
                 else -> {
                     AlertDialog().dialog(this,"Profile update successfully")
                 }
-            }*/
+            }
         }
-
 
         imvProfile.setOnClickListener {
             dialogTakePhoto()
@@ -99,6 +121,7 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spTitle.adapter = adapter
+        spTitle.setSelection(jobTitle)
         spTitle.onItemSelectedListener = this
 
     }

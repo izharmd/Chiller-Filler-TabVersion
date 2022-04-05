@@ -84,7 +84,7 @@ class CartListActivity : AppCompatActivity() {
 
         var orderValue = 80.00 - totalOrderValue
 
-        txtAddWorth.text = "£"+orderValue.toString() +"0"+ " worth products before place order"
+        txtAddWorth.text = "You are" +"£"+orderValue.toString() +"0"+ " away from meeting the minimum spend."
 
     }
 

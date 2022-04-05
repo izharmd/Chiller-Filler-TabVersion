@@ -15,8 +15,9 @@ import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.clickOnTop
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
+import com.bws.musclefood.itemcategory.productlist.SubCategory
 
-class TopCategoryAdapter (val mList: List<TopCategoryModel>):
+class TopCategoryAdapter (val mList: List<SubCategory>):
     RecyclerView.Adapter<TopCategoryAdapter.ViewHolder>() {
 
     private var context: Context? = null
@@ -33,16 +34,16 @@ class TopCategoryAdapter (val mList: List<TopCategoryModel>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemCategory = mList[position]
-        holder.txtCategoryTop.text = itemCategory.categoryName
-        holder.imvProduct.setImageResource(itemCategory.topImage)
+        holder.txtCategoryTop.text = itemCategory.CategoryName
+       // holder.imvProduct.setImageResource(itemCategory.topImage)
 
 
 
-        if(position == 0) {
+       /* if(position == 0) {
             holder.itemView.setBackgroundResource(R.drawable.round_login_button)
-        }
+        }*/
 
-        val catgoryName = itemCategory.categoryName
+        val catgoryName = itemCategory.CategoryName
         if(catgoryName.equals("",true)){
             holder.itemView.visibility = View.GONE
         }
@@ -55,7 +56,7 @@ class TopCategoryAdapter (val mList: List<TopCategoryModel>):
              notifyDataSetChanged();
             if (context is ProductListActivity) {
                 //clickOnTop = "NO"
-                (context as ProductListActivity).subMenuCategory()
+              //  (context as ProductListActivity).subMenuCategory()
             }
         }
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
 
@@ -27,9 +28,18 @@ class ViewCartItemAdapter(val mList: List<CartListModel>) :
 
         val itemProduct = mList[position]
         holder.txtProductName.text = itemProduct.pName
-        holder.txtProductQuantity.text = itemProduct.quantity
+       // holder.txtProductQuantity.text = itemProduct.quantity
         holder.txtPrice.text = itemProduct.price
-        holder.imvProduct.setImageResource(itemProduct.image)
+       // holder.imvProduct.setImageResource(itemProduct.image)
+
+        var productImage = itemProduct.image
+        if (productImage !== null) {
+            Glide.with(context!!)
+                .load(itemProduct.image)
+                .into(holder.imvProduct)
+        } else {
+            holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)
+        }
     }
 
     override fun getItemCount(): Int {
