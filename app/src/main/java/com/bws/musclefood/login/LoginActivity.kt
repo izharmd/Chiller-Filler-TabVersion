@@ -34,7 +34,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
 
-       // val retro = RetrofitHelper.getInstance()
+
+        // val retro = RetrofitHelper.getInstance()
 
         println("SINGLO TON==="+NewsService.retrofitService)
         println("SINGLO TON==="+NewsService.retrofitService)
