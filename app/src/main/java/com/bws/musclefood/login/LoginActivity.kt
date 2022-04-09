@@ -35,16 +35,6 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
 
-        // val retro = RetrofitHelper.getInstance()
-
-        println("SINGLO TON==="+NewsService.retrofitService)
-        println("SINGLO TON==="+NewsService.retrofitService)
-        println("SINGLO TON==="+NewsService.retrofitService)
-        println("SINGLO TON==="+NewsService.retrofitService)
-        println("SINGLO TON==="+NewsService.retrofitService)
-
-
-
         val content = SpannableString("Guest User")
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         txtGuestUser.text = content
@@ -53,16 +43,6 @@ class LoginActivity : AppCompatActivity() {
         preferenceConnector = PreferenceConnector(this)
 
 
-
-        // val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login)
-        //  val loginModel = LoginModel("Login Button",)
-        //  binding.loginModel = loginModel
-
-        /* val binding: ActivityLoginBinding = DataBindingUtil.setContentView(
-            this, R.layout.activity_databinding)
-
-         val user = User("Test", "User")
-         binding.user = user*/
 
         btnSignUp.setOnClickListener() {
             startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
@@ -105,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun callLoginAPI(email:String, password:String){
-        val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","122345")
+        val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
        // val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
         val loadingDialog = LoadingDialog.progressDialog(this)
         loginViewModel.loginUser(loginPram)

@@ -19,6 +19,7 @@ import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.addDataToCart
 import com.bws.musclefood.common.Constant.Companion.arrFavourites
+import com.bws.musclefood.common.Constant.Companion.hashMap
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
 import com.bws.musclefood.favourites.FavouritesModel
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
@@ -34,6 +35,7 @@ import com.bws.musclefood.urils.AlertDialog
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_productlist.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlin.reflect.KMutableProperty1
 
 
 class ProductListAdapter(val mList: ProductListResponse) :
@@ -43,6 +45,8 @@ class ProductListAdapter(val mList: ProductListResponse) :
     var myInt: Int = 0
 
     val arrItem = ArrayList<String>()
+
+    //   var hashMap = HashMap<String, CartListModel>() //define empty hashmap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -71,14 +75,6 @@ class ProductListAdapter(val mList: ProductListResponse) :
             holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)
         }
 
-        // var offer = itemProduct.offer
-
-       /* if (offer.equals("", true)) {
-            holder.txtOffer.visibility = View.GONE
-            holder.txtDiscountPrice.visibility = View.GONE
-        }*/
-
-
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
         holder.txtAdd.setOnClickListener() {
@@ -93,13 +89,30 @@ class ProductListAdapter(val mList: ProductListResponse) :
             holder.llIncrementDecrement.visibility = View.VISIBLE
             holder.txtAdd.visibility = View.GONE
 
-            addDataToCart.add(
-                CartListModel(
-                    itm.ProductImage,
-                    itm.ProductName,
-                    itm.ProductPrice
+            if (hashMap.isEmpty()) {
+                hashMap.put(
+                    itm.ProductID, CartListModel(
+                        itm.ProductImage,
+                        itm.ProductName,
+                        "1",
+                        itm.ProductPrice,
+                        itm.ProductID
+                    )
                 )
-            )
+            } else {
+                if (!hashMap.containsKey(itm.ProductID)) {
+                    hashMap.put(
+                        itm.ProductID, CartListModel(
+                            itm.ProductImage,
+                            itm.ProductName,
+                            "1",
+                            itm.ProductPrice,
+                            itm.ProductID
+                        )
+                    )
+                }
+            }
+
 
             arrItem.add(itemProduct.ProductName)
         }
@@ -120,6 +133,20 @@ class ProductListAdapter(val mList: ProductListResponse) :
                     addDataToCart.removeAt(position)
                     (context as ProductListActivity).updateCartItem(totalCartItem)
                 }
+
+                val itm = mList[position]
+
+                if (hashMap.containsKey(itm.ProductID)) {
+                    hashMap.remove(
+                        itm.ProductID, CartListModel(
+                            itm.ProductImage,
+                            itm.ProductName,
+                            holder.txtTotalQuentity.text.toString(),
+                            itm.ProductPrice,
+                            itm.ProductID
+                        )
+                    )
+                }
             }
 
             val itmProduct = holder.txtTotalQuentity.text.toString().toInt()
@@ -138,19 +165,17 @@ class ProductListAdapter(val mList: ProductListResponse) :
             myInt++
 
             if (myInt <= 10) {
-
                 holder.txtTotalQuentity.text = myInt.toString()
                 val itm = mList[position]
                 val bl = arrItem.contains(itm.ProductName)
-
-                if (bl) {
-                    // Toast.makeText(context,"YYYYY",Toast.LENGTH_SHORT).show()
-                } else {
-                    addDataToCart.add(
-                        CartListModel(
+                if (hashMap.containsKey(itm.ProductID)) {
+                    hashMap.replace(
+                        itm.ProductID, CartListModel(
                             itm.ProductImage,
                             itm.ProductName,
-                            itm.ProductPrice
+                            holder.txtTotalQuentity.text.toString(),
+                            itm.ProductPrice,
+                            itm.ProductID
                         )
                     )
                 }
@@ -315,5 +340,6 @@ class ProductListAdapter(val mList: ProductListResponse) :
 
         dialog.show()
     }
+
 
 }

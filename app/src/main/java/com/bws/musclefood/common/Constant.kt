@@ -10,6 +10,8 @@ class Constant {
         val addDataToCart = ArrayList<CartListModel>()
         val arrFavourites = ArrayList<FavouritesModel>()
         var subCategoryData = ArrayList<String>()
+
+        var hashMap = HashMap<String, CartListModel>() //define empty hashmap
         var pos:Int = 0
         var totalCartItem:Int = 0
         var totalFavoritesCartItem:Int = 0
@@ -19,7 +21,11 @@ class Constant {
         var orderNo = ""
         var deliveryAddress = ""
         var paymentDetails = "Payment"
+        var retailReady = ""
+        var foodService = ""
         var categoryId = ""
+        var mainCategory = ""
         var categoryName = ""
+        var sessionID = "12345"
     }
 }

@@ -6,12 +6,19 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
 import com.bws.musclefood.delivery.deliveryoption.DeliveryOptionActivity
+import com.bws.musclefood.factory.FactoryProvider
+import com.bws.musclefood.network.RequestBodies
+import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.urils.AlertDialog
+import com.bws.musclefood.urils.Resources
+import com.bws.musclefood.viewmodels.CartListViewModel
+import com.bws.musclefood.viewmodels.ProductListViewModel
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_cart_list.*
 import kotlinx.android.synthetic.main.activity_productlist.*
@@ -28,7 +35,8 @@ import java.util.*
 class CartListActivity : AppCompatActivity() {
 
     var totalOrderValue = 0f
-    var t_orderValue = 0f
+
+    lateinit var cartListViewModel: CartListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +52,52 @@ class CartListActivity : AppCompatActivity() {
             ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
         recyCartList.addItemDecoration(DividerItemDecoration(dividerDrawable))
 
-        val adapter = CartListAdapter(Constant.addDataToCart)
+       /* val adapter = CartListAdapter(Constant.addDataToCart)
         recyCartList.adapter = adapter
         adapter.notifyDataSetChanged()
+*/
+
+
+        cartListViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(CartListViewModel::class.java)
+
+        val body = RequestBodies.GetAllCartDetailsBody("2", "12345")
+
+        cartListViewModel.getCartList(body)
+
+        cartListViewModel.cartList.observe(this) {
+
+            when (it) {
+
+                is Resources.Loading -> {
+
+
+                }
+                is Resources.NoInternet -> {
+
+                }
+
+                is Resources.Success -> {
+
+                   // Toast.makeText(this, "werty", Toast.LENGTH_SHORT).show()
+
+
+                    val adapter = CartListAdapter(it.data!!)
+                    recyCartList.adapter = adapter
+                    adapter.notifyDataSetChanged()
+
+                }
+
+                is Resources.Error -> {
+
+                }
+            }
+
+        }
+
+
 
         imvSearch.setOnClickListener() {
             searchView1.visibility = View.VISIBLE
@@ -62,8 +113,6 @@ class CartListActivity : AppCompatActivity() {
                     "Minimum cart value should be £80 or more to place order."
                 )
             }
-
-
         }
 
         imvBack.setOnClickListener() {
@@ -84,7 +133,8 @@ class CartListActivity : AppCompatActivity() {
 
         var orderValue = 80.00 - totalOrderValue
 
-        txtAddWorth.text = "You are" +"£"+orderValue.toString() +"0"+ " away from meeting the minimum spend."
+        txtAddWorth.text =
+            "You are" + "£" + orderValue.toString() + "0" + " away from meeting the minimum spend."
 
     }
 

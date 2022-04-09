@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bws.musclefood.common.Constant
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.itemcategory.productlist.SubCategory
 
@@ -29,7 +30,14 @@ class NavigationAdapter2 (val mList: List<SubCategory>) :
 
         holder.itemView.setOnClickListener {
 
+            Constant.mainCategory = Constant.foodService
+
+            Constant.categoryId = itemProduct.CategoryID
+            Constant.categoryName = itemProduct.CategoryName
+
             (context as ProductListActivity).closeDrawer()
+
+            (context as ProductListActivity).callProdctListAPI()
         }
     }
 

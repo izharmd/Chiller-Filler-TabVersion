@@ -14,7 +14,7 @@ import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
 import com.bws.musclefood.urils.AlertDialog
 
-class CartListAdapter(val mList: ArrayList<CartListModel>) :
+class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
     RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
 
     var context: Context? = null
@@ -34,14 +34,14 @@ class CartListAdapter(val mList: ArrayList<CartListModel>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemProduct = mList[position]
-        holder.txtPName.text = itemProduct.pName
-        holder.txtPrice.text = itemProduct.price
+        holder.txtPName.text = itemProduct.ProductName
+        holder.txtPrice.text = itemProduct.Price
 
-        var productImage = itemProduct.image
+        var productImage = itemProduct.ProductImageName
 
         if (productImage !== null) {
             Glide.with(context!!)
-                .load(itemProduct.image)
+                .load(itemProduct.ProductImageName)
                 .into(holder.imvProduct)
         } else {
             holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)

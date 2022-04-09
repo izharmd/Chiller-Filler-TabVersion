@@ -13,21 +13,20 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bws.musclefood.Item
 import com.bws.musclefood.NavigationAdapter
 import com.bws.musclefood.NavigationAdapter2
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
-import com.bws.musclefood.common.Constant.Companion.pos
+import com.bws.musclefood.common.Constant.Companion.foodService
+import com.bws.musclefood.common.Constant.Companion.hashMap
+import com.bws.musclefood.common.Constant.Companion.mainCategory
+import com.bws.musclefood.common.Constant.Companion.retailReady
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
 import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.favourites.FavouritesActivity
-import com.bws.musclefood.itemcategory.ItemCategoryAdapter
-import com.bws.musclefood.itemcategory.ItemCategoryModel
 import com.bws.musclefood.itemcategory.basket.BasketsActivity
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryAdapter
-import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryModel
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.orders.SearchOrderActivity
 import com.bws.musclefood.profile.MyProfileActivity
@@ -37,18 +36,20 @@ import com.bws.musclefood.urils.LoadingDialog
 import com.bws.musclefood.urils.PreferenceConnector
 import com.bws.musclefood.urils.Resources
 import com.bws.musclefood.viewmodels.CategoryViewModel
+import com.bws.musclefood.viewmodels.InsertUpdateCartViewModel
 import com.bws.musclefood.viewmodels.ProductListViewModel
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import com.google.gson.Gson
 import com.volcaniccoder.bottomify.BottomifyNavigationView
 import com.volcaniccoder.bottomify.OnNavigationItemChangeListener
-import kotlinx.android.synthetic.main.a_profile_new.*
 import kotlinx.android.synthetic.main.activity_productlist.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.drawer_layout.*
 import kotlinx.android.synthetic.main.side_menu_drawer.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.*
-import kotlinx.coroutines.channels.Channel
+import org.json.JSONArray
+import org.json.JSONObject
+
 
 class ProductListActivity : AppCompatActivity() {
 
@@ -59,7 +60,11 @@ class ProductListActivity : AppCompatActivity() {
 
     lateinit var productListViewModel: ProductListViewModel
 
+    lateinit var insertUpdateCartViewModel: InsertUpdateCartViewModel
+
     lateinit var preferenceConnector: PreferenceConnector
+
+    lateinit var jo: JSONObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +93,11 @@ class ProductListActivity : AppCompatActivity() {
                     txtRetailReady.text = it.data?.get(0)?.Category
                     txtFoodService.text = it.data?.get(1)?.Category
 
+                    retailReady = it.data?.get(0)?.Category.toString()
+                    foodService = it.data?.get(1)?.Category.toString()
+
+                    mainCategory = retailReady
+
                     Constant.categoryId =
                         it.data?.get(1)?.SubCategory?.get(0)?.CategoryID.toString()
                     Constant.categoryName =
@@ -100,7 +110,7 @@ class ProductListActivity : AppCompatActivity() {
                         ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
                     navLV.addItemDecoration(DividerItemDecoration(dividerDrawable))
 
-                    navigationAdapter = NavigationAdapter(it.data?.get(0)?.SubCategory!!)
+                    navigationAdapter = NavigationAdapter(it.data?.get(0)!!.SubCategory)
                     navLV.adapter = navigationAdapter
                     navigationAdapter.notifyDataSetChanged()
 
@@ -109,7 +119,6 @@ class ProductListActivity : AppCompatActivity() {
                     navigationAdapter2 = NavigationAdapter2(it.data?.get(1)?.SubCategory!!)
                     navLV_2.adapter = navigationAdapter2
                     navigationAdapter2.notifyDataSetChanged()
-
 
 
                     //TOP CATEGORY MENU
@@ -139,11 +148,10 @@ class ProductListActivity : AppCompatActivity() {
         }
 
         imvCart.setOnClickListener() {
-
             if (txtTotalCartItem.text.equals("0")) {
                 AlertDialog().dialog(this, "Please add at lease one product to cart.")
             } else {
-                startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
+                updateInsertCart()
             }
         }
 
@@ -183,20 +191,6 @@ class ProductListActivity : AppCompatActivity() {
         drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
             override fun onDrawerOpened(drawerView: View) {
-                /*  items.clear()
-                  items.add(Item("Beef"))
-                  items.add(Item("Chicken"))
-                  items.add(Item("Pork"))
-                  items.add(Item("Turkey"))
-                  items.add(Item("Fish"))
-
-                  val dividerDrawable =
-                      ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
-                  navLV.addItemDecoration(DividerItemDecoration(dividerDrawable))
-
-                  val adapter = NavigationAdapter(items)
-                  navLV.adapter = adapter
-                  adapter.notifyDataSetChanged()*/
             }
 
             override fun onDrawerClosed(drawerView: View) {}
@@ -211,9 +205,7 @@ class ProductListActivity : AppCompatActivity() {
         }
 
         txtRetailReady.setOnClickListener {
-            // drawer_layout.closeDrawer(Gravity.LEFT)
             txtLogInSignUp.text = "Retail Ready"
-
             txtRetailReady.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_up_15, 0)
             txtFoodService.setCompoundDrawablesWithIntrinsicBounds(
                 0,
@@ -221,22 +213,8 @@ class ProductListActivity : AppCompatActivity() {
                 R.drawable.arrow_down_24,
                 0
             )
-            /* items.clear()
-             items.add(Item("Beef"))
-             items.add(Item("Chicken"))
-             items.add(Item("Pork"))
-             items.add(Item("Turkey"))
-             items.add(Item("Fish"))*/
-
             navLV.visibility = View.VISIBLE
             navLV_2.visibility = View.GONE
-            /* val dividerDrawable =
-                 ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
-             navLV.addItemDecoration(DividerItemDecoration(dividerDrawable))
-
-             navigationAdapter = NavigationAdapter(items)
-             navLV.adapter = navigationAdapter
-             navigationAdapter.notifyDataSetChanged()*/
         }
 
         txtFoodService.setOnClickListener {
@@ -249,23 +227,8 @@ class ProductListActivity : AppCompatActivity() {
                 0
             )
             txtFoodService.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_up_15, 0)
-
-            /*  items.clear()
-              items.add(Item("Beef"))
-              items.add(Item("Chicken"))
-              items.add(Item("Pork"))
-              items.add(Item("Turkey"))
-              items.add(Item("Fish"))*/
-
             navLV.visibility = View.GONE
             navLV_2.visibility = View.VISIBLE
-            /*  val dividerDrawable =
-                  ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
-              navLV_2.addItemDecoration(DividerItemDecoration(dividerDrawable))
-
-              navigationAdapter2 = NavigationAdapter2(items)
-              navLV_2.adapter = navigationAdapter2
-              navigationAdapter2.notifyDataSetChanged()*/
         }
     }
 
@@ -280,10 +243,14 @@ class ProductListActivity : AppCompatActivity() {
             preferenceConnector.getValueString("USER_ID")!!,
             Constant.categoryId,
             Constant.categoryName,
-            "12233"
+            "12233",
+            mainCategory
         )
+
+        println("JSON===" + Gson().toJson(pramProductDetails))
         productListViewModel.populateProduct(pramProductDetails)
-        productListViewModel.productListResult.observe(this, Observer {
+
+        productListViewModel.productListResult.observe(this) {
 
             when (it) {
                 is Resources.Loading -> {
@@ -300,6 +267,8 @@ class ProductListActivity : AppCompatActivity() {
                     val adapter = ProductListAdapter(it.data!!)
                     recyProductList.adapter = adapter
                     adapter.notifyDataSetChanged()
+
+                    this.viewModelStore.clear()
                 }
 
                 is Resources.Error -> {
@@ -307,12 +276,67 @@ class ProductListActivity : AppCompatActivity() {
                 }
             }
 
-        })
+        }
+    }
+
+
+    fun updateInsertCart() {
+
+        insertUpdateCartViewModel =
+            ViewModelProvider(this, FactoryProvider(Repository(), this)).get(
+                InsertUpdateCartViewModel::class.java
+            )
+
+        val ja = JSONArray()
+        var keys = hashMap.keys
+        for (key in keys) {
+            jo = JSONObject()
+            var cartModel = hashMap.get(key)
+            jo.put("CartItemID", cartModel?.productId)
+            jo.put("Price", cartModel?.price)
+            jo.put("ProductID", cartModel?.productId)
+            jo.put("Quantity", cartModel?.quantity)
+            jo.put("SessionID", Constant.sessionID)
+            jo.put("TotalPrice", cartModel?.price)
+            jo.put("UserID", preferenceConnector.getValueString("USER_ID"))
+            ja.put(jo)
+        }
+        println("JSON=====" + ja)
+        val loadingDialog = LoadingDialog.progressDialog(this)
+        insertUpdateCartViewModel.insertUpdateCart(ja)
+        insertUpdateCartViewModel.resultInsertUpdate.observe(this) {
+
+            when (it) {
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.hide()
+                }
+                is Resources.Success -> {
+
+                    val statusCode = it.data
+                   /* val statusCode = it.data?.StatusCode
+                    if(statusCode.equals("200")){
+                        startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
+                    }else{
+                        Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_SHORT).show()
+                    }*/
+
+                    //Toast.makeText(this,it.data,Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
+                    loadingDialog.hide()
+                }
+
+                is Resources.Error -> {
+                    loadingDialog.hide()
+                }
+            }
+        }
     }
 
 
     fun closeDrawer() {
-
         drawer_layout.closeDrawer(Gravity.LEFT)
     }
 

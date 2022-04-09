@@ -38,24 +38,4 @@ class LoginViewModel(val repository: Repository, val context: Context) : ViewMod
             loginResult.postValue(Resources.NoInternet(context.resources.getString(R.string.NO_INTERNET_CONNECTION)))
         }
     }
-
-    /* private fun getUserLogin() {
-         viewModelScope.launch {
-             loginResult.postValue(Resources2.Loading(loadingMessage = context.resources.getString(R.string.LOADING_PLEASE_WAIT)))
-
-             if (NetworkUtils.isNetworkAvailable(context)) {
-                 try {
-                     val response = loginRepository.loginUser()
-
-                         loginResult.postValue(Resources2.Success(response.body()))
-
-                 } catch (e: Exception) {
-                     loginResult.postValue(Resources2.Error(errorMessage = e.message.toString()))
-                 }
-             } else {
-                 loginResult.postValue(Resources2.NoInternet(context.resources.getString(R.string.NO_INTERNET_CONNECTION)))
-             }
-         }
-     }*/
-
 }

@@ -55,8 +55,12 @@ class TopCategoryAdapter (val mList: List<SubCategory>):
             row_index=position;
              notifyDataSetChanged();
             if (context is ProductListActivity) {
-                //clickOnTop = "NO"
-              //  (context as ProductListActivity).subMenuCategory()
+
+                Constant.mainCategory = Constant.retailReady
+                Constant.categoryId = itemCategory.CategoryID
+                Constant.categoryName = itemCategory.CategoryName
+
+                (context as ProductListActivity).callProdctListAPI()
             }
         }
 
