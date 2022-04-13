@@ -133,6 +133,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:background="@drawable/rippal_cardview"
                 android:text="REGISTER"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />

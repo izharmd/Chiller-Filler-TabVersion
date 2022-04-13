@@ -11,10 +11,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
-import com.bws.musclefood.common.Constant.Companion.totalCartItem
-import com.bws.musclefood.urils.AlertDialog
+import com.bws.musclefood.utils.AlertDialog
+import com.bws.musclefood.viewmodels.RemoveProductViewModel
 
-class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
+class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListResponseItem>) :
     RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
 
     var context: Context? = null
@@ -23,6 +23,10 @@ class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
     var totalProductPrice: Double = 0.0
     var totalDiscount: Double = 0.0
     var netDiscount: Double = 0.0
+    var priceFormatted: Double = 0.0
+    var totalPriceFormatted: Double = 0.0
+
+    lateinit var removeProductViewModel: RemoveProductViewModel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -35,9 +39,14 @@ class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
 
         val itemProduct = mList[position]
         holder.txtPName.text = itemProduct.ProductName
-        holder.txtPrice.text = itemProduct.Price
-
+        holder.txtProSize.text = itemProduct.ProductSize
+        holder.txtPrice.text = "£" + itemProduct.Price
+        holder.txtTotalQuentity.text = itemProduct.Quantity
         var productImage = itemProduct.ProductImageName
+
+        priceFormatted = itemProduct.FormattedProductTotalPrice.drop(1).toDouble()
+
+        totalPriceFormatted = totalPriceFormatted + priceFormatted
 
         if (productImage !== null) {
             Glide.with(context!!)
@@ -48,8 +57,13 @@ class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
         }
 
 
-        holder.txtDeleteProduct.setOnClickListener() {
-            mList.removeAt(position)
+        holder.txtDeleteProduct.setOnClickListener {
+
+            var prodictId = itemProduct.ProductID
+
+           /* mList.removeAt(position)
+            System.out.println("Total Price11111===" + mList.size)
+            System.out.println("Total Price11111===" + position)
             notifyDataSetChanged()
 
             totalCartItem = mList.size
@@ -58,13 +72,15 @@ class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
             val productPrice = holder.txtPrice.text.toString().drop(1).toDouble()
             totalProductPrice = productQuantity * productPrice
             totalPrice = totalPrice - totalProductPrice
-            System.out.println("Total Price===" + productQuantity)
+            //  System.out.println("Total Price11111===" + mList.size)
 
             val discountPrice = holder.txtDiscountPrice.text.toString().drop(1).toDouble()
             totalDiscount = discountPrice - totalProductPrice
-            netDiscount = netDiscount - totalDiscount
+            netDiscount = netDiscount - totalDiscount*/
 
-            (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+           // (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+
+            (context as CartListActivity).removeProduct(itemProduct.ProductID)
 
         }
 
@@ -89,6 +105,9 @@ class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
                 netDiscount = netDiscount - totalDiscount
 
                 (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+
+                (context as CartListActivity).cartItemDecrement()
+
             }
         }
 
@@ -109,8 +128,9 @@ class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
                 netDiscount = netDiscount + totalDiscount
 
                 (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
-            }else{
-                AlertDialog().dialog(context as Activity,"Can not add quantity more than 10 ")
+                (context as CartListActivity).cartItemIncrement()
+            } else {
+                AlertDialog().dialog(context as Activity, "Can not add quantity more than 10 ")
             }
         }
 
@@ -125,7 +145,11 @@ class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
         totalDiscount = discountPrice - totalProductPrice
         netDiscount = netDiscount + totalDiscount
 
-        (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+     //   (context as CartListActivity).updateCartItem(totalPriceFormatted, netDiscount)
+
+
+       // textView.text = totalPriceFormatted.toString()
+
 
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
@@ -155,6 +179,7 @@ class CartListAdapter(val mList: ArrayList<CartListResponseItem>) :
         val txtInrement: TextView = itemView.findViewById(R.id.txtInrement)
         val txtTotalQuentity: TextView = itemView.findViewById(R.id.txtTotalQuentity)
         val txtYouSaved: TextView = itemView.findViewById(R.id.txtYouSaved)
+        val txtProSize: TextView = itemView.findViewById(R.id.txtProSize)
         val imvProduct: ImageView = itemView.findViewById(R.id.imvProduct)
 
         val imvAddToFavourites: ImageView = itemView.findViewById(R.id.imvAddToFavourites)

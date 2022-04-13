@@ -12,11 +12,15 @@ import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
+import com.bws.musclefood.common.Constant.Companion.orderItem
+import com.bws.musclefood.interfaceCallback.CallbackInterface
 import com.bws.musclefood.itemcategory.ItemCategoryAdapter
 import com.bws.musclefood.orders.reorder.ReorderActivity
+import com.bws.musclefood.orders.searchorder.OrderItem
+import com.bws.musclefood.orders.searchorder.SearchOrderResponseItem
 import com.bws.musclefood.orders.vieworderdetails.ViewOrderDetailsActivity
 
-class CurrentOrderAdapter(val mList:ArrayList<CurrentOrderModel>) :RecyclerView.Adapter<CurrentOrderAdapter.ViewHolder>(){
+class CurrentOrderAdapter(val mList:List<SearchOrderResponseItem>) :RecyclerView.Adapter<CurrentOrderAdapter.ViewHolder>(){
      private var context: Context? = null
 
 
@@ -30,33 +34,38 @@ class CurrentOrderAdapter(val mList:ArrayList<CurrentOrderModel>) :RecyclerView.
 
         val currentOrder = mList[position]
 
-        holder.txtOrderDate.text = currentOrder.orderDate
-        holder.txtOrderNumber.text = currentOrder.orderNumber
-        holder.txtOrderValue.text = currentOrder.orderValue
-        holder.txtOrderStatus.text = currentOrder.status
+        holder.txtOrderDate.text = currentOrder.OrderDate
+        holder.txtOrderNumber.text = currentOrder.OrderNumber
+        holder.txtOrderValue.text = currentOrder.OrderAmount
+        holder.txtOrderStatus.text = currentOrder.OrderStatus
 
-        val content = SpannableString(currentOrder.deliveryTrack)
-        content.setSpan(UnderlineSpan(), 0, content.length, 0)
-        holder.txtTrack.text = content
+       // val content = SpannableString(currentOrder.deliveryTrack)
+       // content.setSpan(UnderlineSpan(), 0, content.length, 0)
+       // holder.txtTrack.text = content
 
        // val content2 = SpannableString(currentOrder.orderNumber)
         //content2.setSpan(UnderlineSpan(), 0, content.length, 0)
         //holder.txtOrderNumber.text = content2
 
 
+
+
         holder.txtViewOrder.setOnClickListener{
+
+            orderItem = currentOrder.OrderItemList as ArrayList<OrderItem>
+
             context?.startActivity(Intent(context,ViewOrderDetailsActivity::class.java))
         }
 
         holder.txtReOrder.setOnClickListener{
-            Constant.orderNo = currentOrder.orderNumber
+            Constant.orderNo = currentOrder.OrderNumber
             context?.startActivity(Intent(context,ReorderActivity::class.java))
         }
 
     }
 
     override fun getItemCount(): Int {
-//        TODO("Not yet implemented")
+
         return mList.size
     }
 

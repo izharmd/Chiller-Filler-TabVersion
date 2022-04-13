@@ -2,11 +2,10 @@ package com.bws.musclefood.payment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
-import com.bws.musclefood.urils.AlertDialog
+import com.bws.musclefood.utils.AlertDialog
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
 

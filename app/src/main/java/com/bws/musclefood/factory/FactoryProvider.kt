@@ -33,6 +33,39 @@ class FactoryProvider(private val repository: Repository, val context: Context) 
             return ProductDetailsViewModel(repository, context) as T
         }
 
+        if (modelClass.isAssignableFrom(RemoveProductViewModel::class.java)) {
+            return RemoveProductViewModel(repository, context) as T
+        }
+
+
+        if (modelClass.isAssignableFrom(RegistrationViewModel::class.java)) {
+            return RegistrationViewModel(repository, context) as T
+        }
+
+        if (modelClass.isAssignableFrom(AddFavouriteViewModel::class.java)) {
+            return AddFavouriteViewModel(repository, context) as T
+        }
+
+        if (modelClass.isAssignableFrom(RemoveFavoriteViewModel::class.java)) {
+            return RemoveFavoriteViewModel(repository, context) as T
+        }
+
+        if (modelClass.isAssignableFrom(FavouriteListViewModel::class.java)) {
+            return FavouriteListViewModel(repository, context) as T
+        }
+
+        if (modelClass.isAssignableFrom(SearchOrderViewModel::class.java)) {
+            return SearchOrderViewModel(repository, context) as T
+        }
+
+        if (modelClass.isAssignableFrom(UpdateProfileViewModel::class.java)) {
+            return UpdateProfileViewModel(repository, context) as T
+        } 
+
+        if (modelClass.isAssignableFrom(UserProfileDetailsModel::class.java)) {
+            return UserProfileDetailsModel(repository, context) as T
+        }
+
         throw IllegalArgumentException("Unknown class name")
     }
 }

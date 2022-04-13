@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
-import android.provider.SyncStateContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,25 +16,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
-import com.bws.musclefood.common.Constant.Companion.addDataToCart
-import com.bws.musclefood.common.Constant.Companion.arrFavourites
 import com.bws.musclefood.common.Constant.Companion.hashMap
+import com.bws.musclefood.common.Constant.Companion.quantity
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
-import com.bws.musclefood.favourites.FavouritesModel
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
 import com.bws.musclefood.itemcategory.productlist.addquentity.QuentityAdapater
 import com.bws.musclefood.itemcategory.productlist.addquentity.QuentityModel
-import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryAdapter
-import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryModel
 import com.bws.musclefood.itemcategory.rating.RatingActivity
 import com.bws.musclefood.itemcategory.rating.RatingAdapter
 import com.bws.musclefood.itemcategory.rating.RatingModel
 import com.bws.musclefood.productdetails.ProductDetailsActivity
-import com.bws.musclefood.urils.AlertDialog
+import com.bws.musclefood.utils.AlertDialog
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
-import kotlinx.android.synthetic.main.activity_productlist.*
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlin.reflect.KMutableProperty1
 
 
 class ProductListAdapter(val mList: ProductListResponse) :
@@ -45,6 +37,8 @@ class ProductListAdapter(val mList: ProductListResponse) :
     var myInt: Int = 0
 
     val arrItem = ArrayList<String>()
+
+    var cartItem:Int = 0
 
     //   var hashMap = HashMap<String, CartListModel>() //define empty hashmap
 
@@ -63,7 +57,12 @@ class ProductListAdapter(val mList: ProductListResponse) :
 
         holder.txtPrice.text = itemProduct.ProductPriceFormatted
 
-        // holder.imvProduct.setImageResource(itemProduct.productImage)
+       if(position == 0){
+
+           Constant.mainCategory = "Retail Ready"
+           Constant.categoryId = itemProduct.CategoryID
+           Constant.categoryName = itemProduct.CategoryName
+       }
 
         var productImage = itemProduct.ProductImage
 
@@ -75,14 +74,30 @@ class ProductListAdapter(val mList: ProductListResponse) :
             holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)
         }
 
+
+        var favouritesFlag = itemProduct.FavoriteFlag
+
+        if(favouritesFlag == "Y"){
+            holder.imvAddToFavourites.setImageResource(R.drawable.favorite_24)
+            holder.imvAddToFavourites.visibility = View.VISIBLE
+            holder.imvAddToFavouritesHover.visibility = View.GONE
+        }else{
+            holder.imvAddToFavourites.setImageResource(R.drawable.favorite_hover)
+            holder.imvAddToFavourites.visibility = View.GONE
+            holder.imvAddToFavouritesHover.visibility = View.VISIBLE
+        }
+
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
+
 
         holder.txtAdd.setOnClickListener() {
 
             myInt = 1
             totalCartItem = totalCartItem + 1
 
-            (context as ProductListActivity).updateCartItem(totalCartItem)
+            cartItem = cartItem + 1
+
+            (context as ProductListActivity).updateCartItem(cartItem)
 
             val itm = mList[position]
 
@@ -124,18 +139,18 @@ class ProductListAdapter(val mList: ProductListResponse) :
 
         holder.txtDecrement.setOnClickListener() {
             myInt = holder.txtTotalQuentity.text.toString().toInt()
+            val quantity = holder.txtTotalQuentity.text.toString().toInt()
+            if(quantity > 1){
+                holder.txtTotalQuentity.text =  (holder.txtTotalQuentity.text.toString().toInt() - 1).toString()
+                cartItem = cartItem-1
+                (context as ProductListActivity).updateCartItem(cartItem)
+            }
+
             if (myInt <= 1) {
                 myInt = 1
             } else {
                 myInt--
-                holder.txtTotalQuentity.text = myInt.toString()
-                if (myInt == 1) {
-                    addDataToCart.removeAt(position)
-                    (context as ProductListActivity).updateCartItem(totalCartItem)
-                }
-
                 val itm = mList[position]
-
                 if (hashMap.containsKey(itm.ProductID)) {
                     hashMap.remove(
                         itm.ProductID, CartListModel(
@@ -164,10 +179,12 @@ class ProductListAdapter(val mList: ProductListResponse) :
         holder.txtInrement.setOnClickListener() {
             myInt++
 
-            if (myInt <= 10) {
-                holder.txtTotalQuentity.text = myInt.toString()
+            val quantity = holder.txtTotalQuentity.text.toString().toInt() + 1
+
+            if (quantity <= 10) {
+                holder.txtTotalQuentity.text =  (holder.txtTotalQuentity.text.toString().toInt() + 1).toString()
                 val itm = mList[position]
-                val bl = arrItem.contains(itm.ProductName)
+
                 if (hashMap.containsKey(itm.ProductID)) {
                     hashMap.replace(
                         itm.ProductID, CartListModel(
@@ -178,6 +195,9 @@ class ProductListAdapter(val mList: ProductListResponse) :
                             itm.ProductID
                         )
                     )
+                    totalCartItem = totalCartItem + 1
+                    cartItem = cartItem + 1
+                    (context as ProductListActivity).updateCartItem(cartItem)
                 }
             } else {
                 AlertDialog().dialog(context as Activity, "Can not add quantity more than 10 ")
@@ -185,7 +205,6 @@ class ProductListAdapter(val mList: ProductListResponse) :
         }
 
         holder.llRating.setOnClickListener() {
-
             context?.startActivity(Intent(context, RatingActivity::class.java))
             // dialogRating(itemProduct.productName)
         }
@@ -194,30 +213,24 @@ class ProductListAdapter(val mList: ProductListResponse) :
             // holder.imvAddToFavourites.setImageResource(R.drawable.favorite_24)
             holder.imvAddToFavourites.visibility = View.GONE
             holder.imvAddToFavouritesHover.visibility = View.VISIBLE
-            //  notifyDataSetChanged()
+            val itm = mList[position]
+            val pId = itm.ProductID
+            (context as ProductListActivity).calRemoveFavouritePI(pId)
         }
 
 
-        /* holder.imvAddToFavouritesHover.setOnClickListener() {
+         holder.imvAddToFavouritesHover.setOnClickListener() {
              holder.imvAddToFavourites.visibility = View.VISIBLE
              holder.imvAddToFavouritesHover.visibility = View.GONE
 
              val itm = mList[position]
-             arrFavourites.add(
-                 FavouritesModel(
-                     itm.productImage,
-                     itm.productName,
-                     itm.quentity,
-                     itm.productPrice,
-                     itm.productDiscountPrice,
-                     itm.offer
-                 )
-             )
-             // notifyDataSetChanged()
-         }*/
+             val pId = itm.ProductID
+             (context as ProductListActivity).calAddFavouritePI(pId)
+         }
 
 
         holder.imvProduct.setOnClickListener() {
+            quantity = myInt.toString()
             context?.startActivity(Intent(context, ProductDetailsActivity::class.java))
         }
 

@@ -9,12 +9,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.totalFavoritesCartItem
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 
-class FavouritesAdapter (val mList: ArrayList<FavouritesModel>): RecyclerView.Adapter<FavouritesAdapter.ViewHolder>() {
+class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): RecyclerView.Adapter<FavouritesAdapter.ViewHolder>() {
 
     var context: Context? = null
     var myInt: Int = 1
@@ -32,18 +33,22 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesModel>): RecyclerView.Ad
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemProduct = mList[position]
-        holder.txtPName.text = itemProduct.pName
-        holder.txtPrice.text = itemProduct.netPrice
-        holder.txtQuantity.text = itemProduct.quantity
-        holder.txtDiscountPrice.text = itemProduct.price
-        holder.txtYouSaved.text = itemProduct.youSaved + "\n" +"SAVED"
-        holder.imvProduct.setImageResource(itemProduct.image)
+        holder.txtPName.text = itemProduct.ProductName
+        holder.txtPrice.text = "£"+itemProduct.ProductPrice
+       // holder.txtQuantity.text = itemProduct.
+      //  holder.txtDiscountPrice.text = itemProduct.price
+       // holder.txtYouSaved.text = itemProduct.youSaved + "\n" +"SAVED"
 
-        var youSaved = itemProduct.youSaved
-        if(youSaved.equals("",true)){
-            holder.txtYouSaved.visibility = View.GONE
-            holder.txtDiscountPrice.visibility = View.GONE
+        var productImage = itemProduct.ProductImage
+
+        if (productImage !== null) {
+            Glide.with(context!!)
+                .load(itemProduct.ProductImage)
+                .into(holder.imvProduct)
+        } else {
+            holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)
         }
+
 
         holder.txtDeleteProduct.setOnClickListener() {
             mList.removeAt(position)

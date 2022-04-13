@@ -9,11 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
-import com.bws.musclefood.delivery.AddNewAddressActivity
 import com.bws.musclefood.delivery.choosedeliveryaddress.ChooseDeliveryAddressActivity
-import com.bws.musclefood.delivery.deliveryoption.DeliveryOptionActivity
-import com.bws.musclefood.orders.OrderActivity
-import com.bws.musclefood.orders.SearchOrderActivity
+import com.bws.musclefood.orders.searchorder.SearchOrderActivity
 import com.bws.musclefood.payment.PaymentActivity
 
 class ProfileAdapter(val mList: List<ProfileModel>) :
@@ -42,7 +39,7 @@ class ProfileAdapter(val mList: List<ProfileModel>) :
                 Constant.deliveryAddress = "Delivery Address"
                 context?.startActivity(Intent(context,ChooseDeliveryAddressActivity::class.java))
             }else if(position == 2){
-                context?.startActivity(Intent(context,SearchOrderActivity::class.java))
+                context?.startActivity(Intent(context, SearchOrderActivity::class.java))
             }else if(position == 3){
                 Constant.hidePaymentSection = "YES"
                 Constant.paymentDetails = "Payment Details"

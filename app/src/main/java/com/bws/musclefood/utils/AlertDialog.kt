@@ -1,4 +1,4 @@
-package com.bws.musclefood.urils
+package com.bws.musclefood.utils
 
 import android.app.Activity
 import android.app.Dialog

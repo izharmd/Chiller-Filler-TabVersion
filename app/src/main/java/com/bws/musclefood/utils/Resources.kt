@@ -1,4 +1,4 @@
-package com.bws.musclefood.urils
+package com.bws.musclefood.utils
 
 sealed class Resources<T>(
     val data: T? = null,

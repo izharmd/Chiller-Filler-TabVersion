@@ -11,8 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.favourites.FavouritesActivity
+import com.bws.musclefood.orders.searchorder.OrderItem
 
-class ViewOrderAdapter (val mList: ArrayList<ViewOrderModel>): RecyclerView.Adapter<ViewOrderAdapter.ViewHolder>() {
+class ViewOrderAdapter (val mList: ArrayList<OrderItem>): RecyclerView.Adapter<ViewOrderAdapter.ViewHolder>() {
 
     var context: Context? = null
     var myInt: Int = 1
@@ -30,44 +31,49 @@ class ViewOrderAdapter (val mList: ArrayList<ViewOrderModel>): RecyclerView.Adap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemProduct = mList[position]
-        holder.txtPName.text = itemProduct.pName
-        holder.txtPrice.text = "£"+itemProduct.netPrice
-        holder.txtQuantity.text = itemProduct.quantity
-        holder.txtDiscountPrice.text = "£"+itemProduct.price
-        holder.txtYouSaved.text = "£"+itemProduct.youSaved + "\n" +"SAVED"
-        holder.imvProduct.setImageResource(itemProduct.image)
+        holder.txtPName.text = itemProduct.OrderItem
+        holder.txtPrice.text = "£"+itemProduct.ItemPrice
+      //  holder.txtQuantity.text = itemProduct.Q
+      //  holder.txtDiscountPrice.text = "£"+itemProduct.price
+        //holder.txtYouSaved.text = "£"+itemProduct.youSaved + "\n" +"SAVED"
+       // holder.imvProduct.setImageResource(itemProduct.image)
 
-        var youSaved = itemProduct.youSaved
-        if(youSaved.equals("",true)){
-            holder.txtYouSaved.visibility = View.GONE
-            holder.txtDiscountPrice.visibility = View.GONE
+      //  var youSaved = itemProduct.youSaved
+//        if(youSaved.equals("",true)){
+//            holder.txtYouSaved.visibility = View.GONE
+//            holder.txtDiscountPrice.visibility = View.GONE
+//        }
+
+//        val productQuantity = holder.txtTotalQuentity.text.toString().toInt()
+//        val productPrice = holder.txtPrice.text.toString().drop(1).toFloat()
+//        totalProductPrice = (productQuantity * productPrice).toDouble()
+//        totalPrice = totalPrice + totalProductPrice
+//        System.out.println("Total Price===" + totalPrice)
+//
+//        val discountPrice = holder.txtDiscountPrice.text.toString().drop(1).toFloat()
+//        totalDiscount = discountPrice - totalProductPrice
+//        netDiscount = netDiscount + totalDiscount
+//        holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
+
+
+        //var favoriteFlag = itemProduct.FavoriteFlag
+
+        if(itemProduct.FavoriteFlag == "Y"){
+            holder.imvAddToFavourites.visibility = View.VISIBLE
+            holder.imvAddToFavouritesHover.visibility = View.GONE
+        }else{
+            holder.imvAddToFavourites.visibility = View.GONE
+            holder.imvAddToFavouritesHover.visibility = View.VISIBLE
         }
 
-        val productQuantity = holder.txtTotalQuentity.text.toString().toInt()
-        val productPrice = holder.txtPrice.text.toString().drop(1).toFloat()
-        totalProductPrice = (productQuantity * productPrice).toDouble()
-        totalPrice = totalPrice + totalProductPrice
-        System.out.println("Total Price===" + totalPrice)
-
-        val discountPrice = holder.txtDiscountPrice.text.toString().drop(1).toFloat()
-        totalDiscount = discountPrice - totalProductPrice
-        netDiscount = netDiscount + totalDiscount
-
-
-
-
-        holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
-
-
-
-        holder.imvAddToFavourites.setOnClickListener() {
+       /* holder.imvAddToFavourites.setOnClickListener() {
             holder.imvAddToFavourites.visibility = View.GONE
             holder.imvAddToFavouritesHover.visibility = View.VISIBLE
         }
         holder.imvAddToFavouritesHover.setOnClickListener() {
             holder.imvAddToFavourites.visibility = View.VISIBLE
             holder.imvAddToFavouritesHover.visibility = View.GONE
-        }
+        }*/
     }
 
     override fun getItemCount(): Int {

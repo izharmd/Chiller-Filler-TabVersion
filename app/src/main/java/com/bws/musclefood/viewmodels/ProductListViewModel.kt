@@ -10,7 +10,7 @@ import com.bws.musclefood.itemcategory.productlist.ProductListResponse
 import com.bws.musclefood.network.NetworkUtils
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
-import com.bws.musclefood.urils.Resources
+import com.bws.musclefood.utils.Resources
 import kotlinx.coroutines.launch
 
 class ProductListViewModel(val repository: Repository,val context: Context):ViewModel() {

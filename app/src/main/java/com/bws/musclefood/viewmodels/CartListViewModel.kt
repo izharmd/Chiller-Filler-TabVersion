@@ -11,7 +11,7 @@ import com.bws.musclefood.itemcategory.cartlist.CartListResponse
 import com.bws.musclefood.network.NetworkUtils
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
-import com.bws.musclefood.urils.Resources
+import com.bws.musclefood.utils.Resources
 import kotlinx.coroutines.launch
 
 class CartListViewModel(val repository: Repository,val context: Context):ViewModel() {

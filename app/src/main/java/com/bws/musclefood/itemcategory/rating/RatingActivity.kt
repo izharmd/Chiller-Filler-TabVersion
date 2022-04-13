@@ -11,7 +11,7 @@ import com.bws.musclefood.R
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_rating.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
-import com.bws.musclefood.urils.AlertDialog
+import com.bws.musclefood.utils.AlertDialog
 
 class RatingActivity:AppCompatActivity() {
 

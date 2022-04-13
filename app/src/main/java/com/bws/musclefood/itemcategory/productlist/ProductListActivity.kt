@@ -2,6 +2,7 @@ package com.bws.musclefood.itemcategory.productlist
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
@@ -28,20 +29,22 @@ import com.bws.musclefood.itemcategory.basket.BasketsActivity
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryAdapter
 import com.bws.musclefood.network.RequestBodies
-import com.bws.musclefood.orders.SearchOrderActivity
+import com.bws.musclefood.orders.searchorder.SearchOrderActivity
 import com.bws.musclefood.profile.MyProfileActivity
 import com.bws.musclefood.repo.Repository
-import com.bws.musclefood.urils.AlertDialog
-import com.bws.musclefood.urils.LoadingDialog
-import com.bws.musclefood.urils.PreferenceConnector
-import com.bws.musclefood.urils.Resources
-import com.bws.musclefood.viewmodels.CategoryViewModel
-import com.bws.musclefood.viewmodels.InsertUpdateCartViewModel
-import com.bws.musclefood.viewmodels.ProductListViewModel
+import com.bws.musclefood.utils.LoadingDialog
+import com.bws.musclefood.utils.PreferenceConnector
+import com.bws.musclefood.utils.Resources
+import com.bws.musclefood.viewmodels.*
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import com.google.gson.Gson
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
 import com.volcaniccoder.bottomify.BottomifyNavigationView
 import com.volcaniccoder.bottomify.OnNavigationItemChangeListener
+import cz.msebera.android.httpclient.Header
+import cz.msebera.android.httpclient.HttpEntity
+import cz.msebera.android.httpclient.entity.StringEntity
 import kotlinx.android.synthetic.main.activity_productlist.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.drawer_layout.*
@@ -61,6 +64,8 @@ class ProductListActivity : AppCompatActivity() {
     lateinit var productListViewModel: ProductListViewModel
 
     lateinit var insertUpdateCartViewModel: InsertUpdateCartViewModel
+    lateinit var addFavouriteViewModel: AddFavouriteViewModel
+    lateinit var removeFavoriteViewModel: RemoveFavoriteViewModel
 
     lateinit var preferenceConnector: PreferenceConnector
 
@@ -148,11 +153,12 @@ class ProductListActivity : AppCompatActivity() {
         }
 
         imvCart.setOnClickListener() {
-            if (txtTotalCartItem.text.equals("0")) {
-                AlertDialog().dialog(this, "Please add at lease one product to cart.")
-            } else {
-                updateInsertCart()
-            }
+            /* if (txtTotalCartItem.text.equals("0")) {
+                 AlertDialog().dialog(this, "Please add at lease one product to cart.")
+             } else {
+                 updateInsertCart()
+             }*/
+          updateInsertCart()
         }
 
         bottomify.setOnNavigationItemChangedListener(object : OnNavigationItemChangeListener {
@@ -280,7 +286,95 @@ class ProductListActivity : AppCompatActivity() {
     }
 
 
-    fun updateInsertCart() {
+    fun calAddFavouritePI(productId: String) {
+
+        addFavouriteViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(AddFavouriteViewModel::class.java)
+
+        val addFavourite = RequestBodies.AddFavouriteListBody(
+            productId,
+            preferenceConnector.getValueString("USER_ID")!!,
+
+            )
+
+        println("JSON===" + Gson().toJson(addFavourite))
+        addFavouriteViewModel.getAddFavourite(addFavourite)
+
+        val loadingDialog = LoadingDialog.progressDialog(this)
+
+        addFavouriteViewModel.resultAddFavourite.observe(this) {
+
+            when (it) {
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.hide()
+                }
+                is Resources.Success -> {
+
+                    Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
+                    loadingDialog.hide()
+
+                    this.viewModelStore.clear()
+                }
+
+                is Resources.Error -> {
+                    Toast.makeText(this, "reeeee", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+    }
+
+
+    fun calRemoveFavouritePI(productId: String) {
+
+        removeFavoriteViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(RemoveFavoriteViewModel::class.java)
+
+        val removeFavourite = RequestBodies.RemoveFavoriteProductBody(
+            productId,
+            preferenceConnector.getValueString("USER_ID")!!,
+
+            )
+
+        println("JSON===" + Gson().toJson(removeFavourite))
+        removeFavoriteViewModel.getRemoveFavorite(removeFavourite)
+
+        val loadingDialog = LoadingDialog.progressDialog(this)
+
+        removeFavoriteViewModel.resultRemoveRemoveFavorite.observe(this) {
+
+            when (it) {
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.hide()
+                }
+                is Resources.Success -> {
+
+                    Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
+                    loadingDialog.hide()
+
+                    this.viewModelStore.clear()
+                }
+
+                is Resources.Error -> {
+                    Toast.makeText(this, "reeeee", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+    }
+
+
+    /*fun updateInsertCart() {
 
         insertUpdateCartViewModel =
             ViewModelProvider(this, FactoryProvider(Repository(), this)).get(
@@ -292,7 +386,7 @@ class ProductListActivity : AppCompatActivity() {
         for (key in keys) {
             jo = JSONObject()
             var cartModel = hashMap.get(key)
-            jo.put("CartItemID", cartModel?.productId)
+            jo.put("CartItemID", "")
             jo.put("Price", cartModel?.price)
             jo.put("ProductID", cartModel?.productId)
             jo.put("Quantity", cartModel?.quantity)
@@ -315,17 +409,12 @@ class ProductListActivity : AppCompatActivity() {
                 }
                 is Resources.Success -> {
 
-                    val statusCode = it.data
-                   /* val statusCode = it.data?.StatusCode
-                    if(statusCode.equals("200")){
-                        startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
-                    }else{
-                        Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_SHORT).show()
-                    }*/
+                    val dt = it.data.toString()
+                    Toast.makeText(this, dt, Toast.LENGTH_SHORT).show()
 
-                    //Toast.makeText(this,it.data,Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
                     loadingDialog.hide()
+                    this.viewModelStore.clear()
                 }
 
                 is Resources.Error -> {
@@ -333,6 +422,63 @@ class ProductListActivity : AppCompatActivity() {
                 }
             }
         }
+    }*/
+
+
+    fun updateInsertCart() {
+        val client = AsyncHttpClient()
+        val jsonArray = JSONArray()
+        var keys = hashMap.keys
+        for (key in keys) {
+            var jsonObject = JSONObject()
+            var cartModel = hashMap.get(key)
+            try {
+                jsonObject.put("CartItemID", "")
+                jsonObject.put("Price", cartModel?.price)
+                jsonObject.put("ProductID", cartModel?.productId)
+                jsonObject.put("Quantity", cartModel?.quantity)
+                jsonObject.put("SessionID", Constant.sessionID);
+                jsonObject.put("TotalPrice", cartModel?.price)
+                jsonObject.put("UserID", "2")
+                jsonArray.put(jsonObject)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        val entity: HttpEntity
+        entity = try {
+            StringEntity(jsonArray.toString(), "UTF-8")
+        } catch (e: IllegalArgumentException) {
+            Log.d("HTTP", "StringEntity: IllegalArgumentException")
+            return
+        }
+        val contentType = "application/json; charset=utf-8"
+        client.post(
+            this,
+           Constant.BASE_URL + "InsertUpdateCartDetails",
+            entity,
+            contentType,
+            object : AsyncHttpResponseHandler() {
+                override fun onSuccess(
+                    statusCode: Int,
+                    headers: Array<Header>,
+                    responseBody: ByteArray
+                ) {
+                    val asynchResult = String(responseBody)
+                   // Toast.makeText(this@ProductListActivity, asynchResult, Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
+                }
+
+                override fun onFailure(
+                    statusCode: Int,
+                    headers: Array<Header>,
+                    responseBody: ByteArray,
+                    error: Throwable
+                ) {
+                    Toast.makeText(this@ProductListActivity, statusCode.toString(), Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
 

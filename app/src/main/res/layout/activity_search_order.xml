@@ -30,6 +30,8 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_5sdp"
+        android:hint="Order no"
+        android:textSize="@dimen/_12sdp"
         android:background="@drawable/round_profile_view"
         android:paddingLeft="@dimen/_3sdp">
 
@@ -75,7 +77,6 @@
             android:background="@drawable/round_profile_view"
             android:gravity="center|left"
             android:hint="From"
-
             android:paddingLeft="@dimen/_5sdp"
             android:textColor="@color/black" />
 

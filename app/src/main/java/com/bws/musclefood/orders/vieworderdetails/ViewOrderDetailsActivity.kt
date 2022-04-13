@@ -35,10 +35,10 @@ class ViewOrderDetailsActivity:AppCompatActivity() {
             ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
         recyViewOrder.addItemDecoration(DividerItemDecoration(dividerDrawable))
 
-        arrViewOrder.add(ViewOrderModel(R.drawable.beef1,"Heritage Fillet Steaks","2","12.00","10.00","2.00"))
-        arrViewOrder.add(ViewOrderModel(R.drawable.cheken1,"Supergreen Stuffed Chicken Breastd","3","4.50","3.00","1.50"))
+      //  arrViewOrder.add(ViewOrderModel(R.drawable.beef1,"Heritage Fillet Steaks","2","12.00","10.00","2.00"))
+       // arrViewOrder.add(ViewOrderModel(R.drawable.cheken1,"Supergreen Stuffed Chicken Breastd","3","4.50","3.00","1.50"))
 
-        val adapter = ViewOrderAdapter(arrViewOrder)
+        val adapter = ViewOrderAdapter(Constant.orderItem)
         recyViewOrder.adapter = adapter
         adapter.notifyDataSetChanged()
 

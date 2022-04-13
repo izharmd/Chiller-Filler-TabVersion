@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bws.musclefood.R
-import com.bws.musclefood.urils.AlertDialog
+import com.bws.musclefood.utils.AlertDialog
 import kotlinx.android.synthetic.main.activity_add_new_address.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
 

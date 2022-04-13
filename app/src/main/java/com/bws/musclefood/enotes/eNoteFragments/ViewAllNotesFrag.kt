@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.R
-import com.bws.musclefood.orders.fragment.fragmentCurrent.CurrentOrderAdapter
-import com.bws.musclefood.orders.fragment.fragmentCurrent.CurrentOrderModel
-import kotlinx.android.synthetic.main.fragment_football.view.*
+
 import kotlinx.android.synthetic.main.fragment_view_all_notes.view.*
 
 class ViewAllNotesFrag : Fragment() {

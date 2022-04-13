@@ -4,44 +4,82 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.R
-import com.bws.musclefood.itemcategory.ItemCategoryAdapter
-import com.bws.musclefood.itemcategory.ItemCategoryModel
-import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
-import kotlinx.android.synthetic.main.activity_item_categoty.*
-import kotlinx.android.synthetic.main.activity_productlist.*
-import kotlinx.android.synthetic.main.fragment_football.*
-import kotlinx.android.synthetic.main.fragment_football.view.*
-import java.util.zip.Inflater
+import com.bws.musclefood.common.Constant
+import com.bws.musclefood.factory.FactoryProvider
+import com.bws.musclefood.network.RequestBodies
+import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.utils.AlertDialog
+import com.bws.musclefood.utils.LoadingDialog
+import com.bws.musclefood.utils.PreferenceConnector
+import com.bws.musclefood.utils.Resources
+import com.bws.musclefood.viewmodels.SearchOrderViewModel
+import kotlinx.android.synthetic.main.fragment_order.view.*
 
 class CurrentOrderFragment : Fragment() {
-   override fun onCreateView(
-   inflater: LayoutInflater, container: ViewGroup?,
-   savedInstanceState: Bundle?
-   ): View? {
 
-      val view: View = inflater!!.inflate(R.layout.fragment_football, container, false)
+    lateinit var searchOrderViewModel: SearchOrderViewModel
+    lateinit var preferenceConnector: PreferenceConnector
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-      /* view.recyCurrentOrder.layoutManager = LinearLayoutManager(context)
-       val data = ArrayList<CurrentOrderModel>()
+        val view: View = inflater!!.inflate(R.layout.fragment_order, container, false)
+
+        view.recyCurrentOrder.layoutManager = LinearLayoutManager(context)
+        preferenceConnector = PreferenceConnector(requireContext())
+
+        searchOrderAPI()
+        return view
+    }
 
 
-       data.add(CurrentOrderModel("20/12/2021","11004344","£100.00","Not Shipped","Track"))
-       data.add(CurrentOrderModel("25/12/2021","15610044","£150.60","Not Shipped","Track"))
-       data.add(CurrentOrderModel("26/12/2021","17610044","£50.20","Order Confirm","Track"))
-       data.add(CurrentOrderModel("01/01/2022","11004984","£70.00","Not Shipped","Track"))
-       data.add(CurrentOrderModel("10/01/2022","11054044","£20.80","Out for Delivery","Track"))
+    fun searchOrderAPI() {
+        searchOrderViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), requireContext())
+        ).get(SearchOrderViewModel::class.java)
 
-       val adapter = CurrentOrderAdapter(data)
-       view.recyCurrentOrder.adapter = adapter
-       adapter.notifyDataSetChanged()
-*/
+        val body = RequestBodies.SearchOrdersBody(
+            preferenceConnector.getValueString("USER_ID").toString(),
+            Constant.fromDate,
+            Constant.toDate,
+            "",
+            "1"
+        )
 
-      return view
-   }
+        searchOrderViewModel.getSearchOrder(body)
+
+        val loadingDialog = LoadingDialog.progressDialog(requireContext())
+
+        searchOrderViewModel.resultSearchOrder.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.dismiss()
+                    Toast.makeText(requireActivity(), it.noInternetMessage, Toast.LENGTH_SHORT)
+                        .show()
+                }
+                is Resources.Success -> {
+                    loadingDialog.dismiss()
+                    val adapter = CurrentOrderAdapter(it.data!!)
+                    view?.recyCurrentOrder!!.adapter = adapter
+                    adapter.notifyDataSetChanged()
+                }
+                is Resources.Error -> {
+                    loadingDialog.dismiss()
+                    AlertDialog().dialog(requireActivity(), it.errorMessage.toString())
+                }
+            }
+        }
+    }
 }
 
 

@@ -24,4 +24,30 @@ class Repository {
     suspend fun getProductDetails(body: RequestBodies.PopulateProductDetailsByProductIDBody) =
         retrofitInntance.callPopulateProductDetailsByProductID(body)
 
+    suspend fun getRemoveProduct(body: RequestBodies.GetRemoveCartProductBody) =
+        retrofitInntance.callRemoveCartProduct(body)
+
+    suspend fun registrationDetails(body: RequestBodies.RegistrationDetailsBody) =
+        retrofitInntance.callRegistrationDetails(body)
+
+    suspend fun addAddFavourite(body: RequestBodies.AddFavouriteListBody) =
+        retrofitInntance.callAddFavouriteList(body)
+
+
+    suspend fun removeFavourite(body: RequestBodies.RemoveFavoriteProductBody) =
+        retrofitInntance.callRemoveFavourite(body)
+
+    suspend fun favouriteList(body: RequestBodies.FavouriteListBody) =
+        retrofitInntance.callFavouriteList(body)
+
+
+    suspend fun searchOrder(body: RequestBodies.SearchOrdersBody) =
+        retrofitInntance.callSearchOrders(body)
+
+    suspend fun updateProfile(body: RequestBodies.UpdateProfileBody) =
+        retrofitInntance.callUpdateProfile(body)
+
+    suspend fun userProfileDetails(body: RequestBodies.GetUserProfileDetailsBody) =
+        retrofitInntance.callGetUserProfileDetails(body)
+
 }

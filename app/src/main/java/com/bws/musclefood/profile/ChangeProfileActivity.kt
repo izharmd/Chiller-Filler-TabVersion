@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import android.Manifest
 import android.app.Dialog
 
-import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
@@ -19,30 +18,39 @@ import android.view.Window
 import android.widget.*
 
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
-import com.bws.musclefood.urils.AlertDialog
-import com.bws.musclefood.urils.PreferenceConnector
+import com.bws.musclefood.factory.FactoryProvider
+import com.bws.musclefood.network.RequestBodies
+import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.utils.AlertDialog
+import com.bws.musclefood.utils.LoadingDialog
+import com.bws.musclefood.utils.PreferenceConnector
+import com.bws.musclefood.utils.Resources
+import com.bws.musclefood.viewmodels.ProductDetailsViewModel
+import com.bws.musclefood.viewmodels.UpdateProfileViewModel
+import com.bws.musclefood.viewmodels.UserProfileDetailsModel
 
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_profile.spTitle
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.edtCompName
+import kotlinx.android.synthetic.main.dialog_forgot_password.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
-import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
-class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener {
+class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private val REQUEST_PERMISSION = 100
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
 
     var jobTitle = 0
+    var strTitle = ""
 
     lateinit var preferenceConnector: PreferenceConnector
+    lateinit var updateProfileViewModel: UpdateProfileViewModel
+    lateinit var userProfileDetailsViewModel: UserProfileDetailsModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,12 +79,13 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
             imvProfile.setImageResource(R.drawable.ic_launcher_background)
         }
 
+
         when (title) {
             "Mr." -> {
                 jobTitle = 0
             }
             "Mrs." -> {
-                jobTitle =1
+                jobTitle = 1
             }
             "Miss." -> {
                 jobTitle = 2
@@ -88,30 +97,35 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
 
         txtUpdate.setOnClickListener {
 
-          when {
+            when {
                 edtFname.text.isEmpty() -> {
-                    AlertDialog().dialog(this,"Please enter first name")
+                    AlertDialog().dialog(this, "Please enter first name")
                 }
                 edtLastNameProfile.text.isEmpty() -> {
-                    AlertDialog().dialog(this,"Please enter last name")
+                    AlertDialog().dialog(this, "Please enter last name")
                 }
                 edtEmailProfile.text.isEmpty() -> {
-                    AlertDialog().dialog(this,"Please enter email id")
+                    AlertDialog().dialog(this, "Please enter email id")
                 }
                 edtPhoneNoProfile.text.isEmpty() -> {
-                    AlertDialog().dialog(this,"Please enter phone no")
+                    AlertDialog().dialog(this, "Please enter phone no")
                 }
                 edtPhoneNoProfile.text.length < 10 -> {
-                    AlertDialog().dialog(this,"Please enter valid phone no")
+                    AlertDialog().dialog(this, "Please enter valid phone no")
                 }
                 else -> {
-                    AlertDialog().dialog(this,"Profile update successfully")
+                    callUpdateProfileAPI()
+
                 }
             }
         }
 
         imvProfile.setOnClickListener {
             dialogTakePhoto()
+        }
+
+        imvBack.setOnClickListener {
+            finish()
         }
 
         val adapter = ArrayAdapter.createFromResource(
@@ -124,6 +138,10 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
         spTitle.setSelection(jobTitle)
         spTitle.onItemSelectedListener = this
 
+
+        // FETCH USER DETAILS FROM SERVER
+        callGetUserProfileDetails()
+
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -131,7 +149,7 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val text: String = parent?.getItemAtPosition(position).toString()
+        strTitle = parent?.getItemAtPosition(position).toString()
 
     }
 
@@ -212,5 +230,101 @@ class ChangeProfileActivity : AppCompatActivity(),AdapterView.OnItemSelectedList
         }
 
         dialog.show()
+    }
+
+
+    fun callUpdateProfileAPI() {
+
+        updateProfileViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(UpdateProfileViewModel::class.java)
+
+
+        val body = RequestBodies.UpdateProfileBody(
+            preferenceConnector.getValueString("USER_ID").toString(),
+            strTitle,
+            edtFname.text.toString(),
+            edtLastNameProfile.text.toString(),
+            preferenceConnector.getValueString("COMPANY_NAME").toString(),
+            preferenceConnector.getValueString("VAT_NO").toString(),
+            edtEmailProfile.text.toString(),
+            edtPhoneNoProfile.text.toString()
+        )
+
+        updateProfileViewModel.getUpdateProfile(body)
+
+        val loadingDialog = LoadingDialog.progressDialog(this)
+
+        updateProfileViewModel.resultUpdateProfile.observe(this) {
+
+            when (it) {
+
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.dismiss()
+                    AlertDialog().dialog(this, it.noInternetMessage.toString())
+                    this.viewModelStore.clear()
+                }
+                is Resources.Success -> {
+                    loadingDialog.dismiss()
+                    if (it.data?.StatusCode == "200") {
+                        // AlertDialog().dialog(this, "Profile update successfully")
+                        AlertDialog().dialog(this, it.data?.StatusMSG)
+                    } else {
+                        AlertDialog().dialog(this, it.data?.StatusMSG.toString())
+                    }
+
+                    this.viewModelStore.clear()
+                }
+                is Resources.Error -> {
+                    loadingDialog.dismiss()
+                    AlertDialog().dialog(this, it.errorMessage.toString())
+                    this.viewModelStore.clear()
+                }
+            }
+        }
+
+    }
+
+
+    fun callGetUserProfileDetails() {
+        userProfileDetailsViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(UserProfileDetailsModel::class.java)
+        val body = RequestBodies.GetUserProfileDetailsBody(
+            preferenceConnector.getValueString("USER_ID").toString()
+        )
+        userProfileDetailsViewModel.getUserProfileDetails(body)
+        val loadingDialog = LoadingDialog.progressDialog(this)
+        userProfileDetailsViewModel.resultUserProfileDetails.observe(this) {
+            when (it) {
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.dismiss()
+                    AlertDialog().dialog(this, it.noInternetMessage.toString())
+                    this.viewModelStore.clear()
+                }
+                is Resources.Success -> {
+                    if (it.data?.StatusCode == "200") {
+                        edtFname.setText(it.data.FirstName)
+                        edtLastNameProfile.setText(it.data.FirstName)
+                        edtEmailProfile.setText(it.data.EmailID)
+                        edtPhoneNoProfile.setText(it.data.MobilePhone)
+                    } else {
+                        AlertDialog().dialog(this, it.data?.StatusMSG.toString())
+                    }
+
+                }
+                is Resources.Error -> {
+                    AlertDialog().dialog(this, it.errorMessage.toString())
+                }
+            }
+        }
     }
 }

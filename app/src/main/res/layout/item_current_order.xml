@@ -176,7 +176,7 @@
                 android:layout_gravity="center"
                 android:layout_weight=".5"
                 android:paddingLeft="@dimen/_5sdp"
-                android:text="10 Dec 2021"
+                android:text=""
                 android:textColor="@color/yellow"
                 android:textSize="@dimen/_12sdp" />
 

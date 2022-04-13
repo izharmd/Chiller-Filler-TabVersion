@@ -58,7 +58,7 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".itemcategory.basket.BasketsActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".orders.SearchOrderActivity"
+        <activity android:name=".orders.searchorder.SearchOrderActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".enotes.EnotesActivity"
             android:screenOrientation="portrait"></activity>

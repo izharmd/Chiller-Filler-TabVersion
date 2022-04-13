@@ -12,17 +12,19 @@ import android.view.Window
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bws.musclefood.InsertUpdateProduct
 import com.bws.musclefood.R
-import com.bws.musclefood.common.NewsService
-import com.bws.musclefood.common.RetrofitHelper
+import com.bws.musclefood.common.Constant
 import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.signup.SignUpActivity
-import com.bws.musclefood.urils.*
+import com.bws.musclefood.utils.*
 import com.bws.musclefood.viewmodels.LoginViewModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -33,6 +35,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
+
+       // InsertUpdateProduct().callApi(this)
 
 
         val content = SpannableString("Guest User")
@@ -85,14 +89,22 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun callLoginAPI(email:String, password:String){
+
+        Constant.sessionID = Random().nextFloat().toString()
+
         val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
        // val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
+
+        val jso = Gson()
+
+        println("LOGIN JSON == "+Gson().toJson(loginPram))
         val loadingDialog = LoadingDialog.progressDialog(this)
         loginViewModel.loginUser(loginPram)
         loginViewModel.loginResult.observe(this, Observer {
             when (it) {
                 is Resources.NoInternet -> {
                     loadingDialog.hide()
+                    AlertDialog().dialog(this,it.noInternetMessage.toString())
                     this.viewModelStore.clear()
                 }
                 is Resources.Loading -> {
@@ -122,6 +134,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Resources.Error -> {
                     loadingDialog.hide()
+                    AlertDialog().dialog(this,it.errorMessage.toString())
                 //    Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_LONG).show()
                     this.viewModelStore.clear()
                 }

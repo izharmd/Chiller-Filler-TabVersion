@@ -76,7 +76,7 @@
                 android:text="Potato"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/txtDeleteProduct"
@@ -91,6 +91,17 @@
 
 
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/txtProSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center"
+            android:text="Potato"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"/>
 
 
         <TextView
@@ -112,20 +123,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_3sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="left|center"
-                android:text="JUST : "
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:visibility="gone"></TextView>
-
 
             <TextView
                 android:id="@+id/txtPrice"
