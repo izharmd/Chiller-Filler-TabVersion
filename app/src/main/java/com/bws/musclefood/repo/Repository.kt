@@ -3,7 +3,9 @@ package com.bws.musclefood.repo
 import com.bws.musclefood.common.ApiInterface
 import com.bws.musclefood.common.RetrofitHelper
 import com.bws.musclefood.network.RequestBodies
+import com.google.gson.JsonObject
 import org.json.JSONArray
+import org.json.JSONObject
 
 class Repository {
     // var retrofitInntance = RetrofitHelper.getInstance().create(ApiInterface::class.java)
@@ -49,5 +51,9 @@ class Repository {
 
     suspend fun userProfileDetails(body: RequestBodies.GetUserProfileDetailsBody) =
         retrofitInntance.callGetUserProfileDetails(body)
+
+
+    suspend fun insertPlaceOrderDetails(body:JSONObject) =
+        retrofitInntance.callInsertPlaceOrderDetails(body)
 
 }

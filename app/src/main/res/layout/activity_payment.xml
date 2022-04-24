@@ -28,7 +28,7 @@
             android:gravity="center|left"
             android:text="10 Vauchers Available"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp"></TextView>
+            android:textSize="@dimen/_10sdp"/>
 
         <TextView
             android:id="@+id/txtViewAllItems"
@@ -111,6 +111,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_marginRight="@dimen/_3sdp"
                         android:weightSum="1">
 
                         <TextView
@@ -125,13 +127,14 @@
                             android:textSize="@dimen/_10sdp"/>
 
                         <TextView
+                            android:id="@+id/txtBasketValue"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_25sdp"
                             android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/_10sdp"
                             android:layout_weight=".3"
                             android:gravity="center|right"
-                            android:text="£ 203.00"
+                            android:text="£203.00"
+                            android:paddingRight="@dimen/_5sdp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_10sdp"/>
 
@@ -174,6 +177,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_marginRight="@dimen/_3sdp"
                         android:visibility="visible"
                         android:weightSum="1">
 
@@ -190,13 +195,14 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/txtTotalPayable"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_25sdp"
                             android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/_10sdp"
                             android:layout_weight=".3"
                             android:gravity="center|right"
-                            android:text="£ 202.00"
+                            android:text="£2.00"
+                            android:paddingRight="@dimen/_5sdp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_10sdp"
                             android:textStyle="bold" />
@@ -231,13 +237,12 @@
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_25sdp"
                             android:layout_gravity="center|right"
-
                             android:layout_weight=".3"
                             android:gravity="center|right"
                             android:paddingRight="@dimen/_5sdp"
-                            android:text="£ 210.00"
+                            android:text="£00.00"
                             android:textColor="@color/yellow"
-                            android:textSize="@dimen/_10sdp"></TextView>
+                            android:textSize="@dimen/_10sdp"/>
 
 
                     </LinearLayout>
@@ -698,7 +703,7 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@color/yellow"
                 android:gravity="center"
-                android:text="Update"
+                android:text="Place Order"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
                 android:visibility="visible" />

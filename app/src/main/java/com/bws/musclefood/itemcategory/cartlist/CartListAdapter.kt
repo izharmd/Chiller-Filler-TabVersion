@@ -58,30 +58,7 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
 
 
         holder.txtDeleteProduct.setOnClickListener {
-
-            var prodictId = itemProduct.ProductID
-
-           /* mList.removeAt(position)
-            System.out.println("Total Price11111===" + mList.size)
-            System.out.println("Total Price11111===" + position)
-            notifyDataSetChanged()
-
-            totalCartItem = mList.size
-
-            val productQuantity = holder.txtTotalQuentity.text.toString().toInt()
-            val productPrice = holder.txtPrice.text.toString().drop(1).toDouble()
-            totalProductPrice = productQuantity * productPrice
-            totalPrice = totalPrice - totalProductPrice
-            //  System.out.println("Total Price11111===" + mList.size)
-
-            val discountPrice = holder.txtDiscountPrice.text.toString().drop(1).toDouble()
-            totalDiscount = discountPrice - totalProductPrice
-            netDiscount = netDiscount - totalDiscount*/
-
-           // (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
-
             (context as CartListActivity).removeProduct(itemProduct.ProductID)
-
         }
 
 
@@ -145,10 +122,10 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
         totalDiscount = discountPrice - totalProductPrice
         netDiscount = netDiscount + totalDiscount
 
-     //   (context as CartListActivity).updateCartItem(totalPriceFormatted, netDiscount)
+        //   (context as CartListActivity).updateCartItem(totalPriceFormatted, netDiscount)
 
 
-       // textView.text = totalPriceFormatted.toString()
+        // textView.text = totalPriceFormatted.toString()
 
 
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
@@ -167,6 +144,10 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
 
     override fun getItemCount(): Int {
         return mList.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {

@@ -36,6 +36,8 @@ class NavigationAdapter(val mList: List<SubCategory>) :
 
         holder.itemView.setOnClickListener {
 
+            Constant.row_index = position
+
             mainCategory = retailReady
             categoryId = itemProduct.CategoryID
             categoryName = itemProduct.CategoryName

@@ -52,7 +52,7 @@ class RatingActivity:AppCompatActivity() {
 
 
         txtSubmitReview.setOnClickListener(){
-            AlertDialog().dialogPaymentSuccessFull(this,"Thank you for your review.","")
+            AlertDialog().dialogPaymentSuccessFull(this,"Thank you for your review.")
         }
     }
 }

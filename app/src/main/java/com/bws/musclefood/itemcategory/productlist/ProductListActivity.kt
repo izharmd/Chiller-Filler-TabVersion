@@ -32,6 +32,7 @@ import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.orders.searchorder.SearchOrderActivity
 import com.bws.musclefood.profile.MyProfileActivity
 import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
@@ -58,6 +59,7 @@ class ProductListActivity : AppCompatActivity() {
 
     lateinit var navigationAdapter: NavigationAdapter
     lateinit var navigationAdapter2: NavigationAdapter2
+    lateinit var topCategoryAdapter: TopCategoryAdapter
 
     lateinit var categoryViewModel: CategoryViewModel
 
@@ -68,8 +70,6 @@ class ProductListActivity : AppCompatActivity() {
     lateinit var removeFavoriteViewModel: RemoveFavoriteViewModel
 
     lateinit var preferenceConnector: PreferenceConnector
-
-    lateinit var jo: JSONObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +91,7 @@ class ProductListActivity : AppCompatActivity() {
                     loadingDialog.show()
                 }
                 is Resources.NoInternet -> {
-                    loadingDialog.hide()
+                    loadingDialog.dismiss()
                 }
                 is Resources.Success -> {
                     // Toast.makeText(this, "sssss", Toast.LENGTH_SHORT).show()
@@ -129,19 +129,19 @@ class ProductListActivity : AppCompatActivity() {
                     //TOP CATEGORY MENU
                     recyTopCategory.layoutManager =
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                    val adapterTop = TopCategoryAdapter(it.data?.get(0)?.SubCategory!!)
-                    recyTopCategory.adapter = adapterTop
-                    adapterTop.notifyDataSetChanged()
+                    topCategoryAdapter = TopCategoryAdapter(it.data?.get(0)?.SubCategory!!)
+                    recyTopCategory.adapter = topCategoryAdapter
+                    topCategoryAdapter.notifyDataSetChanged()
 
 
-                    loadingDialog.hide()
+                    loadingDialog.dismiss()
 
 //  CALL MAIN PRODUCT LIST AFTER RESPONSE CATEGORY MENU
                     callProdctListAPI()
                 }
 
                 is Resources.Error -> {
-                    loadingDialog.hide()
+                    loadingDialog.dismiss()
                     Toast.makeText(this, "errrr", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -153,12 +153,12 @@ class ProductListActivity : AppCompatActivity() {
         }
 
         imvCart.setOnClickListener() {
-            /* if (txtTotalCartItem.text.equals("0")) {
+            if (txtTotalCartItem.text.equals("0")) {
                  AlertDialog().dialog(this, "Please add at lease one product to cart.")
              } else {
                  updateInsertCart()
-             }*/
-          updateInsertCart()
+             }
+         // updateInsertCart()
         }
 
         bottomify.setOnNavigationItemChangedListener(object : OnNavigationItemChangeListener {
@@ -373,58 +373,6 @@ class ProductListActivity : AppCompatActivity() {
         }
     }
 
-
-    /*fun updateInsertCart() {
-
-        insertUpdateCartViewModel =
-            ViewModelProvider(this, FactoryProvider(Repository(), this)).get(
-                InsertUpdateCartViewModel::class.java
-            )
-
-        val ja = JSONArray()
-        var keys = hashMap.keys
-        for (key in keys) {
-            jo = JSONObject()
-            var cartModel = hashMap.get(key)
-            jo.put("CartItemID", "")
-            jo.put("Price", cartModel?.price)
-            jo.put("ProductID", cartModel?.productId)
-            jo.put("Quantity", cartModel?.quantity)
-            jo.put("SessionID", Constant.sessionID)
-            jo.put("TotalPrice", cartModel?.price)
-            jo.put("UserID", preferenceConnector.getValueString("USER_ID"))
-            ja.put(jo)
-        }
-        println("JSON=====" + ja)
-        val loadingDialog = LoadingDialog.progressDialog(this)
-        insertUpdateCartViewModel.insertUpdateCart(ja)
-        insertUpdateCartViewModel.resultInsertUpdate.observe(this) {
-
-            when (it) {
-                is Resources.Loading -> {
-                    loadingDialog.show()
-                }
-                is Resources.NoInternet -> {
-                    loadingDialog.hide()
-                }
-                is Resources.Success -> {
-
-                    val dt = it.data.toString()
-                    Toast.makeText(this, dt, Toast.LENGTH_SHORT).show()
-
-                    startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
-                    loadingDialog.hide()
-                    this.viewModelStore.clear()
-                }
-
-                is Resources.Error -> {
-                    loadingDialog.hide()
-                }
-            }
-        }
-    }*/
-
-
     fun updateInsertCart() {
         val client = AsyncHttpClient()
         val jsonArray = JSONArray()
@@ -439,12 +387,14 @@ class ProductListActivity : AppCompatActivity() {
                 jsonObject.put("Quantity", cartModel?.quantity)
                 jsonObject.put("SessionID", Constant.sessionID);
                 jsonObject.put("TotalPrice", cartModel?.price)
-                jsonObject.put("UserID", "2")
+                jsonObject.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
                 jsonArray.put(jsonObject)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+
+        println("CART INSERT =="+jsonArray.toString())
 
         val entity: HttpEntity
         entity = try {
@@ -465,8 +415,8 @@ class ProductListActivity : AppCompatActivity() {
                     headers: Array<Header>,
                     responseBody: ByteArray
                 ) {
-                    val asynchResult = String(responseBody)
-                   // Toast.makeText(this@ProductListActivity, asynchResult, Toast.LENGTH_SHORT).show()
+                    val asyncResult = String(responseBody)
+                   // Toast.makeText(this@ProductListActivity, asyncResult, Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
                 }
 
@@ -484,6 +434,7 @@ class ProductListActivity : AppCompatActivity() {
 
     fun closeDrawer() {
         drawer_layout.closeDrawer(Gravity.LEFT)
+        topCategoryAdapter.notifyDataSetChanged()
     }
 
 

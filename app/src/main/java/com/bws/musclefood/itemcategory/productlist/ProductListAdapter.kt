@@ -38,7 +38,7 @@ class ProductListAdapter(val mList: ProductListResponse) :
 
     val arrItem = ArrayList<String>()
 
-    var cartItem:Int = 0
+    var cartItem: Int = 0
 
     //   var hashMap = HashMap<String, CartListModel>() //define empty hashmap
 
@@ -57,12 +57,12 @@ class ProductListAdapter(val mList: ProductListResponse) :
 
         holder.txtPrice.text = itemProduct.ProductPriceFormatted
 
-       if(position == 0){
+        if (position == 0) {
 
-           Constant.mainCategory = "Retail Ready"
-           Constant.categoryId = itemProduct.CategoryID
-           Constant.categoryName = itemProduct.CategoryName
-       }
+            Constant.mainCategory = "Retail Ready"
+            Constant.categoryId = itemProduct.CategoryID
+            Constant.categoryName = itemProduct.CategoryName
+        }
 
         var productImage = itemProduct.ProductImage
 
@@ -77,11 +77,11 @@ class ProductListAdapter(val mList: ProductListResponse) :
 
         var favouritesFlag = itemProduct.FavoriteFlag
 
-        if(favouritesFlag == "Y"){
+        if (favouritesFlag == "Y") {
             holder.imvAddToFavourites.setImageResource(R.drawable.favorite_24)
             holder.imvAddToFavourites.visibility = View.VISIBLE
             holder.imvAddToFavouritesHover.visibility = View.GONE
-        }else{
+        } else {
             holder.imvAddToFavourites.setImageResource(R.drawable.favorite_hover)
             holder.imvAddToFavourites.visibility = View.GONE
             holder.imvAddToFavouritesHover.visibility = View.VISIBLE
@@ -96,6 +96,8 @@ class ProductListAdapter(val mList: ProductListResponse) :
             totalCartItem = totalCartItem + 1
 
             cartItem = cartItem + 1
+
+
 
             (context as ProductListActivity).updateCartItem(cartItem)
 
@@ -140,14 +142,20 @@ class ProductListAdapter(val mList: ProductListResponse) :
         holder.txtDecrement.setOnClickListener() {
             myInt = holder.txtTotalQuentity.text.toString().toInt()
             val quantity = holder.txtTotalQuentity.text.toString().toInt()
-            if(quantity > 1){
-                holder.txtTotalQuentity.text =  (holder.txtTotalQuentity.text.toString().toInt() - 1).toString()
-                cartItem = cartItem-1
+            if (quantity > 1) {
+                holder.txtTotalQuentity.text =
+                    (holder.txtTotalQuentity.text.toString().toInt() - 1).toString()
+                cartItem = cartItem - 1
                 (context as ProductListActivity).updateCartItem(cartItem)
             }
 
             if (myInt <= 1) {
-                myInt = 1
+                myInt = 0
+                holder.txtAdd.visibility = View.VISIBLE
+                holder.llIncrementDecrement.visibility = View.GONE
+                totalCartItem = totalCartItem - 1
+                cartItem = cartItem - 1
+                (context as ProductListActivity).updateCartItem(cartItem)
             } else {
                 myInt--
                 val itm = mList[position]
@@ -182,7 +190,8 @@ class ProductListAdapter(val mList: ProductListResponse) :
             val quantity = holder.txtTotalQuentity.text.toString().toInt() + 1
 
             if (quantity <= 10) {
-                holder.txtTotalQuentity.text =  (holder.txtTotalQuentity.text.toString().toInt() + 1).toString()
+                holder.txtTotalQuentity.text =
+                    (holder.txtTotalQuentity.text.toString().toInt() + 1).toString()
                 val itm = mList[position]
 
                 if (hashMap.containsKey(itm.ProductID)) {
@@ -210,23 +219,21 @@ class ProductListAdapter(val mList: ProductListResponse) :
         }
 
         holder.imvAddToFavourites.setOnClickListener() {
-            // holder.imvAddToFavourites.setImageResource(R.drawable.favorite_24)
+            holder.imvAddToFavourites.setImageResource(R.drawable.favorite_24)
+            holder.imvAddToFavouritesHover.setImageResource(R.drawable.favorite_hover)
             holder.imvAddToFavourites.visibility = View.GONE
             holder.imvAddToFavouritesHover.visibility = View.VISIBLE
-            val itm = mList[position]
-            val pId = itm.ProductID
-            (context as ProductListActivity).calRemoveFavouritePI(pId)
+            (context as ProductListActivity).calRemoveFavouritePI(mList[position].ProductID)
         }
 
 
-         holder.imvAddToFavouritesHover.setOnClickListener() {
-             holder.imvAddToFavourites.visibility = View.VISIBLE
-             holder.imvAddToFavouritesHover.visibility = View.GONE
-
-             val itm = mList[position]
-             val pId = itm.ProductID
-             (context as ProductListActivity).calAddFavouritePI(pId)
-         }
+        holder.imvAddToFavouritesHover.setOnClickListener() {
+            holder.imvAddToFavourites.setImageResource(R.drawable.favorite_24)
+            holder.imvAddToFavouritesHover.setImageResource(R.drawable.favorite_hover)
+            holder.imvAddToFavourites.visibility = View.VISIBLE
+            holder.imvAddToFavouritesHover.visibility = View.GONE
+            (context as ProductListActivity).calAddFavouritePI(mList[position].ProductID)
+        }
 
 
         holder.imvProduct.setOnClickListener() {
@@ -241,8 +248,6 @@ class ProductListAdapter(val mList: ProductListResponse) :
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-
-
         val txtProductName: TextView = itemView.findViewById(R.id.txtProductName)
         val txtSizeOfProduct: TextView = itemView.findViewById(R.id.txtSizeOfProduct)
         val txtQuantity: TextView = itemView.findViewById(R.id.txtQuantity)

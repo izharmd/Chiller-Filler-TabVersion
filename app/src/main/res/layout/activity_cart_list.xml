@@ -119,7 +119,7 @@
                     android:textAllCaps="false"
                     android:textSize="@dimen/_10sdp"
                     android:textColor="@color/white"
-                    android:text="Add £80 worth products before place order"></TextView>
+                    android:text="Add £80 worth products before place order"/>
 
 
                 <LinearLayout

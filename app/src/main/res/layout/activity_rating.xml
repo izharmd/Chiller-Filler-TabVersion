@@ -19,6 +19,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             android:background="@drawable/round_dialog"
+
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -32,6 +33,7 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_5sdp"
                 app:cardElevation="@dimen/_6sdp"
+
                 app:cardMaxElevation="@dimen/_8sdp"
                 app:cardPreventCornerOverlap="true"
                 app:layout_constraintEnd_toEndOf="parent"

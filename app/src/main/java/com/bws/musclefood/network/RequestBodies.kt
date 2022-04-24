@@ -1,8 +1,6 @@
 package com.bws.musclefood.network
 
 object RequestBodies {
-
-
     data class LoginBody(
         val EmailID: String,
         val Password: String,

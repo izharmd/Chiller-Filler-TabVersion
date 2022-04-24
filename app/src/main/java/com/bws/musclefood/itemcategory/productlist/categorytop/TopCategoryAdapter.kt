@@ -14,19 +14,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.clickOnTop
+import com.bws.musclefood.common.Constant.Companion.row_index
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.itemcategory.productlist.SubCategory
 
-class TopCategoryAdapter (val mList: List<SubCategory>):
+class TopCategoryAdapter(val mList: List<SubCategory>) :
     RecyclerView.Adapter<TopCategoryAdapter.ViewHolder>() {
 
     private var context: Context? = null
 
-    var row_index:Int = 0;
+    //var row_index:Int = 0;
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_category_top_round_image, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_category_top_round_image, parent, false)
         context = parent.context
         return ViewHolder(view)
     }
@@ -35,16 +37,15 @@ class TopCategoryAdapter (val mList: List<SubCategory>):
 
         val itemCategory = mList[position]
         holder.txtCategoryTop.text = itemCategory.CategoryName
-       // holder.imvProduct.setImageResource(itemCategory.topImage)
+        // holder.imvProduct.setImageResource(itemCategory.topImage)
 
 
-
-       /* if(position == 0) {
-            holder.itemView.setBackgroundResource(R.drawable.round_login_button)
-        }*/
+        /* if(position == 0) {
+             holder.itemView.setBackgroundResource(R.drawable.round_login_button)
+         }*/
 
         val catgoryName = itemCategory.CategoryName
-        if(catgoryName.equals("",true)){
+        if (catgoryName.equals("", true)) {
             holder.itemView.visibility = View.GONE
         }
 
@@ -52,8 +53,8 @@ class TopCategoryAdapter (val mList: List<SubCategory>):
 
         holder.itemView.setOnClickListener() {
             Constant.pos = position
-            row_index=position;
-             notifyDataSetChanged();
+            row_index = position;
+            notifyDataSetChanged();
             if (context is ProductListActivity) {
 
                 Constant.mainCategory = Constant.retailReady
@@ -65,20 +66,19 @@ class TopCategoryAdapter (val mList: List<SubCategory>):
         }
 
 
-        if(row_index==position){
+        if (row_index == position) {
             holder.itemView.setBackgroundResource(R.drawable.round_login_button);
-        }
-        else
-        {
+        } else {
             holder.itemView.setBackgroundResource(R.drawable.round_top_sub_menu);
         }
+
     }
 
     override fun getItemCount(): Int {
         return mList.size
     }
 
-    class ViewHolder(ItemView: View): RecyclerView.ViewHolder(ItemView){
+    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
 
         val txtCategoryTop: TextView = itemView.findViewById(R.id.txtCategoryTop)
         val imvProduct: ImageView = itemView.findViewById(R.id.imvProduct)

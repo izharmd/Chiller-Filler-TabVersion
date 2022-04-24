@@ -60,27 +60,22 @@ class LoginActivity : AppCompatActivity() {
             val pass = Validator.isValidPassword(edtPassword.text.toString(),true)
             val email = Validator.isValidEmail(edtEmailId.text.toString(),true)
 
-           /*if(edtEmailId.text.isEmpty()){
+           if(edtEmailId.text.isEmpty()){
                 AlertDialog().dialog(this,"Please enter email id")
             }else if(!email){
                AlertDialog().dialog(this,"Invalid email id")
             }else if(!pass){
                 AlertDialog().dialog(this,"Password should be minimum 8 characters, a-Z,0-9 and one special character")
             }else{
+               val loginRepository = Repository()
+               val loginFactory = FactoryProvider(loginRepository, this)
+               loginViewModel =
+                   ViewModelProvider(this, loginFactory).get(LoginViewModel::class.java)
 
                callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
                 //dialogOTPtoLogin()
-            }*/
-
-            val loginRepository = Repository()
-            val loginFactory = FactoryProvider(loginRepository, this)
-            loginViewModel =
-                ViewModelProvider(this, loginFactory).get(LoginViewModel::class.java)
-
-
-            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
-
-          // startActivity(Intent(this@LoginActivity, ProductListActivity::class.java))
+            }
+           // callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
         }
 
         llForgotPassword.setOnClickListener() {
@@ -92,8 +87,8 @@ class LoginActivity : AppCompatActivity() {
 
         Constant.sessionID = Random().nextFloat().toString()
 
-        val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
-       // val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
+        //val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
+        val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
 
         val jso = Gson()
 
@@ -111,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
                     loadingDialog.show()
                 }
                 is Resources.Success -> {
-                    loadingDialog.hide()
+                    loadingDialog.dismiss()
                     val statusCode = it.data?.StatusCode
                     if (statusCode.equals("200")){
                         preferenceConnector.saveString("USER_ID",it.data?.UserId.toString())
@@ -133,7 +128,7 @@ class LoginActivity : AppCompatActivity() {
                     //Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_LONG).show()
                 }
                 is Resources.Error -> {
-                    loadingDialog.hide()
+                    loadingDialog.dismiss()
                     AlertDialog().dialog(this,it.errorMessage.toString())
                 //    Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_LONG).show()
                     this.viewModelStore.clear()

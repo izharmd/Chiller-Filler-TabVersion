@@ -30,6 +30,8 @@ class NavigationAdapter2 (val mList: List<SubCategory>) :
 
         holder.itemView.setOnClickListener {
 
+            Constant.row_index = position
+
             Constant.mainCategory = Constant.foodService
 
             Constant.categoryId = itemProduct.CategoryID

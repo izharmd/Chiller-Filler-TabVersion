@@ -3,21 +3,21 @@ package com.bws.musclefood.common
 import com.bws.musclefood.favourites.FavouritesModel
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
 import com.bws.musclefood.orders.searchorder.OrderItem
+import org.json.JSONArray
 
 class Constant {
 
     companion object {
 
         val BASE_URL = "http://food-hunt.co.uk/ChillerFiller/API/ChillerFillerMobileWS.svc/"
+        val INSERTPLACEORDERDETAILS = "InsertPlaceOrderDetails"
 
-        val APPLE_SIZE_KEY: String = "APPLE_SIZE_KEY"
         val addDataToCart = ArrayList<CartListModel>()
-        val arrFavourites = ArrayList<FavouritesModel>()
-        var subCategoryData = ArrayList<String>()
 
         var hashMap = HashMap<String, CartListModel>() //define empty hashmap
         var pos: Int = 0
         var totalCartItem: Int = 0
+        var totalBasketValue = ""
         var totalFavoritesCartItem: Int = 0
         var clickOnTop: String = "YES"
         var serviceType = "Retail Ready"
@@ -38,6 +38,12 @@ class Constant {
         var toDate = ""
 
         var orderItem = ArrayList<OrderItem>()
+
+        val jsonOrder = JSONArray()
+        var deliveryDate = ""
+        var deliveryTime = ""
+        var TotalPrice = "00.00"
+        var row_index = 0
 
     }
 }

@@ -124,7 +124,7 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 is Resources.Success -> {
                     var statusCode = it.data?.StatusCode
                     if (statusCode == "200") {
-                        Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
+                       // Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
                         //INSERT OTP TO COMPLETE REGISTRATION
                         dialogOTPtoLogin()
                     } else {
@@ -186,8 +186,10 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     this,
                     "Request sent successfully, will get a activation email once activated."
                 )
+                dialog.dismiss()
+                finish()
             }
-            dialog.dismiss()
+
         }
 
         imv_cross.setOnClickListener() {
