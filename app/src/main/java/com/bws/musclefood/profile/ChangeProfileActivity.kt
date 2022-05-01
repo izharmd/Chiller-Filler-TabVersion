@@ -71,13 +71,13 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
 
         val imageUrl = preferenceConnector.getValueString("PROFILE_URL")
 
-        if (imageUrl !== null) {
+       /* if (imageUrl !== null) {
             Glide.with(this)
                 .load(imageUrl)
                 .into(imvProfile)
         } else {
-            imvProfile.setImageResource(R.drawable.ic_launcher_background)
-        }
+            imvProfile.setImageResource(R.drawable.user_account_circle_24)
+        }*/
 
 
         when (title) {
@@ -269,7 +269,7 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                     this.viewModelStore.clear()
                 }
                 is Resources.Success -> {
-                    loadingDialog.dismiss()
+
                     if (it.data?.StatusCode == "200") {
                         // AlertDialog().dialog(this, "Profile update successfully")
                         AlertDialog().dialog(this, it.data?.StatusMSG)
@@ -277,6 +277,7 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                         AlertDialog().dialog(this, it.data?.StatusMSG.toString())
                     }
 
+                    loadingDialog.dismiss()
                     this.viewModelStore.clear()
                 }
                 is Resources.Error -> {
@@ -316,13 +317,29 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                         edtLastNameProfile.setText(it.data.FirstName)
                         edtEmailProfile.setText(it.data.EmailID)
                         edtPhoneNoProfile.setText(it.data.MobilePhone)
+
+                        var imageUrl = it.data.ProfileImage
+
+                        println("PROFILE IMAGE=="+imageUrl)
+
+                        if (imageUrl !== null) {
+                            Glide.with(this)
+                                .load(imageUrl)
+                                .into(imvProfile)
+                        } else {
+                            imvProfile.setImageResource(R.drawable.user_account_circle_24)
+                        }
+
                     } else {
                         AlertDialog().dialog(this, it.data?.StatusMSG.toString())
                     }
 
+                    loadingDialog.dismiss()
+
                 }
                 is Resources.Error -> {
                     AlertDialog().dialog(this, it.errorMessage.toString())
+                    loadingDialog.dismiss()
                 }
             }
         }

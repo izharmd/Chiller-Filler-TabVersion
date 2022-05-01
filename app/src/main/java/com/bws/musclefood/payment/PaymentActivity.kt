@@ -139,9 +139,29 @@ class PaymentActivity : AppCompatActivity() {
 
         }
 
+
         txtPlaceOrder.setOnClickListener() {
             val jsonObject = JSONObject()
+            jsonObject.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
+            jsonObject.put("SessionID", Constant.sessionID)
+            jsonObject.put("EmailID", preferenceConnector.getValueString("EMAIL_ID").toString())
+            jsonObject.put("PaymentType", "Card")
+            jsonObject.put("DeliveryAddressType", "Office")
+            jsonObject.put("DeliveryDate", Constant.deliveryDate)
+            jsonObject.put("DeliveryTime", Constant.deliveryTime)
+            jsonObject.put("DeliveryCharge", "")
+            jsonObject.put("TotalAmount", Constant.TotalPrice.toString())
+            jsonObject.put("OrderItems", Constant.jsonOrder)
 
+             println("PAYMENT JSON==" + jsonObject)
+
+            //PLACE ORDER
+            placeOrder(jsonObject)
+
+        }
+
+        txtPlaceOrder2.setOnClickListener() {
+            val jsonObject = JSONObject()
             jsonObject.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
             jsonObject.put("SessionID", Constant.sessionID)
             jsonObject.put("EmailID", preferenceConnector.getValueString("EMAIL_ID").toString())
@@ -153,18 +173,10 @@ class PaymentActivity : AppCompatActivity() {
             jsonObject.put("TotalAmount", Constant.TotalPrice)
             jsonObject.put("OrderItems", Constant.jsonOrder)
 
-             println("PAYMENT JSON==" + jsonObject)
+            println("PAYMENT JSON==" + jsonObject)
 
             //PLACE ORDER
             placeOrder(jsonObject)
-
-        }
-
-        txtPlaceOrder2.setOnClickListener() {
-            AlertDialog().dialog(
-                this,
-                "Your order has been placed successfully.\n Total Order Price : £200.00"
-            )
         }
 
 

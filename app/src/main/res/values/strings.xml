@@ -18,6 +18,7 @@
     <string name="LOADING_PLEASE_WAIT">Loading Please wait..</string>
     <string name="NO_INTERNET_CONNECTION">No internet connection</string>
     <string name="FIELD_ARE_REQUIRED">Field are required</string>
+    <string name="CANT_ADD_MORE_THAN_10">Can\'t add quantity more than 10 </string>
 
 
     <string name="greidient">Chicken (80%),Supergreens Filling(11.4%)(Coocked Quinoa(Quinoa Water),Kale,Spinach,Regglano Parmesan(Milk),Low Fat Soft Cheese Sea Salt,Cracked Black Pepper),Crumb(8.6%)(Crumb(Dehydrated Potato Flour,Sodium Metabisulphite),Rice Flour,Salt,Emulsifler (E471),laize Dextrose),Reggiano Parmesan(Milk),Repeseed Oil,Mozzarella (Milk),Dried Basil,Lemon Zest,Garlic Poweder,Sea Salt,Cracked Black Pepper) Allergy Advice:For allergence see ingredients in bold. \nOrigin:EU</string>

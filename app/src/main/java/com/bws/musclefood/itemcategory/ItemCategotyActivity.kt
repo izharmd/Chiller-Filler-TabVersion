@@ -52,9 +52,9 @@ class ItemCategotyActivity:AppCompatActivity() {
 
         data.add(ItemCategoryModel(R.drawable.meat,"Meat",arrayListFish))
         data.add(ItemCategoryModel(R.drawable.fruts,"Veg & Vegan",arrayListFriudts))
-        data.add(ItemCategoryModel(R.drawable.egg,"Eggs & Diary",arrayListDairy))
+        data.add(ItemCategoryModel(R.drawable.fruts,"Eggs & Diary",arrayListDairy))
         data.add(ItemCategoryModel(R.drawable.gro,"Snacks",arrayListGrosries))
-        data.add(ItemCategoryModel(R.drawable.drink,"DRINKS",arrayListFish))
+        data.add(ItemCategoryModel(R.drawable.fruts,"DRINKS",arrayListFish))
 
         val adapter = ItemCategoryAdapter(data)
         recyCategory.adapter = adapter

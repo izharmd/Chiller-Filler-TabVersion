@@ -55,12 +55,12 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener() {
 
 
-           // val email = Validator.isValidEmail("nameg@mail.com",false)
-           // val email = Validator.isValidEmail("nameg@mail.com",false)
-            val pass = Validator.isValidPassword(edtPassword.text.toString(),true)
-            val email = Validator.isValidEmail(edtEmailId.text.toString(),true)
+            // val email = Validator.isValidEmail("nameg@mail.com",false)
+            // val email = Validator.isValidEmail("nameg@mail.com",false)
+            val pass = Validator.isValidPassword(edtPassword.text.toString(), true)
+            val email = Validator.isValidEmail(edtEmailId.text.toString(), true)
 
-           if(edtEmailId.text.isEmpty()){
+            /* if(edtEmailId.text.isEmpty()){
                 AlertDialog().dialog(this,"Please enter email id")
             }else if(!email){
                AlertDialog().dialog(this,"Invalid email id")
@@ -73,9 +73,19 @@ class LoginActivity : AppCompatActivity() {
                    ViewModelProvider(this, loginFactory).get(LoginViewModel::class.java)
 
                callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
-                //dialogOTPtoLogin()
-            }
-           // callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
+
+            }*/
+
+            val loginRepository = Repository()
+            val loginFactory = FactoryProvider(loginRepository, this)
+            loginViewModel =
+                ViewModelProvider(this, loginFactory).get(LoginViewModel::class.java)
+
+
+            val dt = loginViewModel.loginDta("Hi how r u")
+            println("DTA==="+dt)
+
+            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
         }
 
         llForgotPassword.setOnClickListener() {
@@ -87,8 +97,8 @@ class LoginActivity : AppCompatActivity() {
 
         Constant.sessionID = Random().nextFloat().toString()
 
-        //val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
-        val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
+        val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
+       // val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
 
         val jso = Gson()
 
@@ -188,12 +198,13 @@ class LoginActivity : AppCompatActivity() {
 
         dialog.setContentView(R.layout.dialog_login_to_otp)
         dialog.getWindow()
-            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         val imv_cross: ImageView = dialog.findViewById(R.id.imv_cross)
 
         val edtOTP: EditText = dialog.findViewById(R.id.edtOTP)
         val txtResentOTP: TextView = dialog.findViewById(R.id.txtResentOTP)
         val btnSubmitToLogin: Button = dialog.findViewById(R.id.btnSubmitToLogin)
+
 
 
         btnSubmitToLogin.setOnClickListener(){

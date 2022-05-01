@@ -1,5 +1,6 @@
 package com.bws.musclefood.productdetails
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
@@ -45,7 +47,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         preferenceConnector = PreferenceConnector(this)
 
         txtLogInSignUp.text = "Product Details"
-        txtCartValue.text = "2"
+        txtCartValue.text = Constant.cartItem.toString()
 
         myInt = Constant.quantity.toInt()
 
@@ -108,15 +110,25 @@ class ProductDetailsActivity : AppCompatActivity() {
             if (myInt <= 1) {
                 myInt = 1
             } else {
+                Constant.cartItem --
                 myInt--
                 txtTotalQuentity.text = myInt.toString()
+
+                txtCartValue.text = Constant.cartItem.toString()
             }
         }
 
         txtInrement.setOnClickListener {
-            myInt = txtTotalQuentity.text.toString().toInt()
-            myInt++
-            txtTotalQuentity.text = myInt.toString()
+
+            if(myInt <= 9) {
+                myInt = txtTotalQuentity.text.toString().toInt()
+                myInt++
+                Constant.cartItem++
+                txtTotalQuentity.text = myInt.toString()
+                txtCartValue.text = Constant.cartItem.toString()
+            }else{
+                AlertDialog().dialog(this, resources.getString(R.string.CANT_ADD_MORE_THAN_10))
+            }
         }
 
         txtAdd.setOnClickListener {
@@ -165,7 +177,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         val pramProductDetails = RequestBodies.PopulateProductDetailsByProductIDBody(
             preferenceConnector.getValueString("USER_ID")!!,
             "Retail Ready",
-            "2",
+            "1",//Constant.subCategoryId,        //NEED TO SET ID LIKE 1,2,3 NOW IS COMMING Beef.. like that
             "",
             ""
         )

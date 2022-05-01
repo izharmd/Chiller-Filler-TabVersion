@@ -36,13 +36,15 @@ class Constant {
         var searchOrderNo = ""
         var fromDate = ""
         var toDate = ""
+        var subCategoryId = "1"
+        var cartItem = 0
 
         var orderItem = ArrayList<OrderItem>()
 
         val jsonOrder = JSONArray()
         var deliveryDate = ""
         var deliveryTime = ""
-        var TotalPrice = "00.00"
+        var TotalPrice = 0f
         var row_index = 0
 
     }

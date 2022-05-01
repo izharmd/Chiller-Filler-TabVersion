@@ -44,8 +44,8 @@ class ReorderActivity:AppCompatActivity() {
             ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
         recyCartList.addItemDecoration(DividerItemDecoration(dividerDrawable))
 
-        arrReorder.add(ReorderModel(R.drawable.cheken1,"Suppergreen Stuffed Chicken Breasted","2","3.55","4.50","2"))
-        arrReorder.add(ReorderModel(R.drawable.beef1,"Heritage Fillet Steaks","2","4.50","12.00","2"))
+        arrReorder.add(ReorderModel(R.drawable.fruts,"Suppergreen Stuffed Chicken Breasted","2","3.55","4.50","2"))
+        arrReorder.add(ReorderModel(R.drawable.fruts,"Heritage Fillet Steaks","2","4.50","12.00","2"))
 
 
         val adapter = ReorderAdapter(arrReorder)

@@ -38,4 +38,10 @@ class LoginViewModel(val repository: Repository, val context: Context) : ViewMod
             loginResult.postValue(Resources.NoInternet(context.resources.getString(R.string.NO_INTERNET_CONNECTION)))
         }
     }
+
+    fun loginDta(string: String):String{
+
+
+        return string
+    }
 }

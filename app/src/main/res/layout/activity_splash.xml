@@ -22,7 +22,7 @@
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
 
-
+        android:visibility="invisible"
         android:background="@drawable/round_yello"
         android:paddingLeft="@dimen/_15sdp"
         android:paddingRight="@dimen/_15sdp"

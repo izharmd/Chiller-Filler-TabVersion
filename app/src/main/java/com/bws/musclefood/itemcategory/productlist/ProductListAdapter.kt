@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
+import com.bws.musclefood.common.Constant.Companion.cartItem
 import com.bws.musclefood.common.Constant.Companion.hashMap
 import com.bws.musclefood.common.Constant.Companion.quantity
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
@@ -38,7 +39,7 @@ class ProductListAdapter(val mList: ProductListResponse) :
 
     val arrItem = ArrayList<String>()
 
-    var cartItem: Int = 0
+   // var cartItem: Int = 0
 
     //   var hashMap = HashMap<String, CartListModel>() //define empty hashmap
 
@@ -46,6 +47,7 @@ class ProductListAdapter(val mList: ProductListResponse) :
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_product_list, parent, false)
         context = parent.context
+        cartItem = 0
         return ViewHolder(view)
     }
 
@@ -55,7 +57,7 @@ class ProductListAdapter(val mList: ProductListResponse) :
         holder.txtProductName.text = itemProduct.ProductName
         holder.txtSizeOfProduct.text = itemProduct.ProductSize
 
-        holder.txtPrice.text = itemProduct.ProductPriceFormatted
+        holder.txtPrice.text = "£"+itemProduct.ProductPriceFormatted.drop(1)
 
         if (position == 0) {
 
@@ -209,7 +211,7 @@ class ProductListAdapter(val mList: ProductListResponse) :
                     (context as ProductListActivity).updateCartItem(cartItem)
                 }
             } else {
-                AlertDialog().dialog(context as Activity, "Can not add quantity more than 10 ")
+                AlertDialog().dialog(context as Activity, (context as Activity).resources.getString(R.string.CANT_ADD_MORE_THAN_10))
             }
         }
 
@@ -238,6 +240,8 @@ class ProductListAdapter(val mList: ProductListResponse) :
 
         holder.imvProduct.setOnClickListener() {
             quantity = myInt.toString()
+
+            Constant.subCategoryId = itemProduct.SubCategoryID
             context?.startActivity(Intent(context, ProductDetailsActivity::class.java))
         }
 

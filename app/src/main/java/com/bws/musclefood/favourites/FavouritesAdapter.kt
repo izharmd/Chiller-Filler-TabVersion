@@ -1,19 +1,30 @@
 package com.bws.musclefood.favourites
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.totalFavoritesCartItem
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
+import com.bws.musclefood.utils.LoadingDialog
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
+import cz.msebera.android.httpclient.Header
+import cz.msebera.android.httpclient.HttpEntity
+import cz.msebera.android.httpclient.entity.StringEntity
+import org.json.JSONArray
+import org.json.JSONObject
 
 class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): RecyclerView.Adapter<FavouritesAdapter.ViewHolder>() {
 
@@ -66,7 +77,7 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
             totalDiscount = discountPrice - totalProductPrice
             netDiscount = netDiscount - totalDiscount
 
-            (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
+           // (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
 
         }
 
@@ -90,7 +101,7 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
                 totalDiscount = (discountPrice - productPrice).toDouble()
                 netDiscount = netDiscount - totalDiscount
 
-                (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
+                (context as FavouritesActivity).updateCartItemDecrement()
             }
         }
 
@@ -108,14 +119,23 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
             totalDiscount = (discountPrice - productPrice).toDouble()
             netDiscount = netDiscount + totalDiscount
 
-            (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
+            (context as FavouritesActivity).updateCartItem()
         }
 
 
-       /* holder.txtAdd.setOnClickListener{
-            holder.llIncrementDecrement.visibility = View.VISIBLE
-            holder.txtAdd.visibility = View.GONE
-        }*/
+        holder.txtAdd.setOnClickListener{
+           // holder.llIncrementDecrement.visibility = View.VISIBLE
+           // holder.txtAdd.visibility = View.GONE
+
+            val quantity = holder.txtTotalQuentity.text.toString()
+            val price = itemProduct.ProductPrice
+            val totalPrice = itemProduct.ProductPrice.toFloat() * quantity.toInt()
+            val productId = itemProduct.ProductID
+
+
+            Toast.makeText(context, quantity, Toast.LENGTH_SHORT).show()
+            updateInsertCart(quantity,price,totalPrice.toString(),itemProduct.ProductID)
+        }
 
 
         val productQuantity = holder.txtTotalQuentity.text.toString().toInt()
@@ -128,7 +148,7 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
         totalDiscount = discountPrice - totalProductPrice
         netDiscount = netDiscount + totalDiscount
 
-        (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
+       // (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
 
 
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
@@ -168,5 +188,78 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
 
         val imvAddToFavourites: ImageView = itemView.findViewById(R.id.imvAddToFavourites)
         val imvAddToFavouritesHover: ImageView = itemView.findViewById(R.id.imvAddToFavouritesHover)
+    }
+
+
+    fun updateInsertCart(quantity:String,price:String,totalPrice:String,productId:String) {
+        val client = AsyncHttpClient()
+        val jsonArray = JSONArray()
+
+        val loadingDialog = LoadingDialog.progressDialog(context!!)
+      //  var keys = Constant.hashMap.keys
+       // for (key in keys) {
+            var jsonObject = JSONObject()
+           // var cartModel = Constant.hashMap.get(key)
+            try {
+                jsonObject.put("CartItemID", "")
+                jsonObject.put("Price", price)
+                jsonObject.put("ProductID", productId)
+                jsonObject.put("Quantity", quantity)
+                jsonObject.put("SessionID", Constant.sessionID);
+                jsonObject.put("TotalPrice", totalPrice)
+                jsonObject.put("UserID", "2")
+                jsonArray.put(jsonObject)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+      //  }
+
+        println("CART INSERT =="+jsonArray.toString())
+
+        val entity: HttpEntity
+        entity = try {
+            StringEntity(jsonArray.toString(), "UTF-8")
+        } catch (e: IllegalArgumentException) {
+            Log.d("HTTP", "StringEntity: IllegalArgumentException")
+            return
+        }
+        val contentType = "application/json; charset=utf-8"
+        client.post(
+            context,
+            Constant.BASE_URL + "InsertUpdateCartDetails",
+            entity,
+            contentType,
+            object : AsyncHttpResponseHandler() {
+                override fun onSuccess(
+                    statusCode: Int,
+                    headers: Array<Header>,
+                    responseBody: ByteArray
+                ) {
+                    val asyncResult = String(responseBody)
+                    Toast.makeText(context, asyncResult, Toast.LENGTH_SHORT).show()
+                   // startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
+                }
+
+                override fun onStart() {
+                    super.onStart()
+
+                    loadingDialog.show()
+                }
+
+                override fun onFinish() {
+                    super.onFinish()
+                    loadingDialog.dismiss()
+                }
+
+                override fun onFailure(
+                    statusCode: Int,
+                    headers: Array<Header>,
+                    responseBody: ByteArray,
+                    error: Throwable
+                ) {
+                    loadingDialog.dismiss()
+                    Toast.makeText(context, statusCode.toString(), Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 }

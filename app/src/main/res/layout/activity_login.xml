@@ -83,7 +83,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:background="@drawable/rippal_cardview"
-                android:text="log in"
+                android:text="Log in"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"/>

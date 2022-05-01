@@ -13,9 +13,11 @@ import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.serviceType
 import com.bws.musclefood.delivery.deliveryoption.DeliveryOptionActivity
 import com.bws.musclefood.factory.FactoryProvider
+import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.cartlist.CartListAdapter
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
@@ -29,10 +31,7 @@ import kotlinx.android.synthetic.main.tool_bar.txtLogInSignUp
 import kotlinx.android.synthetic.main.tool_bar_address.*
 import kotlinx.android.synthetic.main.tool_bar_address.imvBack
 import kotlinx.android.synthetic.main.tool_bar_cart_details.*
-import kotlinx.android.synthetic.main.tool_bar_search_view.*
-import kotlinx.android.synthetic.main.tool_bar_search_view.imvSearch
-import java.text.NumberFormat
-import java.util.*
+
 
 class FavouritesActivity : AppCompatActivity() {
 
@@ -40,12 +39,16 @@ class FavouritesActivity : AppCompatActivity() {
 
     lateinit var preferenceConnector: PreferenceConnector
 
+    var favoritesItmSize:Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favourites)
         supportActionBar?.hide()
 
         preferenceConnector = PreferenceConnector(this)
+
+        txtCartValue.text = Constant.cartItem.toString()
 
 
         txtLogInSignUp.text = "Favourite Items"
@@ -64,6 +67,12 @@ class FavouritesActivity : AppCompatActivity() {
         imvBack.setOnClickListener() {
             finish()
         }
+
+       imvCart.setOnClickListener {
+
+           startActivity(Intent(this@FavouritesActivity,CartListActivity::class.java))
+       }
+
 
         callFavouriteListPI()
     }
@@ -104,12 +113,18 @@ class FavouritesActivity : AppCompatActivity() {
                         ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
                     recyCartList.addItemDecoration(DividerItemDecoration(dividerDrawable))
 
+                     favoritesItmSize = it.data?.size!!
+
                     val adapter = FavouritesAdapter(it.data!!)
                     recyCartList.adapter = adapter
                     adapter.notifyDataSetChanged()
 
                     loadingDialog.hide()
                     this.viewModelStore.clear()
+
+
+                    val total =  Constant.cartItem + favoritesItmSize
+                    txtCartValue.text = total.toString()
                 }
 
                 is Resources.Error -> {
@@ -121,15 +136,15 @@ class FavouritesActivity : AppCompatActivity() {
         }
     }
 
-    fun updateCartItem(totalPrice: Double, netDiscount: Double) {
-        val currentLocale = Locale.UK
-        val currencyFormatter = NumberFormat.getCurrencyInstance()
-        //txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString()
-        //txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString().drop(1)
-        txtTotalPrice.text = "£ 7.10"
-        txtTotalSave.text = "£ 9.40"
-        txtCartValue.text = "2"
+    fun updateCartItem() {
+        var itm = txtCartValue.text.toString().toInt()
+        val total = 1 + itm
+        txtCartValue.text = total.toString()
+    }
 
-        //txtCartValue.text = Constant.totalCartItem.toString()
+    fun updateCartItemDecrement() {
+        var itm = txtCartValue.text.toString().toInt()
+        val total =  itm - 1
+        txtCartValue.text = total.toString()
     }
 }

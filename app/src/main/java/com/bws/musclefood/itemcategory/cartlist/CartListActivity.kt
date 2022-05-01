@@ -72,15 +72,18 @@ class CartListActivity : AppCompatActivity() {
 
              totalBasketValue = txtTotalPrice.text.toString().drop(1)
 
-            startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
-            /* if (totalOrderValue >= 80) {
+            val totalPrice = txtTotalPrice.text.toString().drop(1).toFloat()
+
+
+           // startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
+             if (totalPrice >= 80.00) {
                  startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
              } else {
                  AlertDialog().dialog(
                      this,
                      "Minimum cart value should be £80 or more to place order."
                  )
-             }*/
+             }
         }
 
         imvBack.setOnClickListener() {
@@ -159,9 +162,7 @@ class CartListActivity : AppCompatActivity() {
                 }
 
                 is Resources.Success -> {
-
-                    var totalPrice = 0f
-
+                    Constant.TotalPrice = 0f
                     cartListAdapter = CartListAdapter(it.data!!)
                     recyCartList.adapter = cartListAdapter
                     cartListAdapter.notifyDataSetChanged()
@@ -170,10 +171,12 @@ class CartListActivity : AppCompatActivity() {
                         for (i in 0 until it.data.size) {
                             var jsonOjb = JSONObject()
                             cartItem = cartItem + it.data[i].Quantity.toInt()
-                            var price = it.data[i].FormattedProductTotalPrice.drop(2).toFloat() * it.data[i].Quantity.toFloat()
-                            totalPrice =
-                                totalPrice + price
-                            txtTotalPrice.text = totalPrice.toString()
+                            var price = it.data[i].Price.toFloat() * it.data[i].Quantity.toInt()
+                            Constant.TotalPrice =
+                                Constant.TotalPrice + price
+                           // txtTotalPrice.text = Constant.TotalPrice.toString()
+
+                            println("JSON=="+price)
 
                             jsonOjb.put("CartItemID", it.data[i].CartItemID)
                             jsonOjb.put("ProductID", it.data[i].ProductID)
@@ -188,21 +191,20 @@ class CartListActivity : AppCompatActivity() {
                         }
                         val currencyFormatter = NumberFormat.getCurrencyInstance()
 
-                        txtTotalPrice.text = currencyFormatter.format(totalPrice).toString()
-                        Constant.TotalPrice =
-                            currencyFormatter.format(totalPrice).toString().drop(1)
+                        txtTotalPrice.text = "£"+Constant.TotalPrice.toString() + "0"
                         txtCartValue.text = cartItem.toString()
+                        println("TOTAL===="+Constant.TotalPrice)
                     }else{
                         finish()
                     }
-                    if (totalPrice <= 80.00) {
-                        var orderValue = 80.00 - totalPrice
+                    if (Constant.TotalPrice <= 80.00) {
+                        var orderValue = 80.00 - Constant.TotalPrice
                         txtAddWorth.text =
                             "You are " + "£" + orderValue.toString() + "0" + " away from meeting the minimum spend."
                     } else {
                         txtAddWorth.text =
-                            "You are " + "£" + "80." + "00" + " away from meeting the minimum spend."
-                        txtTotalPrice.text = "£00.00"
+                            "You are " + "£" + "00." + "00" + " away from meeting the minimum spend."
+                      //  txtTotalPrice.text = "£00.00"
                     }
 
                     loadingDialog.dismiss()
@@ -218,11 +220,11 @@ class CartListActivity : AppCompatActivity() {
 
     fun updateCartItem(totalPrice: Double, netDiscount: Double) {
         val currencyFormatter = NumberFormat.getCurrencyInstance()
-        txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString()
-        txtTotalPrice.text = "£ " + currencyFormatter.format(totalPrice).toString().drop(1)
-        txtTotalSave.text = "£ " + currencyFormatter.format(netDiscount).toString().drop(1)
+        txtTotalPrice.text = "£" + currencyFormatter.format(totalPrice).toString()
+        txtTotalPrice.text = "£" + currencyFormatter.format(totalPrice).toString().drop(1)
+        txtTotalSave.text = "£" + currencyFormatter.format(netDiscount).toString().drop(1)
 
-        Constant.TotalPrice = currencyFormatter.format(netDiscount).toString().drop(1)
+        //Constant.TotalPrice = currencyFormatter.format(netDiscount).toString().drop(1)
 
         if (totalPrice <= 80.00) {
             var orderValue = 80.00 - totalPrice
@@ -230,7 +232,7 @@ class CartListActivity : AppCompatActivity() {
                 "You are " + "£" + orderValue.toString() + "0" + " away from meeting the minimum spend."
         } else {
             txtAddWorth.text =
-                "You are " + "£" + "80." + "00" + " away from meeting the minimum spend."
+                "You are " + "£" + "00." + "00" + " away from meeting the minimum spend."
         }
     }
 
