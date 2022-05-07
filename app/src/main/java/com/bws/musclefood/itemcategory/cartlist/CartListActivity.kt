@@ -13,6 +13,7 @@ import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.totalBasketValue
 import com.bws.musclefood.delivery.deliveryoption.DeliveryOptionActivity
 import com.bws.musclefood.factory.FactoryProvider
+import com.bws.musclefood.itemcategory.basket.BasketModel
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.utils.AlertDialog
@@ -45,15 +46,22 @@ class CartListActivity : AppCompatActivity() {
     lateinit var removeProductViewModel: RemoveProductViewModel
     lateinit var preferenceConnector: PreferenceConnector
 
+    private lateinit var content: BasketModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart_list)
         supportActionBar?.hide()
 
+        if(::content.isInitialized) {
+            // put your code here
+            val tt = content.clientName
+        }
+
         preferenceConnector = PreferenceConnector(this)
 
         txtOrderNo.visibility = View.GONE
-        txtLogInSignUp.text = "Cart Details"
+        txtLogInSignUp.text = "Baskets"
         recyCartList.layoutManager = LinearLayoutManager(this)
 
         val dividerDrawable =
@@ -234,6 +242,8 @@ class CartListActivity : AppCompatActivity() {
             txtAddWorth.text =
                 "You are " + "£" + "00." + "00" + " away from meeting the minimum spend."
         }
+
+
     }
 
     fun cartItemIncrement() {

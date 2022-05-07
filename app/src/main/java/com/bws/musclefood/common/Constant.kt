@@ -2,6 +2,8 @@ package com.bws.musclefood.common
 
 import com.bws.musclefood.favourites.FavouritesModel
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
+import com.bws.musclefood.itemcategory.productlist.ProductListResponse
+import com.bws.musclefood.itemcategory.productlist.ProductListResponseItem
 import com.bws.musclefood.orders.searchorder.OrderItem
 import org.json.JSONArray
 
@@ -13,6 +15,10 @@ class Constant {
         val INSERTPLACEORDERDETAILS = "InsertPlaceOrderDetails"
 
         val addDataToCart = ArrayList<CartListModel>()
+
+        var dataModel = ArrayList<ProductListResponseItem>()
+
+
 
         var hashMap = HashMap<String, CartListModel>() //define empty hashmap
         var pos: Int = 0

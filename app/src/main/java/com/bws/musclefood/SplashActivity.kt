@@ -14,6 +14,12 @@ class SplashActivity:AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
 
+        val user = User("1233")
+
+
+        user.uniqueIdentifier = "name==="
+        user.age = "32"
+
         Handler().postDelayed(Runnable {
             val mainIntent = Intent(this@SplashActivity, LoginActivity::class.java)
             startActivity(mainIntent)

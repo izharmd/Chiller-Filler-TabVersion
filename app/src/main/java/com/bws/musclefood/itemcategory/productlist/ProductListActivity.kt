@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.NavigationAdapter
 import com.bws.musclefood.NavigationAdapter2
 import com.bws.musclefood.R
+import com.bws.musclefood.User
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.foodService
 import com.bws.musclefood.common.Constant.Companion.hashMap
@@ -25,9 +26,11 @@ import com.bws.musclefood.common.Constant.Companion.retailReady
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
 import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.favourites.FavouritesActivity
+import com.bws.musclefood.interfaceCallback.CallbackInterface
 import com.bws.musclefood.itemcategory.basket.BasketsActivity
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryAdapter
+import com.bws.musclefood.login.LoginResponse
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.orders.searchorder.SearchOrderActivity
 import com.bws.musclefood.profile.MyProfileActivity
@@ -55,7 +58,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
-class ProductListActivity : AppCompatActivity() {
+class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
     lateinit var navigationAdapter: NavigationAdapter
     lateinit var navigationAdapter2: NavigationAdapter2
@@ -71,11 +74,20 @@ class ProductListActivity : AppCompatActivity() {
 
     lateinit var preferenceConnector: PreferenceConnector
 
+    //lateinit var loginResponse: LoginResponse
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation_drawer)
         supportActionBar?.hide()
         txtLogInSignUp.text = Constant.serviceType
+
+
+        val user = User("123")
+
+        println("USER==="+user.id)
+        println("USER==="+user.uniqueIdentifier)
+
 
         preferenceConnector = PreferenceConnector(this)
 
@@ -270,7 +282,7 @@ class ProductListActivity : AppCompatActivity() {
                     val dividerDrawable =
                         ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
                     recyProductList.addItemDecoration(DividerItemDecoration(dividerDrawable))
-                    val adapter = ProductListAdapter(it.data!!)
+                    val adapter = ProductListAdapter(this,it.data!!)
                     recyProductList.adapter = adapter
                     adapter.notifyDataSetChanged()
 
@@ -445,6 +457,12 @@ class ProductListActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         txtTotalCartItem.text = totalCartItem.toString()
+    }
+
+    override fun passResultCallback(message: ProductListResponseItem) {
+
+       // Toast.makeText(this,message.ProductName,Toast.LENGTH_SHORT).show()
+
     }
 
 }

@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
             val pass = Validator.isValidPassword(edtPassword.text.toString(), true)
             val email = Validator.isValidEmail(edtEmailId.text.toString(), true)
 
-            /* if(edtEmailId.text.isEmpty()){
+             if(edtEmailId.text.isEmpty()){
                 AlertDialog().dialog(this,"Please enter email id")
             }else if(!email){
                AlertDialog().dialog(this,"Invalid email id")
@@ -74,18 +74,16 @@ class LoginActivity : AppCompatActivity() {
 
                callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
 
-            }*/
+            }
 
-            val loginRepository = Repository()
+           /* val loginRepository = Repository()
             val loginFactory = FactoryProvider(loginRepository, this)
             loginViewModel =
                 ViewModelProvider(this, loginFactory).get(LoginViewModel::class.java)
-
-
             val dt = loginViewModel.loginDta("Hi how r u")
             println("DTA==="+dt)
 
-            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
+            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())*/
         }
 
         llForgotPassword.setOnClickListener() {
@@ -97,8 +95,8 @@ class LoginActivity : AppCompatActivity() {
 
         Constant.sessionID = Random().nextFloat().toString()
 
-        val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
-       // val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
+       // val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
+        val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
 
         val jso = Gson()
 

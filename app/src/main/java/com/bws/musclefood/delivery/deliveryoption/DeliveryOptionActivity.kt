@@ -39,6 +39,11 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         imvSaveaddress.visibility = View.GONE
         txtTxtHeader.text = "Delivery Options"
 
+
+        val sdf = SimpleDateFormat("dd-MM-yyyy")
+        val currentDate = sdf.format(Date())
+        txtDeliveryDate.text = currentDate
+
         val date =
             OnDateSetListener { view, year, month, dayOfMonth ->
                 myCalendar[Calendar.YEAR] = year

@@ -12,6 +12,7 @@ import com.bws.musclefood.common.Constant.Companion.INSERTPLACEORDERDETAILS
 import com.bws.musclefood.common.Constant.Companion.totalBasketValue
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.utils.AlertDialog
+import com.bws.musclefood.utils.CreditCardTextFormatter
 import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.viewmodels.OrderPlaceViewModel
@@ -32,6 +33,8 @@ class PaymentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         supportActionBar?.hide()
+
+        edtCard.addTextChangedListener(CreditCardTextFormatter())
 
         preferenceConnector = PreferenceConnector(this)
 

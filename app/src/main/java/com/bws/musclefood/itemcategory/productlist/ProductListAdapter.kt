@@ -20,6 +20,7 @@ import com.bws.musclefood.common.Constant.Companion.cartItem
 import com.bws.musclefood.common.Constant.Companion.hashMap
 import com.bws.musclefood.common.Constant.Companion.quantity
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
+import com.bws.musclefood.interfaceCallback.CallbackInterface
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
 import com.bws.musclefood.itemcategory.productlist.addquentity.QuentityAdapater
 import com.bws.musclefood.itemcategory.productlist.addquentity.QuentityModel
@@ -31,7 +32,7 @@ import com.bws.musclefood.utils.AlertDialog
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 
 
-class ProductListAdapter(val mList: ProductListResponse) :
+class ProductListAdapter(private val callbackInterface: CallbackInterface, val mList: ProductListResponse) :
     RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     var context: Context? = null
@@ -56,6 +57,12 @@ class ProductListAdapter(val mList: ProductListResponse) :
         val itemProduct = mList[position]
         holder.txtProductName.text = itemProduct.ProductName
         holder.txtSizeOfProduct.text = itemProduct.ProductSize
+
+
+        holder.itemView.setOnClickListener {
+
+            callbackInterface.passResultCallback(itemProduct)
+        }
 
         holder.txtPrice.text = "£"+itemProduct.ProductPriceFormatted.drop(1)
 

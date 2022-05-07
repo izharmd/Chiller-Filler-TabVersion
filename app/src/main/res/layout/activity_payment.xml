@@ -537,6 +537,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="center"
                         android:layout_marginRight="@dimen/_10sdp"
+
                         android:layout_weight="1.4"
                         android:background="@drawable/round_payment_view"
                         android:drawablePadding="@dimen/_5sdp"
@@ -565,6 +566,7 @@
 
 
                 <TextView
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/_5sdp"
@@ -575,6 +577,7 @@
 
 
                 <EditText
+                    android:id="@+id/edtCard"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"

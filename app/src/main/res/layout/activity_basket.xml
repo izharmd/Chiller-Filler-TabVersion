@@ -15,7 +15,8 @@
         android:text="You have no saved baskets"
         android:gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
-        android:textColor="@color/blue"></TextView>
+        android:textColor="@color/blue"
+        android:visibility="gone"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

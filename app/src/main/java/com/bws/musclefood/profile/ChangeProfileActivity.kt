@@ -22,6 +22,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.factory.FactoryProvider
+import com.bws.musclefood.interfaceCallback.CallbackInterface
+import com.bws.musclefood.itemcategory.productlist.ProductListResponseItem
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.utils.AlertDialog
@@ -39,7 +41,7 @@ import kotlinx.android.synthetic.main.activity_sign_up.edtCompName
 import kotlinx.android.synthetic.main.dialog_forgot_password.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
 
-class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,CallbackInterface {
 
     private val REQUEST_PERMISSION = 100
     private val REQUEST_IMAGE_CAPTURE = 1
@@ -343,5 +345,9 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                 }
             }
         }
+    }
+
+    override fun passResultCallback(message: ProductListResponseItem) {
+      //  Toast.makeText(this,message.ProductName,Toast.LENGTH_SHORT).show()
     }
 }
