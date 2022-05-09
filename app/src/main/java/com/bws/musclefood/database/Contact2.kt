@@ -5,15 +5,15 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-const val CURRENT_USER_ID = 0
+
+const val CURRENT_USER_ID_ = 0
 
 @Entity(indices = [Index(value = ["id"], unique = true)])
-data class Contact(
+data class Contact2(
     val name: String,
-    val phone:String
+    val phone: String
 
-):Serializable{
+) : Serializable {
     @PrimaryKey(autoGenerate = true)
-    var id: Int =0
+    var id: Int = 0
 }
-

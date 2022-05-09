@@ -25,14 +25,21 @@ interface ContactDAO {
     @Query("SELECT * FROM contact WHERE id > :ids")
     suspend fun getMobileNo(ids: Int): List<Contact>
 
+    @Query("INSERT INTO contact2  SELECT * FROM  contact")
+    suspend fun getMobileNo1()
 
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addDog(dog: List<Dog>)
+    @Query("SELECT * FROM contact2")
+    fun getContactData(): LiveData<List<Contact2>>
 
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-   suspend fun addDogOwner(dogAndOwner: List<Owner>)
+
+   // @Insert(onConflict = OnConflictStrategy.REPLACE)
+   // suspend fun addDog(dog: List<Dog>)
+
+
+  //  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  // suspend fun addDogOwner(dogAndOwner: List<Owner>)
 
   //  @Query("select * from contact where id between :ids and :ids2")
    // suspend fun getIds(ids:Int,ids2:Int) :List<Contact>

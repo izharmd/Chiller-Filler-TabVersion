@@ -19,23 +19,34 @@ class FeatchDataActivity : AppCompatActivity() {
 
         database = ContactDatabase.getDatabase(this)
 
-        database.contactDao().getContact().observe(this, Observer {
-            Log.d("NAME==",it.toString())
-            Log.d("NAME==",it[4].name)
 
-            val gs = Gson()
-            Log.d("NAME==",Gson().toJson(it))
+
+
+
+      /*  database.contactDao().getContact().observe(this, Observer {
+
 
            GlobalScope.launch {
               val ids =  database.contactDao().getMobileNo(5).toString()
                Log.d("IDDDSSS==",ids.toString())
                println("ID=="+Gson().toJson(ids))
 
+               val dt = database.contactDao().getMobileNo1()
+
               // val idBtween = database.contactDao().getIds(10,11).toString()
 
-              // Log.d("IDDDSSS==",idBtween.toString())
-               //println("ID=="+Gson().toJson(idBtween))
+               Log.d("IDDDSSS==",dt.toString())
+              println("ID=="+Gson().toJson(dt))
+
+
            }
+
+        })*/
+
+        database.contactDao().getContactData().observe(this@FeatchDataActivity, Observer {
+
+            val dt = it
+            println("ID=="+dt[0].name)
 
         })
     }

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Contact::class,Dog::class,Owner::class], version = 1)
+@Database(entities = [Contact::class,Contact2::class,Dog::class,Owner::class], version = 1)
 abstract class ContactDatabase : RoomDatabase() {
 
     abstract fun contactDao(): ContactDAO
