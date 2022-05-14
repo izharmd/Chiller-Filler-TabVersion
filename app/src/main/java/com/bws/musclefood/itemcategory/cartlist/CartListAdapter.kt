@@ -3,6 +3,7 @@ package com.bws.musclefood.itemcategory.cartlist
 import android.app.Activity
 import android.content.Context
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
+import com.bws.musclefood.database.AppDatabase
 import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.viewmodels.RemoveProductViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListResponseItem>) :
+class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListResponseItem>,val db:AppDatabase) :
     RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
 
     var context: Context? = null
@@ -57,6 +62,8 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
         }
 
 
+
+
         holder.txtDeleteProduct.setOnClickListener {
             (context as CartListActivity).removeProduct(itemProduct.ProductID)
         }
@@ -85,6 +92,12 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
 
                 (context as CartListActivity).cartItemDecrement()
 
+                GlobalScope.launch(Dispatchers.Main) {
+                    db.contactDao().updateProductItems(holder.txtTotalQuentity.text.toString(),itemProduct.ProductID)
+                    val dt =  db.contactDao().getProductItem()
+                    Log.d("ALL DATA===",dt.toString())
+                }
+
             }
         }
 
@@ -106,6 +119,13 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
 
                 (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
                 (context as CartListActivity).cartItemIncrement()
+
+                GlobalScope.launch(Dispatchers.Main) {
+                    db.contactDao().updateProductItems(holder.txtTotalQuentity.text.toString(),itemProduct.ProductID)
+                    val dt =  db.contactDao().getProductItem()
+                    Log.d("ALL DATA===",dt.toString())
+                }
+
             } else {
                 AlertDialog().dialog(context as Activity, "Can not add quantity more than 10 ")
             }

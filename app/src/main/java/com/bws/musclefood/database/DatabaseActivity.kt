@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.room.Room
 import com.bws.musclefood.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DatabaseActivity : AppCompatActivity() {
-    lateinit var database: ContactDatabase
+    lateinit var database: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_database)
@@ -24,7 +25,12 @@ class DatabaseActivity : AppCompatActivity() {
 
         val list = ArrayList<Contact>()
 
+        val random = Random().nextInt()
+
         list.add(Contact("Izan", "9931314095"))
+        list.add(Contact("Izan", "9931314095"))
+        list.add(Contact("Izan", "9931314095"))
+
 
 
         val dog = ArrayList<Dog>()
@@ -43,13 +49,22 @@ class DatabaseActivity : AppCompatActivity() {
 
 
 
-        database = ContactDatabase.getDatabase(this)
+       // database = AppDatabase.getDatabase(this)
 
         GlobalScope.launch {
             database.contactDao().addDistrict(list)
-            //add dog
-         //   database.contactDao().addDog(dog)
-           // database.contactDao().addDogOwner(dogOwner)
+
+
+
+         database.contactDao().getContact().observe(this@DatabaseActivity, Observer {
+
+             val contact2 = ArrayList<Contact2>()
+                for(i in 1..it.size){
+                    contact2.add(Contact2(it[i].name,it[i].phone))
+                }
+            })
+
+
 
             val dogData = database.contactDao().getDogsAndOwners().toString()
             Log.d("NAME==", dogData.toString())

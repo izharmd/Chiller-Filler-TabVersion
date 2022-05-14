@@ -1,15 +1,14 @@
 package com.bws.musclefood.repo
 
-import com.bws.musclefood.common.ApiInterface
 import com.bws.musclefood.common.RetrofitHelper
 import com.bws.musclefood.network.RequestBodies
-import com.google.gson.JsonObject
 import org.json.JSONArray
 import org.json.JSONObject
 
-class Repository {
+class Repository/*(private val db:ContactDatabase)*/{
     // var retrofitInntance = RetrofitHelper.getInstance().create(ApiInterface::class.java)
     var retrofitInntance = RetrofitHelper.retrofitService
+
     suspend fun loginUser(body: RequestBodies.LoginBody) = retrofitInntance.callLoginApi(body)
     suspend fun categoryMenu(body: RequestBodies.GetMenu) = retrofitInntance.callMenuCategory(body)
 

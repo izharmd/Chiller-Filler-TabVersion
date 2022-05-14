@@ -2,6 +2,7 @@ package com.bws.musclefood.itemcategory.cartlist
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.totalBasketValue
+import com.bws.musclefood.database.AppDatabase
+import com.bws.musclefood.database.tblBaskets
 import com.bws.musclefood.delivery.deliveryoption.DeliveryOptionActivity
 import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.itemcategory.basket.BasketModel
@@ -23,21 +26,21 @@ import com.bws.musclefood.utils.Resources
 import com.bws.musclefood.viewmodels.CartListViewModel
 import com.bws.musclefood.viewmodels.RemoveProductViewModel
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
-import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_cart_list.*
 import kotlinx.android.synthetic.main.tool_bar.txtLogInSignUp
 import kotlinx.android.synthetic.main.tool_bar_address.imvBack
 import kotlinx.android.synthetic.main.tool_bar_cart_details.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.imvSearch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.NumberFormat
 
 class CartListActivity : AppCompatActivity() {
-
-    var totalOrderValue = 0f
-
-    //  var totalPrice = 0f
     var cartItem: Int = 0
 
     lateinit var cartListViewModel: CartListViewModel
@@ -48,15 +51,35 @@ class CartListActivity : AppCompatActivity() {
 
     private lateinit var content: BasketModel
 
+    lateinit var db: AppDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart_list)
         supportActionBar?.hide()
 
-        if(::content.isInitialized) {
+        if (::content.isInitialized) {
             // put your code here
             val tt = content.clientName
         }
+
+        var jsonObj = JSONObject()
+        var jsonarr = JSONArray()
+        jsonObj.put("aaaa","qqwrw")
+        jsonObj.put("bbbb","qqwrw")
+        jsonObj.put("ccccc","qqwrw")
+        var inJoson = JSONObject()
+        inJoson.put("weert","qawert")
+        inJoson.put("eete","qawert")
+        inJoson.put("weuytutyert","qawert")
+        jsonarr.put(inJoson)
+
+        val finalJson = jsonObj.put("itmmm",jsonarr)
+
+
+
+
+        db = AppDatabase(this)
 
         preferenceConnector = PreferenceConnector(this)
 
@@ -78,20 +101,20 @@ class CartListActivity : AppCompatActivity() {
 
         txtCheckOut.setOnClickListener() {
 
-             totalBasketValue = txtTotalPrice.text.toString().drop(1)
+            totalBasketValue = txtTotalPrice.text.toString().drop(1)
 
             val totalPrice = txtTotalPrice.text.toString().drop(1).toFloat()
 
 
-           // startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
-             if (totalPrice >= 80.00) {
-                 startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
-             } else {
-                 AlertDialog().dialog(
-                     this,
-                     "Minimum cart value should be £80 or more to place order."
-                 )
-             }
+            // startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
+            if (totalPrice >= 80.00) {
+                startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
+            } else {
+                AlertDialog().dialog(
+                    this,
+                    "Minimum cart value should be £80 or more to place order."
+                )
+            }
         }
 
         imvBack.setOnClickListener() {
@@ -170,10 +193,38 @@ class CartListActivity : AppCompatActivity() {
                 }
 
                 is Resources.Success -> {
+
+
+                    val arrBaskets = ArrayList<tblBaskets>()
+
+                    GlobalScope.launch(Dispatchers.Main) {
+                        db.contactDao().deleteProductItems()
+                        for (i in it.data?.indices!!) {
+                            arrBaskets.add(
+                                tblBaskets(
+                                    it.data?.get(i).CartItemID,
+                                    it.data?.get(i).FavoriteFlag,
+                                    it.data?.get(i).FormattedPrice,
+                                    it.data?.get(i).FormattedProductTotalPrice,
+                                    it.data?.get(i).Price,
+                                    it.data?.get(i).ProductID,
+                                    it.data?.get(i).ProductImageName,
+                                    it.data?.get(i).ProductName,
+                                    it.data?.get(i).ProductSize,
+                                    it.data?.get(i).Quantity
+                                )
+                            )
+                        }
+                        db.contactDao().saveProductItems(arrBaskets)
+                        val dt = db.contactDao().getProductItem()
+                        Log.d("ALL DATA===", dt.toString())
+                    }
+
                     Constant.TotalPrice = 0f
-                    cartListAdapter = CartListAdapter(it.data!!)
+                    cartListAdapter = CartListAdapter(it.data!!, db)
                     recyCartList.adapter = cartListAdapter
                     cartListAdapter.notifyDataSetChanged()
+
 
                     if (it.data.size != 0) {
                         for (i in 0 until it.data.size) {
@@ -182,9 +233,9 @@ class CartListActivity : AppCompatActivity() {
                             var price = it.data[i].Price.toFloat() * it.data[i].Quantity.toInt()
                             Constant.TotalPrice =
                                 Constant.TotalPrice + price
-                           // txtTotalPrice.text = Constant.TotalPrice.toString()
+                            // txtTotalPrice.text = Constant.TotalPrice.toString()
 
-                            println("JSON=="+price)
+                            println("JSON==" + price)
 
                             jsonOjb.put("CartItemID", it.data[i].CartItemID)
                             jsonOjb.put("ProductID", it.data[i].ProductID)
@@ -199,10 +250,10 @@ class CartListActivity : AppCompatActivity() {
                         }
                         val currencyFormatter = NumberFormat.getCurrencyInstance()
 
-                        txtTotalPrice.text = "£"+Constant.TotalPrice.toString() + "0"
+                        txtTotalPrice.text = "£" + Constant.TotalPrice.toString() + "0"
                         txtCartValue.text = cartItem.toString()
-                        println("TOTAL===="+Constant.TotalPrice)
-                    }else{
+                        println("TOTAL====" + Constant.TotalPrice)
+                    } else {
                         finish()
                     }
                     if (Constant.TotalPrice <= 80.00) {
@@ -212,7 +263,7 @@ class CartListActivity : AppCompatActivity() {
                     } else {
                         txtAddWorth.text =
                             "You are " + "£" + "00." + "00" + " away from meeting the minimum spend."
-                      //  txtTotalPrice.text = "£00.00"
+                        //  txtTotalPrice.text = "£00.00"
                     }
 
                     loadingDialog.dismiss()

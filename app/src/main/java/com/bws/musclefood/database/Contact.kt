@@ -9,11 +9,12 @@ const val CURRENT_USER_ID = 0
 
 @Entity(indices = [Index(value = ["id"], unique = true)])
 data class Contact(
+
     val name: String,
     val phone:String
 
 ):Serializable{
     @PrimaryKey(autoGenerate = true)
-    var id: Int =0
+    var id: Int = CURRENT_USER_ID
 }
 

@@ -28,11 +28,12 @@ import com.bws.musclefood.itemcategory.rating.RatingActivity
 import com.bws.musclefood.itemcategory.rating.RatingAdapter
 import com.bws.musclefood.itemcategory.rating.RatingModel
 import com.bws.musclefood.productdetails.ProductDetailsActivity
+import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.utils.AlertDialog
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 
 
-class ProductListAdapter(private val callbackInterface: CallbackInterface, val mList: ProductListResponse) :
+class ProductListAdapter(private val callbackInterface: CallbackInterface, val mList: ProductListResponse, private val respository: Repository?) :
     RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     var context: Context? = null
@@ -40,9 +41,6 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
 
     val arrItem = ArrayList<String>()
 
-   // var cartItem: Int = 0
-
-    //   var hashMap = HashMap<String, CartListModel>() //define empty hashmap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =

@@ -10,6 +10,7 @@ import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.INSERTPLACEORDERDETAILS
 import com.bws.musclefood.common.Constant.Companion.totalBasketValue
+import com.bws.musclefood.database.AppDatabase
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.utils.CreditCardTextFormatter
@@ -23,18 +24,26 @@ import cz.msebera.android.httpclient.HttpEntity
 import cz.msebera.android.httpclient.entity.StringEntity
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.json.JSONArray
 import org.json.JSONObject
 
 class PaymentActivity : AppCompatActivity() {
 
     lateinit var preferenceConnector: PreferenceConnector
 
+    lateinit var db: AppDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         supportActionBar?.hide()
 
-        edtCard.addTextChangedListener(CreditCardTextFormatter())
+        db = AppDatabase(this)
+
+        // edtCard.addTextChangedListener(CreditCardTextFormatter())
 
         preferenceConnector = PreferenceConnector(this)
 
@@ -144,7 +153,7 @@ class PaymentActivity : AppCompatActivity() {
 
 
         txtPlaceOrder.setOnClickListener() {
-            val jsonObject = JSONObject()
+          /*  val jsonObject = JSONObject()
             jsonObject.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
             jsonObject.put("SessionID", Constant.sessionID)
             jsonObject.put("EmailID", preferenceConnector.getValueString("EMAIL_ID").toString())
@@ -156,10 +165,54 @@ class PaymentActivity : AppCompatActivity() {
             jsonObject.put("TotalAmount", Constant.TotalPrice.toString())
             jsonObject.put("OrderItems", Constant.jsonOrder)
 
-             println("PAYMENT JSON==" + jsonObject)
+            println("PAYMENT JSON==" + jsonObject)*/
+
+
+            var jsonObj = JSONObject()
+            var jsonarr = JSONArray()
+            jsonObj.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
+            jsonObj.put("SessionID", Constant.sessionID)
+            jsonObj.put("EmailID", preferenceConnector.getValueString("EMAIL_ID").toString())
+            jsonObj.put("PaymentType", "Card")
+            jsonObj.put("DeliveryAddressType", "Office")
+            jsonObj.put("DeliveryDate", Constant.deliveryDate)
+            jsonObj.put("DeliveryTime", Constant.deliveryTime)
+            jsonObj.put("DeliveryCharge", "")
+            jsonObj.put("DeliverySlot", "Pre 12")
+            jsonObj.put("CardNumber", edtCardNO.text.toString())
+            jsonObj.put("OnCardName", edtCardName.text.toString())
+            jsonObj.put("CardCVVNumber", edtCVVNo.text.toString())
+            jsonObj.put("CardExpiryDate", edtCardExpDate.text.toString())
+            jsonObj.put("PaymentGatewayID", "Card Payment")
+            jsonObj.put("TotalAmount", Constant.TotalPrice.toString())
+
+
+            GlobalScope.launch(Dispatchers.Main) {
+                val productList = db.contactDao().getProductItem()
+
+                for (i in productList.indices) {
+                    var innerJoson = JSONObject()
+                    innerJoson.put("CartItemID", productList[i].CartItemID)
+                    innerJoson.put("ProductID", productList[i].ProductID)
+                    innerJoson.put("ProductName", productList[i].ProductName)
+                    innerJoson.put("ProductQuantity", productList[i].Quantity)
+                    innerJoson.put("ProductPrice", productList[i].Price)
+                    innerJoson.put("ProductTotalPrice", productList[i].FormattedProductTotalPrice)
+                    jsonarr.put(innerJoson)
+
+                }
+
+
+                val finalJson = jsonObj.put("OrderItems", jsonarr)
+                Log.d("ALL DATA===", finalJson.toString())
+            }
+
+
+
+
 
             //PLACE ORDER
-            placeOrder(jsonObject)
+          //  placeOrder(jsonObject)
 
         }
 

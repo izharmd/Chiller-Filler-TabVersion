@@ -24,13 +24,13 @@ import com.bws.musclefood.common.Constant.Companion.hashMap
 import com.bws.musclefood.common.Constant.Companion.mainCategory
 import com.bws.musclefood.common.Constant.Companion.retailReady
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
+import com.bws.musclefood.database.AppDatabase
 import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.favourites.FavouritesActivity
 import com.bws.musclefood.interfaceCallback.CallbackInterface
 import com.bws.musclefood.itemcategory.basket.BasketsActivity
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryAdapter
-import com.bws.musclefood.login.LoginResponse
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.orders.searchorder.SearchOrderActivity
 import com.bws.musclefood.profile.MyProfileActivity
@@ -76,6 +76,9 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
     //lateinit var loginResponse: LoginResponse
 
+    var respository: Repository? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation_drawer)
@@ -91,7 +94,11 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
         preferenceConnector = PreferenceConnector(this)
 
-        val factory = FactoryProvider(Repository(), this)
+        var db = AppDatabase(this)
+
+        respository = Repository()
+
+        val factory = FactoryProvider(respository!!, this)
         categoryViewModel = ViewModelProvider(this, factory).get(CategoryViewModel::class.java)
         val pram = RequestBodies.GetMenu()
         val loadingDialog = LoadingDialog.progressDialog(this)
@@ -254,7 +261,7 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
         productListViewModel = ViewModelProvider(
             this,
-            FactoryProvider(Repository(), this)
+            FactoryProvider(respository!!, this)
         ).get(ProductListViewModel::class.java)
 
         val pramProductDetails = RequestBodies.PopulateProductDetailsBody(
@@ -282,7 +289,7 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
                     val dividerDrawable =
                         ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
                     recyProductList.addItemDecoration(DividerItemDecoration(dividerDrawable))
-                    val adapter = ProductListAdapter(this,it.data!!)
+                    val adapter = ProductListAdapter(this,it.data!!,respository!!)
                     recyProductList.adapter = adapter
                     adapter.notifyDataSetChanged()
 
@@ -302,7 +309,7 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
         addFavouriteViewModel = ViewModelProvider(
             this,
-            FactoryProvider(Repository(), this)
+            FactoryProvider(respository!!, this)
         ).get(AddFavouriteViewModel::class.java)
 
         val addFavourite = RequestBodies.AddFavouriteListBody(
@@ -346,7 +353,7 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
         removeFavoriteViewModel = ViewModelProvider(
             this,
-            FactoryProvider(Repository(), this)
+            FactoryProvider(respository!!, this)
         ).get(RemoveFavoriteViewModel::class.java)
 
         val removeFavourite = RequestBodies.RemoveFavoriteProductBody(

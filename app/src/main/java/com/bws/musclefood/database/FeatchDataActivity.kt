@@ -2,22 +2,17 @@ package com.bws.musclefood.database
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
-import androidx.room.Room
 import com.bws.musclefood.R
-import com.google.gson.Gson
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class FeatchDataActivity : AppCompatActivity() {
 
-    lateinit var database: ContactDatabase
+    lateinit var database: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_featch_data)
 
-        database = ContactDatabase.getDatabase(this)
+       // database = AppDatabase.getDatabase(this)
 
 
 

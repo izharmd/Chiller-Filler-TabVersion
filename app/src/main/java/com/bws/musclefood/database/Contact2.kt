@@ -8,7 +8,7 @@ import java.io.Serializable
 
 const val CURRENT_USER_ID_ = 0
 
-@Entity(indices = [Index(value = ["id"], unique = true)])
+@Entity(tableName = "contact2",indices = [Index(value = ["id"], unique = true)])
 data class Contact2(
     val name: String,
     val phone: String
