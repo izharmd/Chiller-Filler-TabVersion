@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.totalFavoritesCartItem
+import com.bws.musclefood.itemcategory.basket.BasketsActivity
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.utils.LoadingDialog
 import com.loopj.android.http.AsyncHttpClient
@@ -156,13 +157,14 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
 
 
         holder.imvAddToFavourites.setOnClickListener() {
-            holder.imvAddToFavourites.visibility = View.GONE
-            holder.imvAddToFavouritesHover.visibility = View.VISIBLE
+           // holder.imvAddToFavourites.visibility = View.GONE
+           // holder.imvAddToFavouritesHover.visibility = View.VISIBLE
+            (context as FavouritesActivity).calRemoveFavouritePI(mList[position].ProductID)
         }
-        holder.imvAddToFavouritesHover.setOnClickListener() {
+      /*  holder.imvAddToFavouritesHover.setOnClickListener() {
             holder.imvAddToFavourites.visibility = View.VISIBLE
             holder.imvAddToFavouritesHover.visibility = View.GONE
-        }
+        }*/
 
        // totalFavoritesCartItem = mList.size
 

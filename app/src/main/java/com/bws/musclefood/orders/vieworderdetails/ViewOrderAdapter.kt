@@ -1,7 +1,6 @@
 package com.bws.musclefood.orders.vieworderdetails
 
 import android.content.Context
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
-import com.bws.musclefood.favourites.FavouritesActivity
-import com.bws.musclefood.orders.searchorder.OrderItem
+import com.bws.musclefood.orders.searchorder.OrderItemList
 
-class ViewOrderAdapter (val mList: ArrayList<OrderItem>): RecyclerView.Adapter<ViewOrderAdapter.ViewHolder>() {
+class ViewOrderAdapter (val mList: ArrayList<OrderItemList>): RecyclerView.Adapter<ViewOrderAdapter.ViewHolder>() {
 
     var context: Context? = null
     var myInt: Int = 1
@@ -56,7 +54,6 @@ class ViewOrderAdapter (val mList: ArrayList<OrderItem>): RecyclerView.Adapter<V
 //        holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
 
-        //var favoriteFlag = itemProduct.FavoriteFlag
 
         if(itemProduct.FavoriteFlag == "Y"){
             holder.imvAddToFavourites.visibility = View.VISIBLE
@@ -66,14 +63,7 @@ class ViewOrderAdapter (val mList: ArrayList<OrderItem>): RecyclerView.Adapter<V
             holder.imvAddToFavouritesHover.visibility = View.VISIBLE
         }
 
-       /* holder.imvAddToFavourites.setOnClickListener() {
-            holder.imvAddToFavourites.visibility = View.GONE
-            holder.imvAddToFavouritesHover.visibility = View.VISIBLE
-        }
-        holder.imvAddToFavouritesHover.setOnClickListener() {
-            holder.imvAddToFavourites.visibility = View.VISIBLE
-            holder.imvAddToFavouritesHover.visibility = View.GONE
-        }*/
+
     }
 
     override fun getItemCount(): Int {

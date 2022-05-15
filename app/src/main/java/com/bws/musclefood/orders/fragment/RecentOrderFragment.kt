@@ -52,8 +52,14 @@ class RecentOrderFragment : Fragment() {
             FactoryProvider(Repository(), requireContext())
         ).get(SearchOrderViewModel::class.java)
 
-        val body = RequestBodies.SearchOrdersBody(preferenceConnector.getValueString("USER_ID").toString(), Constant.fromDate, Constant.toDate, "", "1")
-
+        val body = RequestBodies.SearchOrdersBody(
+            preferenceConnector.getValueString("USER_ID").toString(),
+            "1",
+            "",
+            Constant.fromDate,
+            Constant.toDate,
+            "CURRENT"
+        )
         searchOrderViewModel.getSearchOrder(body)
 
         val loadingDialog = LoadingDialog.progressDialog(requireContext())

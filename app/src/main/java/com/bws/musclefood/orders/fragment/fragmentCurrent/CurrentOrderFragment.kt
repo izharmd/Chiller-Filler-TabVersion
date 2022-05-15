@@ -18,6 +18,8 @@ import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
 import com.bws.musclefood.viewmodels.SearchOrderViewModel
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_order.*
 import kotlinx.android.synthetic.main.fragment_order.view.*
 
 class CurrentOrderFragment : Fragment() {
@@ -47,11 +49,13 @@ class CurrentOrderFragment : Fragment() {
 
         val body = RequestBodies.SearchOrdersBody(
             preferenceConnector.getValueString("USER_ID").toString(),
+            "1",
+            "",
             Constant.fromDate,
             Constant.toDate,
-            "",
-            "1"
+            "CURRENT"
         )
+
 
         searchOrderViewModel.getSearchOrder(body)
 
@@ -69,9 +73,16 @@ class CurrentOrderFragment : Fragment() {
                 }
                 is Resources.Success -> {
                     loadingDialog.dismiss()
-                    val adapter = CurrentOrderAdapter(it.data!!)
-                    view?.recyCurrentOrder!!.adapter = adapter
-                    adapter.notifyDataSetChanged()
+
+                    if(it.data?.size != 0){
+                        val adapter = CurrentOrderAdapter(it.data!!)
+                        view?.recyCurrentOrder!!.adapter = adapter
+                        adapter.notifyDataSetChanged()
+                    }else{
+                        view?.txtNoOrder?.visibility = View.GONE
+                    }
+
+
                 }
                 is Resources.Error -> {
                     loadingDialog.dismiss()

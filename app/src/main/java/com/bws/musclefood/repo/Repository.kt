@@ -55,4 +55,7 @@ class Repository/*(private val db:ContactDatabase)*/{
     suspend fun insertPlaceOrderDetails(body:JSONObject) =
         retrofitInntance.callInsertPlaceOrderDetails(body)
 
+    suspend fun getDeliveryDetails(body:JSONObject) =
+        retrofitInntance.getDeliveryDetails(body)
+
 }

@@ -10,8 +10,6 @@ import kotlinx.android.synthetic.main.tool_bar_address.*
 
 class AddNewAddressActivity:AppCompatActivity() {
 
-    val ine:Int = 1
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -172,7 +172,7 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/favorite_24"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
 
                 <ImageView
@@ -180,7 +180,8 @@
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_gravity="center"
-                    android:src="@drawable/favorite_24" />
+                    android:src="@drawable/favorite_24"
+                    android:visibility="gone"/>
 
 
             </LinearLayout>

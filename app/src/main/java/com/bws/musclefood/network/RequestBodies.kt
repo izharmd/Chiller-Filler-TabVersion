@@ -27,10 +27,13 @@ object RequestBodies {
 
     data class SearchOrdersBody(
         val UserID: String,
+        val StoreID: String,
+        val OrderNumber: String,
         val DateFrom: String,
         val DateTo: String,
-        val OrderNumber: String,
-        val StoreID: String
+        val TabKey: String
+
+
     )
 
     data class UpdateProfileBody(

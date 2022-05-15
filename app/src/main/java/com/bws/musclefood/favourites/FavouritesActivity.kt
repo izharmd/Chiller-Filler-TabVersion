@@ -36,6 +36,7 @@ import kotlinx.android.synthetic.main.tool_bar_cart_details.*
 class FavouritesActivity : AppCompatActivity() {
 
     lateinit var favouriteListViewModel: FavouriteListViewModel
+    lateinit var removeFavoriteViewModel: RemoveFavoriteViewModel
 
     lateinit var preferenceConnector: PreferenceConnector
 
@@ -51,7 +52,7 @@ class FavouritesActivity : AppCompatActivity() {
         txtCartValue.text = Constant.cartItem.toString()
 
 
-        txtLogInSignUp.text = "Favourite Items"
+        txtLogInSignUp.text = "Likes"
 
         recyCartList.layoutManager = LinearLayoutManager(this)
 
@@ -146,5 +147,52 @@ class FavouritesActivity : AppCompatActivity() {
         var itm = txtCartValue.text.toString().toInt()
         val total =  itm - 1
         txtCartValue.text = total.toString()
+    }
+
+
+
+    fun calRemoveFavouritePI(productId: String) {
+
+        removeFavoriteViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(RemoveFavoriteViewModel::class.java)
+
+        val removeFavourite = RequestBodies.RemoveFavoriteProductBody(
+            productId,
+            preferenceConnector.getValueString("USER_ID")!!,
+
+            )
+
+        println("JSON===" + Gson().toJson(removeFavourite))
+        removeFavoriteViewModel.getRemoveFavorite(removeFavourite)
+
+        val loadingDialog = LoadingDialog.progressDialog(this)
+
+        removeFavoriteViewModel.resultRemoveRemoveFavorite.observe(this) {
+
+            when (it) {
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.hide()
+                }
+                is Resources.Success -> {
+
+                    Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
+                    loadingDialog.hide()
+
+                    this.viewModelStore.clear()
+
+                    callFavouriteListPI()
+                }
+
+                is Resources.Error -> {
+                    Toast.makeText(this, "reeeee", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
     }
 }

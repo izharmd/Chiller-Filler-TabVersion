@@ -1,10 +1,8 @@
 package com.bws.musclefood.common
 
-import com.bws.musclefood.favourites.FavouritesModel
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
-import com.bws.musclefood.itemcategory.productlist.ProductListResponse
 import com.bws.musclefood.itemcategory.productlist.ProductListResponseItem
-import com.bws.musclefood.orders.searchorder.OrderItem
+import com.bws.musclefood.orders.searchorder.OrderItemList
 import org.json.JSONArray
 
 class Constant {
@@ -45,7 +43,9 @@ class Constant {
         var subCategoryId = "1"
         var cartItem = 0
 
-        var orderItem = ArrayList<OrderItem>()
+        var orderItem = ArrayList<OrderItemList>()
+
+        var itm = ArrayList<OrderItemList>()
 
         val jsonOrder = JSONArray()
         var deliveryDate = ""

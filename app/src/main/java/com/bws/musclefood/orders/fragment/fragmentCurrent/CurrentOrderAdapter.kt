@@ -2,25 +2,21 @@ package com.bws.musclefood.orders.fragment.fragmentCurrent
 
 import android.content.Context
 import android.content.Intent
-import android.text.SpannableString
-import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.orderItem
-import com.bws.musclefood.interfaceCallback.CallbackInterface
-import com.bws.musclefood.itemcategory.ItemCategoryAdapter
 import com.bws.musclefood.orders.reorder.ReorderActivity
-import com.bws.musclefood.orders.searchorder.OrderItem
+import com.bws.musclefood.orders.searchorder.OrderItemList
 import com.bws.musclefood.orders.searchorder.SearchOrderResponseItem
 import com.bws.musclefood.orders.vieworderdetails.ViewOrderDetailsActivity
 
-class CurrentOrderAdapter(val mList:List<SearchOrderResponseItem>) :RecyclerView.Adapter<CurrentOrderAdapter.ViewHolder>(){
+class CurrentOrderAdapter(val mList:ArrayList<SearchOrderResponseItem>) :RecyclerView.Adapter<CurrentOrderAdapter.ViewHolder>(){
      private var context: Context? = null
 
 
@@ -39,21 +35,10 @@ class CurrentOrderAdapter(val mList:List<SearchOrderResponseItem>) :RecyclerView
         holder.txtOrderValue.text = currentOrder.OrderAmount
         holder.txtOrderStatus.text = currentOrder.OrderStatus
 
-       // val content = SpannableString(currentOrder.deliveryTrack)
-       // content.setSpan(UnderlineSpan(), 0, content.length, 0)
-       // holder.txtTrack.text = content
-
-       // val content2 = SpannableString(currentOrder.orderNumber)
-        //content2.setSpan(UnderlineSpan(), 0, content.length, 0)
-        //holder.txtOrderNumber.text = content2
-
-
-
 
         holder.txtViewOrder.setOnClickListener{
 
-            orderItem = currentOrder.OrderItemList as ArrayList<OrderItem>
-
+           orderItem = currentOrder.OrderItemList
             context?.startActivity(Intent(context,ViewOrderDetailsActivity::class.java))
         }
 

@@ -1,6 +1,6 @@
 package com.bws.musclefood.orders.searchorder
 
-data class OrderItem(
+data class OrderItemList(
     val CateGories: String,
     val FavoriteFlag: String,
     val ItemPrice: String,

@@ -4,7 +4,7 @@ data class SearchOrderResponseItem(
     val OrderAmount: String,
     val OrderDate: String,
     val OrderID: String,
-    val OrderItemList: List<OrderItem>,
+    val OrderItemList: ArrayList<OrderItemList>,
     val OrderNumber: String,
     val OrderStatus: String,
     val StoreID: String,

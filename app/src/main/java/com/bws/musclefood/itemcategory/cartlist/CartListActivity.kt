@@ -23,9 +23,12 @@ import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
+import com.bws.musclefood.viewmodels.AddFavouriteViewModel
 import com.bws.musclefood.viewmodels.CartListViewModel
+import com.bws.musclefood.viewmodels.RemoveFavoriteViewModel
 import com.bws.musclefood.viewmodels.RemoveProductViewModel
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_cart_list.*
 import kotlinx.android.synthetic.main.tool_bar.txtLogInSignUp
 import kotlinx.android.synthetic.main.tool_bar_address.imvBack
@@ -47,6 +50,8 @@ class CartListActivity : AppCompatActivity() {
     lateinit var cartListAdapter: CartListAdapter
 
     lateinit var removeProductViewModel: RemoveProductViewModel
+    lateinit var removeFavoriteViewModel: RemoveFavoriteViewModel
+    lateinit var addFavouriteViewModel: AddFavouriteViewModel
     lateinit var preferenceConnector: PreferenceConnector
 
     private lateinit var content: BasketModel
@@ -63,19 +68,6 @@ class CartListActivity : AppCompatActivity() {
             val tt = content.clientName
         }
 
-        var jsonObj = JSONObject()
-        var jsonarr = JSONArray()
-        jsonObj.put("aaaa","qqwrw")
-        jsonObj.put("bbbb","qqwrw")
-        jsonObj.put("ccccc","qqwrw")
-        var inJoson = JSONObject()
-        inJoson.put("weert","qawert")
-        inJoson.put("eete","qawert")
-        inJoson.put("weuytutyert","qawert")
-        jsonarr.put(inJoson)
-
-        val finalJson = jsonObj.put("itmmm",jsonarr)
-
 
 
 
@@ -85,6 +77,7 @@ class CartListActivity : AppCompatActivity() {
 
         txtOrderNo.visibility = View.GONE
         txtLogInSignUp.text = "Baskets"
+
         recyCartList.layoutManager = LinearLayoutManager(this)
 
         val dividerDrawable =
@@ -277,7 +270,7 @@ class CartListActivity : AppCompatActivity() {
         }
     }
 
-    fun updateCartItem(totalPrice: Double, netDiscount: Double) {
+    fun updateCartItem(totalPrice: Float, netDiscount: Double) {
         val currencyFormatter = NumberFormat.getCurrencyInstance()
         txtTotalPrice.text = "£" + currencyFormatter.format(totalPrice).toString()
         txtTotalPrice.text = "£" + currencyFormatter.format(totalPrice).toString().drop(1)
@@ -295,6 +288,94 @@ class CartListActivity : AppCompatActivity() {
         }
 
 
+    }
+
+
+    fun calRemoveFavouritePI(productId: String) {
+
+        removeFavoriteViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(RemoveFavoriteViewModel::class.java)
+
+        val removeFavourite = RequestBodies.RemoveFavoriteProductBody(
+            productId,
+            preferenceConnector.getValueString("USER_ID")!!,
+
+            )
+
+        println("JSON===" + Gson().toJson(removeFavourite))
+        removeFavoriteViewModel.getRemoveFavorite(removeFavourite)
+
+        val loadingDialog = LoadingDialog.progressDialog(this)
+
+        removeFavoriteViewModel.resultRemoveRemoveFavorite.observe(this) {
+
+            when (it) {
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.hide()
+                }
+                is Resources.Success -> {
+
+                    Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
+                    loadingDialog.hide()
+
+                    this.viewModelStore.clear()
+                }
+
+                is Resources.Error -> {
+                    Toast.makeText(this, "reeeee", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+    }
+
+
+    fun calAddFavouritePI(productId: String) {
+
+        addFavouriteViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(AddFavouriteViewModel::class.java)
+
+        val addFavourite = RequestBodies.AddFavouriteListBody(
+            productId,
+            preferenceConnector.getValueString("USER_ID")!!,
+
+            )
+
+        println("JSON===" + Gson().toJson(addFavourite))
+        addFavouriteViewModel.getAddFavourite(addFavourite)
+
+        val loadingDialog = LoadingDialog.progressDialog(this)
+
+        addFavouriteViewModel.resultAddFavourite.observe(this) {
+
+            when (it) {
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.hide()
+                }
+                is Resources.Success -> {
+
+                    Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
+                    loadingDialog.hide()
+
+                    this.viewModelStore.clear()
+                }
+
+                is Resources.Error -> {
+                    Toast.makeText(this, "reeeee", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
     }
 
     fun cartItemIncrement() {

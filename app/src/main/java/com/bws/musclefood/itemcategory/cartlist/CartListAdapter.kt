@@ -12,7 +12,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
+import com.bws.musclefood.common.Constant
 import com.bws.musclefood.database.AppDatabase
+import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.viewmodels.RemoveProductViewModel
 import kotlinx.coroutines.Dispatchers
@@ -49,6 +51,22 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
         holder.txtTotalQuentity.text = itemProduct.Quantity
         var productImage = itemProduct.ProductImageName
 
+
+
+        var favouritesFlag = itemProduct.FavoriteFlag
+
+        if (favouritesFlag == "Y") {
+            holder.imvAddToFavourites.setImageResource(R.drawable.favorite_24)
+            holder.imvAddToFavourites.visibility = View.VISIBLE
+            holder.imvAddToFavouritesHover.visibility = View.GONE
+        } else {
+            holder.imvAddToFavourites.setImageResource(R.drawable.favorite_hover)
+            holder.imvAddToFavourites.visibility = View.GONE
+            holder.imvAddToFavouritesHover.visibility = View.VISIBLE
+        }
+
+
+
         priceFormatted = itemProduct.FormattedProductTotalPrice.drop(1).toDouble()
 
         totalPriceFormatted = totalPriceFormatted + priceFormatted
@@ -81,14 +99,14 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
 
                 val productQuantity = holder.txtTotalQuentity.text.toString().toInt()
                 val productPrice = holder.txtPrice.text.toString().drop(1).toFloat()
-                totalPrice = totalPrice - productPrice
+                Constant.TotalPrice = Constant.TotalPrice - productPrice
                 System.out.println("Total Price===" + productQuantity)
 
                 val discountPrice = holder.txtDiscountPrice.text.toString().drop(1).toFloat()
                 totalDiscount = (discountPrice - productPrice).toDouble()
                 netDiscount = netDiscount - totalDiscount
 
-                (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+               (context as CartListActivity).updateCartItem(Constant.TotalPrice, netDiscount)
 
                 (context as CartListActivity).cartItemDecrement()
 
@@ -110,14 +128,14 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
 
                 val productQuantity = holder.txtTotalQuentity.text.toString().toInt()
                 val productPrice = holder.txtPrice.text.toString().drop(1).toFloat()
-                totalPrice = totalPrice + productPrice
+                Constant.TotalPrice = Constant.TotalPrice + productPrice
                 System.out.println("Total Price===" + productQuantity)
 
                 val discountPrice = holder.txtDiscountPrice.text.toString().drop(1).toFloat()
                 totalDiscount = (discountPrice - productPrice).toDouble()
                 netDiscount = netDiscount + totalDiscount
 
-                (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+                (context as CartListActivity).updateCartItem(Constant.TotalPrice, netDiscount)
                 (context as CartListActivity).cartItemIncrement()
 
                 GlobalScope.launch(Dispatchers.Main) {
@@ -154,10 +172,12 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
         holder.imvAddToFavourites.setOnClickListener() {
             holder.imvAddToFavourites.visibility = View.GONE
             holder.imvAddToFavouritesHover.visibility = View.VISIBLE
+            (context as CartListActivity).calRemoveFavouritePI(mList[position].ProductID)
         }
         holder.imvAddToFavouritesHover.setOnClickListener() {
             holder.imvAddToFavourites.visibility = View.VISIBLE
             holder.imvAddToFavouritesHover.visibility = View.GONE
+            (context as CartListActivity).calAddFavouritePI(mList[position].ProductID)
         }
 
     }

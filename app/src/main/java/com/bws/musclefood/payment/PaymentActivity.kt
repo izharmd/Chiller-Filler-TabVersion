@@ -153,21 +153,6 @@ class PaymentActivity : AppCompatActivity() {
 
 
         txtPlaceOrder.setOnClickListener() {
-          /*  val jsonObject = JSONObject()
-            jsonObject.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
-            jsonObject.put("SessionID", Constant.sessionID)
-            jsonObject.put("EmailID", preferenceConnector.getValueString("EMAIL_ID").toString())
-            jsonObject.put("PaymentType", "Card")
-            jsonObject.put("DeliveryAddressType", "Office")
-            jsonObject.put("DeliveryDate", Constant.deliveryDate)
-            jsonObject.put("DeliveryTime", Constant.deliveryTime)
-            jsonObject.put("DeliveryCharge", "")
-            jsonObject.put("TotalAmount", Constant.TotalPrice.toString())
-            jsonObject.put("OrderItems", Constant.jsonOrder)
-
-            println("PAYMENT JSON==" + jsonObject)*/
-
-
             var jsonObj = JSONObject()
             var jsonarr = JSONArray()
             jsonObj.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
@@ -202,18 +187,11 @@ class PaymentActivity : AppCompatActivity() {
 
                 }
 
-
                 val finalJson = jsonObj.put("OrderItems", jsonarr)
                 Log.d("ALL DATA===", finalJson.toString())
+                //PLACE ORDER
+                placeOrder(finalJson)
             }
-
-
-
-
-
-            //PLACE ORDER
-          //  placeOrder(jsonObject)
-
         }
 
         txtPlaceOrder2.setOnClickListener() {

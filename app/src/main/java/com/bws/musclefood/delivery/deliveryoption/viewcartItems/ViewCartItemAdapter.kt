@@ -9,10 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
+import com.bws.musclefood.database.tblBaskets
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
 
 
-class ViewCartItemAdapter(val mList: List<CartListModel>) :
+class ViewCartItemAdapter(val mList: List<tblBaskets>) :
     RecyclerView.Adapter<ViewCartItemAdapter.ViewHolder>() {
 
     var context: Context? = null
@@ -27,15 +28,16 @@ class ViewCartItemAdapter(val mList: List<CartListModel>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemProduct = mList[position]
-        holder.txtProductName.text = itemProduct.pName
-       // holder.txtProductQuantity.text = itemProduct.quantity
-        holder.txtPrice.text = itemProduct.price
-       // holder.imvProduct.setImageResource(itemProduct.image)
+        holder.txtProductName.text = itemProduct.ProductName
+        holder.txtProductQuantity.text = itemProduct.ProductSize
+        holder.txtPrice.text = itemProduct.FormattedPrice
+        holder.txtQty.text = "Qty : "+itemProduct.Quantity
+        //holder.imvProduct.setImageResource(itemProduct.image)
 
-        var productImage = itemProduct.image
+        var productImage = itemProduct.ProductImageName
         if (productImage !== null) {
             Glide.with(context!!)
-                .load(itemProduct.image)
+                .load(itemProduct.ProductImageName)
                 .into(holder.imvProduct)
         } else {
             holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)
@@ -50,6 +52,7 @@ class ViewCartItemAdapter(val mList: List<CartListModel>) :
         val txtProductName: TextView = itemView.findViewById(R.id.txtProductName)
         val txtProductQuantity: TextView = itemView.findViewById(R.id.txtProductQuantity)
         val txtPrice: TextView = itemView.findViewById(R.id.txtPrice)
+        val txtQty: TextView = itemView.findViewById(R.id.txtQty)
         val imvProduct: ImageView = itemView.findViewById(R.id.imvProduct)
     }
 }

@@ -18,6 +18,7 @@ import com.bws.musclefood.orders.OrderActivity
 import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.utils.LoadingDialog
+import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
 import com.bws.musclefood.viewmodels.SearchOrderViewModel
 import kotlinx.android.synthetic.main.activity_search_order.*
@@ -33,6 +34,7 @@ class SearchOrderActivity : AppCompatActivity() {
     val dateFormat = "dd-MMM-yyyy"
 
     lateinit var searchOrderViewModel: SearchOrderViewModel
+    lateinit var preferenceConnector: PreferenceConnector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +43,10 @@ class SearchOrderActivity : AppCompatActivity() {
         txtTxtHeader.text = "Search Orders"
         imvSaveaddress.visibility = View.GONE
 
+        preferenceConnector = PreferenceConnector(this)
+
         btnSearchOrder.setOnClickListener() {
-            if (edtOrderNo.text.isNotEmpty() && txtFromDate.text.toString()
+           /* if (edtOrderNo.text.isNotEmpty() && txtFromDate.text.toString()
                     .isEmpty() && txtToDate.text.toString().isEmpty()
             ) {
                 searchOrderNo = edtOrderNo.text.toString()
@@ -59,7 +63,9 @@ class SearchOrderActivity : AppCompatActivity() {
                 startActivity(Intent(this@SearchOrderActivity, OrderActivity::class.java))
             } else {
                 AlertDialog().dialog(this, "Please enter order number or select date")
-            }
+            }*/
+
+            startActivity(Intent(this@SearchOrderActivity, OrderActivity::class.java))
         }
 
 
@@ -137,13 +143,13 @@ class SearchOrderActivity : AppCompatActivity() {
     }
 
 
-    fun searchOrderAPI() {
+   /* fun searchOrderAPI() {
         searchOrderViewModel = ViewModelProvider(
             this,
             FactoryProvider(Repository(), this)
         ).get(SearchOrderViewModel::class.java)
 
-        val body = RequestBodies.SearchOrdersBody("", "", "", "", "")
+        val body = RequestBodies.SearchOrdersBody(preferenceConnector.getValueString("USER_ID").toString(), "1", "", "3 March 2022", "15 May 2022","CURRENT")
 
         searchOrderViewModel.getSearchOrder(body)
 
@@ -167,5 +173,5 @@ class SearchOrderActivity : AppCompatActivity() {
             }
         }
 
-    }
+    }*/
 }

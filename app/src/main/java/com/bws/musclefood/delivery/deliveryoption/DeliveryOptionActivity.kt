@@ -5,12 +5,14 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
@@ -18,24 +20,43 @@ import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.deliveryDate
 import com.bws.musclefood.delivery.choosedeliveryaddress.ChooseDeliveryAddressActivity
 import com.bws.musclefood.delivery.deliveryoption.viewcartItems.ViewCartItemAdapter
+import com.bws.musclefood.delivery.deliveryoption.viewcartItems.ViewItemActivity
+import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.payment.PaymentActivity
+import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.utils.AlertDialog
+import com.bws.musclefood.utils.LoadingDialog
+import com.bws.musclefood.utils.PreferenceConnector
+import com.bws.musclefood.utils.Resources
+import com.bws.musclefood.viewmodels.DeliveryOptionViewModel
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
+import com.google.gson.Gson
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
+import cz.msebera.android.httpclient.Header
+import cz.msebera.android.httpclient.HttpEntity
+import cz.msebera.android.httpclient.entity.StringEntity
 import kotlinx.android.synthetic.main.accitivity_delivery_option.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     val myCalendar = Calendar.getInstance()
-    var year:Int = 0
-    var month:Int = 0
-    var day:Int = 0
+    var year: Int = 0
+    var month: Int = 0
+    var day: Int = 0
+    lateinit var deliveryOptionViewModel: DeliveryOptionViewModel
+    lateinit var preferenceConnector: PreferenceConnector
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.accitivity_delivery_option)
         supportActionBar?.hide()
+
+        preferenceConnector = PreferenceConnector(this)
         imvSaveaddress.visibility = View.GONE
         txtTxtHeader.text = "Delivery Options"
 
@@ -63,7 +84,7 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             day = myCalendar[Calendar.DAY_OF_MONTH]
             datePicker = DatePickerDialog(this@DeliveryOptionActivity, date, year, month, day)
             datePicker.datePicker.minDate = System.currentTimeMillis()
-           // datePicker.datePicker.calendarViewShown = false
+            // datePicker.datePicker.calendarViewShown = false
             datePicker.show()
         }
 
@@ -79,7 +100,7 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         }
 
         txtViewAllItems.setOnClickListener {
-            startActivity(Intent(this@DeliveryOptionActivity, CartListActivity::class.java))
+            startActivity(Intent(this@DeliveryOptionActivity, ViewItemActivity::class.java))
         }
 
         txtProceedToPay.setOnClickListener {
@@ -105,6 +126,14 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spDeliveryTime.adapter = adapter
         spDeliveryTime.onItemSelectedListener = this
+
+//GET ALL SAVED ADDRESS
+       // getDeliveryDetails()
+
+        var body = JSONObject()
+        body.put("UserID", preferenceConnector.getValueString("USER_ID"))
+
+        placeOrder(body)
     }
 
 
@@ -117,34 +146,115 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
     }
 
-    fun dialogViewProduct(pName: String) {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.dialog_view_cart_item)
-        dialog.getWindow()
-            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        val recyQuentity: RecyclerView = dialog.findViewById(R.id.recyQuentity)
-        val imv_cross: ImageView = dialog.findViewById(R.id.imv_cross)
-        val txtProductName: TextView = dialog.findViewById(R.id.txtProductName)
-        txtProductName.text = Constant.addDataToCart.size.toString() + " Items" + "Total : £ 450.90"
+    fun getDeliveryDetails() {
 
-        recyQuentity.layoutManager = LinearLayoutManager(this)
-
-        val dividerDrawable =
-            ContextCompat.getDrawable(this, R.drawable.line_divider)
-        recyQuentity.addItemDecoration(DividerItemDecoration(dividerDrawable))
+        deliveryOptionViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(DeliveryOptionViewModel::class.java)
 
 
-        val adapterTop = ViewCartItemAdapter(Constant.addDataToCart)
-        recyQuentity.adapter = adapterTop
-        adapterTop.notifyDataSetChanged()
+        var body = JSONObject()
+        body.put("UserID", preferenceConnector.getValueString("USER_ID"))
 
-        imv_cross.setOnClickListener() {
-            dialog.dismiss()
+        deliveryOptionViewModel.getDeliveryList(body)
+        val loadingDialog = LoadingDialog.progressDialog(this)
+
+        deliveryOptionViewModel.addressList.observe(this) {
+
+            when (it) {
+
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.dismiss()
+                }
+                is Resources.Success -> {
+                    val size1 = it.data!![0]?.DeliveryAddressLine1
+                    val size = it.data?.size
+                    if (it.data?.size != 0) {
+                        for (i in 0 until size!!) {
+                            val defaultAddress = it.data?.get(i).DefaultAddressFlag
+                            if (defaultAddress == "Y") {
+                                val fullAddress = it.data?.get(i).DeliveryAddressName + " " +
+                                        it.data?.get(i).DeliveryAddressHouseNumber + " " +
+                                        it.data?.get(i).DeliveryAddressLine1 + " " +
+                                        it.data?.get(i).DeliveryAddressLine2 + " " +
+                                        it.data?.get(i).DeliveryCity + " " +
+                                        it.data?.get(i).DeliveryPostcode + " " +
+                                        it.data?.get(i).DeliveryContactNumber
+                                txtFullAddress.text = fullAddress
+                                txtDeliveredTo.text = "Delivery to : " + "Office(Default)"
+
+                                txtAddAddress.visibility = View.GONE
+                                txtChangeAddress.visibility = View.VISIBLE
+                                break
+                            }
+                        }
+                    } else {
+                        txtAddAddress.visibility = View.VISIBLE
+                        txtChangeAddress.visibility = View.GONE
+
+                    }
+                    loadingDialog.dismiss()
+                }
+                is Resources.Error -> {
+                    loadingDialog.dismiss()
+                }
+            }
         }
+    }
 
-        dialog.show()
+
+
+    fun placeOrder(body: JSONObject) {
+        val loadingDialog = LoadingDialog.progressDialog(this)
+        val client = AsyncHttpClient()
+        val entity: HttpEntity = try {
+            StringEntity(body.toString(), "UTF-8")
+        } catch (e: IllegalArgumentException) {
+            Log.d("HTTP", "StringEntity: IllegalArgumentException")
+            return
+        }
+        val contentType = "application/json; charset=utf-8"
+        client.post(
+            this,
+            Constant.BASE_URL + "GetDeliveryDetails",
+            entity,
+            contentType,
+            object : AsyncHttpResponseHandler() {
+
+                override fun onStart() {
+                    super.onStart()
+                    loadingDialog.show()
+                }
+
+                override fun onSuccess(
+                    statusCode: Int,
+                    headers: Array<Header>,
+                    responseBody: ByteArray
+                ) {
+                    val asyncResult = String(responseBody)
+
+
+                }
+
+                override fun onFailure(
+                    statusCode: Int,
+                    headers: Array<Header>,
+                    responseBody: ByteArray,
+                    error: Throwable
+                ) {
+                    Toast.makeText(this@DeliveryOptionActivity, statusCode.toString(), Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                override fun onFinish() {
+                    super.onFinish()
+                    loadingDialog.dismiss()
+                }
+            })
     }
 }

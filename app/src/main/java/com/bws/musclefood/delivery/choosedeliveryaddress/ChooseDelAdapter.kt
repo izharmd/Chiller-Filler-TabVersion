@@ -39,10 +39,10 @@ class ChooseDelAdapter(val mList: List<ChooseDelModel>) :
         }
 
 
-        holder.rdDefaultAddress.setOnClickListener(){
-            if (position == 0){
+        holder.itemView.setOnClickListener{
 
-            }
+            holder.rdDefaultAddress.isChecked = true
+
         }
 
         holder.txtEditAddress.setOnClickListener {
@@ -61,5 +61,6 @@ class ChooseDelAdapter(val mList: List<ChooseDelModel>) :
         val txtFullAddress: TextView = itemView.findViewById(R.id.txtFullAddress)
         val txtPhone: TextView = itemView.findViewById(R.id.txtPhone)
         val txtEditAddress: TextView = itemView.findViewById(R.id.txtEditAddress)
+
     }
 }

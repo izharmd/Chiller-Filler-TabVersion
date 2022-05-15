@@ -3,6 +3,7 @@ package com.bws.musclefood.itemcategory.basket
 import android.app.Activity
 import android.content.Context
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,9 @@ import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.cartlist.CartListResponseItem
 import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.viewmodels.RemoveProductViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class BasketAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListResponseItem>) :
     RecyclerView.Adapter<BasketAdapter.ViewHolder>() {
@@ -57,12 +61,6 @@ class BasketAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListResp
         } else {
             holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)
         }
-
-
-        holder.txtDeleteProduct.setOnClickListener {
-          //  (context as CartListActivity).removeProduct(itemProduct.ProductID)
-        }
-
 
         holder.txtDecrement.setOnClickListener() {
             myInt = holder.txtTotalQuentity.text.toString().toInt()
@@ -133,13 +131,19 @@ class BasketAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListResp
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
 
 
-        holder.imvAddToFavourites.setOnClickListener() {
+        holder.imvAddToFavourites.setOnClickListener {
             holder.imvAddToFavourites.visibility = View.GONE
             holder.imvAddToFavouritesHover.visibility = View.VISIBLE
+            (context as BasketsActivity).calRemoveFavouritePI(mList[position].ProductID)
         }
         holder.imvAddToFavouritesHover.setOnClickListener() {
             holder.imvAddToFavourites.visibility = View.VISIBLE
             holder.imvAddToFavouritesHover.visibility = View.GONE
+            (context as BasketsActivity).calAddFavouritePI(mList[position].ProductID)
+        }
+
+        holder.txtDeleteProduct.setOnClickListener {
+            (context as BasketsActivity).removeProduct(itemProduct.ProductID)
         }
 
     }

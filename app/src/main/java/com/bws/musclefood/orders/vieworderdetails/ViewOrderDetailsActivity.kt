@@ -14,7 +14,9 @@ import kotlinx.android.synthetic.main.activity_cart_list.searchView1
 import kotlinx.android.synthetic.main.activity_view_order.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.*
+import kotlinx.android.synthetic.main.tool_bar_search_view.imvSearch
 import kotlinx.android.synthetic.main.tool_bar_search_view.txtLogInSignUp
+import kotlinx.android.synthetic.main.tool_bar_view_order.*
 
 class ViewOrderDetailsActivity:AppCompatActivity() {
 
@@ -35,8 +37,6 @@ class ViewOrderDetailsActivity:AppCompatActivity() {
             ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
         recyViewOrder.addItemDecoration(DividerItemDecoration(dividerDrawable))
 
-      //  arrViewOrder.add(ViewOrderModel(R.drawable.beef1,"Heritage Fillet Steaks","2","12.00","10.00","2.00"))
-       // arrViewOrder.add(ViewOrderModel(R.drawable.cheken1,"Supergreen Stuffed Chicken Breastd","3","4.50","3.00","1.50"))
 
         val adapter = ViewOrderAdapter(Constant.orderItem)
         recyViewOrder.adapter = adapter
@@ -44,6 +44,10 @@ class ViewOrderDetailsActivity:AppCompatActivity() {
 
         imvSearch.setOnClickListener(){
             searchView1.visibility = View.VISIBLE
+        }
+
+        imvBack.setOnClickListener {
+            finish()
         }
     }
 }
