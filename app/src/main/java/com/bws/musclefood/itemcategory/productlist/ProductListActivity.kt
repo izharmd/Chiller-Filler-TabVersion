@@ -188,7 +188,7 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
                 } else if (pos == 1) {
                     startActivity(Intent(this@ProductListActivity, SearchOrderActivity::class.java))
                 } else if (pos == 2) {
-                    startActivity(Intent(this@ProductListActivity, BasketsActivity::class.java))
+                    startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
                 } else if (pos == 3) {
                     // startActivity(Intent(this@ProductListActivity,EnotesActivity::class.java))
                     startActivity(Intent(this@ProductListActivity, FavouritesActivity::class.java))

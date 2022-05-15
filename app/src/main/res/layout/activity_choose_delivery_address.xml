@@ -58,7 +58,8 @@
         app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="@dimen/_2sdp"
         app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -152,7 +153,8 @@
         app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="@dimen/_2sdp"
         app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

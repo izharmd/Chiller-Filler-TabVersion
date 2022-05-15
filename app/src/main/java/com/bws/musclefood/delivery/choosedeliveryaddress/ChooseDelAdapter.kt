@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ class ChooseDelAdapter(val mList: List<ChooseDelModel>) :
     RecyclerView.Adapter<ChooseDelAdapter.ViewHolder>() {
 
     var context: Context? = null
-
+    private var lastCheckedRB: RadioButton? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context)
@@ -34,16 +35,17 @@ class ChooseDelAdapter(val mList: List<ChooseDelModel>) :
         holder.txtFullAddress.text = itemProduct.fullAddress
         holder.txtPhone.text = itemProduct.phoneNo
 
-        if(position == 0){
-           holder.rdDefaultAddress.isChecked = true
-        }
-
 
         holder.itemView.setOnClickListener{
 
             holder.rdDefaultAddress.isChecked = true
+            if (lastCheckedRB!=null){
+                lastCheckedRB?.isChecked=false
+            }
+            lastCheckedRB = holder.rdDefaultAddress
 
         }
+
 
         holder.txtEditAddress.setOnClickListener {
           context?.startActivity(Intent(context,AddNewAddressActivity::class.java))

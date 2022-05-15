@@ -50,7 +50,7 @@
                     android:gravity="center"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
-                    android:text="Request sent successfully\nPlease wait for activation "
+                    android:text=" "
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp" />
 

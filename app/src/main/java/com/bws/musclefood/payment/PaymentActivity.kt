@@ -163,7 +163,7 @@ class PaymentActivity : AppCompatActivity() {
             jsonObj.put("DeliveryDate", Constant.deliveryDate)
             jsonObj.put("DeliveryTime", Constant.deliveryTime)
             jsonObj.put("DeliveryCharge", "")
-            jsonObj.put("DeliverySlot", "Pre 12")
+            jsonObj.put("DeliverySlot", "")
             jsonObj.put("CardNumber", edtCardNO.text.toString())
             jsonObj.put("OnCardName", edtCardName.text.toString())
             jsonObj.put("CardCVVNumber", edtCVVNo.text.toString())
@@ -176,13 +176,16 @@ class PaymentActivity : AppCompatActivity() {
                 val productList = db.contactDao().getProductItem()
 
                 for (i in productList.indices) {
+
+                    val totalPrice = productList[i].FormattedProductTotalPrice.drop(2).toFloat() * productList[i].Quantity.toInt()
+
                     var innerJoson = JSONObject()
                     innerJoson.put("CartItemID", productList[i].CartItemID)
                     innerJoson.put("ProductID", productList[i].ProductID)
                     innerJoson.put("ProductName", productList[i].ProductName)
                     innerJoson.put("ProductQuantity", productList[i].Quantity)
                     innerJoson.put("ProductPrice", productList[i].Price)
-                    innerJoson.put("ProductTotalPrice", productList[i].FormattedProductTotalPrice)
+                    innerJoson.put("ProductTotalPrice", totalPrice)
                     jsonarr.put(innerJoson)
 
                 }

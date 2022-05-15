@@ -58,4 +58,8 @@ class Repository/*(private val db:ContactDatabase)*/{
     suspend fun getDeliveryDetails(body:JSONObject) =
         retrofitInntance.getDeliveryDetails(body)
 
+
+    suspend fun addNewAddress(body: RequestBodies.AddEditDeliveryDetails) =
+        retrofitInntance.addNewAddress(body)
+
 }
