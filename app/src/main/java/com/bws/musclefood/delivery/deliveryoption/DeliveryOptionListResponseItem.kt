@@ -8,9 +8,9 @@ data class DeliveryOptionListResponseItem(
     val DeliveryAddressName: String,
     val DeliveryCity: String,
     val DeliveryContactNumber: String,
-    val DeliveryDate: Any,
+    val DeliveryDate: String,
     val DeliveryPostcode: String,
     val DeliverySlot: String,
     val ID: String,
-    val UserID: Any
+    val UserID: String
 )

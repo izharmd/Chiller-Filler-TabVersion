@@ -22,6 +22,9 @@
         android:theme="@style/Theme.MuscleFood"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".payment.PaymentDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".delivery.deliveryoption.viewcartItems.ViewItemActivity"
             android:exported="false" />
         <activity

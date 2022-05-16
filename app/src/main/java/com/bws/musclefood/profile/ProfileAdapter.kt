@@ -12,6 +12,7 @@ import com.bws.musclefood.common.Constant
 import com.bws.musclefood.delivery.choosedeliveryaddress.ChooseDeliveryAddressActivity
 import com.bws.musclefood.orders.searchorder.SearchOrderActivity
 import com.bws.musclefood.payment.PaymentActivity
+import com.bws.musclefood.payment.PaymentDetailsActivity
 
 class ProfileAdapter(val mList: List<ProfileModel>) :
     RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
@@ -43,7 +44,7 @@ class ProfileAdapter(val mList: List<ProfileModel>) :
             }else if(position == 3){
                 Constant.hidePaymentSection = "YES"
                 Constant.paymentDetails = "Payment Details"
-                context?.startActivity(Intent(context,PaymentActivity::class.java))
+                context?.startActivity(Intent(context,PaymentDetailsActivity::class.java))
             }else if(position == 4){
                 context?.startActivity(Intent(context,ContactPreferenceActivity::class.java))
             }else if(position == 5){

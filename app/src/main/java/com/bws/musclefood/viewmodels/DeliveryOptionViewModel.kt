@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bws.musclefood.R
+import com.bws.musclefood.delivery.choosedeliveryaddress.DeliveryAddress
 import com.bws.musclefood.delivery.deliveryoption.DeliveryOptionListResponse
 import com.bws.musclefood.network.NetworkUtils
 import com.bws.musclefood.network.RequestBodies
@@ -19,12 +20,12 @@ class DeliveryOptionViewModel(val repository: Repository,val context: Context):V
 
     val addressList = MutableLiveData<Resources<DeliveryOptionListResponse>>()
 
-    fun getDeliveryList(body: JSONObject) = viewModelScope.launch {
+    fun getDeliveryList(body: RequestBodies.GetDeliveryDetails) = viewModelScope.launch {
 
         calGetDeliveryDetails(body)
     }
 
-    private suspend fun calGetDeliveryDetails(jsonBody: JSONObject) {
+    private suspend fun calGetDeliveryDetails(jsonBody: RequestBodies.GetDeliveryDetails) {
         if (NetworkUtils.isNetworkAvailable(context)) {
             addressList.postValue(Resources.Loading(loadingMessage = context.resources.getString(R.string.LOADING_PLEASE_WAIT)))
             try {

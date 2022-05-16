@@ -62,6 +62,10 @@ class FactoryProvider(private val repository: Repository, val context: Context) 
         if (modelClass.isAssignableFrom(AddNewAddressViewModel::class.java)) {
             return AddNewAddressViewModel(repository, context) as T
         }
+
+        if (modelClass.isAssignableFrom(PaymentDetailsViewModel::class.java)) {
+            return PaymentDetailsViewModel(repository, context) as T
+        }
         throw IllegalArgumentException("Unknown class name")
     }
 }

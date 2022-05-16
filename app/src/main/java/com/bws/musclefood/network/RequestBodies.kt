@@ -47,6 +47,10 @@ object RequestBodies {
         val MobilePhone: String
     )
 
+    data class GetDeliveryDetails(
+        val UserID: String,
+    )
+
     data class GetUserProfileDetailsBody(
         val UserID: String,
     )
@@ -102,7 +106,6 @@ object RequestBodies {
     )
 
 
-
     data class AddEditDeliveryDetails(
         val ID: String,
         val UserID: String,
@@ -116,6 +119,17 @@ object RequestBodies {
         val DeliveryDate: String,
         val DeliverySlot: String,
         val DefaultAddressFlag: String
+    )
+
+    data class AddEditPaymentDetails(
+        val ID: String,
+        val UserID: String,
+        val PaymentType: String,
+        val CardNumber: String,
+        val OnCardName: String,
+        val CardCVVNumber: String,
+        val CardExpiryDate: String,
+        val PaymentGatewayID: String
     )
 
 }

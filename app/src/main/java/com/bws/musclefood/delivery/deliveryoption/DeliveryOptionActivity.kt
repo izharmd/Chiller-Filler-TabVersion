@@ -23,6 +23,7 @@ import com.bws.musclefood.delivery.deliveryoption.viewcartItems.ViewCartItemAdap
 import com.bws.musclefood.delivery.deliveryoption.viewcartItems.ViewItemActivity
 import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
+import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.payment.PaymentActivity
 import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.utils.AlertDialog
@@ -128,12 +129,13 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         spDeliveryTime.onItemSelectedListener = this
 
 //GET ALL SAVED ADDRESS
-       // getDeliveryDetails()
+        // getDeliveryDetails()
 
         var body = JSONObject()
         body.put("UserID", preferenceConnector.getValueString("USER_ID"))
 
-        placeOrder(body)
+        // placeOrder(body)
+        getDeliveryDetails()
     }
 
 
@@ -155,8 +157,8 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         ).get(DeliveryOptionViewModel::class.java)
 
 
-        var body = JSONObject()
-        body.put("UserID", preferenceConnector.getValueString("USER_ID"))
+        var body = RequestBodies.GetDeliveryDetails("2")
+        // body.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
 
         deliveryOptionViewModel.getDeliveryList(body)
         val loadingDialog = LoadingDialog.progressDialog(this)
@@ -172,32 +174,17 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                     loadingDialog.dismiss()
                 }
                 is Resources.Success -> {
-                    val size1 = it.data!![0]?.DeliveryAddressLine1
-                    val size = it.data?.size
-                    if (it.data?.size != 0) {
-                        for (i in 0 until size!!) {
-                            val defaultAddress = it.data?.get(i).DefaultAddressFlag
-                            if (defaultAddress == "Y") {
-                                val fullAddress = it.data?.get(i).DeliveryAddressName + " " +
-                                        it.data?.get(i).DeliveryAddressHouseNumber + " " +
-                                        it.data?.get(i).DeliveryAddressLine1 + " " +
-                                        it.data?.get(i).DeliveryAddressLine2 + " " +
-                                        it.data?.get(i).DeliveryCity + " " +
-                                        it.data?.get(i).DeliveryPostcode + " " +
-                                        it.data?.get(i).DeliveryContactNumber
-                                txtFullAddress.text = fullAddress
-                                txtDeliveredTo.text = "Delivery to : " + "Office(Default)"
+                    val fullAddress = it.data?.get(0)?.DeliveryAddressHouseNumber + " " +
+                            it.data?.get(0)?.DeliveryAddressLine1 + " " +
+                            it.data?.get(0)?.DeliveryAddressLine2 + " " +
+                            it.data?.get(0)?.DeliveryCity + " " +
+                            it.data?.get(0)?.DeliveryPostcode + " " +
+                            it.data?.get(0)?.DeliveryContactNumber
+                    txtFullAddress.text = fullAddress
+                    txtDeliveredTo.text = "Delivery to : " + it.data?.get(0)?.DeliveryAddressHouseNumber +"(Default)"
 
-                                txtAddAddress.visibility = View.GONE
-                                txtChangeAddress.visibility = View.VISIBLE
-                                break
-                            }
-                        }
-                    } else {
-                        txtAddAddress.visibility = View.VISIBLE
-                        txtChangeAddress.visibility = View.GONE
-
-                    }
+                    txtAddAddress.visibility = View.GONE
+                    txtChangeAddress.visibility = View.VISIBLE
                     loadingDialog.dismiss()
                 }
                 is Resources.Error -> {
@@ -206,7 +193,6 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             }
         }
     }
-
 
 
     fun placeOrder(body: JSONObject) {
@@ -247,7 +233,11 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                     responseBody: ByteArray,
                     error: Throwable
                 ) {
-                    Toast.makeText(this@DeliveryOptionActivity, statusCode.toString(), Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        this@DeliveryOptionActivity,
+                        statusCode.toString(),
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
 

@@ -6,23 +6,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bws.musclefood.R
-import com.bws.musclefood.delivery.AddNewAddresResponse
 import com.bws.musclefood.network.NetworkUtils
 import com.bws.musclefood.network.RequestBodies
+import com.bws.musclefood.payment.PaymentDetailsResponse
 import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.utils.Resources
 import kotlinx.coroutines.launch
 
-class AddNewAddressViewModel(val repository: Repository,val context: Context):ViewModel() {
+class PaymentDetailsViewModel(val repository: Repository,val context: Context):ViewModel() {
 
-    var response  = MutableLiveData<Resources<AddNewAddresResponse>>()
+    var response = MutableLiveData<Resources<PaymentDetailsResponse>>()
 
-    fun AddEditDeliveryDetails(body: RequestBodies.AddEditDeliveryDetails) = viewModelScope.launch {
-        addNewAddress(body)
+
+    fun getPaymentDetails(body:RequestBodies.AddEditPaymentDetails) = viewModelScope.launch {
+        callAddEditPaymentDetails(body)
     }
 
-
-    suspend fun addNewAddress(body: RequestBodies.AddEditDeliveryDetails) {
+    suspend fun callAddEditPaymentDetails(body: RequestBodies.AddEditPaymentDetails) {
         if (NetworkUtils.isNetworkAvailable(context)) {
             response.postValue(
                 Resources.Loading(
@@ -32,7 +32,7 @@ class AddNewAddressViewModel(val repository: Repository,val context: Context):Vi
                 )
             )
             try {
-                val result = repository.addNewAddress(body)
+                val result = repository.AddEditPaymentDetails(body)
                 response.postValue(Resources.Success(result.body()))
             } catch (e: Exception) {
                 Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
@@ -42,5 +42,4 @@ class AddNewAddressViewModel(val repository: Repository,val context: Context):Vi
             response.postValue(Resources.NoInternet(context.resources.getString(R.string.NO_INTERNET_CONNECTION)))
         }
     }
-
 }

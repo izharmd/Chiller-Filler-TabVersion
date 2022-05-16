@@ -27,8 +27,7 @@ import com.bws.musclefood.common.Constant.Companion.totalCartItem
 import com.bws.musclefood.database.AppDatabase
 import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.favourites.FavouritesActivity
-import com.bws.musclefood.interfaceCallback.CallbackInterface
-import com.bws.musclefood.itemcategory.basket.BasketsActivity
+import com.bws.musclefood.myinterface.CallbackInterface
 import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.itemcategory.productlist.categorytop.TopCategoryAdapter
 import com.bws.musclefood.network.RequestBodies

@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.factory.FactoryProvider
-import com.bws.musclefood.interfaceCallback.CallbackInterface
+import com.bws.musclefood.myinterface.CallbackInterface
 import com.bws.musclefood.itemcategory.productlist.ProductListResponseItem
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
@@ -30,15 +30,11 @@ import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
-import com.bws.musclefood.viewmodels.ProductDetailsViewModel
 import com.bws.musclefood.viewmodels.UpdateProfileViewModel
 import com.bws.musclefood.viewmodels.UserProfileDetailsModel
 
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_profile.spTitle
-import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.activity_sign_up.edtCompName
-import kotlinx.android.synthetic.main.dialog_forgot_password.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
 
 class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,CallbackInterface {

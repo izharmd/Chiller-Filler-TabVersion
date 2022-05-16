@@ -20,7 +20,7 @@ import com.bws.musclefood.common.Constant.Companion.cartItem
 import com.bws.musclefood.common.Constant.Companion.hashMap
 import com.bws.musclefood.common.Constant.Companion.quantity
 import com.bws.musclefood.common.Constant.Companion.totalCartItem
-import com.bws.musclefood.interfaceCallback.CallbackInterface
+import com.bws.musclefood.myinterface.CallbackInterface
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
 import com.bws.musclefood.itemcategory.productlist.addquentity.QuentityAdapater
 import com.bws.musclefood.itemcategory.productlist.addquentity.QuentityModel

@@ -63,7 +63,7 @@
             android:text="Mr James"
 
             android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp"></TextView>
+            android:textSize="@dimen/_10sdp"/>
 
 
         <TextView
@@ -86,7 +86,7 @@
 
         <TextView
             android:id="@+id/txtEditAddress"
-            android:layout_width="@dimen/_60sdp"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_gravity="right"
             android:layout_marginLeft="@dimen/_25sdp"

@@ -1,5 +1,6 @@
 package com.bws.musclefood.common
 
+import com.bws.musclefood.delivery.choosedeliveryaddress.ChooseDelModel
 import com.bws.musclefood.itemcategory.cartlist.CartListModel
 import com.bws.musclefood.itemcategory.productlist.ProductListResponseItem
 import com.bws.musclefood.orders.searchorder.OrderItemList
@@ -45,13 +46,15 @@ class Constant {
 
         var orderItem = ArrayList<OrderItemList>()
 
-        var itm = ArrayList<OrderItemList>()
 
         val jsonOrder = JSONArray()
         var deliveryDate = ""
         var deliveryTime = ""
         var TotalPrice = 0f
         var row_index = 0
+
+        var addressType = "Edit"
+        var dFaultFlag = "Y"
 
     }
 }

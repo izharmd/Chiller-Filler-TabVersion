@@ -6,22 +6,27 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.common.Constant.Companion.INSERTPLACEORDERDETAILS
 import com.bws.musclefood.common.Constant.Companion.totalBasketValue
 import com.bws.musclefood.database.AppDatabase
+import com.bws.musclefood.delivery.choosedeliveryaddress.ChooseDelAdapter
+import com.bws.musclefood.delivery.choosedeliveryaddress.ChooseDelModel
+import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.itemcategory.productlist.ProductListActivity
-import com.bws.musclefood.utils.AlertDialog
-import com.bws.musclefood.utils.CreditCardTextFormatter
-import com.bws.musclefood.utils.LoadingDialog
-import com.bws.musclefood.utils.PreferenceConnector
+import com.bws.musclefood.network.RequestBodies
+import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.utils.*
+import com.bws.musclefood.viewmodels.DeliveryOptionViewModel
 import com.bws.musclefood.viewmodels.OrderPlaceViewModel
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
 import cz.msebera.android.httpclient.HttpEntity
 import cz.msebera.android.httpclient.entity.StringEntity
+import kotlinx.android.synthetic.main.activity_choose_delivery_address.*
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +40,7 @@ class PaymentActivity : AppCompatActivity() {
     lateinit var preferenceConnector: PreferenceConnector
 
     lateinit var db: AppDatabase
+    lateinit var deliveryOptionViewModel: DeliveryOptionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +48,6 @@ class PaymentActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         db = AppDatabase(this)
-
-        // edtCard.addTextChangedListener(CreditCardTextFormatter())
 
         preferenceConnector = PreferenceConnector(this)
 
@@ -53,7 +57,7 @@ class PaymentActivity : AppCompatActivity() {
         txtBasketValue.text = "£$totalBasketValue"
         txtTotalPayable.text = "£$totalBasketValue"
 
-
+        getDeliveryDetails()
 
         rdDebitCredit.setOnClickListener() {
             rdDebitCredit.isChecked = true
@@ -159,7 +163,7 @@ class PaymentActivity : AppCompatActivity() {
             jsonObj.put("SessionID", Constant.sessionID)
             jsonObj.put("EmailID", preferenceConnector.getValueString("EMAIL_ID").toString())
             jsonObj.put("PaymentType", "Card")
-            jsonObj.put("DeliveryAddressType", "Office")
+            jsonObj.put("DeliveryAddressType", Constant.dFaultFlag)
             jsonObj.put("DeliveryDate", Constant.deliveryDate)
             jsonObj.put("DeliveryTime", Constant.deliveryTime)
             jsonObj.put("DeliveryCharge", "")
@@ -289,5 +293,54 @@ class PaymentActivity : AppCompatActivity() {
                     loadingDialog.dismiss()
                 }
             })
+    }
+
+
+
+    fun getDeliveryDetails() {
+
+        deliveryOptionViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(DeliveryOptionViewModel::class.java)
+
+        var body = RequestBodies.GetDeliveryDetails(preferenceConnector.getValueString("USER_ID").toString())
+
+        deliveryOptionViewModel.getDeliveryList(body)
+        val loadingDialog = LoadingDialog.progressDialog(this)
+
+        deliveryOptionViewModel.addressList.observe(this) {
+
+            when (it) {
+
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.dismiss()
+                }
+                is Resources.Success -> {
+                    val data = ArrayList<ChooseDelModel>()
+                    val size = it.data?.size!!
+                    val listData = it.data!!
+                    for (i in 0 until size) {
+                       val default = listData[i].DefaultAddressFlag
+                        if(default == "Y"){
+                            Constant.dFaultFlag = listData[i].DefaultAddressFlag
+                            break
+                        }
+                    }
+
+                    val adapter = ChooseDelAdapter(data)
+                    recyAddress.adapter = adapter
+                    adapter.notifyDataSetChanged()
+                    loadingDialog.dismiss()
+
+                }
+                is Resources.Error -> {
+                    loadingDialog.dismiss()
+                }
+            }
+        }
     }
 }

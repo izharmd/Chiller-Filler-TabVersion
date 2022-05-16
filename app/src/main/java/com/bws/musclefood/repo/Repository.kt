@@ -55,11 +55,14 @@ class Repository/*(private val db:ContactDatabase)*/{
     suspend fun insertPlaceOrderDetails(body:JSONObject) =
         retrofitInntance.callInsertPlaceOrderDetails(body)
 
-    suspend fun getDeliveryDetails(body:JSONObject) =
+    suspend fun getDeliveryDetails(body:RequestBodies.GetDeliveryDetails) =
         retrofitInntance.getDeliveryDetails(body)
 
 
     suspend fun addNewAddress(body: RequestBodies.AddEditDeliveryDetails) =
         retrofitInntance.addNewAddress(body)
+
+    suspend fun AddEditPaymentDetails(body: RequestBodies.AddEditPaymentDetails) =
+        retrofitInntance.AddEditPaymentDetails(body)
 
 }
