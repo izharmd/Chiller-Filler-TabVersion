@@ -60,7 +60,6 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         txtTxtHeader.text = "Profile"
 
         preferenceConnector = PreferenceConnector(this)
-
         edtFname.setText(preferenceConnector.getValueString("FIRST_NAME"))
         edtLastNameProfile.setText(preferenceConnector.getValueString("LAST_NAME"))
         edtEmailProfile.setText(preferenceConnector.getValueString("EMAIL_ID"))

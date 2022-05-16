@@ -37,6 +37,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <EditText
+                    android:id="@+id/edtTitle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
@@ -100,6 +101,7 @@
 
 
                     <EditText
+                        android:id="@+id/edtFirstName"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginLeft="@dimen/_10sdp"
@@ -117,6 +119,7 @@
                     </EditText>
 
                     <EditText
+                        android:id="@+id/edtLastName"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
@@ -150,6 +153,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <EditText
+                    android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
@@ -235,6 +239,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <EditText
+                    android:id="@+id/edtPhoneNo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
@@ -351,6 +356,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/txtUpdatePrefrence"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
