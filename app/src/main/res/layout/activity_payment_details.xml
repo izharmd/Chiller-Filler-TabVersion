@@ -305,7 +305,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/round_payment_view"
-                    android:hint="XXXX XXXX 1267"
+                    android:hint="XXXX XXXX XXXX 1267"
                     android:inputType="number"
                     android:paddingLeft="@dimen/_5sdp"
                     android:textColorHint="@color/deep_gray"
@@ -369,7 +369,7 @@
                         android:background="@drawable/round_payment_view"
                         android:drawablePadding="@dimen/_5sdp"
                         android:hint="MM/YYYY"
-                        android:inputType="date"
+                        android:inputType="text"
                         android:paddingLeft="@dimen/_5sdp"
                         android:textColorHint="@color/deep_gray"
                         android:textSize="@dimen/_12sdp" />
@@ -519,7 +519,7 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@color/yellow"
                 android:gravity="center"
-                android:text="Update"
+                android:text="Saved Detail"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
                 android:visibility="gone" />
@@ -534,7 +534,7 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@color/yellow"
                 android:gravity="center"
-                android:text="Saved Details"
+                android:text="Save Detail"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
                 android:visibility="visible" />

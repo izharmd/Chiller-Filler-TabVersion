@@ -1,3 +1,4 @@
+/*
 package com.bws.musclefood.database
 
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,8 @@ class FeatchDataActivity : AppCompatActivity() {
 
 
 
-      /*  database.contactDao().getContact().observe(this, Observer {
+      */
+/*  database.contactDao().getContact().observe(this, Observer {
 
 
            GlobalScope.launch {
@@ -36,13 +38,16 @@ class FeatchDataActivity : AppCompatActivity() {
 
            }
 
-        })*/
+        })*//*
 
-        database.contactDao().getContactData().observe(this@FeatchDataActivity, Observer {
+
+       */
+/* database.contactDao().getContactData().observe(this@FeatchDataActivity, Observer {
 
             val dt = it
             println("ID=="+dt[0].name)
 
-        })
+        })*//*
+
     }
-}
+}*/

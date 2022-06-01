@@ -62,6 +62,13 @@ class CartListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart_list)
         supportActionBar?.hide()
+        ll_placeOrder.visibility = View.GONE
+        txtEmptyBaskets.visibility = View.GONE
+        txtMinumSpend.visibility = View.GONE
+
+
+
+
 
         if (::content.isInitialized) {
             // put your code here
@@ -76,7 +83,7 @@ class CartListActivity : AppCompatActivity() {
         preferenceConnector = PreferenceConnector(this)
 
         txtOrderNo.visibility = View.GONE
-        txtLogInSignUp.text = "Baskets"
+        txtLogInSignUp.text = "Basket"
 
         recyCartList.layoutManager = LinearLayoutManager(this)
 
@@ -93,6 +100,7 @@ class CartListActivity : AppCompatActivity() {
         }
 
         txtCheckOut.setOnClickListener() {
+            Constant.orderType = " "
 
             totalBasketValue = txtTotalPrice.text.toString().drop(1)
 
@@ -220,6 +228,9 @@ class CartListActivity : AppCompatActivity() {
 
 
                     if (it.data.size != 0) {
+                        txtEmptyBaskets.visibility = View.GONE
+                        txtMinumSpend.visibility = View.VISIBLE
+                        ll_placeOrder.visibility = View.VISIBLE
                         for (i in 0 until it.data.size) {
                             var jsonOjb = JSONObject()
                             cartItem = cartItem + it.data[i].Quantity.toInt()
@@ -247,7 +258,10 @@ class CartListActivity : AppCompatActivity() {
                         txtCartValue.text = cartItem.toString()
                         println("TOTAL====" + Constant.TotalPrice)
                     } else {
-                        finish()
+                        txtEmptyBaskets.visibility = View.VISIBLE
+                        txtMinumSpend.visibility = View.GONE
+                        ll_placeOrder.visibility = View.GONE
+                       // finish()
                     }
                     if (Constant.TotalPrice <= 80.00) {
                         var orderValue = 80.00 - Constant.TotalPrice

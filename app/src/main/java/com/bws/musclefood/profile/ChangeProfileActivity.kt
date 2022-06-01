@@ -12,6 +12,7 @@ import android.Manifest
 import android.app.Dialog
 
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -36,6 +37,8 @@ import com.bws.musclefood.viewmodels.UserProfileDetailsModel
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_profile.spTitle
 import kotlinx.android.synthetic.main.tool_bar_address.*
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 
 class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,CallbackInterface {
 
@@ -190,7 +193,33 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 val bitmap = data?.extras?.get("data") as Bitmap
+
+               // val bitmap = (image.getDrawable() as BitmapDrawable).getBitmap()
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+                val image = stream.toByteArray()
+
+                val jsonObj = JSONObject()
+
+                jsonObj.put("UserID","2")
+
+                val imageStrem = JSONObject()
+                val _Identity = JSONObject()
+                val _Identity2 = JSONObject()
+
+
+                imageStrem.put("__identity",_Identity)
+
+                _Identity.put("__identity",_Identity2)
+
+                jsonObj.put("ImageByte",image)
+                jsonObj.put("ImageStream",imageStrem)
+
+                Log.d("IMAGE JSON==",jsonObj.toString())
+                Log.d("IMAGE JSON==",jsonObj.toString())
+
                 imvProfile.setImageBitmap(bitmap)
+
             } else if (requestCode == REQUEST_PICK_IMAGE) {
                 val uri = data?.getData()
                 imvProfile.setImageURI(uri)
@@ -268,8 +297,8 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                 is Resources.Success -> {
 
                     if (it.data?.StatusCode == "200") {
-                        // AlertDialog().dialog(this, "Profile update successfully")
-                        AlertDialog().dialog(this, it.data?.StatusMSG)
+                         AlertDialog().dialog(this, "Profile update successfully")
+                        //AlertDialog().dialog(this, it.data?.StatusMSG)
                     } else {
                         AlertDialog().dialog(this, it.data?.StatusMSG.toString())
                     }

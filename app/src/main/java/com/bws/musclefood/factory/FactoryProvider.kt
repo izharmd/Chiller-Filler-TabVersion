@@ -3,6 +3,7 @@ package com.bws.musclefood.factory
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bws.musclefood.login.SummerAbhiyanViewModel
 import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.viewmodels.*
 
@@ -65,6 +66,14 @@ class FactoryProvider(private val repository: Repository, val context: Context) 
 
         if (modelClass.isAssignableFrom(PaymentDetailsViewModel::class.java)) {
             return PaymentDetailsViewModel(repository, context) as T
+        }
+
+        if (modelClass.isAssignableFrom(SummerAbhiyanViewModel::class.java)) {
+            return SummerAbhiyanViewModel(repository, context) as T
+        }
+
+        if (modelClass.isAssignableFrom(ReorderViewModel::class.java)) {
+            return ReorderViewModel(repository, context) as T
         }
         throw IllegalArgumentException("Unknown class name")
     }

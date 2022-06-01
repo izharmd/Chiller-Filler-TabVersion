@@ -9,7 +9,9 @@ import com.bws.musclefood.itemcategory.cartlist.RemoveProductResponse
 import com.bws.musclefood.itemcategory.productlist.*
 
 import com.bws.musclefood.login.LoginResponse
+import com.bws.musclefood.login.tbl.ResponseData
 import com.bws.musclefood.network.RequestBodies
+import com.bws.musclefood.orders.reorder.ReorderResponse
 import com.bws.musclefood.orders.searchorder.SearchOrderResponse
 import com.bws.musclefood.payment.OrderSuccessResponse
 import com.bws.musclefood.payment.PaymentDetailsResponse
@@ -17,17 +19,24 @@ import com.bws.musclefood.productdetails.ProductDetailsResponse
 import com.bws.musclefood.profile.UpdateProfileResponse
 import com.bws.musclefood.profile.UserProfileDetailsResponse
 import com.bws.musclefood.signup.RegistrationResponse
-import com.google.gson.JsonObject
 import org.json.JSONArray
 import org.json.JSONObject
 
 import retrofit2.Response
-
-import retrofit2.http.Body
-
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiInterface {
+   // http://nodejs.swalekha.in:5000/ultrapoor/LoginUltraPoor?userid=1&password=1
+
+   // @FormUrlEncoded
+    @GET("LoginUltraPoor")
+    suspend fun userLogin(
+       @Query("userid") email: String,
+       @Query("password") password: String,
+    ): Response<ResponseData>
+
+
+
     @POST("UserMobileloginDetails")
     suspend fun callLoginApi(@Body loginPram: RequestBodies.LoginBody): Response<LoginResponse>
 
@@ -94,16 +103,10 @@ interface ApiInterface {
     suspend fun AddEditPaymentDetails(@Body getCartDetails: RequestBodies.AddEditPaymentDetails): Response<PaymentDetailsResponse>
 
 
-    /*   @GET("data.json")
-       suspend fun callLoginApi(): Response<CovidDataList>
-
-       @POST("Populateproductmenu")
-       suspend fun callProductListApi(@Body loginPram: ProductListBody): Response<ProductMenuResponse>
+    @POST("Reorder")
+    suspend fun reorder(@Body getCartDetails: RequestBodies.ReorderBody): Response<ReorderResponse>
 
 
-       @POST("GetAllCartDetails")
-       suspend fun callGetAllCartDetails(@Body getAllCartDetailsBody: RequestBodies.GetAllCartDetailsBody): Response<CartListResponse>
-   */
 
 
 }

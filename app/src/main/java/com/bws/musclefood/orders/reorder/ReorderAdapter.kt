@@ -2,6 +2,7 @@ package com.bws.musclefood.orders.reorder
 
 import android.content.Context
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
+import com.bws.musclefood.database.AppDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
-class ReorderAdapter(val mList: ArrayList<ReorderModel>) :
+class ReorderAdapter(val mList: List<OrderItem>,val db: AppDatabase) :
     RecyclerView.Adapter<ReorderAdapter.ViewHolder>() {
 
     var context: Context? = null
@@ -21,6 +26,7 @@ class ReorderAdapter(val mList: ArrayList<ReorderModel>) :
     var totalProductPrice: Double = 0.0
     var totalDiscount: Double = 0.0
     var netDiscount: Double = 0.0
+    var  itemPrice:Float = 0f
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -32,21 +38,24 @@ class ReorderAdapter(val mList: ArrayList<ReorderModel>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val itemProduct = mList[position]
-        holder.txtPName.text = itemProduct.pName
-        holder.txtPrice.text = "£"+itemProduct.price
-        holder.txtQuantity.text = itemProduct.quantity
-        holder.txtDiscountPrice.text = "£"+itemProduct.netPrice
-        holder.txtYouSaved.text = "£"+itemProduct.youSaved + "\n" + "SAVED"
-        holder.imvProduct.setImageResource(itemProduct.image)
+        holder.txtPName.text = itemProduct.OrderItem
+        holder.txtPrice.text = "£"+itemProduct.ItemPrice
+        holder.txtTotalQuentity.text = itemProduct.ItemQty
 
-        var youSaved = itemProduct.youSaved
+        holder.txtProSize.visibility = View.GONE
+
+        //  holder.txtDiscountPrice.text = "£"+itemProduct.netPrice
+       // holder.txtYouSaved.text = "£"+itemProduct.youSaved + "\n" + "SAVED"
+       // holder.imvProduct.setImageResource(itemProduct.image)
+
+       /* var youSaved = itemProduct.youSaved
         if (youSaved.equals("", true)) {
             holder.txtYouSaved.visibility = View.GONE
             holder.txtDiscountPrice.visibility = View.GONE
-        }
+        }*/
 
         holder.txtDeleteProduct.setOnClickListener() {
-            mList.removeAt(position)
+           // mList.re(position)
             notifyDataSetChanged()
 
             Constant.totalCartItem = mList.size
@@ -85,7 +94,20 @@ class ReorderAdapter(val mList: ArrayList<ReorderModel>) :
                 totalDiscount = (discountPrice - productPrice).toDouble()
                 netDiscount = netDiscount - totalDiscount
 
-                //(context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+
+
+                GlobalScope.launch(Dispatchers.Main) {
+                    val itemPrice = db.contactDao().getReorderPrice(itemProduct.ProductID)
+                    var price = itemPrice[0].ItemPrice.toFloat() - itemProduct.ItemRate.toFloat()
+                    holder.txtPrice.text = "£"+price.toString()
+
+                    db.contactDao().updateReorderItems(holder.txtTotalQuentity.text.toString(),price.toString(),itemProduct.ProductID)
+
+                    val dt =  db.contactDao().getReorderItems()
+                    Log.d("ALL DATA===",dt.toString())
+                }
+
+                (context as ReorderActivity).decrement(itemProduct.ItemRate)
             }
         }
 
@@ -103,7 +125,20 @@ class ReorderAdapter(val mList: ArrayList<ReorderModel>) :
             totalDiscount = (discountPrice - productPrice).toDouble()
             netDiscount = netDiscount + totalDiscount
 
-           // (context as CartListActivity).updateCartItem(totalPrice, netDiscount)
+
+            GlobalScope.launch(Dispatchers.Main) {
+                val itemPrice = db.contactDao().getReorderPrice(itemProduct.ProductID)
+                var price = itemPrice[0].ItemPrice.toFloat() + itemProduct.ItemRate.toFloat()
+                holder.txtPrice.text = "£"+price.toString()
+
+                db.contactDao().updateReorderItems(holder.txtTotalQuentity.text.toString(),price.toString(),itemProduct.ProductID)
+                val dt =  db.contactDao().getReorderItems()
+                Log.d("ALL DATA===",dt.toString())
+
+            }
+
+            (context as ReorderActivity).increment(itemProduct.ItemRate)
+
         }
 
 
@@ -147,6 +182,7 @@ class ReorderAdapter(val mList: ArrayList<ReorderModel>) :
         val txtInrement: TextView = itemView.findViewById(R.id.txtInrement)
         val txtTotalQuentity: TextView = itemView.findViewById(R.id.txtTotalQuentity)
         val txtYouSaved: TextView = itemView.findViewById(R.id.txtYouSaved)
+        val txtProSize: TextView = itemView.findViewById(R.id.txtProSize)
         val imvProduct: ImageView = itemView.findViewById(R.id.imvProduct)
 
         val imvAddToFavourites: ImageView = itemView.findViewById(R.id.imvAddToFavourites)

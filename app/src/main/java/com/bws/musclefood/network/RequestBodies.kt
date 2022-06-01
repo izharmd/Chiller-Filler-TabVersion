@@ -58,6 +58,8 @@ object RequestBodies {
 
     data class GetAllCartDetailsBody(val UserID: String, val SessionID: String)
 
+    data class ReorderBody(val UserID: String, val OrderID: String)
+
     data class GetRemoveCartProductBody(val ProductID: String, val UserID: String)
 
     data class AddFavouriteListBody(val ProductID: String, val UserID: String)
@@ -70,7 +72,7 @@ object RequestBodies {
         val Category: String,
         val SubCategoryID: String,
         val SubCategoryName: String,
-        val Keya: String,
+        val Key: String,
     )
 
     data class RegistrationDetailsBody(

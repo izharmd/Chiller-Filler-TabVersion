@@ -37,12 +37,6 @@ class TopCategoryAdapter(val mList: List<SubCategory>) :
 
         val itemCategory = mList[position]
         holder.txtCategoryTop.text = itemCategory.CategoryName
-        // holder.imvProduct.setImageResource(itemCategory.topImage)
-
-
-        /* if(position == 0) {
-             holder.itemView.setBackgroundResource(R.drawable.round_login_button)
-         }*/
 
         val catgoryName = itemCategory.CategoryName
         if (catgoryName.equals("", true)) {

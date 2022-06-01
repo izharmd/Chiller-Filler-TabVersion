@@ -2,6 +2,7 @@ package com.bws.musclefood.delivery.deliveryoption.viewcartItems
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.musclefood.R
@@ -26,11 +27,13 @@ class ViewItemActivity : AppCompatActivity() {
         supportActionBar?.hide()
         db = AppDatabase(this)
 
+        imvCart.visibility = View.VISIBLE
+
         GlobalScope.launch {
             val arrCartList = db.contactDao().getProductItem()
 
             txtCartValue.text = cartItem.toString()
-            txtLogInSignUp.text = "Baskets"
+            txtLogInSignUp.text = "Basket"
 
 
             recyCartList.layoutManager = LinearLayoutManager(this@ViewItemActivity)

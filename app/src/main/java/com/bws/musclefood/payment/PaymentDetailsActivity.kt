@@ -24,6 +24,23 @@ import cz.msebera.android.httpclient.Header
 import cz.msebera.android.httpclient.HttpEntity
 import cz.msebera.android.httpclient.entity.StringEntity
 import kotlinx.android.synthetic.main.activity_payment.*
+import kotlinx.android.synthetic.main.activity_payment.edtCVVNo
+import kotlinx.android.synthetic.main.activity_payment.edtCardExpDate
+import kotlinx.android.synthetic.main.activity_payment.edtCardNO
+import kotlinx.android.synthetic.main.activity_payment.edtCardName
+import kotlinx.android.synthetic.main.activity_payment.edtPayWithGpay
+import kotlinx.android.synthetic.main.activity_payment.edtPayWithPayPal
+import kotlinx.android.synthetic.main.activity_payment.ll_CardDetails
+import kotlinx.android.synthetic.main.activity_payment.ll_PayWithGpay
+import kotlinx.android.synthetic.main.activity_payment.ll_PayWithPayPal
+import kotlinx.android.synthetic.main.activity_payment.rdAccountPayment
+import kotlinx.android.synthetic.main.activity_payment.rdCashOnDelivery
+import kotlinx.android.synthetic.main.activity_payment.rdDebitCredit
+import kotlinx.android.synthetic.main.activity_payment.rdGpay
+import kotlinx.android.synthetic.main.activity_payment.rdPayPal
+import kotlinx.android.synthetic.main.activity_payment.txtPayToCard
+import kotlinx.android.synthetic.main.activity_payment.txtPlaceOrder
+import kotlinx.android.synthetic.main.activity_payment_details.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -71,7 +88,7 @@ class PaymentDetailsActivity : AppCompatActivity() {
             ll_PayWithPayPal.visibility = View.GONE
             //  llAccountPaymet.visibility = View.GONE
             txtPlaceOrder.visibility = View.VISIBLE
-            txtPlaceOrder2.visibility = View.GONE
+             txtPlaceOrder2.visibility = View.GONE
             edtPayWithPayPal.visibility = View.GONE
             edtPayWithGpay.visibility = View.GONE
 
@@ -96,6 +113,8 @@ class PaymentDetailsActivity : AppCompatActivity() {
             edtPayWithGpay.visibility = View.GONE
 
             paymentType = "Paypal"
+
+           // Toast.makeText(this@PaymentDetailsActivity,"work in progress",Toast.LENGTH_SHORT).show()
         }
 
         rdGpay.setOnClickListener() {
@@ -117,6 +136,8 @@ class PaymentDetailsActivity : AppCompatActivity() {
             edtPayWithGpay.visibility = View.VISIBLE
 
             paymentType = "GPay"
+
+           // Toast.makeText(this@PaymentDetailsActivity,"work in progress",Toast.LENGTH_SHORT).show()
 
         }
 
@@ -159,8 +180,18 @@ class PaymentDetailsActivity : AppCompatActivity() {
 
             paymentType = "Account"
 
+           // Toast.makeText(this@PaymentDetailsActivity,"work in progress",Toast.LENGTH_SHORT).show()
+
         }
 
+
+        ll_PayWithPayPal.setOnClickListener() {
+            Toast.makeText(this@PaymentDetailsActivity,"work in progress",Toast.LENGTH_SHORT).show()
+        }
+
+        ll_PayWithGpay.setOnClickListener() {
+            Toast.makeText(this@PaymentDetailsActivity,"work in progress",Toast.LENGTH_SHORT).show()
+        }
 
         txtPlaceOrder.setOnClickListener() {
             addPaymentDetails()
@@ -168,6 +199,7 @@ class PaymentDetailsActivity : AppCompatActivity() {
 
         txtPlaceOrder2.setOnClickListener() {
 
+            Toast.makeText(this@PaymentDetailsActivity,"work in progress",Toast.LENGTH_SHORT).show()
 
         }
 

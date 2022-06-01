@@ -32,20 +32,14 @@ import java.util.*
 class LoginActivity : AppCompatActivity() {
 
     lateinit var loginViewModel: LoginViewModel
+
+    lateinit var summerAbhiyanViewModel: SummerAbhiyanViewModel
+
     lateinit var preferenceConnector: PreferenceConnector
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
-
-       // InsertUpdateProduct().callApi(this)
-
-        var jsonObj = JSONObject()
-        var jsonarr = JSONArray()
-
-        jsonObj.put("aaaa","qqwrw")
-
-
 
 
         val content = SpannableString("Guest User")
@@ -69,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
             val pass = Validator.isValidPassword(edtPassword.text.toString(), true)
             val email = Validator.isValidEmail(edtEmailId.text.toString(), true)
 
-             /*if(edtEmailId.text.isEmpty()){
+            if(edtEmailId.text.isEmpty()){
                 AlertDialog().dialog(this,"Please enter email id")
             }else if(!email){
                AlertDialog().dialog(this,"Invalid email id")
@@ -83,29 +77,70 @@ class LoginActivity : AppCompatActivity() {
 
                callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
 
-            }*/
+            }
 
-            val loginRepository = Repository()
+            /*val loginRepository = Repository()
             val loginFactory = FactoryProvider(loginRepository, this)
             loginViewModel =
                 ViewModelProvider(this, loginFactory).get(LoginViewModel::class.java)
             val dt = loginViewModel.loginDta("Hi how r u")
             println("DTA==="+dt)
 
-            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
+            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())*/
         }
 
         llForgotPassword.setOnClickListener() {
-            dialogForgotPassword()
+           // dialogForgotPassword()
+            Toast.makeText(this, "Work in progress", Toast.LENGTH_SHORT).show()
         }
+
+
+       /* val repoSummerAbhiYsn = Repository()
+        val summerFactory = FactoryProvider(repoSummerAbhiYsn, this)
+        summerAbhiyanViewModel =
+            ViewModelProvider(this, summerFactory).get(SummerAbhiyanViewModel::class.java)
+*/
+
+        //CallSUmmerAbhiyan()
+    }
+
+    private fun CallSUmmerAbhiyan(){
+
+        val loadingDialog = LoadingDialog.progressDialog(this)
+        summerAbhiyanViewModel.loginUser("1","1")
+        summerAbhiyanViewModel.resultSummerAbiyan.observe(this, Observer {
+            when (it) {
+                is Resources.NoInternet -> {
+                    loadingDialog.hide()
+                    AlertDialog().dialog(this,it.noInternetMessage.toString())
+                    this.viewModelStore.clear()
+                }
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.Success -> {
+                    loadingDialog.dismiss()
+                    val statusCode = it.data
+                    Toast.makeText(this, it.data.toString(), Toast.LENGTH_SHORT).show()
+
+                }
+                is Resources.Error -> {
+                    loadingDialog.dismiss()
+                    AlertDialog().dialog(this,it.errorMessage.toString())
+                    //    Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_LONG).show()
+                    this.viewModelStore.clear()
+                }
+            }
+        })
+
     }
 
     private fun callLoginAPI(email:String, password:String){
 
         Constant.sessionID = Random().nextFloat().toString()
 
-        val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
-       // val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
+      // val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
+        val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
 
         val jso = Gson()
 
@@ -136,7 +171,10 @@ class LoginActivity : AppCompatActivity() {
                         preferenceConnector.saveString("EMAIL_ID",it.data?.EmailID.toString())
                         preferenceConnector.saveString("PROFILE_URL",it.data?.ProfileImage.toString())
                         preferenceConnector.saveString("MOBILE_NO",it.data?.MobileNo.toString())
-                        dialogOTPtoLogin()
+
+                        //dialogOTPtoLogin()
+                        startActivity(Intent(this@LoginActivity, ProductListActivity::class.java))
+
                         this.viewModelStore.clear()
                     }else{
                         Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_LONG).show()

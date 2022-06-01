@@ -14,7 +14,7 @@
     <item
         android:id="@+id/action_browse"
         android:icon="@drawable/basket_24"
-        android:title="Baskets" />
+        android:title="Basket" />
 
     <item
         android:id="@+id/action_radio"

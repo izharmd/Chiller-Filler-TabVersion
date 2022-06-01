@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
@@ -39,11 +40,14 @@ class CurrentOrderAdapter(val mList:ArrayList<SearchOrderResponseItem>) :Recycle
         holder.txtViewOrder.setOnClickListener{
 
            orderItem = currentOrder.OrderItemList
-            context?.startActivity(Intent(context,ViewOrderDetailsActivity::class.java))
+            Toast.makeText(context, "work in progress", Toast.LENGTH_SHORT).show()
+            //context?.startActivity(Intent(context,ViewOrderDetailsActivity::class.java))
         }
 
         holder.txtReOrder.setOnClickListener{
-            Constant.orderNo = currentOrder.OrderNumber
+            Constant.orderNo = currentOrder.OrderID
+            Constant.orderNumber = currentOrder.OrderNumber
+            //Toast.makeText(context, "work in progress", Toast.LENGTH_SHORT).show()
             context?.startActivity(Intent(context,ReorderActivity::class.java))
         }
 

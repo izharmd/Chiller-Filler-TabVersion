@@ -9,7 +9,17 @@ class Repository/*(private val db:ContactDatabase)*/{
     // var retrofitInntance = RetrofitHelper.getInstance().create(ApiInterface::class.java)
     var retrofitInntance = RetrofitHelper.retrofitService
 
+
+
+    suspend fun userLogin(email: String, password: String) = retrofitInntance.userLogin(email,password)
+
+
+
+   /* suspend fun userLogin(email: String, password: String): LoginResponse {
+        return apiRequest { api.userLogin(email, password) }
+    }*/
     suspend fun loginUser(body: RequestBodies.LoginBody) = retrofitInntance.callLoginApi(body)
+
     suspend fun categoryMenu(body: RequestBodies.GetMenu) = retrofitInntance.callMenuCategory(body)
 
     suspend fun insertUpdate(body: JSONArray) =
@@ -64,5 +74,9 @@ class Repository/*(private val db:ContactDatabase)*/{
 
     suspend fun AddEditPaymentDetails(body: RequestBodies.AddEditPaymentDetails) =
         retrofitInntance.AddEditPaymentDetails(body)
+
+
+    suspend fun reorder(body: RequestBodies.ReorderBody) =
+        retrofitInntance.reorder(body)
 
 }

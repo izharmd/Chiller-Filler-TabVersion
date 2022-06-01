@@ -47,6 +47,9 @@ class FavouritesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_favourites)
         supportActionBar?.hide()
 
+        imvCart.visibility = View.GONE
+        txtCartValue.visibility = View.GONE
+
         preferenceConnector = PreferenceConnector(this)
 
         txtCartValue.text = Constant.cartItem.toString()

@@ -11,7 +11,8 @@ const val CURRENT_USER_ID = 0
 data class Contact(
 
     val name: String,
-    val phone:String
+    val phone:String,
+    val age:Int,
 
 ):Serializable{
     @PrimaryKey(autoGenerate = true)

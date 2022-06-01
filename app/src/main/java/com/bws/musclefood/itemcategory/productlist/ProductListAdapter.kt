@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,13 +34,18 @@ import com.bws.musclefood.utils.AlertDialog
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 
 
-class ProductListAdapter(private val callbackInterface: CallbackInterface, val mList: ProductListResponse, private val respository: Repository?) :
-    RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+class ProductListAdapter(private val callbackInterface: CallbackInterface, val mList: List<ProductListResponseItem>, private val respository: Repository?) :
+    RecyclerView.Adapter<ProductListAdapter.ViewHolder>(),Filterable {
 
     var context: Context? = null
     var myInt: Int = 0
 
     val arrItem = ArrayList<String>()
+
+    var dataFilterList = ArrayList<ProductListResponseItem>()
+    init {
+        dataFilterList = mList as ArrayList<ProductListResponseItem>
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -52,7 +58,7 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val itemProduct = mList[position]
+        val itemProduct = dataFilterList[position]
         holder.txtProductName.text = itemProduct.ProductName
         holder.txtSizeOfProduct.text = itemProduct.ProductSize
 
@@ -253,8 +259,10 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
     }
 
     override fun getItemCount(): Int {
-        return mList.size
+        return dataFilterList.size
     }
+
+
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val txtProductName: TextView = itemView.findViewById(R.id.txtProductName)
@@ -366,6 +374,36 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
         }
 
         dialog.show()
+    }
+
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    dataFilterList = mList as ArrayList<ProductListResponseItem>
+                } else {
+                    val resultList = ArrayList<ProductListResponseItem>()
+                    for (row in mList) {
+                        if (row.ProductName.toLowerCase().contains(constraint.toString().toLowerCase())) {
+                            resultList.add(row)
+                        }
+
+                    }
+                    dataFilterList = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = dataFilterList
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                dataFilterList = results?.values as ArrayList<ProductListResponseItem>
+                Log.d("DATA====",dataFilterList.toString())
+                notifyDataSetChanged()
+            }
+        }
     }
 
 

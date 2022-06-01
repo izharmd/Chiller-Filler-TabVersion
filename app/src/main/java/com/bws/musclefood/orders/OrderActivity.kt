@@ -3,9 +3,14 @@ package com.bws.musclefood.orders
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.bws.musclefood.R
+import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.orders.fragment.MyAdapter
+import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.utils.LoadingDialog
+import com.bws.musclefood.viewmodels.AddNewAddressViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.tool_bar_address.*
 
@@ -45,5 +50,7 @@ class OrderActivity : AppCompatActivity() {
             finish()
         }
     }
+
+
 
 }

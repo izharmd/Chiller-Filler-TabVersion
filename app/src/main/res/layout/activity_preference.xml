@@ -248,6 +248,7 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:background="@drawable/round_profile_view"
                     android:paddingLeft="@dimen/_5sdp"
+                    android:maxLength="10"
                     android:text="07830052891"
                     android:textSize="@dimen/_12sdp">
 

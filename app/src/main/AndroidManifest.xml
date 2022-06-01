@@ -27,14 +27,7 @@
         <activity
             android:name=".delivery.deliveryoption.viewcartItems.ViewItemActivity"
             android:exported="false" />
-        <activity
-            android:name=".database.FeatchDataActivity"
-            android:exported="false" />
-        <!--
-         <activity
-            android:name=".database.DatabaseActivity"
-            android:exported="false" />
-        -->
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"

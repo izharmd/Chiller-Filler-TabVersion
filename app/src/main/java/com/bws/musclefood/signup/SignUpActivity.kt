@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant.Companion.deviceID
 import com.bws.musclefood.databinding.ActivitySignUpBinding
+
 import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
@@ -126,7 +127,8 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     if (statusCode == "200") {
                        // Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
                         //INSERT OTP TO COMPLETE REGISTRATION
-                        dialogOTPtoLogin()
+                       // dialogOTPtoLogin()
+                        Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
                     }
@@ -144,20 +146,6 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
 
-    fun dialogViewProduct(pName: String) {
-        val dialog = Dialog(this, R.style.NewDialog)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.dailog_alert)
-        dialog.getWindow()
-            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        val imv_cross: ImageView = dialog.findViewById(R.id.imv_cross)
-        imv_cross.setOnClickListener() {
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
 
     fun dialogOTPtoLogin() {
         val dialog = Dialog(this, R.style.NewDialog)
@@ -174,7 +162,7 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val btnSubmitToLogin: Button = dialog.findViewById(R.id.btnSubmitToLogin)
 
 
-        btnSubmitToLogin.setOnClickListener() {
+        btnSubmitToLogin.setOnClickListener {
 
             if (edtOTP.text.isEmpty()) {
                 AlertDialog().dialog(
@@ -182,12 +170,12 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     "Please enter OTP"
                 )
             } else {
-                dialog(
+               /* dialog(
                     this,
                     "Request sent successfully, will get a activation email once activated."
-                )
+                )*/
                 dialog.dismiss()
-                finish()
+               // finish()
             }
 
         }

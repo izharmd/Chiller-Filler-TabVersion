@@ -46,7 +46,7 @@ class SearchOrderActivity : AppCompatActivity() {
         preferenceConnector = PreferenceConnector(this)
 
         btnSearchOrder.setOnClickListener() {
-           /* if (edtOrderNo.text.isNotEmpty() && txtFromDate.text.toString()
+            if (edtOrderNo.text.isNotEmpty() && txtFromDate.text.toString()
                     .isEmpty() && txtToDate.text.toString().isEmpty()
             ) {
                 searchOrderNo = edtOrderNo.text.toString()
@@ -63,9 +63,9 @@ class SearchOrderActivity : AppCompatActivity() {
                 startActivity(Intent(this@SearchOrderActivity, OrderActivity::class.java))
             } else {
                 AlertDialog().dialog(this, "Please enter order number or select date")
-            }*/
+            }
 
-            startActivity(Intent(this@SearchOrderActivity, OrderActivity::class.java))
+           // startActivity(Intent(this@SearchOrderActivity, OrderActivity::class.java))
         }
 
 

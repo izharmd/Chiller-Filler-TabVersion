@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -77,6 +78,9 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
     var respository: Repository? = null
 
+    lateinit var productListAdapter: ProductListAdapter
+
+    var cartValue = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -254,6 +258,20 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
             navLV.visibility = View.GONE
             navLV_2.visibility = View.VISIBLE
         }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                Log.d("onQueryTextChange", "query: " + query)
+                productListAdapter?.filter?.filter(query)
+                productListAdapter?.notifyDataSetChanged()
+                return true
+            }
+        })
     }
 
     fun callProdctListAPI() {
@@ -281,16 +299,20 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
                 }
                 is Resources.NoInternet -> {
+                    Toast.makeText(this, R.string.NO_INTERNET_CONNECTION, Toast.LENGTH_SHORT).show()
 
                 }
                 is Resources.Success -> {
                     recyProductList.layoutManager = LinearLayoutManager(this)
+
+                    val des = it.data as List<ProductListResponseItem>
+                   // val dt = des.get(0)
                     val dividerDrawable =
                         ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
                     recyProductList.addItemDecoration(DividerItemDecoration(dividerDrawable))
-                    val adapter = ProductListAdapter(this,it.data!!,respository!!)
-                    recyProductList.adapter = adapter
-                    adapter.notifyDataSetChanged()
+                    productListAdapter = ProductListAdapter(this,des!!,respository!!)
+                    recyProductList.adapter = productListAdapter
+                    productListAdapter.notifyDataSetChanged()
 
                     this.viewModelStore.clear()
                 }
@@ -457,7 +479,8 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
 
     fun updateCartItem(cartItem: Int) {
-        txtTotalCartItem.text = cartItem.toString()
+        cartValue = cartValue + cartItem
+        txtTotalCartItem.text = cartValue.toString()
     }
 
     override fun onResume() {

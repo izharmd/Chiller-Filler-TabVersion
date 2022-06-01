@@ -57,6 +57,8 @@ class CurrentOrderFragment : Fragment() {
         )
 
 
+        val dt = Gson().toJson(body)
+
         searchOrderViewModel.getSearchOrder(body)
 
         val loadingDialog = LoadingDialog.progressDialog(requireContext())
@@ -78,8 +80,9 @@ class CurrentOrderFragment : Fragment() {
                         val adapter = CurrentOrderAdapter(it.data!!)
                         view?.recyCurrentOrder!!.adapter = adapter
                         adapter.notifyDataSetChanged()
-                    }else{
                         view?.txtNoOrder?.visibility = View.GONE
+                    }else{
+                        view?.txtNoOrder?.visibility = View.VISIBLE
                     }
 
 

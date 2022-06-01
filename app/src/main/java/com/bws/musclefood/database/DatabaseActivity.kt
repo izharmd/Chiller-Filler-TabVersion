@@ -1,3 +1,4 @@
+/*
 package com.bws.musclefood.database
 
 import android.content.Intent
@@ -27,9 +28,9 @@ class DatabaseActivity : AppCompatActivity() {
 
         val random = Random().nextInt()
 
-        list.add(Contact("Izan", "9931314095"))
-        list.add(Contact("Izan", "9931314095"))
-        list.add(Contact("Izan", "9931314095"))
+        list.add(Contact("Izan", "9931314095",1))
+        list.add(Contact("Izan", "9931314095",1))
+        list.add(Contact("Izan", "9931314095",2))
 
 
 
@@ -73,10 +74,12 @@ class DatabaseActivity : AppCompatActivity() {
 
         }
 
-        /*  database.contactDao().getContact().observe(this, Observer {
+        */
+/*  database.contactDao().getContact().observe(this, Observer {
               Log.d("NAME==",it.toString())
               Log.d("NAME==",it[4].name)
-          })*/
+          })*//*
+
 
         GlobalScope.launch {
 
@@ -88,4 +91,4 @@ class DatabaseActivity : AppCompatActivity() {
 
         startActivity(Intent(this, FeatchDataActivity::class.java))
     }
-}
+}*/

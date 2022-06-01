@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -41,63 +42,59 @@
         </androidx.appcompat.widget.SearchView>
 
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:weightSum="1">
 
-            <ScrollView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".91">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/bottomify"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyMainCategory"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:visibility="gone">
 
-                    android:orientation="vertical">
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/round_payment_view"
+                    android:visibility="visible">
+
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyMainCategory"
+                        android:id="@+id/recyTopCategory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:visibility="gone">
+                        android:layout_margin="@dimen/_5sdp">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:background="@drawable/round_payment_view"
-                        android:visibility="visible">
+                </androidx.cardview.widget.CardView>
 
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyTopCategory"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_5sdp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyProductList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                        </androidx.recyclerview.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
-
-                    </androidx.cardview.widget.CardView>
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyProductList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                    </androidx.recyclerview.widget.RecyclerView>
-
-                </LinearLayout>
-
-            </ScrollView>
+            </LinearLayout>
 
 
             <com.volcaniccoder.bottomify.BottomifyNavigationView
@@ -110,6 +107,8 @@
                 app:active_color="@color/yellow"
                 app:animation_duration="300"
                 app:item_text_size="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:menu="@menu/nevigation_items"
                 app:passive_color="@color/black"
                 app:pressed_color="@color/bottomifyPressedColor">
@@ -118,7 +117,7 @@
             </com.volcaniccoder.bottomify.BottomifyNavigationView>
 
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>

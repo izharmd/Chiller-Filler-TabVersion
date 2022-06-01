@@ -42,19 +42,19 @@ class ContactPreferenceActivity : AppCompatActivity() {
         }
         txtUpdatePrefrence.setOnClickListener() {
             when {
+                edtTitle.text.isEmpty() -> {
+                    AlertDialog().dialog(this, "Please enter title")
+                }
                 edtFirstName.text.isEmpty() -> {
                     AlertDialog().dialog(this, "Please enter first name")
                 }
                 edtLastName.text.isEmpty() -> {
-                    AlertDialog().dialog(this, "Please enter last name")
+                    AlertDialog().dialog(this, "Please enter last id")
                 }
                 edtEmail.text.isEmpty() -> {
                     AlertDialog().dialog(this, "Please enter email id")
                 }
-                edtPhoneNo.text.isEmpty() -> {
-                    AlertDialog().dialog(this, "Please enter phone no")
-                }
-                edtTitle.text.length < 10 -> {
+                edtPhoneNo.text.length != 10 -> {
                     AlertDialog().dialog(this, "Please enter valid phone no")
                 }
                 else -> {

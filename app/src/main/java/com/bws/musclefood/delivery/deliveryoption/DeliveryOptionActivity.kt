@@ -128,14 +128,12 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         spDeliveryTime.adapter = adapter
         spDeliveryTime.onItemSelectedListener = this
 
-//GET ALL SAVED ADDRESS
-        // getDeliveryDetails()
+
 
         var body = JSONObject()
         body.put("UserID", preferenceConnector.getValueString("USER_ID"))
 
-        // placeOrder(body)
-        getDeliveryDetails()
+
     }
 
 
@@ -146,6 +144,12 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         Constant.deliveryTime = parent?.getItemAtPosition(position).toString()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        getDeliveryDetails()
     }
 
 
@@ -174,17 +178,27 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                     loadingDialog.dismiss()
                 }
                 is Resources.Success -> {
-                    val fullAddress = it.data?.get(0)?.DeliveryAddressHouseNumber + " " +
-                            it.data?.get(0)?.DeliveryAddressLine1 + " " +
-                            it.data?.get(0)?.DeliveryAddressLine2 + " " +
-                            it.data?.get(0)?.DeliveryCity + " " +
-                            it.data?.get(0)?.DeliveryPostcode + " " +
-                            it.data?.get(0)?.DeliveryContactNumber
-                    txtFullAddress.text = fullAddress
-                    txtDeliveredTo.text = "Delivery to : " + it.data?.get(0)?.DeliveryAddressHouseNumber +"(Default)"
 
-                    txtAddAddress.visibility = View.GONE
-                    txtChangeAddress.visibility = View.VISIBLE
+                    if (it.data?.size != 0) {
+
+                        val fullAddress = it.data?.get(0)?.DeliveryAddressHouseNumber + " " +
+                                it.data?.get(0)?.DeliveryAddressLine1 + " " +
+                                it.data?.get(0)?.DeliveryAddressLine2 + " " +
+                                it.data?.get(0)?.DeliveryCity + " " +
+                                it.data?.get(0)?.DeliveryPostcode + " " +
+                                it.data?.get(0)?.DeliveryContactNumber
+                        txtFullAddress.text = fullAddress
+                        txtDeliveredTo.text =
+                            "Delivery to : " + it.data?.get(0)?.DeliveryAddressHouseNumber + "(Default)"
+
+                        txtAddAddress.visibility = View.GONE
+                        txtChangeAddress.visibility = View.VISIBLE
+
+                    }else {
+                        txtAddAddress.visibility = View.VISIBLE
+                        txtChangeAddress.visibility = View.GONE
+                    }
+
                     loadingDialog.dismiss()
                 }
                 is Resources.Error -> {

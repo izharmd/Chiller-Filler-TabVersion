@@ -1,5 +1,6 @@
 package com.bws.musclefood.delivery.choosedeliveryaddress
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,22 +9,36 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.delivery.AddNewAddressActivity
 import com.bws.musclefood.delivery.deliveryoption.DeliveryOptionListResponse
+import com.bws.musclefood.factory.FactoryProvider
 import com.bws.musclefood.myinterface.CallbackInterface
+import com.bws.musclefood.network.RequestBodies
+import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.utils.AlertDialog
+import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.PreferenceConnector
+import com.bws.musclefood.utils.Resources
+import com.bws.musclefood.viewmodels.AddNewAddressViewModel
+import com.bws.musclefood.viewmodels.DeliveryOptionViewModel
+import kotlinx.android.synthetic.main.activity_add_new_address.*
 
 
-class ChooseDelAdapter(val mList: ArrayList<ChooseDelModel>) :
+class ChooseDelAdapter(val activity: AppCompatActivity, val mList: ArrayList<ChooseDelModel>) :
     RecyclerView.Adapter<ChooseDelAdapter.ViewHolder>() {
 
     var context: Context? = null
     private var lastCheckedRB: RadioButton? = null
 
     lateinit var preferenceConnector: PreferenceConnector
+
+    lateinit var addNewAddressViewModel: AddNewAddressViewModel
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,19 +52,30 @@ class ChooseDelAdapter(val mList: ArrayList<ChooseDelModel>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         preferenceConnector = PreferenceConnector(context!!)
         val itemProduct = mList[position]
-        holder.txtDefaultAdd.text = itemProduct.DeliveryAddressName
+        holder.txtDefaultAdd.text = "(" + itemProduct.DeliveryAddressName + ")"
         holder.txtName.text = preferenceConnector.getValueString("FULL_NAME").toString()
-        holder.txtFullAddress.text =
-            itemProduct.DeliveryAddressHouseNumber +
-                    " " + itemProduct.DeliveryAddressHouseNumber
-                    " " + itemProduct.DeliveryAddressLine1
-                    " " + itemProduct.DeliveryAddressLine2
-                    " " + itemProduct.DeliveryCity
-                    " " + itemProduct.DeliveryPostcode
 
-         holder.txtPhone.text = itemProduct.DeliveryContactNumber
+
+        Constant.fullAddress = itemProduct.DeliveryAddressHouseNumber +
+                " " + itemProduct.DeliveryAddressHouseNumber
+        " " + itemProduct.DeliveryAddressLine1
+        " " + itemProduct.DeliveryAddressLine2
+        " " + itemProduct.DeliveryCity
+        " " + itemProduct.DeliveryPostcode
+
+        holder.txtFullAddress.text = Constant.fullAddress
+
+        holder.txtPhone.text = itemProduct.DeliveryContactNumber
 
         val defaultAddress = itemProduct.DefaultAddressFlag
+
+        val defaoutAdd = itemProduct.DefaultAddressFlag
+        if (defaoutAdd == "Y") {
+            holder.txtDefault.text = "Default Address"
+            holder.txtDefault.visibility = View.VISIBLE
+        } else {
+            holder.txtDefault.visibility = View.GONE
+        }
 
         holder.rdDefaultAddress.isChecked = defaultAddress == "Y"
 
@@ -61,6 +87,25 @@ class ChooseDelAdapter(val mList: ArrayList<ChooseDelModel>) :
                 lastCheckedRB?.isChecked = false
             }
             lastCheckedRB = holder.rdDefaultAddress
+
+
+            val body =
+                RequestBodies.AddEditDeliveryDetails(
+                    itemProduct.ID,
+                    preferenceConnector.getValueString("USER_ID").toString(),
+                    itemProduct.DeliveryAddressName,
+                    itemProduct.DeliveryAddressHouseNumber,
+                    itemProduct.DeliveryAddressLine1,
+                    itemProduct.DeliveryAddressLine2,
+                    itemProduct.DeliveryCity,
+                    itemProduct.DeliveryPostcode,
+                    itemProduct.DeliveryContactNumber,
+                    "",
+                    "",
+                    "Y"
+                )
+
+            addNewAddress(body)
 
         }
 
@@ -96,6 +141,57 @@ class ChooseDelAdapter(val mList: ArrayList<ChooseDelModel>) :
         val txtFullAddress: TextView = itemView.findViewById(R.id.txtFullAddress)
         val txtPhone: TextView = itemView.findViewById(R.id.txtPhone)
         val txtEditAddress: TextView = itemView.findViewById(R.id.txtEditAddress)
+        val txtDefault: TextView = itemView.findViewById(R.id.txtDefault)
+
+    }
+
+    fun addNewAddress(body: RequestBodies.AddEditDeliveryDetails) {
+
+
+        addNewAddressViewModel = ViewModelProvider(
+            activity,
+            FactoryProvider(Repository(), activity)
+        ).get(AddNewAddressViewModel::class.java)
+
+        addNewAddressViewModel.AddEditDeliveryDetails(body)
+        val loadingDialog = LoadingDialog.progressDialog(activity)
+
+
+
+        addNewAddressViewModel.response.observe(activity) {
+
+            when (it) {
+
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    loadingDialog.dismiss()
+                }
+                is Resources.Success -> {
+
+                    val status = it.data?.StatusCode
+
+                    if (status == "200") {
+                        AlertDialog().dialogPaymentDetailsAdd(
+                            activity,
+                            it.data?.StatusMSG.toString()
+                        )
+                    } else {
+                        AlertDialog().dialogPaymentDetailsAdd(
+                            activity,
+                            it.data?.StatusMSG.toString()
+                        )
+                    }
+
+                    loadingDialog.dismiss()
+
+                }
+                is Resources.Error -> {
+                    loadingDialog.dismiss()
+                }
+            }
+        }
 
     }
 }

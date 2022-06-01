@@ -20,6 +20,7 @@ import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
 import com.bws.musclefood.viewmodels.SearchOrderViewModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_order.view.*
 
 class RecentOrderFragment : Fragment() {
@@ -58,9 +59,11 @@ class RecentOrderFragment : Fragment() {
             "",
             Constant.fromDate,
             Constant.toDate,
-            "CURRENT"
+            "RECENT"
         )
         searchOrderViewModel.getSearchOrder(body)
+
+        val json = Gson().toJson(body)
 
         val loadingDialog = LoadingDialog.progressDialog(requireContext())
 

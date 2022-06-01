@@ -134,7 +134,7 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
             val productId = itemProduct.ProductID
 
 
-            Toast.makeText(context, quantity, Toast.LENGTH_SHORT).show()
+           // Toast.makeText(context, quantity, Toast.LENGTH_SHORT).show()
             updateInsertCart(quantity,price,totalPrice.toString(),itemProduct.ProductID)
         }
 

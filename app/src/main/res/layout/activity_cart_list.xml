@@ -63,7 +63,20 @@
         android:weightSum="1">
 
         <TextView
+            android:id="@+id/txtEmptyBaskets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Basket is empty please add items to basket"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="normal"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"/>
 
+        <TextView
+            android:id="@+id/txtMinumSpend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Minimum spend : £80"
@@ -97,6 +110,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
+            android:id="@+id/ll_placeOrder"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".09"

@@ -19,6 +19,7 @@ import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
 import com.bws.musclefood.viewmodels.InsertUpdateCartViewModel
 import com.bws.musclefood.viewmodels.ProductDetailsViewModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_producct_details.*
 import kotlinx.android.synthetic.main.tool_bar_cart_details.*
 import kotlinx.android.synthetic.main.tool_bar_search_view.txtLogInSignUp
@@ -176,11 +177,13 @@ class ProductDetailsActivity : AppCompatActivity() {
 
         val pramProductDetails = RequestBodies.PopulateProductDetailsByProductIDBody(
             preferenceConnector.getValueString("USER_ID")!!,
-            "Retail Ready",
-            "1",//Constant.subCategoryId,        //NEED TO SET ID LIKE 1,2,3 NOW IS COMMING Beef.. like that
+            Constant.mainCategory,
+            Constant.subCategoryId,        //NEED TO SET ID LIKE 1,2,3 NOW IS COMMING Beef.. like that
             "",
             ""
         )
+
+        val json = Gson().toJson(pramProductDetails)
         productDetailsViewModel.getProductDetails(pramProductDetails)
 
         productDetailsViewModel.resultProductDetails.observe(this) {
@@ -193,57 +196,63 @@ class ProductDetailsActivity : AppCompatActivity() {
                     loadingDialog.hide()
                 }
                 is Resources.Success -> {
-                    val result = it.data?.get(0)
-                    txtPName.text = result?.ProductName
-                    txtPrice.text = result?.ProductPriceFormatted
-                    txtPSize.text = result?.ProductSize
-                    txtGradient.text = result?.Ingredients
-                    txtNutritionals.text = result?.Nutritionals
-                    txtStorageIntuction.text = result?.StorageInstructions
-                    txtShelfLife.text = result?.ShelfLife
 
-                    productId = result?.ProductID!!
-                    productName = result?.ProductName!!
-                    productPrice = result?.ProductPrice!!
-                    productImage = result?.ProductImage!!
+                    if(it.data?.size != 0) {
 
-                    var gradient = result?.Ingredients
-                    if (gradient.equals("")) {
-                        txtGradient.visibility = View.GONE
-                        txtMinus1.visibility = View.GONE
-                        txtPlus1.visibility = View.VISIBLE
-                    }
+                        val result = it.data?.get(0)
+                        txtPName.text = result?.ProductName
+                        txtPrice.text = result?.ProductPriceFormatted
+                        txtPSize.text = result?.ProductSize
+                        txtGradient.text = result?.Ingredients
+                        txtNutritionals.text = result?.Nutritionals
+                        txtStorageIntuction.text = result?.StorageInstructions
+                        txtShelfLife.text = result?.ShelfLife
 
-                    var nuttitional = result?.Nutritionals
-                    if (nuttitional.equals("")) {
-                        txtNutritionals.visibility = View.GONE
-                        txtMinus2.visibility = View.GONE
-                        txtPlus2.visibility = View.VISIBLE
-                    }
+                        productId = result?.ProductID!!
+                        productName = result?.ProductName!!
+                        productPrice = result?.ProductPrice!!
+                        productImage = result?.ProductImage!!
 
-                    var storage = result?.StorageInstructions
-                    if (storage.equals("")) {
-                        txtStorageIntuction.visibility = View.GONE
-                        txtMinus3.visibility = View.GONE
-                        txtPlus3.visibility = View.VISIBLE
-                    }
+                        var gradient = result?.Ingredients
+                        if (gradient.equals("")) {
+                            txtGradient.visibility = View.GONE
+                            txtMinus1.visibility = View.GONE
+                            txtPlus1.visibility = View.VISIBLE
+                        }
 
-                    var shelLife = result?.ShelfLife
-                    if (shelLife.equals("")) {
-                        txtShelfLife.visibility = View.GONE
-                        txtMinus4.visibility = View.GONE
-                        txtPlus4.visibility = View.VISIBLE
-                    }
+                        var nuttitional = result?.Nutritionals
+                        if (nuttitional.equals("")) {
+                            txtNutritionals.visibility = View.GONE
+                            txtMinus2.visibility = View.GONE
+                            txtPlus2.visibility = View.VISIBLE
+                        }
+
+                        var storage = result?.StorageInstructions
+                        if (storage.equals("")) {
+                            txtStorageIntuction.visibility = View.GONE
+                            txtMinus3.visibility = View.GONE
+                            txtPlus3.visibility = View.VISIBLE
+                        }
+
+                        var shelLife = result?.ShelfLife
+                        if (shelLife.equals("")) {
+                            txtShelfLife.visibility = View.GONE
+                            txtMinus4.visibility = View.GONE
+                            txtPlus4.visibility = View.VISIBLE
+                        }
 
 
-                    var productImage = result?.ProductImage
+                        var productImage = result?.ProductImage
 
-                    if (productImage !== null) {
-                        Glide.with(this)
-                            .load(result?.ProductImage)
-                            .into(imvProduct)
-                    } else {
-                        imvProduct.setImageResource(R.drawable.ic_launcher_background)
+                        if (productImage !== null) {
+                            Glide.with(this)
+                                .load(result?.ProductImage)
+                                .into(imvProduct)
+                        } else {
+                            imvProduct.setImageResource(R.drawable.ic_launcher_background)
+                        }
+                    }else{
+                        Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show()
                     }
 
                     loadingDialog.hide()
