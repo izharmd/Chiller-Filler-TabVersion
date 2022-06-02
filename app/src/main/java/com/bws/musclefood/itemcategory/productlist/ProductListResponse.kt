@@ -14,5 +14,6 @@ data class ProductListResponseItem(
     val ProductSize: String,
     val SubCategoryID: String,
     val SubCategoryName: String,
-    val FavoriteFlag: String
+    val FavoriteFlag: String,
+    val OutofStockFlag: String
 )

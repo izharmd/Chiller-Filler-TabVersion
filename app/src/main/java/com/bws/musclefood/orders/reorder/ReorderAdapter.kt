@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.database.AppDatabase
@@ -43,6 +44,16 @@ class ReorderAdapter(val mList: List<OrderItem>,val db: AppDatabase) :
         holder.txtTotalQuentity.text = itemProduct.ItemQty
 
         holder.txtProSize.visibility = View.GONE
+
+        var productImage = itemProduct.ItemImage
+
+        if (productImage !== null) {
+            Glide.with(context!!)
+                .load(itemProduct.ItemImage)
+                .into(holder.imvProduct)
+        } else {
+            holder.imvProduct.setImageResource(R.drawable.ic_launcher_background)
+        }
 
         //  holder.txtDiscountPrice.text = "£"+itemProduct.netPrice
        // holder.txtYouSaved.text = "£"+itemProduct.youSaved + "\n" + "SAVED"

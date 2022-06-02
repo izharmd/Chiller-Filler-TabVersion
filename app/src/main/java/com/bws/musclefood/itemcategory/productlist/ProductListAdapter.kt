@@ -62,6 +62,17 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
         holder.txtProductName.text = itemProduct.ProductName
         holder.txtSizeOfProduct.text = itemProduct.ProductSize
 
+        val outOfStock = itemProduct.OutofStockFlag
+
+        if(outOfStock == "Y"){
+            holder.txtOutOfStockNew.visibility = View.VISIBLE
+            holder.ll_add_to_cart.visibility = View.GONE
+        }else{
+            holder.txtOutOfStockNew.visibility = View.GONE
+            holder.ll_add_to_cart.visibility = View.VISIBLE
+
+        }
+
 
         holder.itemView.setOnClickListener {
 
@@ -280,12 +291,14 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
         val txtWriteReview: TextView = itemView.findViewById(R.id.txtWriteReview)
         val txtOutOfStock: TextView = itemView.findViewById(R.id.txtOutOfStock)
         val txtNotiFyme: TextView = itemView.findViewById(R.id.txtNotiFyme)
+        val txtOutOfStockNew: TextView = itemView.findViewById(R.id.txtOutOfStockNew)
 
         val imvAddToFavourites: ImageView = itemView.findViewById(R.id.imvAddToFavourites)
         val imvAddToFavouritesHover: ImageView = itemView.findViewById(R.id.imvAddToFavouritesHover)
         val imvProduct: ImageView = itemView.findViewById(R.id.imvProduct)
         val llIncrementDecrement: LinearLayout = itemView.findViewById(R.id.llIncrementDecrement)
         val llRating: LinearLayout = itemView.findViewById(R.id.llRating)
+        val ll_add_to_cart: LinearLayout = itemView.findViewById(R.id.ll_add_to_cart)
 
     }
 
