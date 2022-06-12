@@ -23,6 +23,7 @@ import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.utils.LoadingDialog
 import com.bws.musclefood.utils.Resources
 import com.bws.musclefood.viewmodels.RegistrationViewModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 
@@ -108,9 +109,11 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             "Android",
             deviceID,
             "12345",
-            "testUrl"
+            "testUrl",
+            ""
         )
 
+        println("REGISTRATION=="+Gson().toJson(body).toString())
         registrationViewModel.getRegistrationDetails(body)
         val loadingDialog = LoadingDialog.progressDialog(this)
         registrationViewModel.resultRegistraion.observe(this) {
@@ -127,7 +130,7 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     if (statusCode == "200") {
                        // Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
                         //INSERT OTP TO COMPLETE REGISTRATION
-                       // dialogOTPtoLogin()
+                        dialogOTPtoLogin()
                         Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
@@ -154,7 +157,7 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         dialog.setContentView(R.layout.dialog_login_to_otp)
         dialog.getWindow()
-            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         val imv_cross: ImageView = dialog.findViewById(R.id.imv_cross)
 
         val edtOTP: EditText = dialog.findViewById(R.id.edtOTP)

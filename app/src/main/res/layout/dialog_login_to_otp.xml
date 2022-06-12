@@ -101,12 +101,11 @@
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
 
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.61"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
         app:srcCompat="@drawable/cancel_red_24" />
 
 

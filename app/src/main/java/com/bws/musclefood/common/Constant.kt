@@ -18,10 +18,6 @@ class Constant {
         val INSERTPLACEORDERDETAILS = "InsertPlaceOrderDetails"
         val GET_PAYMENT_DETAILS = "GetPaymentDetails"
 
-        val addDataToCart = ArrayList<CartListModel>()
-
-        var dataModel = ArrayList<ProductListResponseItem>()
-
 
         var hashMap = HashMap<String, CartListModel>() //define empty hashmap
         var pos: Int = 0

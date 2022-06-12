@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_14sdp"
-        android:text="You have no saved baskets"
+        android:text="Your basket is currently empty."
         android:gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/blue"

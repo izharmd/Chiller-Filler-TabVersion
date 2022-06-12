@@ -120,30 +120,35 @@ class ChooseDeliveryAddressActivity : AppCompatActivity() {
                 }
                 is Resources.Success -> {
                     val data = ArrayList<ChooseDelModel>()
+                    val dt = it.data
                     val size = it.data?.size!!
-                    val listData = it.data!!
-                    for (i in 0 until size) {
-                        data.add(
-                            ChooseDelModel(
-                                listData[i].ID,
-                                preferenceConnector.getValueString("USER_NAME").toString(),
-                                listData[i].DeliveryAddressName,
-                                listData[i].DeliveryAddressHouseNumber,
-                                listData[i].DeliveryAddressLine1,
-                                listData[i].DeliveryAddressLine2,
-                                listData[i].DeliveryCity,
-                                listData[i].DeliveryPostcode,
-                                listData[i].DeliveryContactNumber,
-                                listData[i].DeliveryDate,
-                                listData[i].DeliverySlot,
-                                listData[i].DefaultAddressFlag,
-                            )
-                        )
-                    }
 
-                    val adapter = ChooseDelAdapter(this,data)
-                    recyAddress.adapter = adapter
-                    adapter.notifyDataSetChanged()
+                    if(size > 0) {
+
+                        val listData = it.data!!
+                        for (i in 0 until size) {
+                            data.add(
+                                ChooseDelModel(
+                                    listData[i].ID,
+                                    preferenceConnector.getValueString("USER_NAME").toString(),
+                                    listData[i].DeliveryAddressName,
+                                    listData[i].DeliveryAddressHouseNumber,
+                                    listData[i].DeliveryAddressLine1,
+                                    listData[i].DeliveryAddressLine2,
+                                    listData[i].DeliveryCity,
+                                    listData[i].DeliveryPostcode,
+                                    listData[i].DeliveryContactNumber,
+                                    listData[i].DeliveryDate,
+                                    listData[i].DeliverySlot,
+                                    listData[i].DefaultAddressFlag,
+                                )
+                            )
+                        }
+
+                        val adapter = ChooseDelAdapter(this, data)
+                        recyAddress.adapter = adapter
+                        adapter.notifyDataSetChanged()
+                    }
                     loadingDialog.dismiss()
 
                 }

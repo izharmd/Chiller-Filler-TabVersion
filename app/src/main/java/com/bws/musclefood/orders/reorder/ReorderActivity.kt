@@ -118,10 +118,10 @@ class ReorderActivity : AppCompatActivity() {
                     totalOrderPrice = it.data!![0].OrderAmount.drop(2).toDouble()
                     txtTotalPrice.text = "£" +totalOrderPrice.toString() + "0"
 
-                    if (totalOrderPrice >= 80.00) {
+                    if (totalOrderPrice >= 60.00) {
                         txtAddWorth.text = "£00.00 away form meeting the minimum spend."
                     } else {
-                        val addMorePrice = 80.0 - it.data!![0].OrderAmount.drop(2).toDouble()
+                        val addMorePrice = 60.0 - it.data!![0].OrderAmount.drop(2).toDouble()
                         txtAddWorth.text = "£" + addMorePrice.toString() + " away form meeting the minimum spend."
                     }
 
@@ -161,13 +161,13 @@ class ReorderActivity : AppCompatActivity() {
         var cartItem = qty - 1
         qty = cartItem
         txtCartValue.text = cartItem.toString()
-        val totalPrice = txtTotalPrice.text.toString().toFloat() - itemRate.toFloat()
+        val totalPrice = txtTotalPrice.text.toString().drop(1).toFloat() - itemRate.toFloat()
         txtTotalPrice.text = totalPrice.toString()
 
-        val tPrice = txtTotalPrice.text.toString().toFloat()
+        val tPrice = txtTotalPrice.text.toString().drop(1).toFloat()
 
-        if(tPrice <= 80.00){
-            val price = 80.00 - tPrice
+        if(tPrice <= 60.00){
+            val price = 60.00 - tPrice
             txtAddWorth.text = "£" + price.toString() +"0"+" away form meeting the minimum spend."
             txtTotalPrice.text = "£" +totalPrice.toString()+"0"
         }else {
@@ -182,13 +182,13 @@ class ReorderActivity : AppCompatActivity() {
         qty = cartItem
         txtCartValue.text = cartItem.toString()
 
-        val totalPrice = txtTotalPrice.text.toString().toFloat() + itemRate.toFloat()
+        val totalPrice = txtTotalPrice.text.toString().drop(1).toFloat() + itemRate.toFloat()
         txtTotalPrice.text = totalPrice.toString()
 
         val tPrice = txtTotalPrice.text.toString().toFloat()
 
-        if(tPrice <= 80.00){
-            val price = 80.00 - tPrice
+        if(tPrice <= 60.00){
+            val price = 60.00 - tPrice
             txtAddWorth.text = "£" + price.toString() +"0"+ " away form meeting the minimum spend."
             txtTotalPrice.text = "£" +totalPrice.toString()+"0"
         }else {

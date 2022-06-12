@@ -108,12 +108,12 @@ class CartListActivity : AppCompatActivity() {
 
 
             // startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
-            if (totalPrice >= 80.00) {
+            if (totalPrice >= 60.00) {
                 startActivity(Intent(this@CartListActivity, DeliveryOptionActivity::class.java))
             } else {
                 AlertDialog().dialog(
                     this,
-                    "Minimum cart value should be £80 or more to place order."
+                    "Minimum cart value should be £60 or more to place order."
                 )
             }
         }
@@ -224,7 +224,9 @@ class CartListActivity : AppCompatActivity() {
                     Constant.TotalPrice = 0f
                     cartListAdapter = CartListAdapter(it.data!!, db)
                     recyCartList.adapter = cartListAdapter
+
                     cartListAdapter.notifyDataSetChanged()
+
 
 
                     if (it.data.size != 0) {
@@ -263,8 +265,8 @@ class CartListActivity : AppCompatActivity() {
                         ll_placeOrder.visibility = View.GONE
                        // finish()
                     }
-                    if (Constant.TotalPrice <= 80.00) {
-                        var orderValue = 80.00 - Constant.TotalPrice
+                    if (Constant.TotalPrice <= 60.00) {
+                        var orderValue = 60.00 - Constant.TotalPrice
                         txtAddWorth.text =
                             "You are " + "£" + orderValue.toString() + "0" + " away from meeting the minimum spend."
                     } else {
@@ -292,8 +294,8 @@ class CartListActivity : AppCompatActivity() {
 
         //Constant.TotalPrice = currencyFormatter.format(netDiscount).toString().drop(1)
 
-        if (totalPrice <= 80.00) {
-            var orderValue = 80.00 - totalPrice
+        if (totalPrice <= 60.00) {
+            var orderValue = 60.00 - totalPrice
             txtAddWorth.text =
                 "You are " + "£" + orderValue.toString() + "0" + " away from meeting the minimum spend."
         } else {

@@ -79,19 +79,19 @@ class LoginActivity : AppCompatActivity() {
 
             }
 
-            /*val loginRepository = Repository()
+            val loginRepository = Repository()
             val loginFactory = FactoryProvider(loginRepository, this)
             loginViewModel =
                 ViewModelProvider(this, loginFactory).get(LoginViewModel::class.java)
             val dt = loginViewModel.loginDta("Hi how r u")
             println("DTA==="+dt)
 
-            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())*/
+            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
         }
 
         llForgotPassword.setOnClickListener() {
-           // dialogForgotPassword()
-            Toast.makeText(this, "Work in progress", Toast.LENGTH_SHORT).show()
+            dialogForgotPassword()
+           // Toast.makeText(this, "Work in progress", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -101,46 +101,17 @@ class LoginActivity : AppCompatActivity() {
             ViewModelProvider(this, summerFactory).get(SummerAbhiyanViewModel::class.java)
 */
 
-        //CallSUmmerAbhiyan()
-    }
-
-    private fun CallSUmmerAbhiyan(){
-
-        val loadingDialog = LoadingDialog.progressDialog(this)
-        summerAbhiyanViewModel.loginUser("1","1")
-        summerAbhiyanViewModel.resultSummerAbiyan.observe(this, Observer {
-            when (it) {
-                is Resources.NoInternet -> {
-                    loadingDialog.hide()
-                    AlertDialog().dialog(this,it.noInternetMessage.toString())
-                    this.viewModelStore.clear()
-                }
-                is Resources.Loading -> {
-                    loadingDialog.show()
-                }
-                is Resources.Success -> {
-                    loadingDialog.dismiss()
-                    val statusCode = it.data
-                    Toast.makeText(this, it.data.toString(), Toast.LENGTH_SHORT).show()
-
-                }
-                is Resources.Error -> {
-                    loadingDialog.dismiss()
-                    AlertDialog().dialog(this,it.errorMessage.toString())
-                    //    Toast.makeText(this,it.data?.StatusMSG,Toast.LENGTH_LONG).show()
-                    this.viewModelStore.clear()
-                }
-            }
-        })
 
     }
+
+
 
     private fun callLoginAPI(email:String, password:String){
 
         Constant.sessionID = Random().nextFloat().toString()
 
-      // val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
-        val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
+       val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
+       // val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
 
         val jso = Gson()
 
@@ -199,7 +170,7 @@ class LoginActivity : AppCompatActivity() {
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.dialog_forgot_password)
         dialog.getWindow()
-            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            ?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         val imv_cross: ImageView = dialog.findViewById(R.id.imv_cross)
         val edtEmailFroGotPassword: EditText = dialog.findViewById(R.id.edtEmailFroGotPassword)
         val edtCompName: EditText = dialog.findViewById(R.id.edtCompName)

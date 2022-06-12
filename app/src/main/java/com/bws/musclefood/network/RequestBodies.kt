@@ -89,7 +89,8 @@ object RequestBodies {
         val DeviceType: String,
         val DeviceID: String,
         val ActivationCode: String,
-        val ActivationURL: String
+        val ActivationURL: String,
+        val RoleID: String
     )
 
     class GetMenu {}

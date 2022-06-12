@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
 import com.bws.musclefood.database.AppDatabase
-import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.utils.AlertDialog
 import com.bws.musclefood.viewmodels.RemoveProductViewModel
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +38,8 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_cart_list, parent, false)
         context = parent.context
+
+
         return ViewHolder(view)
     }
 
@@ -170,11 +171,15 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
 
 
         holder.imvAddToFavourites.setOnClickListener() {
+            holder.imvAddToFavourites.setImageResource(R.drawable.favorite_24)
+            holder.imvAddToFavouritesHover.setImageResource(R.drawable.favorite_hover)
             holder.imvAddToFavourites.visibility = View.GONE
             holder.imvAddToFavouritesHover.visibility = View.VISIBLE
             (context as CartListActivity).calRemoveFavouritePI(mList[position].ProductID)
         }
         holder.imvAddToFavouritesHover.setOnClickListener() {
+            holder.imvAddToFavourites.setImageResource(R.drawable.favorite_24)
+            holder.imvAddToFavouritesHover.setImageResource(R.drawable.favorite_hover)
             holder.imvAddToFavourites.visibility = View.VISIBLE
             holder.imvAddToFavouritesHover.visibility = View.GONE
             (context as CartListActivity).calAddFavouritePI(mList[position].ProductID)
@@ -184,6 +189,10 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
 
     override fun getItemCount(): Int {
         return mList.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     override fun getItemViewType(position: Int): Int {

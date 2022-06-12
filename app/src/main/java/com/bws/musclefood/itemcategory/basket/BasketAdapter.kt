@@ -152,6 +152,10 @@ class BasketAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListResp
         return mList.size
     }
 
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
     override fun getItemViewType(position: Int): Int {
         return position
     }

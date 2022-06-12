@@ -1,7 +1,6 @@
 package com.bws.musclefood.favourites
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,9 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
 import com.bws.musclefood.common.Constant
-import com.bws.musclefood.common.Constant.Companion.totalFavoritesCartItem
-import com.bws.musclefood.itemcategory.basket.BasketsActivity
-import com.bws.musclefood.itemcategory.cartlist.CartListActivity
 import com.bws.musclefood.utils.LoadingDialog
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
@@ -27,7 +23,8 @@ import cz.msebera.android.httpclient.entity.StringEntity
 import org.json.JSONArray
 import org.json.JSONObject
 
-class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): RecyclerView.Adapter<FavouritesAdapter.ViewHolder>() {
+class FavouritesAdapter(val mList: ArrayList<FavouritesListResponseItem>) :
+    RecyclerView.Adapter<FavouritesAdapter.ViewHolder>() {
 
     var context: Context? = null
     var myInt: Int = 1
@@ -46,10 +43,10 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
 
         val itemProduct = mList[position]
         holder.txtPName.text = itemProduct.ProductName
-        holder.txtPrice.text = "£"+itemProduct.ProductPrice
-       // holder.txtQuantity.text = itemProduct.
-      //  holder.txtDiscountPrice.text = itemProduct.price
-       // holder.txtYouSaved.text = itemProduct.youSaved + "\n" +"SAVED"
+        holder.txtPrice.text = "£" + itemProduct.ProductPrice
+        // holder.txtQuantity.text = itemProduct.
+        //  holder.txtDiscountPrice.text = itemProduct.price
+        // holder.txtYouSaved.text = itemProduct.youSaved + "\n" +"SAVED"
 
         var productImage = itemProduct.ProductImage
 
@@ -78,7 +75,7 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
             totalDiscount = discountPrice - totalProductPrice
             netDiscount = netDiscount - totalDiscount
 
-           // (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
+            // (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
 
         }
 
@@ -124,9 +121,9 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
         }
 
 
-        holder.txtAdd.setOnClickListener{
-           // holder.llIncrementDecrement.visibility = View.VISIBLE
-           // holder.txtAdd.visibility = View.GONE
+        holder.txtAdd.setOnClickListener {
+            // holder.llIncrementDecrement.visibility = View.VISIBLE
+            // holder.txtAdd.visibility = View.GONE
 
             val quantity = holder.txtTotalQuentity.text.toString()
             val price = itemProduct.ProductPrice
@@ -134,8 +131,8 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
             val productId = itemProduct.ProductID
 
 
-           // Toast.makeText(context, quantity, Toast.LENGTH_SHORT).show()
-            updateInsertCart(quantity,price,totalPrice.toString(),itemProduct.ProductID)
+            // Toast.makeText(context, quantity, Toast.LENGTH_SHORT).show()
+            updateInsertCart(quantity, price, totalPrice.toString(), itemProduct.ProductID)
         }
 
 
@@ -149,7 +146,7 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
         totalDiscount = discountPrice - totalProductPrice
         netDiscount = netDiscount + totalDiscount
 
-       // (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
+        // (context as FavouritesActivity).updateCartItem(totalPrice, netDiscount)
 
 
         holder.txtDiscountPrice.setPaintFlags(holder.txtDiscountPrice.getPaintFlags() or Paint.STRIKE_THRU_TEXT_FLAG)
@@ -157,21 +154,29 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
 
 
         holder.imvAddToFavourites.setOnClickListener() {
-           // holder.imvAddToFavourites.visibility = View.GONE
-           // holder.imvAddToFavouritesHover.visibility = View.VISIBLE
+            // holder.imvAddToFavourites.visibility = View.GONE
+            // holder.imvAddToFavouritesHover.visibility = View.VISIBLE
             (context as FavouritesActivity).calRemoveFavouritePI(mList[position].ProductID)
         }
-      /*  holder.imvAddToFavouritesHover.setOnClickListener() {
-            holder.imvAddToFavourites.visibility = View.VISIBLE
-            holder.imvAddToFavouritesHover.visibility = View.GONE
-        }*/
+        /*  holder.imvAddToFavouritesHover.setOnClickListener() {
+              holder.imvAddToFavourites.visibility = View.VISIBLE
+              holder.imvAddToFavouritesHover.visibility = View.GONE
+          }*/
 
-       // totalFavoritesCartItem = mList.size
+        // totalFavoritesCartItem = mList.size
 
     }
 
     override fun getItemCount(): Int {
         return mList.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
@@ -193,30 +198,30 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
     }
 
 
-    fun updateInsertCart(quantity:String,price:String,totalPrice:String,productId:String) {
+    fun updateInsertCart(quantity: String, price: String, totalPrice: String, productId: String) {
         val client = AsyncHttpClient()
         val jsonArray = JSONArray()
 
         val loadingDialog = LoadingDialog.progressDialog(context!!)
-      //  var keys = Constant.hashMap.keys
-       // for (key in keys) {
-            var jsonObject = JSONObject()
-           // var cartModel = Constant.hashMap.get(key)
-            try {
-                jsonObject.put("CartItemID", "")
-                jsonObject.put("Price", price)
-                jsonObject.put("ProductID", productId)
-                jsonObject.put("Quantity", quantity)
-                jsonObject.put("SessionID", Constant.sessionID);
-                jsonObject.put("TotalPrice", totalPrice)
-                jsonObject.put("UserID", "2")
-                jsonArray.put(jsonObject)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-      //  }
+        //  var keys = Constant.hashMap.keys
+        // for (key in keys) {
+        var jsonObject = JSONObject()
+        // var cartModel = Constant.hashMap.get(key)
+        try {
+            jsonObject.put("CartItemID", "")
+            jsonObject.put("Price", price)
+            jsonObject.put("ProductID", productId)
+            jsonObject.put("Quantity", quantity)
+            jsonObject.put("SessionID", Constant.sessionID);
+            jsonObject.put("TotalPrice", totalPrice)
+            jsonObject.put("UserID", "2")
+            jsonArray.put(jsonObject)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        //  }
 
-        println("CART INSERT =="+jsonArray.toString())
+        println("CART INSERT ==" + jsonArray.toString())
 
         val entity: HttpEntity
         entity = try {
@@ -239,7 +244,7 @@ class FavouritesAdapter (val mList: ArrayList<FavouritesListResponseItem>): Recy
                 ) {
                     val asyncResult = String(responseBody)
                     Toast.makeText(context, asyncResult, Toast.LENGTH_SHORT).show()
-                   // startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
+                    // startActivity(Intent(this@ProductListActivity, CartListActivity::class.java))
                 }
 
                 override fun onStart() {

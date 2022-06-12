@@ -479,8 +479,13 @@ class ProductListActivity : AppCompatActivity(), CallbackInterface {
 
 
     fun updateCartItem(cartItem: Int) {
-        cartValue = cartValue + cartItem
-        txtTotalCartItem.text = cartValue.toString()
+        val cartItm = txtTotalCartItem.text.toString().toInt()
+        txtTotalCartItem.text = (cartItm + cartItem).toString()
+    }
+
+    fun updateCartItemDecrement(cartItem: Int) {
+        val cartItm = txtTotalCartItem.text.toString().toInt()
+        txtTotalCartItem.text = (cartItm - cartItem).toString()
     }
 
     override fun onResume() {

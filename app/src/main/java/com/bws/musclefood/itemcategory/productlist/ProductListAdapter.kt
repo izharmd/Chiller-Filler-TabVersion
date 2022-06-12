@@ -123,7 +123,7 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
 
 
 
-            (context as ProductListActivity).updateCartItem(cartItem)
+            (context as ProductListActivity).updateCartItem(1)
 
             val itm = mList[position]
 
@@ -170,7 +170,7 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
                 holder.txtTotalQuentity.text =
                     (holder.txtTotalQuentity.text.toString().toInt() - 1).toString()
                 cartItem = cartItem - 1
-                (context as ProductListActivity).updateCartItem(cartItem)
+                (context as ProductListActivity).updateCartItemDecrement(1)
             }
 
             if (myInt <= 1) {
@@ -179,7 +179,9 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
                 holder.llIncrementDecrement.visibility = View.GONE
                 totalCartItem = totalCartItem - 1
                 cartItem = cartItem - 1
-                (context as ProductListActivity).updateCartItem(cartItem)
+
+                (context as ProductListActivity).updateCartItemDecrement(1)
+                //(context as ProductListActivity).updateCartItem(cartItem)
             } else {
                 myInt--
                 val itm = mList[position]
@@ -230,7 +232,7 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
                     )
                     totalCartItem = totalCartItem + 1
                     cartItem = cartItem + 1
-                    (context as ProductListActivity).updateCartItem(cartItem)
+                    (context as ProductListActivity).updateCartItem(1)
                 }
             } else {
                 AlertDialog().dialog(context as Activity, (context as Activity).resources.getString(R.string.CANT_ADD_MORE_THAN_10))
@@ -271,6 +273,14 @@ class ProductListAdapter(private val callbackInterface: CallbackInterface, val m
 
     override fun getItemCount(): Int {
         return dataFilterList.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
 

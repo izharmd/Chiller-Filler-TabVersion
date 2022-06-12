@@ -1,30 +1,29 @@
 package com.bws.musclefood.profile
 
+
+import android.Manifest
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-
-
-import android.Manifest
-import android.app.Dialog
-
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
-
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bws.musclefood.R
+import com.bws.musclefood.common.Constant
 import com.bws.musclefood.factory.FactoryProvider
-import com.bws.musclefood.myinterface.CallbackInterface
 import com.bws.musclefood.itemcategory.productlist.ProductListResponseItem
+import com.bws.musclefood.myinterface.CallbackInterface
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
 import com.bws.musclefood.utils.AlertDialog
@@ -33,12 +32,16 @@ import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
 import com.bws.musclefood.viewmodels.UpdateProfileViewModel
 import com.bws.musclefood.viewmodels.UserProfileDetailsModel
-
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
+import cz.msebera.android.httpclient.Header
+import cz.msebera.android.httpclient.HttpEntity
+import cz.msebera.android.httpclient.entity.StringEntity
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.activity_profile.spTitle
 import kotlinx.android.synthetic.main.tool_bar_address.*
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+
 
 class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,CallbackInterface {
 
@@ -196,29 +199,17 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
 
                // val bitmap = (image.getDrawable() as BitmapDrawable).getBitmap()
                 val stream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
-                val image = stream.toByteArray()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                val byteArray = stream.toByteArray()
 
-                val jsonObj = JSONObject()
-
-                jsonObj.put("UserID","2")
-
-                val imageStrem = JSONObject()
-                val _Identity = JSONObject()
-                val _Identity2 = JSONObject()
+                val encodedString = Base64.encodeToString(byteArray, Base64.DEFAULT)
 
 
-                imageStrem.put("__identity",_Identity)
 
-                _Identity.put("__identity",_Identity2)
-
-                jsonObj.put("ImageByte",image)
-                jsonObj.put("ImageStream",imageStrem)
-
-                Log.d("IMAGE JSON==",jsonObj.toString())
-                Log.d("IMAGE JSON==",jsonObj.toString())
-
+                val imageString = getStringImage(bitmap)
                 imvProfile.setImageBitmap(bitmap)
+
+                upLoadImage(encodedString)
 
             } else if (requestCode == REQUEST_PICK_IMAGE) {
                 val uri = data?.getData()
@@ -297,8 +288,9 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                 is Resources.Success -> {
 
                     if (it.data?.StatusCode == "200") {
-                         AlertDialog().dialog(this, "Profile update successfully")
+                         AlertDialog().dialogPaymentDetailsAdd(this, "Profile update successfully")
                         //AlertDialog().dialog(this, it.data?.StatusMSG)
+
                     } else {
                         AlertDialog().dialog(this, it.data?.StatusMSG.toString())
                     }
@@ -357,7 +349,7 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
                         }
 
                     } else {
-                        AlertDialog().dialog(this, it.data?.StatusMSG.toString())
+                       // AlertDialog().dialog(this, it.data?.StatusCode.toString())
                     }
 
                     loadingDialog.dismiss()
@@ -373,5 +365,76 @@ class ChangeProfileActivity : AppCompatActivity(), AdapterView.OnItemSelectedLis
 
     override fun passResultCallback(message: ProductListResponseItem) {
       //  Toast.makeText(this,message.ProductName,Toast.LENGTH_SHORT).show()
+    }
+
+
+    fun upLoadImage(encodedString:String) {
+        val client = AsyncHttpClient()
+
+        var jsonObject = JSONObject()
+
+
+        jsonObject.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
+
+        jsonObject.put("Imagebase64string", encodedString)
+
+       // Log.d("SSSSS=====",jsonObject.toString())
+
+        System.out.println("SSSSS====="+jsonObject.toString())
+
+        val entity: HttpEntity
+        entity = try {
+            StringEntity(jsonObject.toString(), "UTF-8")
+        } catch (e: IllegalArgumentException) {
+            Log.d("HTTP", "StringEntity: IllegalArgumentException")
+            return
+        }
+        val contentType = "application/json; charset=utf-8"
+        client.post(
+            this,
+            Constant.BASE_URL + "UpdateProfileImage",
+            entity,
+            contentType,
+            object : AsyncHttpResponseHandler() {
+                override fun onSuccess(
+                    statusCode: Int,
+                    headers: Array<Header>,
+                    responseBody: ByteArray
+                ) {
+                    val asyncResult = String(responseBody)
+                    val json = JSONObject(asyncResult)
+                    val scode = json.getString("StatusCode")
+                    val msg = json.getString("StatusMSG")
+
+                    Toast.makeText(
+                        this@ChangeProfileActivity,
+                        asyncResult,
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+
+                }
+
+                override fun onFailure(
+                    statusCode: Int,
+                    headers: Array<Header>,
+                    responseBody: ByteArray,
+                    error: Throwable
+                ) {
+                    Toast.makeText(
+                        this@ChangeProfileActivity,
+                        statusCode.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+    }
+
+
+    fun getStringImage(bmp: Bitmap): String? {
+        val baos = ByteArrayOutputStream()
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val imageBytes = baos.toByteArray()
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
 }

@@ -79,7 +79,7 @@
             android:id="@+id/txtMinumSpend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Minimum spend : £80"
+            android:text="Minimum spend : £60"
             android:textColor="@color/yellow"
             android:textSize="@dimen/_10sdp"
             android:textStyle="normal"
