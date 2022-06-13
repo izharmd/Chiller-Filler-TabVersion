@@ -130,8 +130,8 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     if (statusCode == "200") {
                        // Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
                         //INSERT OTP TO COMPLETE REGISTRATION
-                        dialogOTPtoLogin()
-                        Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
+                        dialogOTPtoLogin(binding.edtEmail.text.toString())
+                       // Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
                     }
@@ -150,7 +150,7 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
 
-    fun dialogOTPtoLogin() {
+    fun dialogOTPtoLogin(emailID:String) {
         val dialog = Dialog(this, R.style.NewDialog)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -173,12 +173,10 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     "Please enter OTP"
                 )
             } else {
-               /* dialog(
-                    this,
-                    "Request sent successfully, will get a activation email once activated."
-                )*/
+
                 dialog.dismiss()
-               // finish()
+                callValidateOTP(emailID,edtOTP.text.toString().trim())
+
             }
 
         }
@@ -187,6 +185,52 @@ class SignUpActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             dialog.dismiss()
         }
         dialog.show()
+    }
+
+    fun callValidateOTP(emailID:String,otp:String){
+
+
+      val  otpViewModel = ViewModelProvider(
+            this,
+            FactoryProvider(Repository(), this)
+        ).get(ValidateOTPViewModel::class.java)
+        val body = RequestBodies.ValidateRegistrationOTP(
+            emailID,
+            otp
+        )
+
+        println("VALIDATE OTP=="+Gson().toJson(body).toString())
+        otpViewModel.optValidate(body)
+        val loadingDialog = LoadingDialog.progressDialog(this)
+        otpViewModel.resultOTP.observe(this) {
+            when (it) {
+                is Resources.Loading -> {
+                    loadingDialog.show()
+                }
+                is Resources.NoInternet -> {
+                    AlertDialog().dialog(this, it.noInternetMessage.toString())
+                    loadingDialog.dismiss()
+                }
+                is Resources.Success -> {
+                    var statusCode = it.data?.StatusCode
+                    if (statusCode == "200") {
+
+                        Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
+
+                        finish()
+                    } else {
+                        Toast.makeText(this, it.data?.StatusMSG, Toast.LENGTH_SHORT).show()
+                    }
+                    this.viewModelStore.clear()
+                    loadingDialog.dismiss()
+                }
+                is Resources.Error -> {
+                    AlertDialog().dialog(this, it.errorMessage.toString())
+                    loadingDialog.dismiss()
+                }
+            }
+
+        }
     }
 
 

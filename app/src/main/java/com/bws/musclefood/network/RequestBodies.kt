@@ -135,4 +135,12 @@ object RequestBodies {
         val PaymentGatewayID: String
     )
 
+
+    data class ValidateRegistrationOTP(
+
+        val EmailID: String,
+        val password: String
+
+    )
+
 }

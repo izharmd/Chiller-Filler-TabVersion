@@ -55,7 +55,8 @@
                 app:layout_constraintStart_toStartOf="@+id/imvProfile"
                 app:layout_constraintTop_toTopOf="@+id/imvProfile"
                 app:layout_constraintVertical_bias="0.776"
-                app:srcCompat="@drawable/camera_24" />
+                app:srcCompat="@drawable/camera_24"
+                android:visibility="invisible"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

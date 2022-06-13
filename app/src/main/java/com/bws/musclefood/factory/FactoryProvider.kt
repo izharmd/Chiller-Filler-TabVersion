@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bws.musclefood.login.SummerAbhiyanViewModel
 import com.bws.musclefood.repo.Repository
+import com.bws.musclefood.signup.ValidateOTPViewModel
 import com.bws.musclefood.viewmodels.*
 
 
@@ -74,6 +75,9 @@ class FactoryProvider(private val repository: Repository, val context: Context) 
 
         if (modelClass.isAssignableFrom(ReorderViewModel::class.java)) {
             return ReorderViewModel(repository, context) as T
+        }
+        if (modelClass.isAssignableFrom(ValidateOTPViewModel::class.java)) {
+            return ValidateOTPViewModel(repository, context) as T
         }
         throw IllegalArgumentException("Unknown class name")
     }

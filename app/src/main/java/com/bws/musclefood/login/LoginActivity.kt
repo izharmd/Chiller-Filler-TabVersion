@@ -79,19 +79,19 @@ class LoginActivity : AppCompatActivity() {
 
             }
 
-            val loginRepository = Repository()
+           /* val loginRepository = Repository()
             val loginFactory = FactoryProvider(loginRepository, this)
             loginViewModel =
                 ViewModelProvider(this, loginFactory).get(LoginViewModel::class.java)
             val dt = loginViewModel.loginDta("Hi how r u")
             println("DTA==="+dt)
 
-            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())
+            callLoginAPI(edtEmailId.text.toString(),edtPassword.text.toString())*/
         }
 
         llForgotPassword.setOnClickListener() {
-            dialogForgotPassword()
-           // Toast.makeText(this, "Work in progress", Toast.LENGTH_SHORT).show()
+            //dialogForgotPassword()
+            Toast.makeText(this, "Work in progress", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -110,10 +110,8 @@ class LoginActivity : AppCompatActivity() {
 
         Constant.sessionID = Random().nextFloat().toString()
 
-       val loginPram = RequestBodies.LoginBody("mk9026125@gmail.com", "Test321@","Android","12345")
-       // val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
-
-        val jso = Gson()
+       //val loginPram = RequestBodies.LoginBody("izhar.md89@gmail.com", "Test@123","Android","12345")
+        val loginPram = RequestBodies.LoginBody(email, password,"Android","122345")
 
         println("LOGIN JSON == "+Gson().toJson(loginPram))
         val loadingDialog = LoadingDialog.progressDialog(this)
@@ -132,6 +130,8 @@ class LoginActivity : AppCompatActivity() {
                     loadingDialog.dismiss()
                     val statusCode = it.data?.StatusCode
                     if (statusCode.equals("200")){
+
+                        println("USER_ID=="+it.data?.UserId.toString())
                         preferenceConnector.saveString("USER_ID",it.data?.UserId.toString())
                         preferenceConnector.saveString("TITLE",it.data?.Title.toString())
                         preferenceConnector.saveString("FIRST_NAME",it.data?.FirstName.toString())

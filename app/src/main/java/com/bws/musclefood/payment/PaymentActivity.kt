@@ -1,6 +1,5 @@
 package com.bws.musclefood.payment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,24 +13,19 @@ import com.bws.musclefood.common.Constant.Companion.INSERTPLACEORDERDETAILS
 import com.bws.musclefood.common.Constant.Companion.orderType
 import com.bws.musclefood.common.Constant.Companion.totalBasketValue
 import com.bws.musclefood.database.AppDatabase
-import com.bws.musclefood.delivery.choosedeliveryaddress.ChooseDelAdapter
-import com.bws.musclefood.delivery.choosedeliveryaddress.ChooseDelModel
 import com.bws.musclefood.factory.FactoryProvider
-import com.bws.musclefood.itemcategory.cartlist.CartListActivity
-import com.bws.musclefood.itemcategory.productlist.ProductListActivity
 import com.bws.musclefood.network.RequestBodies
 import com.bws.musclefood.repo.Repository
-import com.bws.musclefood.utils.*
+import com.bws.musclefood.utils.AlertDialog
+import com.bws.musclefood.utils.LoadingDialog
+import com.bws.musclefood.utils.PreferenceConnector
+import com.bws.musclefood.utils.Resources
 import com.bws.musclefood.viewmodels.DeliveryOptionViewModel
-import com.bws.musclefood.viewmodels.OrderPlaceViewModel
-import com.google.gson.JsonObject
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
 import cz.msebera.android.httpclient.HttpEntity
 import cz.msebera.android.httpclient.entity.StringEntity
-import kotlinx.android.synthetic.main.activity_add_new_address.*
-import kotlinx.android.synthetic.main.activity_choose_delivery_address.*
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.tool_bar_address.*
 import kotlinx.coroutines.Dispatchers
@@ -188,9 +182,12 @@ class PaymentActivity : AppCompatActivity() {
                     AlertDialog().dialog(this, "Please enter card holder name no")
                 }
                 else -> {
-                   // var jsonObj = JSONObject()
-                    //var jsonarr = JSONArray()
+                   // preferenceConnector.saveString("FIRST_NAME",it.data?.FirstName.toString())
+                    //preferenceConnector.saveString("LAST_NAME",it.data?.LastName.toString())
                     jsonObj.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
+                    jsonObj.put("FirstName", preferenceConnector.getValueString("FIRST_NAME").toString())
+                    jsonObj.put("LastName", preferenceConnector.getValueString("LAST_NAME").toString())
+
                     jsonObj.put("SessionID", Constant.sessionID)
                     jsonObj.put(
                         "EmailID",
@@ -305,6 +302,9 @@ class PaymentActivity : AppCompatActivity() {
             var jsonObj = JSONObject()
             var jsonarr = JSONArray()
             jsonObj.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
+            jsonObj.put("FirstName", preferenceConnector.getValueString("FIRST_NAME").toString())
+            jsonObj.put("LastName", preferenceConnector.getValueString("LAST_NAME").toString())
+
             jsonObj.put("SessionID", Constant.sessionID)
             jsonObj.put(
                 "EmailID",
@@ -363,6 +363,9 @@ class PaymentActivity : AppCompatActivity() {
     fun placeOrder(body: JSONObject) {
         val loadingDialog = LoadingDialog.progressDialog(this)
         val client = AsyncHttpClient()
+
+        println("ODER PLACE BODY==="+body)
+
         val entity: HttpEntity = try {
             StringEntity(body.toString(), "UTF-8")
         } catch (e: IllegalArgumentException) {
@@ -392,9 +395,16 @@ class PaymentActivity : AppCompatActivity() {
                     if (statusCode == 200) {
                         Constant.row_index = 0
                         val msg = result.get("StatusMSG").toString()
+
+
+                        val successMsg =
+                            msg.split("\\.".toRegex()).toTypedArray()[0]
+
+                        val orderNo =
+                            msg.split("\\.".toRegex()).toTypedArray()[1]
                         AlertDialog().dialogPaymentSuccessFull(
                             this@PaymentActivity,
-                            result.get("StatusMSG").toString()
+                            successMsg + "\n" + orderNo
                         )
 
 

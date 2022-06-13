@@ -79,4 +79,8 @@ class Repository/*(private val db:ContactDatabase)*/{
     suspend fun reorder(body: RequestBodies.ReorderBody) =
         retrofitInntance.reorder(body)
 
+
+    suspend fun validateOtp(body: RequestBodies.ValidateRegistrationOTP) =
+        retrofitInntance.validateOtp(body)
+
 }

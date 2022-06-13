@@ -26,6 +26,10 @@ import com.bws.musclefood.viewmodels.RemoveFavoriteViewModel
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_cart_list.*
+import kotlinx.android.synthetic.main.activity_cart_list.recyCartList
+import kotlinx.android.synthetic.main.activity_cart_list.searchView1
+import kotlinx.android.synthetic.main.activity_cart_list.txtCheckOut
+import kotlinx.android.synthetic.main.activity_favourites.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import kotlinx.android.synthetic.main.tool_bar.txtLogInSignUp
 import kotlinx.android.synthetic.main.tool_bar_address.*
@@ -117,18 +121,30 @@ class FavouritesActivity : AppCompatActivity() {
                         ContextCompat.getDrawable(applicationContext, R.drawable.line_divider)
                     recyCartList.addItemDecoration(DividerItemDecoration(dividerDrawable))
 
-                     favoritesItmSize = it.data?.size!!
+                    favoritesItmSize = it.data?.size!!
 
-                    val adapter = FavouritesAdapter(it.data!!)
-                    recyCartList.adapter = adapter
-                    adapter.notifyDataSetChanged()
+                    val ProductID = it.data[0].ProductID
+
+                    if(ProductID != "") {
+                        txtNoLikes.visibility = View.GONE
+
+                        val adapter = FavouritesAdapter(it.data!!)
+                        recyCartList.adapter = adapter
+                        adapter.notifyDataSetChanged()
+
+
+                        val total = Constant.cartItem + favoritesItmSize
+                        txtCartValue.text = total.toString()
+                    }else{
+
+                        txtNoLikes.visibility = View.VISIBLE
+
+                       // Toast.makeText(this, "no items", Toast.LENGTH_SHORT).show()
+                    }
 
                     loadingDialog.hide()
                     this.viewModelStore.clear()
 
-
-                    val total =  Constant.cartItem + favoritesItmSize
-                    txtCartValue.text = total.toString()
                 }
 
                 is Resources.Error -> {

@@ -100,6 +100,15 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             )
         }
 
+        txtAddAddress.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@DeliveryOptionActivity,
+                    ChooseDeliveryAddressActivity::class.java
+                )
+            )
+        }
+
         txtViewAllItems.setOnClickListener {
             startActivity(Intent(this@DeliveryOptionActivity, ViewItemActivity::class.java))
         }
@@ -127,7 +136,6 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spDeliveryTime.adapter = adapter
         spDeliveryTime.onItemSelectedListener = this
-
 
 
         var body = JSONObject()
@@ -161,7 +169,9 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         ).get(DeliveryOptionViewModel::class.java)
 
 
-        var body = RequestBodies.GetDeliveryDetails("2")
+        var body = RequestBodies.GetDeliveryDetails(
+            preferenceConnector.getValueString("USER_ID").toString()
+        )
         // body.put("UserID", preferenceConnector.getValueString("USER_ID").toString())
 
         deliveryOptionViewModel.getDeliveryList(body)
@@ -194,9 +204,12 @@ class DeliveryOptionActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
                         txtAddAddress.visibility = View.GONE
                         txtChangeAddress.visibility = View.VISIBLE
 
-                    }else {
+                    } else {
                         txtAddAddress.visibility = View.VISIBLE
                         txtChangeAddress.visibility = View.GONE
+
+                        // txtFullAddress.visibility = View.GONE
+                        // txtDeliveredTo.visibility = View.GONE
                     }
 
                     loadingDialog.dismiss()

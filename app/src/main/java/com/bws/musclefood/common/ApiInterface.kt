@@ -19,6 +19,7 @@ import com.bws.musclefood.productdetails.ProductDetailsResponse
 import com.bws.musclefood.profile.UpdateProfileResponse
 import com.bws.musclefood.profile.UserProfileDetailsResponse
 import com.bws.musclefood.signup.RegistrationResponse
+import com.bws.musclefood.signup.ResposeOTPValidate
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -105,6 +106,10 @@ interface ApiInterface {
 
     @POST("Reorder")
     suspend fun reorder(@Body getCartDetails: RequestBodies.ReorderBody): Response<ReorderResponse>
+
+
+    @POST("ValidateRegistrationOTP")
+    suspend fun validateOtp(@Body validateOTP: RequestBodies.ValidateRegistrationOTP): Response<ResposeOTPValidate>
 
 
 

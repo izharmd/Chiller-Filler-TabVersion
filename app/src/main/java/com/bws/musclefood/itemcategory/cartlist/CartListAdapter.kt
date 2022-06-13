@@ -39,7 +39,6 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
             LayoutInflater.from(parent.context).inflate(R.layout.item_cart_list, parent, false)
         context = parent.context
 
-
         return ViewHolder(view)
     }
 
@@ -191,9 +190,6 @@ class CartListAdapter(/*val textView: TextView,*/val mList: ArrayList<CartListRe
         return mList.size
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
 
     override fun getItemViewType(position: Int): Int {
         return position

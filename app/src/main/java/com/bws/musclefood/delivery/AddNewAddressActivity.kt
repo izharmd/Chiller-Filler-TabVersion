@@ -42,6 +42,8 @@ class AddNewAddressActivity : AppCompatActivity(){
         edtAddressLine2.setText(intent.getStringExtra("DeliveryAddressLine2"))
         edtCity.setText(intent.getStringExtra("DeliveryCity"))
         edtZipCode.setText(intent.getStringExtra("DeliveryPostcode"))
+        edtPhoneNo.setText(intent.getStringExtra("DeliveryContactNumber"))
+        edtAddressName.setText(intent.getStringExtra("DeliveryAddressName"))
 
         val isDefaultAddress = intent.getStringExtra("DefaultAddressFlag")
         val addressType = intent.getStringExtra("DeliveryAddressName")

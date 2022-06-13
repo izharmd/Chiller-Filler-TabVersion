@@ -69,7 +69,8 @@
                     android:gravity="center|right"
                     android:text="Resend OTP"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_14sdp" />
+                    android:textSize="@dimen/_14sdp"
+                    android:visibility="gone"/>
 
 
                 <androidx.appcompat.widget.AppCompatButton

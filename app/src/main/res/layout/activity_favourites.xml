@@ -60,13 +60,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="1">
+        >
+
+        <TextView
+            android:id="@+id/txtNoLikes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You have no likes items"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyCartList"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+           >
 
         </androidx.recyclerview.widget.RecyclerView>
 

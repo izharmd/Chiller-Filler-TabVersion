@@ -27,6 +27,7 @@ import com.bws.musclefood.utils.PreferenceConnector
 import com.bws.musclefood.utils.Resources
 import com.bws.musclefood.viewmodels.AddNewAddressViewModel
 import com.bws.musclefood.viewmodels.DeliveryOptionViewModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_add_new_address.*
 
 
@@ -146,6 +147,8 @@ class ChooseDelAdapter(val activity: AppCompatActivity, val mList: ArrayList<Cho
     }
 
     fun addNewAddress(body: RequestBodies.AddEditDeliveryDetails) {
+
+        println("ADDRESS==="+Gson().toJson(body).toString())
 
 
         addNewAddressViewModel = ViewModelProvider(
